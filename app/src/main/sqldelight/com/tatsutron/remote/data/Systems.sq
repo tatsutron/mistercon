@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS Systems (
+    systemID INTEGER PRIMARY KEY AUTOINCREMENT,
+    systemName TEXT,
+    systemShortName TEXT,
+    systemHeaderSizeBytes INTEGER,
+    systemHashless INTEGER,
+    systemHeader INTEGER,
+    systemSerial TEXT,
+    systemOEID TEXT
+);
+
+selectBySha1:
+SELECT *
+FROM Systems
+WHERE systemID = (
+    SELECT systemID
+    FROM Roms
+    WHERE romHashSHA1 = ?
+)
+LIMIT 1;

@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS Releases (
+    releaseID INTEGER PRIMARY KEY AUTOINCREMENT,
+    romID INTEGER,
+    releaseTitleName TEXT,
+    regionLocalizedID INTEGER,
+    TEMPregionLocalizedName TEXT,
+    TEMPsystemShortName TEXT,
+    TEMPsystemName TEXT,
+    releaseCoverFront TEXT,
+    releaseCoverBack TEXT,
+    releaseCoverCart TEXT,
+    releaseCoverDisc TEXT,
+    releaseDescription TEXT,
+    releaseDeveloper TEXT,
+    releasePublisher TEXT,
+    releaseGenre TEXT,
+    releaseDate TEXT,
+    releaseReferenceURL TEXT,
+    releaseReferenceImageURL TEXT
+);
+
+selectBySha1:
+SELECT *
+FROM Releases
+WHERE romID = (
+    SELECT romID
+    FROM Roms
+    WHERE romHashSHA1 = ?
+)
+LIMIT 1;

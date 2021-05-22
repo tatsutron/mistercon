@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS Roms (
+    romID INTEGER PRIMARY KEY AUTOINCREMENT,
+    systemID INTEGER,
+    regionID INTEGER,
+    romHashCRC TEXT,
+    romHashMD5 TEXT,
+    romHashSHA1 TEXT,
+    romSize INTEGER,
+    romFileName TEXT,
+    romExtensionlessFileName TEXT,
+    romParent TEXT,
+    romSerial TEXT,
+    romHeader TEXT,
+    romLanguage TEXT,
+    TEMPromRegion TEXT,
+    romDumpSource TEXT
+);

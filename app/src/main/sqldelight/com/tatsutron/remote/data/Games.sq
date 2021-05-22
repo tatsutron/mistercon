@@ -1,0 +1,18 @@
+CREATE TABLE Games (
+    core TEXT NOT NULL,
+    filename TEXT NOT NULL UNIQUE,
+    sha1 TEXT
+);
+
+selectAll:
+SELECT * FROM Games;
+
+selectByFilename:
+SELECT * FROM Games WHERE filename = ?;
+
+save:
+REPLACE INTO Games(core, filename, sha1)
+VALUES (:core, :filename, :sha1);
+
+clear:
+DELETE FROM Games;

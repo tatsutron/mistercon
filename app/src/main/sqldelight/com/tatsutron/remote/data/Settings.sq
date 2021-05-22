@@ -1,0 +1,11 @@
+CREATE TABLE Settings (
+    host TEXT,
+    id INTEGER PRIMARY KEY CHECK (id = 0)
+);
+
+select:
+SELECT * FROM Settings WHERE id='0';
+
+save:
+REPLACE INTO Settings(host, id)
+VALUES (:host, :id);
