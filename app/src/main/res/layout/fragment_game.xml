@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray_800">
+
+    <androidx.appcompat.widget.Toolbar
+        style="@style/Toolbar"
+        android:id="@+id/game_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/game_toolbar">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <com.tatsutron.remote.TextCard
+                style="@style/Card"
+                android:id="@+id/publisher"
+                app:label="@string/publisher" />
+
+            <com.tatsutron.remote.TextCard
+                style="@style/Card"
+                android:id="@+id/developer"
+                app:label="@string/developer" />
+
+            <com.tatsutron.remote.TextCard
+                style="@style/Card"
+                android:id="@+id/release_date"
+                app:label="@string/release_date" />
+
+            <com.tatsutron.remote.TextCard
+                style="@style/Card"
+                android:id="@+id/region"
+                app:label="@string/region" />
+
+            <com.tatsutron.remote.ImageCard
+                style="@style/Card"
+                android:id="@+id/front_cover"
+                app:label="@string/front_cover" />
+
+            <com.tatsutron.remote.ImageCard
+                style="@style/Card"
+                android:id="@+id/back_cover"
+                app:label="@string/back_cover" />
+
+            <com.tatsutron.remote.ImageCard
+                style="@style/Card"
+                android:id="@+id/cartridge"
+                app:label="@string/cartridge" />
+
+            <com.tatsutron.remote.TextCard
+                style="@style/Card"
+                android:id="@+id/genre"
+                app:label="@string/genre" />
+
+            <com.tatsutron.remote.TextCard
+                style="@style/Card"
+                android:id="@+id/description"
+                app:label="@string/description" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

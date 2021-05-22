@@ -1,0 +1,20 @@
+<resources>
+    <string name="app">MiSTer</string>
+    <string name="back_cover">Back Cover</string>
+    <string name="cartridge">Cartridge</string>
+    <string name="description">Description</string>
+    <string name="developer">Developer</string>
+    <string name="download">Download</string>
+    <string name="front_cover">Front Cover</string>
+    <string name="games">Games</string>
+    <string name="genre">Genre</string>
+    <string name="host">Host</string>
+    <string name="menu">Menu</string>
+    <string name="play">Play</string>
+    <string name="please_enter_ip_address">Please enter IP address</string>
+    <string name="publisher">Publisher</string>
+    <string name="region">Region</string>
+    <string name="release_date">Release Date</string>
+    <string name="system">System</string>
+    <string name="unable_to_sync">Unable to sync</string>
+</resources>
