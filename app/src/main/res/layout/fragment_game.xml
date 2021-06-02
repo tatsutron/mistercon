@@ -45,6 +45,11 @@
                 android:id="@+id/region"
                 app:label="@string/region" />
 
+            <com.tatsutron.remote.TextCard
+                style="@style/Card"
+                android:id="@+id/genre"
+                app:label="@string/genre" />
+
             <com.tatsutron.remote.ImageCard
                 style="@style/Card"
                 android:id="@+id/front_cover"
@@ -59,11 +64,6 @@
                 style="@style/Card"
                 android:id="@+id/cartridge"
                 app:label="@string/cartridge" />
-
-            <com.tatsutron.remote.TextCard
-                style="@style/Card"
-                android:id="@+id/genre"
-                app:label="@string/genre" />
 
             <com.tatsutron.remote.TextCard
                 style="@style/Card"

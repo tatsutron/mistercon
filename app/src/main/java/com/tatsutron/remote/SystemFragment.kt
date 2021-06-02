@@ -32,5 +32,13 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
                 }
             }
         }
+        val rebootButton = view.findViewById<Button>(R.id.reboot_button)
+        rebootButton.setOnClickListener {
+            launch(Dispatchers.IO) {
+                runCatching {
+                    Ssh.command("reboot now")
+                }
+            }
+        }
     }
 }
