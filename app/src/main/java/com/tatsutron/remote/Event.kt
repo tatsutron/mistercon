@@ -1,7 +1,6 @@
 package com.tatsutron.remote
 
 enum class Event {
-    HOST_SET,
     SYNC_COMPLETED;
 
     private val listeners = mutableListOf<() -> Unit>()

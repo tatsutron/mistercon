@@ -2,8 +2,6 @@ package com.tatsutron.remote
 
 import android.os.Bundle
 import android.view.*
-import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -39,33 +37,9 @@ class MainFragment : Fragment(), CoroutineScope by MainScope() {
                 val context = requireContext()
                 item.isEnabled = false
                 item.icon.setTint(context.getColor(R.color.gray_800))
-                val cb = {
+                sync {
                     item.icon.setTint(context.getColor(R.color.white))
                     item.isEnabled = true
-                }
-                if (Persistence.getHost().isNotEmpty()) {
-                    sync(cb)
-                } else {
-                    val view = layoutInflater.inflate(
-                        R.layout.dialog_no_host,
-                        null, // root
-                    )
-                    AlertDialog.Builder(requireContext()).apply {
-                        setTitle(R.string.unable_to_sync)
-                        setMessage(R.string.please_enter_ip_address)
-                        setNegativeButton(android.R.string.cancel) { _, _ ->
-                            cb()
-                        }
-                        setPositiveButton(android.R.string.yes) { _, _ ->
-                            val host = view.findViewById<EditText>(R.id.host)
-                            Persistence.saveHost(host.text.toString())
-                            Event.HOST_SET.fire()
-                            sync(cb)
-                        }
-                        setView(view)
-                        setCancelable(false)
-                        show()
-                    }
                 }
                 true
             }

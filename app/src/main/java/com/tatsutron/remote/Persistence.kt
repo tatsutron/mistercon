@@ -26,20 +26,6 @@ object Persistence {
         )
     }
 
-    fun saveHost(host: String) {
-        database?.settingsQueries
-            ?.save(
-                host = host,
-                id = 0,
-            )
-    }
-
-    fun getHost() =
-        database?.settingsQueries
-            ?.select()
-            ?.executeAsOneOrNull()
-            ?.host ?: ""
-
     fun saveGame(core: String, filename: String, hash: String?) {
         database?.gamesQueries?.save(core, filename, hash)
     }

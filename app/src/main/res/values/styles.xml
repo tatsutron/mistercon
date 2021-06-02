@@ -39,4 +39,5 @@
         <item name="cardBackgroundColor">@color/gray_700</item>
         <item name="cardCornerRadius">4dp</item>
     </style>
+
 </resources>

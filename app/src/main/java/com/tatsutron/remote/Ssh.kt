@@ -8,6 +8,7 @@ import java.util.*
 
 object Ssh {
 
+    private const val HOST = "MiSTer"
     private const val PORT = 22
     private const val USER = "root"
     private const val PASSWORD = "1"
@@ -26,7 +27,7 @@ object Ssh {
     }
 
     private fun session(): Session =
-        jsch.getSession(USER, Persistence.getHost(), PORT).apply {
+        jsch.getSession(USER, HOST, PORT).apply {
             setConfig(
                 Properties().apply {
                     setProperty("StrictHostKeyChecking", "no")
