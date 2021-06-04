@@ -1,10 +1,10 @@
 <resources>
     <string name="app">MiSTer</string>
     <string name="back_cover">Back Cover</string>
+    <string name="cancel">Cancel</string>
     <string name="cartridge">Cartridge</string>
     <string name="description">Description</string>
     <string name="developer">Developer</string>
-    <string name="download">Download</string>
     <string name="front_cover">Front Cover</string>
     <string name="games">Games</string>
     <string name="genre">Genre</string>
@@ -16,6 +16,9 @@
     <string name="reboot">Reboot</string>
     <string name="region">Region</string>
     <string name="release_date">Release Date</string>
+    <string name="run">Run</string>
+    <string name="script">Script</string>
+    <string name="sync">Sync</string>
     <string name="system">System</string>
     <string name="unable_to_sync">Unable to sync</string>
 </resources>

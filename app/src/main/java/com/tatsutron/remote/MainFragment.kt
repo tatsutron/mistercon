@@ -18,8 +18,8 @@ class MainFragment : Fragment(), CoroutineScope by MainScope() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.menu_main, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
     }
 
     override fun onCreateView(
@@ -33,7 +33,7 @@ class MainFragment : Fragment(), CoroutineScope by MainScope() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.download -> {
+            R.id.sync -> {
                 val context = requireContext()
                 item.isEnabled = false
                 item.icon.setTint(context.getColor(R.color.gray_800))
@@ -97,16 +97,18 @@ class MainFragment : Fragment(), CoroutineScope by MainScope() {
 
     private fun sync(cb: () -> Unit) {
         Persistence.clearGames()
-        Event.SYNC_COMPLETED.fire()
+        Persistence.clearScripts()
+        Event.SYNC.fire()
         launch(Dispatchers.IO) {
             runCatching {
                 Core.values().forEach {
                     it.sync()
                 }
+                Scripts.sync()
             }.onSuccess {
                 requireActivity().runOnUiThread {
                     cb()
-                    Event.SYNC_COMPLETED.fire()
+                    Event.SYNC.fire()
                 }
             }
         }

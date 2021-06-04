@@ -51,7 +51,6 @@ object Persistence {
         database?.gamesQueries?.clear()
     }
 
-
     private fun game(dao: Games): Game {
         val sha1 = dao.sha1?.toUpperCase(Locale.getDefault())
         return Game(
@@ -67,5 +66,19 @@ object Persistence {
                 ?.selectBySha1(sha1)
                 ?.executeAsOneOrNull(),
         )
+    }
+
+    fun saveScript(filename: String) {
+        database?.scriptsQueries?.save(filename)
+    }
+
+    fun getScriptList() =
+        database?.scriptsQueries
+            ?.selectAll()
+            ?.executeAsList()
+            ?: listOf()
+
+    fun clearScripts() {
+        database?.scriptsQueries?.clear()
     }
 }

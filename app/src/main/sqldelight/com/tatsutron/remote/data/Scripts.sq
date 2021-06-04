@@ -1,0 +1,13 @@
+CREATE TABLE Scripts (
+    filename TEXT NOT NULL UNIQUE
+);
+
+selectAll:
+SELECT * FROM Scripts;
+
+save:
+REPLACE INTO Scripts(filename)
+VALUES (:filename);
+
+clear:
+DELETE FROM Scripts;

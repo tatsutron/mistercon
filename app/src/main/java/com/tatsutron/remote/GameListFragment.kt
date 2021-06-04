@@ -38,7 +38,7 @@ class GameListFragment : Fragment(), CoroutineScope by MainScope() {
         val recycler = view.findViewById<RecyclerView>(R.id.recycler)
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = adapter
-        Event.SYNC_COMPLETED.subscribe {
+        Event.SYNC.subscribe {
             val games = Persistence.getGameList()
             adapter.itemList.clear()
             adapter.itemList.addAll(makeItemList(games))

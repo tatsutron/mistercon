@@ -32,6 +32,18 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:id="@+id/script_button"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="8dp"
+                android:textAllCaps="true"
+                android:text="@string/script"
+                android:textColor="@color/primary_200"
+                app:strokeColor="@color/primary_200" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:id="@+id/reboot_button"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
