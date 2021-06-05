@@ -4,7 +4,8 @@ enum class Core {
 
     Gameboy {
         override fun sync() {
-            val dir = "${Paths.GAMES}/Gameboy"
+            val games = Persistence.getGamesPath()
+            val dir = "$games/Gameboy"
             Ssh.command("ls $dir")
                 .split("\n")
                 .filter {
@@ -20,13 +21,16 @@ enum class Core {
         }
 
         override fun play(filename: String) {
-            Ssh.command("${Paths.MBC} load_rom GAMEBOY \"${Paths.GAMES}/Gameboy/$filename\"")
+            val mbc = Persistence.getMbcPath()
+            val games = Persistence.getGamesPath()
+            Ssh.command("$mbc load_rom GAMEBOY \"$games/Gameboy/$filename\"")
         }
     },
 
     GBA {
         override fun sync() {
-            val dir = "${Paths.GAMES}/GBA"
+            val games = Persistence.getGamesPath()
+            val dir = "$games/GBA"
             Ssh.command("ls $dir")
                 .split("\n")
                 .filter {
@@ -42,13 +46,16 @@ enum class Core {
         }
 
         override fun play(filename: String) {
-            Ssh.command("${Paths.MBC} load_rom GBA \"${Paths.GAMES}/GBA/$filename\"")
+            val mbc = Persistence.getMbcPath()
+            val games = Persistence.getGamesPath()
+            Ssh.command("$mbc load_rom GBA \"$games/GBA/$filename\"")
         }
     },
 
     Genesis {
         override fun sync() {
-            val dir = "${Paths.GAMES}/Genesis"
+            val games = Persistence.getGamesPath()
+            val dir = "$games/Genesis"
             Ssh.command("ls $dir")
                 .split("\n")
                 .filter {
@@ -65,13 +72,16 @@ enum class Core {
         }
 
         override fun play(filename: String) {
-            Ssh.command("${Paths.MBC} load_rom MEGADRIVE \"${Paths.GAMES}/Genesis/$filename\"")
+            val mbc = Persistence.getMbcPath()
+            val games = Persistence.getGamesPath()
+            Ssh.command("$mbc load_rom MEGADRIVE \"$games/Genesis/$filename\"")
         }
     },
 
     SNES {
         override fun sync() {
-            val dir = "${Paths.GAMES}/SNES"
+            val games = Persistence.getGamesPath()
+            val dir = "$games/SNES"
             Ssh.command("ls $dir")
                 .split("\n")
                 .filter {
@@ -86,13 +96,16 @@ enum class Core {
         }
 
         override fun play(filename: String) {
-            Ssh.command("${Paths.MBC} load_rom SNES \"${Paths.GAMES}/SNES/$filename\"")
+            val mbc = Persistence.getMbcPath()
+            val games = Persistence.getGamesPath()
+            Ssh.command("$mbc load_rom SNES \"$games/SNES/$filename\"")
         }
     },
 
     TGFX16 {
         override fun sync() {
-            val dir = "${Paths.GAMES}/TGFX16"
+            val games = Persistence.getGamesPath()
+            val dir = "$games/TGFX16"
             Ssh.command("ls $dir")
                 .split("\n")
                 .filter {
@@ -107,7 +120,9 @@ enum class Core {
         }
 
         override fun play(filename: String) {
-            Ssh.command("${Paths.MBC} load_rom TGFX16 \"${Paths.GAMES}/TGFX16/$filename\"")
+            val mbc = Persistence.getMbcPath()
+            val games = Persistence.getGamesPath()
+            Ssh.command("$mbc load_rom TGFX16 \"$games/TGFX16/$filename\"")
         }
     };
 

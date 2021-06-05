@@ -3,7 +3,7 @@
     <item android:id="@+id/games"
         android:title="@string/games"
         android:icon="@drawable/ic_games" />
-    <item android:id="@+id/settings"
+    <item android:id="@+id/system"
         android:title="@string/system"
         android:icon="@drawable/ic_system" />
 </menu>

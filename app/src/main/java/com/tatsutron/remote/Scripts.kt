@@ -3,7 +3,8 @@ package com.tatsutron.remote
 object Scripts {
 
     fun sync() {
-        Ssh.command("ls ${Paths.SCRIPTS}")
+        val scripts = Persistence.getScriptsPath()
+        Ssh.command("ls $scripts")
             .split("\n")
             .filter {
                 it.endsWith(".sh")

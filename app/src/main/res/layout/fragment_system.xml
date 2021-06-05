@@ -18,6 +18,16 @@
             android:clickable="true"
             android:orientation="vertical">
 
+            <com.tatsutron.remote.EditCard
+                style="@style/Card"
+                android:id="@+id/host"
+                app:label="@string/host" />
+
+            <com.tatsutron.remote.EditCard
+                style="@style/Card"
+                android:id="@+id/games_path"
+                app:label="@string/games_path" />
+
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:id="@+id/menu_button"

@@ -7,6 +7,7 @@
     <string name="developer">Developer</string>
     <string name="front_cover">Front Cover</string>
     <string name="games">Games</string>
+    <string name="games_path">Games Path</string>
     <string name="genre">Genre</string>
     <string name="host">Host</string>
     <string name="menu">Menu</string>
@@ -18,6 +19,7 @@
     <string name="release_date">Release Date</string>
     <string name="run">Run</string>
     <string name="script">Script</string>
+    <string name="scripts_path">Scripts Path</string>
     <string name="sync">Sync</string>
     <string name="system">System</string>
     <string name="unable_to_sync">Unable to sync</string>

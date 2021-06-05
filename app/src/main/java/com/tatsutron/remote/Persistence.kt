@@ -24,10 +24,65 @@ object Persistence {
         database = Database(
             AndroidSqliteDriver(Database.Schema, context, name)
         )
+        val config = database?.configQueries
+            ?.select()
+            ?.executeAsOneOrNull()
+        if (config == null) {
+            saveConfig(Config())
+        }
     }
 
+    private fun saveConfig(config: Config) {
+        database?.configQueries
+            ?.save(
+                gamesPath = config.gamesPath,
+                host = config.host,
+                id = 0,
+                mbcPath = config.mbcPath,
+                scriptsPath = config.scriptsPath,
+            )
+    }
+
+    private fun getConfig() =
+        database?.configQueries
+            ?.select()
+            ?.executeAsOneOrNull()
+            ?.let {
+                Config(
+                    gamesPath = it.gamesPath,
+                    host = it.host,
+                    mbcPath = it.mbcPath,
+                    scriptsPath = it.scriptsPath,
+                )
+            }
+
+    fun saveHost(host: String) {
+        getConfig()
+            ?.let {
+                it.host = host
+                saveConfig(it)
+            }
+    }
+
+    fun getHost() = getConfig()?.host
+
+    fun saveGamesPath(path: String) {
+        getConfig()
+            ?.let {
+                it.gamesPath = path
+                saveConfig(it)
+            }
+    }
+
+    fun getGamesPath() = getConfig()?.gamesPath
+
+    fun getMbcPath() = getConfig()?.mbcPath
+
+    fun getScriptsPath() = getConfig()?.scriptsPath
+
     fun saveGame(core: String, filename: String, hash: String?) {
-        database?.gamesQueries?.save(core, filename, hash)
+        database?.gamesQueries
+            ?.save(core, filename, hash)
     }
 
     fun getGameList() =
@@ -48,7 +103,8 @@ object Persistence {
             }
 
     fun clearGames() {
-        database?.gamesQueries?.clear()
+        database?.gamesQueries
+            ?.clear()
     }
 
     private fun game(dao: Games): Game {
@@ -69,7 +125,8 @@ object Persistence {
     }
 
     fun saveScript(filename: String) {
-        database?.scriptsQueries?.save(filename)
+        database?.scriptsQueries
+            ?.save(filename)
     }
 
     fun getScriptList() =
@@ -79,6 +136,7 @@ object Persistence {
             ?: listOf()
 
     fun clearScripts() {
-        database?.scriptsQueries?.clear()
+        database?.scriptsQueries
+            ?.clear()
     }
 }
