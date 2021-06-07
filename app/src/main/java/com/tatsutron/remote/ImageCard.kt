@@ -7,6 +7,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 
 class ImageCard(
@@ -32,12 +34,20 @@ class ImageCard(
         }
     }
 
-    fun set(imageUrl: String?) {
+    fun set(imageUrl: String?, activity: FragmentActivity?) {
         if (imageUrl?.isNotEmpty() == true) {
             visibility = View.VISIBLE
             Glide.with(this)
                 .load(Uri.parse(imageUrl))
                 .into(image)
+            image.setOnClickListener {
+                activity?.supportFragmentManager
+                    ?.beginTransaction()
+                    ?.setTransition(FragmentTransaction.TRANSIT_NONE)
+                    ?.add(R.id.root, FragmentMaker.image(imageUrl))
+                    ?.addToBackStack(null)
+                    ?.commit()
+            }
         } else {
             visibility = View.GONE
         }

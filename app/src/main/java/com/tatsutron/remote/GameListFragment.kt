@@ -85,11 +85,14 @@ class GameListFragment : Fragment(), CoroutineScope by MainScope() {
                         label = game.release?.releaseTitleName
                             ?: game.filename,
                         onClick = {
-                            requireActivity().supportFragmentManager.beginTransaction()
-                                .setTransition(FragmentTransaction.TRANSIT_NONE)
+                            requireActivity().supportFragmentManager
+                                .beginTransaction()
+                                .setTransition(
+                                    FragmentTransaction.TRANSIT_NONE,
+                                )
                                 .add(
                                     R.id.root,
-                                    GameFragment.newInstance(game.filename),
+                                    FragmentMaker.game(game.filename),
                                 )
                                 .addToBackStack(null)
                                 .commit()

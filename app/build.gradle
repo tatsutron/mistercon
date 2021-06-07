@@ -45,4 +45,5 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
     implementation "com.jcraft:jsch:0.1.55"
+    implementation "com.github.MikeOrtiz:TouchImageView:3.1.0"
 }

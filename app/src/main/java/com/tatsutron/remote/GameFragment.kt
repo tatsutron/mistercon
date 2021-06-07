@@ -11,18 +11,6 @@ import kotlinx.coroutines.launch
 
 class GameFragment : Fragment(), CoroutineScope by MainScope() {
 
-    companion object {
-        private const val KEY_FILENAME = "KEY_FILENAME"
-
-        fun newInstance(filename: String): GameFragment {
-            val fragment = GameFragment()
-            val args = Bundle()
-            args.putString(KEY_FILENAME, filename)
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -46,7 +34,7 @@ class GameFragment : Fragment(), CoroutineScope by MainScope() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.play -> {
-                val filename = arguments?.getString(KEY_FILENAME)
+                val filename = arguments?.getString(FragmentMaker.KEY_FILENAME)
                 val game = Persistence.getGame(filename!!)!!
                 launch(Dispatchers.IO) {
                     runCatching {
@@ -61,7 +49,7 @@ class GameFragment : Fragment(), CoroutineScope by MainScope() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val filename = arguments?.getString(KEY_FILENAME)
+        val filename = arguments?.getString(FragmentMaker.KEY_FILENAME)
         val game = Persistence.getGame(filename!!)!!
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(view.findViewById(R.id.game_toolbar))
@@ -81,13 +69,16 @@ class GameFragment : Fragment(), CoroutineScope by MainScope() {
             game.region?.regionName
         )
         view.findViewById<ImageCard>(R.id.front_cover).set(
-            game.release?.releaseCoverFront
+            imageUrl = game.release?.releaseCoverFront,
+            activity = activity,
         )
         view.findViewById<ImageCard>(R.id.back_cover).set(
-            game.release?.releaseCoverBack
+            imageUrl = game.release?.releaseCoverBack,
+            activity = activity,
         )
         view.findViewById<ImageCard>(R.id.cartridge).set(
-            game.release?.releaseCoverCart
+            imageUrl = game.release?.releaseCoverCart,
+            activity = activity,
         )
         view.findViewById<TextCard>(R.id.genre).set(
             game.release?.releaseGenre
