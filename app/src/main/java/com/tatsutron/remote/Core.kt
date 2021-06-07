@@ -74,7 +74,14 @@ enum class Core {
         override fun play(filename: String) {
             val mbc = Persistence.getMbcPath()
             val games = Persistence.getGamesPath()
-            Ssh.command("$mbc load_rom MEGADRIVE \"$games/Genesis/$filename\"")
+            when {
+                filename.endsWith(".bin") -> "MEGADRIVE.BIN"
+                filename.endsWith(".gen") -> "GENESIS"
+                filename.endsWith(".md") -> "MEGADRIVE"
+                else -> null
+            }?.let {
+                Ssh.command("$mbc load_rom $it \"$games/Genesis/$filename\"")
+            }
         }
     },
 
