@@ -1,9 +1,9 @@
 package com.tatsutron.remote
 
-import com.jcraft.jsch.Channel
-import com.jcraft.jsch.ChannelExec
-import com.jcraft.jsch.JSch
-import com.jcraft.jsch.Session
+import android.content.Context
+import com.jcraft.jsch.*
+import java.io.File
+import java.io.FileOutputStream
 import java.util.*
 
 object Ssh {
@@ -17,9 +17,29 @@ object Ssh {
 
     private val jsch = JSch()
 
+    fun install(context: Context) {
+        val file = File("${context.cacheDir}/mbc")
+        val input = context.assets.open("mbc")
+        val buffer = input.readBytes()
+        input.close()
+        val output = FileOutputStream(file)
+        output.write(buffer)
+        output.close()
+        val session = session()
+        val channel = sftp(session)
+        try {
+            channel.mkdir("/media/fat/mistercon")
+        } catch(exception: Throwable) {
+            println("derp")
+        }
+        channel.put(file.path, "/media/fat/mistercon/mbc")
+        channel.disconnect()
+        session.disconnect()
+    }
+
     fun command(command: String): String {
         val session = session()
-        val channel = channel(session, command)
+        val channel = exec(session, command)
         val output = read(channel)
         channel.disconnect()
         session.disconnect()
@@ -37,7 +57,12 @@ object Ssh {
             connect()
         }
 
-    private fun channel(session: Session, command: String) =
+    private fun sftp(session: Session) =
+        (session.openChannel("sftp") as ChannelSftp).apply {
+            connect()
+        }
+
+    private fun exec(session: Session, command: String) =
         (session.openChannel("exec") as ChannelExec).apply {
             inputStream = null
             setErrStream(System.err)

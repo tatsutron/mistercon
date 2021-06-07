@@ -101,6 +101,7 @@ class MainFragment : Fragment(), CoroutineScope by MainScope() {
         Event.SYNC.fire()
         launch(Dispatchers.IO) {
             runCatching {
+                Ssh.install(requireContext())
                 Core.values().forEach {
                     it.sync()
                 }
