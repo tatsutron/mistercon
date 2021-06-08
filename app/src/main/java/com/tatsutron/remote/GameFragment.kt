@@ -8,6 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import java.io.File
 
 class GameFragment : Fragment(), CoroutineScope by MainScope() {
 
@@ -34,11 +35,11 @@ class GameFragment : Fragment(), CoroutineScope by MainScope() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.play -> {
-                val filename = arguments?.getString(FragmentMaker.KEY_FILENAME)
-                val game = Persistence.getGame(filename!!)!!
+                val id = arguments?.getLong(FragmentMaker.KEY_ID)
+                val game = Persistence.getGame(id!!)!!
                 launch(Dispatchers.IO) {
                     runCatching {
-                        game.core.play(game.filename)
+                        game.core.play(game)
                     }
                 }
                 true
@@ -49,12 +50,12 @@ class GameFragment : Fragment(), CoroutineScope by MainScope() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val filename = arguments?.getString(FragmentMaker.KEY_FILENAME)
-        val game = Persistence.getGame(filename!!)!!
+        val id = arguments?.getLong(FragmentMaker.KEY_ID)
+        val game = Persistence.getGame(id!!)!!
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(view.findViewById(R.id.game_toolbar))
             supportActionBar?.title = game.release?.releaseTitleName
-                ?: game.filename
+                ?: File(game.path).name
         }
         view.findViewById<TextCard>(R.id.publisher).set(
             game.release?.releasePublisher

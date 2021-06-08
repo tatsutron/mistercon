@@ -80,9 +80,9 @@ object Persistence {
 
     fun getScriptsPath() = getConfig()?.scriptsPath
 
-    fun saveGame(core: String, filename: String, hash: String?) {
+    fun saveGame(core: String, path: String, hash: String?) {
         database?.gamesQueries
-            ?.save(core, filename, hash)
+            ?.save(core, path, hash)
     }
 
     fun getGameList() =
@@ -94,9 +94,9 @@ object Persistence {
             }
             ?: listOf()
 
-    fun getGame(filename: String) =
+    fun getGame(id: Long) =
         database?.gamesQueries
-            ?.selectByFilename(filename)
+            ?.selectById(id)
             ?.executeAsOneOrNull()
             ?.let {
                 game(it)
@@ -111,7 +111,8 @@ object Persistence {
         val sha1 = dao.sha1?.toUpperCase(Locale.getDefault())
         return Game(
             core = Core.valueOf(dao.core),
-            filename = dao.filename,
+            id = dao.id,
+            path = dao.path,
             region = database?.regionsQueries
                 ?.selectBySha1(sha1)
                 ?.executeAsOneOrNull(),

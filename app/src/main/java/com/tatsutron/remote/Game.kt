@@ -6,7 +6,8 @@ import com.tatsutron.remote.data.Systems
 
 class Game(
     val core: Core,
-    val filename: String,
+    val id: Long,
+    val path: String,
     val region: Regions?,
     val release: Releases?,
     val system: Systems?,

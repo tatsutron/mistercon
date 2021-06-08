@@ -12,18 +12,18 @@ enum class Core {
                     it.endsWith(".gb")
                 }
                 .forEach { filename ->
-                    Ssh.command("sha1sum \"$dir/$filename\"")
+                    val path = "$dir/$filename"
+                    Ssh.command("sha1sum \"$path\"")
                         .let {
-                            Persistence.saveGame("Gameboy", filename, hash(it))
+                            Persistence.saveGame("Gameboy", path, hash(it))
                         }
 
                 }
         }
 
-        override fun play(filename: String) {
+        override fun play(game: Game) {
             val mbc = Persistence.getMbcPath()
-            val games = Persistence.getGamesPath()
-            Ssh.command("$mbc load_rom GAMEBOY \"$games/Gameboy/$filename\"")
+            Ssh.command("$mbc load_rom GAMEBOY \"${game.path}\"")
         }
     },
 
@@ -37,18 +37,18 @@ enum class Core {
                     it.endsWith(".gba")
                 }
                 .forEach { filename ->
-                    Ssh.command("sha1sum \"$dir/$filename\"")
+                    val path = "$dir/$filename"
+                    Ssh.command("sha1sum \"$path\"")
                         .let {
-                            Persistence.saveGame("GBA", filename, hash(it))
+                            Persistence.saveGame("GBA", path, hash(it))
                         }
 
                 }
         }
 
-        override fun play(filename: String) {
+        override fun play(game: Game) {
             val mbc = Persistence.getMbcPath()
-            val games = Persistence.getGamesPath()
-            Ssh.command("$mbc load_rom GBA \"$games/GBA/$filename\"")
+            Ssh.command("$mbc load_rom GBA \"${game.path}\"")
         }
     },
 
@@ -64,23 +64,23 @@ enum class Core {
                             it.endsWith(".md")
                 }
                 .forEach { filename ->
-                    Ssh.command("sha1sum \"$dir/$filename\"")
+                    val path = "$dir/$filename"
+                    Ssh.command("sha1sum \"$path\"")
                         .let {
-                            Persistence.saveGame("Genesis", filename, hash(it))
+                            Persistence.saveGame("Genesis", path, hash(it))
                         }
                 }
         }
 
-        override fun play(filename: String) {
+        override fun play(game: Game) {
             val mbc = Persistence.getMbcPath()
-            val games = Persistence.getGamesPath()
             when {
-                filename.endsWith(".bin") -> "MEGADRIVE.BIN"
-                filename.endsWith(".gen") -> "GENESIS"
-                filename.endsWith(".md") -> "MEGADRIVE"
+                game.path.endsWith(".bin") -> "MEGADRIVE.BIN"
+                game.path.endsWith(".gen") -> "GENESIS"
+                game.path.endsWith(".md") -> "MEGADRIVE"
                 else -> null
             }?.let {
-                Ssh.command("$mbc load_rom $it \"$games/Genesis/$filename\"")
+                Ssh.command("$mbc load_rom $it \"${game.path}\"")
             }
         }
     },
@@ -95,17 +95,17 @@ enum class Core {
                     it.endsWith(".sfc")
                 }
                 .forEach { filename ->
-                    Ssh.command("sha1sum \"$dir/$filename\"")
+                    val path = "$dir/$filename"
+                    Ssh.command("sha1sum \"$path\"")
                         .let {
-                            Persistence.saveGame("SNES", filename, hash(it))
+                            Persistence.saveGame("SNES", path, hash(it))
                         }
                 }
         }
 
-        override fun play(filename: String) {
+        override fun play(game: Game) {
             val mbc = Persistence.getMbcPath()
-            val games = Persistence.getGamesPath()
-            Ssh.command("$mbc load_rom SNES \"$games/SNES/$filename\"")
+            Ssh.command("$mbc load_rom SNES \"${game.path}\"")
         }
     },
 
@@ -119,23 +119,23 @@ enum class Core {
                     it.endsWith(".pce")
                 }
                 .forEach { filename ->
-                    Ssh.command("sha1sum \"$dir/$filename\"")
+                    val path = "$dir/$filename"
+                    Ssh.command("sha1sum \"$path\"")
                         .let {
-                            Persistence.saveGame("TGFX16", filename, hash(it))
+                            Persistence.saveGame("TGFX16", path, hash(it))
                         }
                 }
         }
 
-        override fun play(filename: String) {
+        override fun play(game: Game) {
             val mbc = Persistence.getMbcPath()
-            val games = Persistence.getGamesPath()
-            Ssh.command("$mbc load_rom TGFX16 \"$games/TGFX16/$filename\"")
+            Ssh.command("$mbc load_rom TGFX16 \"${game.path}\"")
         }
     };
 
     abstract fun sync()
 
-    abstract fun play(filename: String)
+    abstract fun play(game: Game)
 
     protected fun hash(input: String) =
         Regex("\\b[0-9a-f]{5,40}\\b")

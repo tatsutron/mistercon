@@ -1,18 +1,19 @@
 CREATE TABLE Games (
     core TEXT NOT NULL,
-    filename TEXT NOT NULL UNIQUE,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    path TEXT NOT NULL UNIQUE,
     sha1 TEXT
 );
 
 selectAll:
 SELECT * FROM Games;
 
-selectByFilename:
-SELECT * FROM Games WHERE filename = ?;
+selectById:
+SELECT * FROM Games WHERE id = ?;
 
 save:
-REPLACE INTO Games(core, filename, sha1)
-VALUES (:core, :filename, :sha1);
+REPLACE INTO Games(core, path, sha1)
+VALUES (:core, :path, :sha1);
 
 clear:
 DELETE FROM Games;

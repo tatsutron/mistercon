@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import java.io.File
 
 class GameListFragment : Fragment(), CoroutineScope by MainScope() {
     private lateinit var adapter: GameListAdapter
@@ -74,7 +75,7 @@ class GameListFragment : Fragment(), CoroutineScope by MainScope() {
             val gamesByCore = mutableListOf<Game>()
             list.addAll(games
                 .sortedBy {
-                    it.release?.releaseTitleName ?: it.filename
+                    it.release?.releaseTitleName ?: File(it.path).name
                 }
                 .filter { game ->
                     game.core.toString() == core
@@ -83,7 +84,7 @@ class GameListFragment : Fragment(), CoroutineScope by MainScope() {
                     gamesByCore.add(game)
                     GameListItem(
                         label = game.release?.releaseTitleName
-                            ?: game.filename,
+                            ?: File(game.path).name,
                         onClick = {
                             requireActivity().supportFragmentManager
                                 .beginTransaction()
@@ -92,7 +93,7 @@ class GameListFragment : Fragment(), CoroutineScope by MainScope() {
                                 )
                                 .add(
                                     R.id.root,
-                                    FragmentMaker.game(game.filename),
+                                    FragmentMaker.game(game.id),
                                 )
                                 .addToBackStack(null)
                                 .commit()
@@ -109,7 +110,7 @@ class GameListFragment : Fragment(), CoroutineScope by MainScope() {
                             val game = gamesByCore.random()
                             launch(Dispatchers.IO) {
                                 runCatching {
-                                    game.core.play(game.filename)
+                                    game.core.play(game)
                                 }
                             }
                         },

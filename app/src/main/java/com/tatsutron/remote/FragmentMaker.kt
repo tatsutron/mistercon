@@ -4,12 +4,12 @@ import android.os.Bundle
 
 object FragmentMaker {
 
-    const val KEY_FILENAME = "KEY_FILENAME"
+    const val KEY_ID = "KEY_ID"
     const val KEY_URL = "KEY_URL"
 
-    fun game(filename: String) = GameFragment().apply {
+    fun game(id: Long) = GameFragment().apply {
         arguments = Bundle().apply {
-            putString(KEY_FILENAME, filename)
+            putLong(KEY_ID, id)
         }
     }
 
