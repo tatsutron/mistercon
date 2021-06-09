@@ -1,14 +1,10 @@
 package com.tatsutron.remote
 
-import android.content.Context
 import com.jcraft.jsch.*
-import java.io.File
-import java.io.FileOutputStream
 import java.util.*
 
 object Ssh {
 
-    private const val HOST = "MiSTer"
     private const val PORT = 22
     private const val USER = "root"
     private const val PASSWORD = "1"
@@ -17,32 +13,8 @@ object Ssh {
 
     private val jsch = JSch()
 
-    fun install(context: Context, session: Session) {
-        val file = File("${context.cacheDir}/mbc")
-        val input = context.assets.open("mbc")
-        val buffer = input.readBytes()
-        input.close()
-        val output = FileOutputStream(file)
-        output.write(buffer)
-        output.close()
-        val channel = sftp(session)
-        try {
-            channel.mkdir("/media/fat/mistercon")
-        } catch (exception: Throwable) {
-        }
-        channel.put(file.path, "/media/fat/mistercon/mbc")
-        channel.disconnect()
-    }
-
-    fun command(session: Session, command: String): String {
-        val channel = exec(session, command)
-        val output = read(channel)
-        channel.disconnect()
-        return output
-    }
-
     fun session(): Session =
-        jsch.getSession(USER, HOST, PORT).apply {
+        jsch.getSession(USER, Persistence.getHost(), PORT).apply {
             setConfig(
                 Properties().apply {
                     setProperty("StrictHostKeyChecking", "no")
@@ -56,6 +28,13 @@ object Ssh {
         (session.openChannel("sftp") as ChannelSftp).apply {
             connect()
         }
+
+    fun command(session: Session, command: String): String {
+        val channel = exec(session, command)
+        val output = read(channel)
+        channel.disconnect()
+        return output
+    }
 
     private fun exec(session: Session, command: String) =
         (session.openChannel("exec") as ChannelExec).apply {

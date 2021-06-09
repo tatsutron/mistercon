@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.jcraft.jsch.Session
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 
 class MainFragment : Fragment(), CoroutineScope by MainScope() {
 
@@ -102,7 +105,7 @@ class MainFragment : Fragment(), CoroutineScope by MainScope() {
         launch(Dispatchers.IO) {
             runCatching {
                 val session = Ssh.session()
-                Ssh.install(requireContext(), session)
+                install(session)
                 Core.values().forEach {
                     it.sync(session)
                 }
@@ -115,5 +118,23 @@ class MainFragment : Fragment(), CoroutineScope by MainScope() {
                 }
             }
         }
+    }
+
+    private fun install(session: Session) {
+        val context = requireContext()
+        val file = File(File(context.cacheDir, "mbc").path)
+        val input = requireContext().assets.open("mbc")
+        val buffer = input.readBytes()
+        input.close()
+        val output = FileOutputStream(file)
+        output.write(buffer)
+        output.close()
+        val channel = Ssh.sftp(session)
+        try {
+            channel.mkdir("/media/fat/mistercon")
+        } catch (exception: Throwable) {
+        }
+        channel.put(file.path, "/media/fat/mistercon/mbc")
+        channel.disconnect()
     }
 }
