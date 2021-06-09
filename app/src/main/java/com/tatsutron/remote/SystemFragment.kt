@@ -15,6 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import java.io.File
 
 class SystemFragment : Fragment(), CoroutineScope by MainScope() {
 
@@ -128,12 +129,12 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
                 ) { dialog, _ ->
                     val list = (dialog as AlertDialog).listView
                     val script = list.adapter.getItem(list.checkedItemPosition)
-                    val path = "\"${Persistence.getScriptsPath()}/$script\""
+                            as? String
+                    val path = File(Persistence.getScriptsPath(), script).path
                     launch(Dispatchers.IO) {
                         runCatching {
                             val session = Ssh.session()
-                            val mbc = Persistence.getMbcPath()
-                            Ssh.command(session, "$mbc load_rom SCRIPT $path")
+                            Scripts.run(session, path)
                             session.disconnect()
                         }
                     }

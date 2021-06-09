@@ -15,4 +15,9 @@ object Scripts {
                 Persistence.saveScript(it)
             }
     }
+
+    fun run(session: Session, path: String) {
+        val mbc = Persistence.getMbcPath()
+        Ssh.command(session, "$mbc load_rom SCRIPT $path")
+    }
 }

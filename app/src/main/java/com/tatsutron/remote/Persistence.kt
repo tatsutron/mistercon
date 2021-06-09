@@ -14,7 +14,7 @@ object Persistence {
     fun init(context: Context) {
         val dir = "/data/data/com.tatsutron.remote/databases"
         val name = "app.db"
-        val path = "$dir/$name"
+        val path = File(dir, name).path
         if (!File(path).exists()) {
             File(dir).mkdir()
             File(path).createNewFile()
