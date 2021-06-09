@@ -1,10 +1,12 @@
 package com.tatsutron.remote
 
+import com.jcraft.jsch.Session
+
 object Scripts {
 
-    fun sync() {
+    fun sync(session: Session) {
         val scripts = Persistence.getScriptsPath()
-        Ssh.command("ls $scripts")
+        Ssh.command(session, "ls $scripts")
             .split("\n")
             .filter {
                 it.endsWith(".sh")

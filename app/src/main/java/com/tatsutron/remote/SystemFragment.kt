@@ -98,8 +98,10 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
         menuButton.setOnClickListener {
             launch(Dispatchers.IO) {
                 runCatching {
+                    val session = Ssh.session()
                     val mbc = Persistence.getMbcPath()
-                    Ssh.command("$mbc raw_seq M")
+                    Ssh.command(session, "$mbc raw_seq M")
+                    session.disconnect()
                 }
             }
         }
@@ -129,8 +131,10 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
                     val path = "\"${Persistence.getScriptsPath()}/$script\""
                     launch(Dispatchers.IO) {
                         runCatching {
+                            val session = Ssh.session()
                             val mbc = Persistence.getMbcPath()
-                            Ssh.command("$mbc load_rom SCRIPT $path")
+                            Ssh.command(session, "$mbc load_rom SCRIPT $path")
+                            session.disconnect()
                         }
                     }
                 }
@@ -148,7 +152,9 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
         rebootButton.setOnClickListener {
             launch(Dispatchers.IO) {
                 runCatching {
-                    Ssh.command("reboot now")
+                    val session = Ssh.session()
+                    Ssh.command(session, "reboot now")
+                    session.disconnect()
                 }
             }
         }

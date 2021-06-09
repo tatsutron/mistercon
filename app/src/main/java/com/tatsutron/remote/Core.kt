@@ -1,70 +1,74 @@
 package com.tatsutron.remote
 
 import com.jcraft.jsch.ChannelSftp
+import com.jcraft.jsch.Session
 import java.io.File
 
 enum class Core {
 
     Gameboy {
-        override fun sync() {
-            sync("Gameboy", listOf(".gb"))
+        override fun sync(session: Session) {
+            sync(session, "Gameboy", listOf(".gb"))
         }
 
-        override fun play(game: Game) {
-            play("GAMEBOY", game.path)
+        override fun play(session: Session, game: Game) {
+            play(session, "GAMEBOY", game.path)
         }
     },
 
     GBA {
-        override fun sync() {
-            sync("GBA", listOf(".gba"))
+        override fun sync(session: Session) {
+            sync(session, "GBA", listOf(".gba"))
         }
 
-        override fun play(game: Game) {
-            play("GBA", game.path)
+        override fun play(session: Session, game: Game) {
+            play(session, "GBA", game.path)
         }
     },
 
     Genesis {
-        override fun sync() {
-            sync("Genesis", listOf(".bin", ".gen", ".md"))
+        override fun sync(session: Session) {
+            sync(session, "Genesis", listOf(".bin", ".gen", ".md"))
         }
 
-        override fun play(game: Game) {
+        override fun play(session: Session, game: Game) {
             game.path.let {
                 when {
-                    it.endsWith(".bin") -> play("MEGADRIVE.BIN", it)
-                    it.endsWith(".gen") -> play("GENESIS", it)
-                    it.endsWith(".md") -> play("MEGADRIVE", it)
+                    it.endsWith(".bin") -> play(session, "MEGADRIVE.BIN", it)
+                    it.endsWith(".gen") -> play(session, "GENESIS", it)
+                    it.endsWith(".md") -> play(session, "MEGADRIVE", it)
                 }
             }
         }
     },
 
     SNES {
-        override fun sync() {
-            sync("SNES", listOf(".sfc"))
+        override fun sync(session: Session) {
+            sync(session, "SNES", listOf(".sfc"))
         }
 
-        override fun play(game: Game) {
-            play("SNES", game.path)
+        override fun play(session: Session, game: Game) {
+            play(session, "SNES", game.path)
         }
     },
 
     TGFX16 {
-        override fun sync() {
-            sync("TGFX16", listOf(".pce"))
+        override fun sync(session: Session) {
+            sync(session, "TGFX16", listOf(".pce"))
         }
 
-        override fun play(game: Game) {
-            play("TGFX16", game.path)
+        override fun play(session: Session, game: Game) {
+            play(session, "TGFX16", game.path)
         }
     };
 
-    abstract fun sync()
+    abstract fun sync(session: Session)
 
-    protected fun sync(core: String, extensions: List<String>) {
-        val session = Ssh.session()
+    protected fun sync(
+        session: Session,
+        core: String,
+        extensions: List<String>,
+    ) {
         val channel = Ssh.sftp(session)
         scan(
             channel = channel,
@@ -77,7 +81,6 @@ enum class Core {
                 }
         }
         channel.disconnect()
-        session.disconnect()
     }
 
     protected fun scan(
@@ -124,10 +127,10 @@ enum class Core {
             ?.groupValues
             ?.first()
 
-    abstract fun play(game: Game)
+    abstract fun play(session: Session, game: Game)
 
-    protected fun play(core: String, path: String) {
+    protected fun play(session: Session, core: String, path: String) {
         val mbc = Persistence.getMbcPath()
-        Ssh.command("$mbc load_rom $core \"$path\"")
+        Ssh.command(session, "$mbc load_rom $core \"$path\"")
     }
 }

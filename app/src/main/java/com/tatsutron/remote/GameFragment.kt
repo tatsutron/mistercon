@@ -39,7 +39,9 @@ class GameFragment : Fragment(), CoroutineScope by MainScope() {
                 val game = Persistence.getGame(id!!)!!
                 launch(Dispatchers.IO) {
                     runCatching {
-                        game.core.play(game)
+                        val session = Ssh.session()
+                        game.core.play(session, game)
+                        session.disconnect()
                     }
                 }
                 true

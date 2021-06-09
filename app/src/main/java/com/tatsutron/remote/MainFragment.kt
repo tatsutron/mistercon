@@ -101,11 +101,13 @@ class MainFragment : Fragment(), CoroutineScope by MainScope() {
         Event.SYNC.fire()
         launch(Dispatchers.IO) {
             runCatching {
-                Ssh.install(requireContext())
+                val session = Ssh.session()
+                Ssh.install(requireContext(), session)
                 Core.values().forEach {
-                    it.sync()
+                    it.sync(session)
                 }
-                Scripts.sync()
+                Scripts.sync(session)
+                session.disconnect()
             }.onSuccess {
                 requireActivity().runOnUiThread {
                     cb()

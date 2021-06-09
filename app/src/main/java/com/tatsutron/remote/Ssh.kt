@@ -17,7 +17,7 @@ object Ssh {
 
     private val jsch = JSch()
 
-    fun install(context: Context) {
+    fun install(context: Context, session: Session) {
         val file = File("${context.cacheDir}/mbc")
         val input = context.assets.open("mbc")
         val buffer = input.readBytes()
@@ -25,23 +25,13 @@ object Ssh {
         val output = FileOutputStream(file)
         output.write(buffer)
         output.close()
-        val session = session()
         val channel = sftp(session)
         try {
             channel.mkdir("/media/fat/mistercon")
-        } catch(exception: Throwable) {
-            println("derp")
+        } catch (exception: Throwable) {
         }
         channel.put(file.path, "/media/fat/mistercon/mbc")
         channel.disconnect()
-        session.disconnect()
-    }
-
-    fun command(command: String): String {
-        val session = session()
-        val output = command(session, command)
-        session.disconnect()
-        return output
     }
 
     fun command(session: Session, command: String): String {
@@ -67,7 +57,7 @@ object Ssh {
             connect()
         }
 
-    fun exec(session: Session, command: String) =
+    private fun exec(session: Session, command: String) =
         (session.openChannel("exec") as ChannelExec).apply {
             inputStream = null
             setErrStream(System.err)

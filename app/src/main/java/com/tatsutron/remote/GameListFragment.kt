@@ -110,7 +110,9 @@ class GameListFragment : Fragment(), CoroutineScope by MainScope() {
                             val game = gamesByCore.random()
                             launch(Dispatchers.IO) {
                                 runCatching {
-                                    game.core.play(game)
+                                    val session = Ssh.session()
+                                    game.core.play(session, game)
+                                    session.disconnect()
                                 }
                             }
                         },
