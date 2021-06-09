@@ -39,14 +39,19 @@ object Ssh {
 
     fun command(command: String): String {
         val session = session()
-        val channel = exec(session, command)
-        val output = read(channel)
-        channel.disconnect()
+        val output = command(session, command)
         session.disconnect()
         return output
     }
 
-    private fun session(): Session =
+    fun command(session: Session, command: String): String {
+        val channel = exec(session, command)
+        val output = read(channel)
+        channel.disconnect()
+        return output
+    }
+
+    fun session(): Session =
         jsch.getSession(USER, HOST, PORT).apply {
             setConfig(
                 Properties().apply {
@@ -57,12 +62,12 @@ object Ssh {
             connect()
         }
 
-    private fun sftp(session: Session) =
+    fun sftp(session: Session) =
         (session.openChannel("sftp") as ChannelSftp).apply {
             connect()
         }
 
-    private fun exec(session: Session, command: String) =
+    fun exec(session: Session, command: String) =
         (session.openChannel("exec") as ChannelExec).apply {
             inputStream = null
             setErrStream(System.err)
