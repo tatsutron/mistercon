@@ -121,20 +121,30 @@ class MainFragment : Fragment(), CoroutineScope by MainScope() {
     }
 
     private fun install(session: Session) {
+        Ssh.sftp(session).apply {
+            try {
+                mkdir("/media/fat/mistercon")
+            } catch (exception: Throwable) {
+
+            }
+            disconnect()
+        }
+        install(session, "mbc")
+    }
+
+    private fun install(session: Session, name: String) {
         val context = requireContext()
-        val file = File(File(context.cacheDir, "mbc").path)
-        val input = requireContext().assets.open("mbc")
+        val file = File(File(context.cacheDir, name).path)
+        val input = requireContext().assets.open(name)
         val buffer = input.readBytes()
         input.close()
-        val output = FileOutputStream(file)
-        output.write(buffer)
-        output.close()
-        val channel = Ssh.sftp(session)
-        try {
-            channel.mkdir("/media/fat/mistercon")
-        } catch (exception: Throwable) {
+        FileOutputStream(file).apply {
+            write(buffer)
+            close()
         }
-        channel.put(file.path, "/media/fat/mistercon/mbc")
-        channel.disconnect()
+        Ssh.sftp(session).apply {
+            put(file.path, File("/media/fat/mistercon", name).path)
+            disconnect()
+        }
     }
 }

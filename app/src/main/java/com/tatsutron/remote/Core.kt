@@ -99,7 +99,11 @@ enum class Core {
         list: MutableList<String>,
         extensions: List<String>,
     ) {
-        channel.cd(path)
+        try {
+            channel.cd(path)
+        } catch (exception: Throwable) {
+            return
+        }
         channel.ls(".")
             .map { it as ChannelSftp.LsEntry }
             .forEach {
