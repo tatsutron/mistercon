@@ -1,11 +1,14 @@
 package com.tatsutron.remote
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jcraft.jsch.Session
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -115,6 +118,18 @@ class MainFragment : Fragment(), CoroutineScope by MainScope() {
                 requireActivity().runOnUiThread {
                     cb()
                     Event.SYNC.fire()
+                }
+            }.onFailure {
+                val context = requireContext()
+                val ok = { _: DialogInterface, _: Int ->
+                    cb()
+                }
+                requireActivity().runOnUiThread {
+                    MaterialAlertDialogBuilder(context)
+                        .setTitle(context.getString(R.string.sync_error))
+                        .setMessage(it.toString())
+                        .setPositiveButton(context.getString(R.string.ok), ok)
+                        .show()
                 }
             }
         }

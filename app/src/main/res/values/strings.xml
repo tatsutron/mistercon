@@ -11,6 +11,7 @@
     <string name="genre">Genre</string>
     <string name="host">Host</string>
     <string name="menu">Menu</string>
+    <string name="ok">OK</string>
     <string name="play">Play</string>
     <string name="please_enter_ip_address">Please enter IP address</string>
     <string name="publisher">Publisher</string>
@@ -21,6 +22,7 @@
     <string name="script">Script</string>
     <string name="scripts_path">Scripts Path</string>
     <string name="sync">Sync</string>
+    <string name="sync_error">Sync Error</string>
     <string name="system">System</string>
     <string name="unable_to_sync">Unable to sync</string>
 </resources>
