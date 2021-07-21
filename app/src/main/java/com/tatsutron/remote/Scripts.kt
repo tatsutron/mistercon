@@ -5,8 +5,7 @@ import com.jcraft.jsch.Session
 object Scripts {
 
     fun sync(session: Session) {
-        val scripts = Persistence.getScriptsPath()
-        Ssh.command(session, "ls $scripts")
+        Ssh.command(session, "ls ${Persistence.getConfig()?.scriptsPath}")
             .split("\n")
             .filter {
                 it.endsWith(".sh")
@@ -17,7 +16,6 @@ object Scripts {
     }
 
     fun run(session: Session, path: String) {
-        val mbc = Persistence.getMbcPath()
-        Ssh.command(session, "$mbc load_rom SCRIPT $path")
+        Ssh.command(session, "${Constants.MBC_PATH} load_rom SCRIPT $path")
     }
 }
