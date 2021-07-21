@@ -19,60 +19,178 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/margin_small"
+            android:showDividers="middle"
+            android:divider="@drawable/vertical_divider_small">
 
-            <View
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/publisher_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="8dp" />
+                android:layout_height="wrap_content"
+                android:hint="@string/publisher"
+                android:textColorHint="@color/primary_200"
+                android:visibility="gone">
 
-            <com.tatsutron.remote.TextCard
-                style="@style/Card"
-                android:id="@+id/publisher"
-                app:label="@string/publisher" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/publisher_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@null"
+                    android:enabled="false" />
 
-            <com.tatsutron.remote.TextCard
-                style="@style/Card"
-                android:id="@+id/developer"
-                app:label="@string/developer" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.tatsutron.remote.TextCard
-                style="@style/Card"
-                android:id="@+id/release_date"
-                app:label="@string/release_date" />
-
-            <com.tatsutron.remote.TextCard
-                style="@style/Card"
-                android:id="@+id/region"
-                app:label="@string/region" />
-
-            <com.tatsutron.remote.TextCard
-                style="@style/Card"
-                android:id="@+id/genre"
-                app:label="@string/genre" />
-
-            <com.tatsutron.remote.ImageCard
-                style="@style/Card"
-                android:id="@+id/front_cover"
-                app:label="@string/front_cover" />
-
-            <com.tatsutron.remote.ImageCard
-                style="@style/Card"
-                android:id="@+id/back_cover"
-                app:label="@string/back_cover" />
-
-            <com.tatsutron.remote.ImageCard
-                style="@style/Card"
-                android:id="@+id/cartridge"
-                app:label="@string/cartridge" />
-
-            <com.tatsutron.remote.TextCard
-                style="@style/Card"
-                android:id="@+id/description"
-                app:label="@string/description" />
-
-            <View
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/developer_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="8dp" />
+                android:layout_height="wrap_content"
+                android:hint="@string/developer"
+                android:textColorHint="@color/primary_200"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/developer_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@null"
+                    android:enabled="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/release_date_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/release_date"
+                android:textColorHint="@color/primary_200"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/release_date_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@null"
+                    android:enabled="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/region_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/region"
+                android:textColorHint="@color/primary_200"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/region_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@null"
+                    android:enabled="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/genre_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/genre"
+                android:textColorHint="@color/primary_200"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/genre_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@null"
+                    android:enabled="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/description_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/description"
+                android:textColorHint="@color/primary_200"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/description_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@null"
+                    android:enabled="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/front_cover_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_medium"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_background"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/front_cover_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/back_cover_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_medium"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_background"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/back_cover_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cartridge_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_medium"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_background"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/cartridge_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
