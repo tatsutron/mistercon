@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.Toolbar
         style="@style/Toolbar"
-        android:id="@+id/main_toolbar" />
+        android:id="@+id/toolbar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,8 +29,8 @@
             android:layout_alignParentBottom="true"
             android:background="@color/gray_700"
             app:itemBackground="@color/gray_700"
-            app:itemIconTint="@drawable/item_bottom_navigation"
-            app:itemTextColor="@drawable/item_bottom_navigation"
+            app:itemIconTint="@drawable/selector_item_bottom_navigation"
+            app:itemTextColor="@drawable/selector_item_bottom_navigation"
             app:menu="@menu/menu_bottom_navigation" />
 
     </RelativeLayout>
