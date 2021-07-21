@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/games"
-        android:title="@string/games"
-        android:icon="@drawable/ic_games" />
+    <item android:id="@+id/consoles"
+        android:title="@string/consoles"
+        android:icon="@drawable/ic_consoles" />
     <item android:id="@+id/system"
         android:title="@string/system"
         android:icon="@drawable/ic_system" />
