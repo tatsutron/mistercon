@@ -11,11 +11,10 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="actionBarStyle">@style/ActionBar</item>
         <item name="android:windowBackground">@color/gray_900</item>
+        <item name="android:colorControlActivated">@color/primary_200</item>
         <item name="colorAccent">@color/primary_500</item>
         <item name="colorPrimary">@color/gray_900</item>
         <item name="colorPrimaryDark">@color/gray_900</item>
-        <item name="android:fontFamily">@font/inter</item>
-        <item name="fontFamily">@font/inter</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -34,8 +33,6 @@
     <style name="Card">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginHorizontal">8dp</item>
-        <item name="android:layout_marginVertical">4dp</item>
         <item name="cardBackgroundColor">@color/gray_700</item>
         <item name="cardCornerRadius">4dp</item>
     </style>
