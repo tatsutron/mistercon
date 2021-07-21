@@ -8,8 +8,8 @@ class FragmentPagerAdapter(
     fragmentManager: FragmentManager,
 ) : FragmentPagerAdapter(fragmentManager) {
 
-    private val items = listOf<Fragment>(
-        GameListFragment(),
+    private val items = listOf(
+        ConsoleListFragment(),
         SystemFragment(),
     )
 
