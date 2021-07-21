@@ -4,8 +4,15 @@ import android.os.Bundle
 
 object FragmentMaker {
 
+    const val KEY_CORE = "KEY_CORE"
     const val KEY_ID = "KEY_ID"
     const val KEY_URL = "KEY_URL"
+
+    fun console(core: String) = ConsoleFragment().apply {
+        arguments = Bundle().apply {
+            putString(KEY_CORE, core)
+        }
+    }
 
     fun game(id: Long) = GameFragment().apply {
         arguments = Bundle().apply {
