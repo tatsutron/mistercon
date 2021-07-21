@@ -2,6 +2,8 @@ package com.tatsutron.remote
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -9,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.jcraft.jsch.Session
 import kotlinx.coroutines.CoroutineScope
@@ -53,7 +56,30 @@ class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
             setSupportActionBar(view.findViewById(R.id.toolbar))
             supportActionBar?.title = core.displayName
         }
-        view.findViewById<TextInputLayout>(R.id.games_path).apply {
+        view.findViewById<TextInputEditText>(R.id.games_path_text).apply {
+            setText(Persistence.getGamesPath(core.name))
+            addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+                }
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {
+                    Persistence.saveGamesPath(core.name, s.toString())
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            })
+        }
+        view.findViewById<TextInputLayout>(R.id.games_path_layout).apply {
             setEndIconOnClickListener {
                 val context = requireContext()
                 val disableButton = {

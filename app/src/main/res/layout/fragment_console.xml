@@ -18,8 +18,8 @@
         android:padding="@dimen/margin_small">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/games_path_layout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/games_path"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/games_path"
@@ -30,6 +30,7 @@
             app:endIconTint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/games_path_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"

@@ -81,6 +81,20 @@ object Persistence {
             }
     }
 
+    fun saveGamesPath(core: String, gamesPath: String) {
+        database?.coresQueries
+            ?.save(gamesPath, core)
+    }
+
+    fun getGamesPath(core: String): String =
+        database?.coresQueries
+            ?.selectByName(core)
+            ?.executeAsOneOrNull()
+            ?.let {
+                it.gamesPath
+            }
+            ?: File(Constants.GAMES_PATH, core).path
+
     fun saveGame(core: String, path: String, hash: String?) {
         database?.gamesQueries
             ?.save(core, path, hash)

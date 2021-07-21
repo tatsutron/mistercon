@@ -1,0 +1,11 @@
+CREATE TABLE Cores (
+    gamesPath TEXT NOT NULL,
+    name TEXT PRIMARY KEY
+);
+
+save:
+REPLACE INTO Cores(gamesPath, name)
+VALUES (:gamesPath, :name);
+
+selectByName:
+SELECT * FROM Cores WHERE name = ?;
