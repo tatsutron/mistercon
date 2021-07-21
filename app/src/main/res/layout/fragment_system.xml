@@ -37,21 +37,22 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/margin_large">
+        android:padding="@dimen/margin_medium">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:background="@color/gray_800"
             android:clickable="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:showDividers="middle"
+            android:divider="@drawable/vertical_divider_small">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="175dp"
                 android:showDividers="middle"
-                android:divider="@drawable/horizontal_divider_small">
+                android:divider="@drawable/horizontal_divider_medium">
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -129,9 +130,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="175dp"
                 android:showDividers="middle"
-                android:divider="@drawable/horizontal_divider_small">
+                android:divider="@drawable/horizontal_divider_medium">
 
                 <RelativeLayout
                     android:layout_width="0dp"
