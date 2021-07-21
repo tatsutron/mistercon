@@ -7,24 +7,25 @@ import androidx.recyclerview.widget.RecyclerView
 
 class GameListAdapter(
     private val context: Context,
-    val itemList: MutableList<GameListItem> = mutableListOf(),
-) : RecyclerView.Adapter<GameListHolder>() {
+    val itemList: MutableList<GameItem> = mutableListOf(),
+) : RecyclerView.Adapter<GameHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): GameListHolder {
+    ): GameHolder {
         val layoutInflater = LayoutInflater.from(context)
         val itemView = layoutInflater.inflate(
-            R.layout.item_game_list,
+            R.layout.item_game,
             parent,
             false, // attachToRoot
         )
-        return GameListHolder(itemView = itemView)
+        return GameHolder(itemView = itemView)
     }
 
-    override fun onBindViewHolder(holder: GameListHolder, position: Int) =
+    override fun onBindViewHolder(holder: GameHolder, position: Int) {
         holder.bind(item = itemList[position])
+    }
 
     override fun getItemCount() = itemList.size
 }
