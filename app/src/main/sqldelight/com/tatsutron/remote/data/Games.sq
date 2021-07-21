@@ -5,15 +5,21 @@ CREATE TABLE Games (
     sha1 TEXT
 );
 
-selectAll:
-SELECT * FROM Games;
-
-selectById:
-SELECT * FROM Games WHERE id = ?;
-
 save:
 REPLACE INTO Games(core, path, sha1)
 VALUES (:core, :path, :sha1);
 
-clear:
+selectAll:
+SELECT * FROM Games;
+
+selectByCore:
+SELECT * FROM Games WHERE core = ?;
+
+selectById:
+SELECT * FROM Games WHERE id = ?;
+
+deleteAll:
 DELETE FROM Games;
+
+deleteByCore:
+DELETE FROM Games WHERE core = ?;
