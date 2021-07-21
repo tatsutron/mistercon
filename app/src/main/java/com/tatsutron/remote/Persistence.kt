@@ -28,30 +28,31 @@ object Persistence {
             ?.select()
             ?.executeAsOneOrNull()
         if (config == null) {
-            saveConfig(Config())
+            saveConfig(
+                Config(
+                    host = Constants.HOST,
+                    scriptsPath = Constants.SCRIPTS_PATH,
+                ),
+            )
         }
     }
 
     private fun saveConfig(config: Config) {
         database?.configQueries
             ?.save(
-                gamesPath = config.gamesPath,
                 host = config.host,
                 id = 0,
-                mbcPath = config.mbcPath,
                 scriptsPath = config.scriptsPath,
             )
     }
 
-    private fun getConfig() =
+    fun getConfig() =
         database?.configQueries
             ?.select()
             ?.executeAsOneOrNull()
             ?.let {
                 Config(
-                    gamesPath = it.gamesPath,
                     host = it.host,
-                    mbcPath = it.mbcPath,
                     scriptsPath = it.scriptsPath,
                 )
             }
@@ -59,42 +60,45 @@ object Persistence {
     fun saveHost(host: String) {
         getConfig()
             ?.let {
-                it.host = host
-                saveConfig(it)
+                saveConfig(
+                    Config(
+                        host = host,
+                        scriptsPath = it.scriptsPath,
+                    ),
+                )
             }
     }
 
-    fun getHost() = getConfig()?.host
-
-    fun saveGamesPath(path: String) {
+    fun saveScriptsPath(scriptsPath: String) {
         getConfig()
             ?.let {
-                it.gamesPath = path
-                saveConfig(it)
+                saveConfig(
+                    Config(
+                        host = it.host,
+                        scriptsPath = scriptsPath,
+                    ),
+                )
             }
     }
-
-    fun getGamesPath() = getConfig()?.gamesPath
-
-    fun getMbcPath() = getConfig()?.mbcPath
-
-    fun getScriptsPath() = getConfig()?.scriptsPath
 
     fun saveGame(core: String, path: String, hash: String?) {
         database?.gamesQueries
             ?.save(core, path, hash)
     }
 
-    fun getGameList() =
+    fun getGamesByCore(core: String) =
         database?.gamesQueries
-            ?.selectAll()
+            ?.selectByCore(core)
             ?.executeAsList()
             ?.map {
                 game(it)
             }
+            ?.sortedBy {
+                File(it.path).name
+            }
             ?: listOf()
 
-    fun getGame(id: Long) =
+    fun getGameById(id: Long) =
         database?.gamesQueries
             ?.selectById(id)
             ?.executeAsOneOrNull()
@@ -102,9 +106,9 @@ object Persistence {
                 game(it)
             }
 
-    fun clearGames() {
+    fun clearGamesByCore(core: String) {
         database?.gamesQueries
-            ?.clear()
+            ?.deleteByCore(core)
     }
 
     private fun game(dao: Games): Game {
