@@ -1,11 +1,10 @@
 <resources>
     <string name="app">MiSTer</string>
-    <string name="back_cover">Back Cover</string>
     <string name="cancel">Cancel</string>
-    <string name="cartridge">Cartridge</string>
+    <string name="consoles">Consoles</string>
+    <string name="credits">Credits</string>
     <string name="description">Description</string>
     <string name="developer">Developer</string>
-    <string name="front_cover">Front Cover</string>
     <string name="games">Games</string>
     <string name="games_path">Games Path</string>
     <string name="genre">Genre</string>
@@ -19,7 +18,7 @@
     <string name="region">Region</string>
     <string name="release_date">Release Date</string>
     <string name="run">Run</string>
-    <string name="script">Script</string>
+    <string name="scripts">Scripts</string>
     <string name="scripts_path">Scripts Path</string>
     <string name="sync">Sync</string>
     <string name="sync_error">Sync Error</string>
