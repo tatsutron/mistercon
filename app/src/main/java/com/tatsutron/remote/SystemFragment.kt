@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,9 +29,10 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHost(view)
-        setMenuButton(view)
-        setScriptButton(view)
+        setCreditsButton(view)
         setRebootButton(view)
+        setScriptsButton(view)
+        setMenuButton(view)
     }
 
     private fun setHost(view: View) {
@@ -62,51 +64,17 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
         }
     }
 
-    private fun setMenuButton(view: View) {
-        val menuButton = view.findViewById<Button>(R.id.menu_button)
-        menuButton.setOnClickListener {
-            launch(Dispatchers.IO) {
-                runCatching {
-                    val session = Ssh.session()
-                    Ssh.command(session, "${Constants.MBC_PATH} raw_seq M")
-                    session.disconnect()
-                }
+    private fun setCreditsButton(view: View) {
+        view.findViewById<Button>(R.id.credits_button).apply {
+            setOnClickListener {
+                requireActivity().supportFragmentManager
+                    .beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_NONE)
+                    .add(R.id.root, FragmentMaker.credits())
+                    .addToBackStack(null)
+                    .commit()
             }
         }
-    }
-
-    private fun setScriptButton(view: View) {
-//        val scriptButton = view.findViewById<Button>(R.id.script_button)
-//        scriptButton.setOnClickListener {
-//            val context = requireContext()
-//            MaterialAlertDialogBuilder(context)
-//                .setTitle(context.getString(R.string.script))
-//                .setNegativeButton(
-//                    context.getString(R.string.cancel),
-//                    null, // listener
-//                )
-//                .setPositiveButton(
-//                    context.getString(R.string.run)
-//                ) { dialog, _ ->
-//                    val list = (dialog as AlertDialog).listView
-//                    val script = list.adapter.getItem(list.checkedItemPosition)
-//                            as? String
-//                    val path = File(Constants.SCRIPTS_PATH, script).path
-//                    launch(Dispatchers.IO) {
-//                        runCatching {
-//                            val session = Ssh.session()
-//                            Scripts.run(session, path)
-//                            session.disconnect()
-//                        }
-//                    }
-//                }
-//                .setSingleChoiceItems(
-//                    Persistence.getScriptList().toTypedArray(),
-//                    0, // checkedItem
-//                    null, // listener
-//                )
-//                .show()
-//        }
     }
 
     private fun setRebootButton(view: View) {
@@ -116,6 +84,32 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
                 runCatching {
                     val session = Ssh.session()
                     Ssh.command(session, "reboot now")
+                    session.disconnect()
+                }
+            }
+        }
+    }
+
+    private fun setScriptsButton(view: View) {
+        view.findViewById<Button>(R.id.scripts_button).apply {
+            setOnClickListener {
+                requireActivity().supportFragmentManager
+                    .beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_NONE)
+                    .add(R.id.root, FragmentMaker.scriptList())
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
+    }
+
+    private fun setMenuButton(view: View) {
+        val menuButton = view.findViewById<Button>(R.id.menu_button)
+        menuButton.setOnClickListener {
+            launch(Dispatchers.IO) {
+                runCatching {
+                    val session = Ssh.session()
+                    Ssh.command(session, "${Constants.MBC_PATH} raw_seq M")
                     session.disconnect()
                 }
             }
