@@ -177,7 +177,7 @@ class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
     private fun install(session: Session) {
         Ssh.sftp(session).apply {
             try {
-                mkdir("/media/fat/mistercon")
+                mkdir(Constants.MISTERCON_PATH)
             } catch (exception: Throwable) {
             }
             disconnect()
@@ -192,7 +192,7 @@ class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
             close()
         }
         Ssh.sftp(session).apply {
-            put(file.path, File("/media/fat/mistercon", "scan").path)
+            put(file.path, File(Constants.MISTERCON_PATH, "scan").path)
             disconnect()
         }
     }
