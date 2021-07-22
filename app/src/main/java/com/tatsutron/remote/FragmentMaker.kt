@@ -8,6 +8,10 @@ object FragmentMaker {
     const val KEY_ID = "KEY_ID"
     const val KEY_URL = "KEY_URL"
 
+    fun credits() = CreditsFragment()
+
+    fun scriptList() = ScriptListFragment()
+
     fun console(core: String) = ConsoleFragment().apply {
         arguments = Bundle().apply {
             putString(KEY_CORE, core)
