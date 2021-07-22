@@ -1,13 +1,13 @@
 CREATE TABLE Scripts (
-    filename TEXT NOT NULL UNIQUE
+    path TEXT NOT NULL UNIQUE
 );
 
 selectAll:
 SELECT * FROM Scripts;
 
 save:
-REPLACE INTO Scripts(filename)
-VALUES (:filename);
+REPLACE INTO Scripts(path)
+VALUES (:path);
 
 clear:
 DELETE FROM Scripts;
