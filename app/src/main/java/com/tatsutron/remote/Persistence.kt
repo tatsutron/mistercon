@@ -81,6 +81,22 @@ object Persistence {
             }
     }
 
+    fun saveScript(filename: String) {
+        database?.scriptsQueries
+            ?.save(filename)
+    }
+
+    fun getScriptList() =
+        database?.scriptsQueries
+            ?.selectAll()
+            ?.executeAsList()
+            ?: listOf()
+
+    fun clearScripts() {
+        database?.scriptsQueries
+            ?.clear()
+    }
+
     fun saveGamesPath(core: String, gamesPath: String) {
         database?.coresQueries
             ?.save(gamesPath, core)
@@ -141,21 +157,5 @@ object Persistence {
                 ?.selectBySha1(sha1)
                 ?.executeAsOneOrNull(),
         )
-    }
-
-    fun saveScript(filename: String) {
-        database?.scriptsQueries
-            ?.save(filename)
-    }
-
-    fun getScriptList() =
-        database?.scriptsQueries
-            ?.selectAll()
-            ?.executeAsList()
-            ?: listOf()
-
-    fun clearScripts() {
-        database?.scriptsQueries
-            ?.clear()
     }
 }
