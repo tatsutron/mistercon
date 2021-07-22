@@ -3,4 +3,8 @@
     <dimen name="margin_large">24dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
     <dimen name="margin_small">8dp</dimen>
+    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="text_size_largest">48sp</dimen>
+    <dimen name="text_size_middle">20sp</dimen>
+    <dimen name="text_size_smallest">16sp</dimen>
 </resources>

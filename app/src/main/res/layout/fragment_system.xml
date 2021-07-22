@@ -83,7 +83,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/credits"
-                            android:textSize="24sp"
+                            android:textSize="@dimen/text_size_large"
                             android:textColor="@color/primary_200" />
 
                     </LinearLayout>
@@ -119,7 +119,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/reboot"
-                            android:textSize="24sp"
+                            android:textSize="@dimen/text_size_large"
                             android:textColor="@color/primary_200" />
 
                     </LinearLayout>
@@ -163,7 +163,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/scripts"
-                            android:textSize="24sp"
+                            android:textSize="@dimen/text_size_large"
                             android:textColor="@color/primary_200" />
 
                     </LinearLayout>
@@ -199,7 +199,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/menu"
-                            android:textSize="24sp"
+                            android:textSize="@dimen/text_size_large"
                             android:textColor="@color/primary_200" />
 
                     </LinearLayout>

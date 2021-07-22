@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_middle"
         android:textColor="@color/white"
         android:singleLine="true" />
 
