@@ -1,4 +1,4 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.tatsutron.remote.MainActivity
+import com.tatsutron.remote.R
+import com.tatsutron.remote.recycler.ConsoleListAdapter
 
 class ConsoleListFragment : Fragment() {
     private lateinit var adapter: ConsoleListAdapter

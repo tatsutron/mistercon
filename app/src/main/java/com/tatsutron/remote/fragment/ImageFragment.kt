@@ -1,4 +1,4 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.fragment
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.ortiz.touchview.TouchImageView
+import com.tatsutron.remote.FragmentMaker
+import com.tatsutron.remote.R
 
 class ImageFragment : Fragment() {
 

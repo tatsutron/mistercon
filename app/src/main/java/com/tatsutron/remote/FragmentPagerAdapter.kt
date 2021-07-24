@@ -3,6 +3,8 @@ package com.tatsutron.remote
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.tatsutron.remote.fragment.ConsoleListFragment
+import com.tatsutron.remote.fragment.SystemFragment
 
 class FragmentPagerAdapter(
     fragmentManager: FragmentManager,

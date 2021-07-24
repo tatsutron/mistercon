@@ -1,6 +1,6 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.recycler
 
-class ConsoleItem(
+class ScriptItem(
     val label: String,
     var onClick: (() -> Unit)? = null,
 )

@@ -1,4 +1,4 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.recycler
 
 class GameItem(
     val label: String,

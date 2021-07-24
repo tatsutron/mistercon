@@ -1,6 +1,7 @@
 package com.tatsutron.remote
 
 import android.os.Bundle
+import com.tatsutron.remote.fragment.*
 
 object FragmentMaker {
 

@@ -1,4 +1,4 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.fragment
 
 import android.net.Uri
 import android.os.Bundle
@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.tatsutron.remote.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope

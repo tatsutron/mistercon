@@ -1,4 +1,4 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.fragment
 
 import android.os.Bundle
 import android.view.*
@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.tatsutron.remote.FragmentPagerAdapter
+import com.tatsutron.remote.R
 
 class MainFragment : Fragment() {
 

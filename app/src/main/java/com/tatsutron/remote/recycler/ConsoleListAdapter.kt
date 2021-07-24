@@ -1,10 +1,14 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.recycler
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
+import com.tatsutron.remote.Core
+import com.tatsutron.remote.FragmentMaker
+import com.tatsutron.remote.MainActivity
+import com.tatsutron.remote.R
 
 class ConsoleListAdapter(
     private val activity: MainActivity,

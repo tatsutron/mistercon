@@ -2,6 +2,7 @@ package com.tatsutron.remote
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.tatsutron.remote.fragment.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
