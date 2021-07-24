@@ -9,14 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import com.jcraft.jsch.Session
-import com.tatsutron.remote.Constants
-import com.tatsutron.remote.Persistence
-import com.tatsutron.remote.R
-import com.tatsutron.remote.Ssh
+import com.tatsutron.remote.*
 import com.tatsutron.remote.recycler.ScriptItem
 import com.tatsutron.remote.recycler.ScriptListAdapter
 import kotlinx.coroutines.CoroutineScope
@@ -24,7 +19,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import java.io.File
-import java.io.FileOutputStream
 
 class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
     private lateinit var adapter: ScriptListAdapter
@@ -108,15 +102,7 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
                         enableButton()
                     },
                     onFailure = { throwable ->
-                        MaterialAlertDialogBuilder(context)
-                            .setTitle(context.getString(R.string.sync_error))
-                            .setMessage(throwable.toString())
-                            .setPositiveButton(
-                                context.getString(R.string.ok),
-                            ) { _, _ ->
-                                enableButton()
-                            }
-                            .show()
+                        ErrorDialog.show(requireContext(), throwable)
                     },
                 )
             }
@@ -139,7 +125,7 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
         launch(Dispatchers.IO) {
             runCatching {
                 val session = Ssh.session()
-                install(session)
+                Asset.put(requireContext(), session, "mbc")
                 val scriptsPath = Persistence.getConfig()?.scriptsPath
                 Ssh.command(session, "ls $scriptsPath")
                     .split("\n")
@@ -160,29 +146,6 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
         }
     }
 
-    private fun install(session: Session) {
-        Ssh.sftp(session).apply {
-            try {
-                mkdir(Constants.MISTERCON_PATH)
-            } catch (exception: Throwable) {
-            }
-            disconnect()
-        }
-        val context = requireContext()
-        val file = File(File(context.cacheDir, "mbc").path)
-        val input = requireContext().assets.open("mbc")
-        val buffer = input.readBytes()
-        input.close()
-        FileOutputStream(file).apply {
-            write(buffer)
-            close()
-        }
-        Ssh.sftp(session).apply {
-            put(file.path, File(Constants.MISTERCON_PATH, "mbc").path)
-            disconnect()
-        }
-    }
-
     private fun refresh() {
         val items = Persistence.getScriptList().map {
             ScriptItem(
@@ -197,20 +160,10 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
                             )
                             session.disconnect()
                         }.onSuccess {
+                            requireActivity().runOnUiThread {}
                         }.onFailure { throwable ->
                             requireActivity().runOnUiThread {
-                                MaterialAlertDialogBuilder(requireContext())
-                                    .setTitle(
-                                        context?.getString(
-                                            R.string.sync_error,
-                                        ),
-                                    )
-                                    .setMessage(throwable.toString())
-                                    .setPositiveButton(
-                                        context?.getString(R.string.ok),
-                                    ) { _, _ ->
-                                    }
-                                    .show()
+                                ErrorDialog.show(requireContext(), throwable)
                             }
                         }
                     }

@@ -108,15 +108,11 @@ class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
                         enableButton()
                     },
                     onFailure = { throwable ->
-                        MaterialAlertDialogBuilder(context)
-                            .setTitle(context.getString(R.string.sync_error))
-                            .setMessage(throwable.toString())
-                            .setPositiveButton(
-                                context.getString(R.string.ok),
-                            ) { _, _ ->
-                                enableButton()
-                            }
-                            .show()
+                        ErrorDialog.show(
+                            context = requireContext(),
+                            throwable = throwable,
+                            cb = { enableButton() },
+                        )
                     },
                 )
             }
@@ -139,7 +135,7 @@ class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
         launch(Dispatchers.IO) {
             runCatching {
                 val session = Ssh.session()
-                install(session)
+                Asset.put(requireContext(), session, "scan")
                 val extensions = core.commandsByExtension
                     .map {
                         it.key
@@ -174,29 +170,6 @@ class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
                     onFailure(it)
                 }
             }
-        }
-    }
-
-    private fun install(session: Session) {
-        Ssh.sftp(session).apply {
-            try {
-                mkdir(Constants.MISTERCON_PATH)
-            } catch (exception: Throwable) {
-            }
-            disconnect()
-        }
-        val context = requireContext()
-        val file = File(File(context.cacheDir, "scan").path)
-        val input = requireContext().assets.open("scan")
-        val buffer = input.readBytes()
-        input.close()
-        FileOutputStream(file).apply {
-            write(buffer)
-            close()
-        }
-        Ssh.sftp(session).apply {
-            put(file.path, File(Constants.MISTERCON_PATH, "scan").path)
-            disconnect()
         }
     }
 
