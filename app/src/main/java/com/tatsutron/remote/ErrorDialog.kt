@@ -9,7 +9,7 @@ object ErrorDialog {
     fun show(context: Context, throwable: Throwable, cb: () -> Unit = {}) {
         val listener = { _: DialogInterface, _: Int -> cb() }
         MaterialAlertDialogBuilder(context)
-            .setTitle(context.getString(R.string.sync_error))
+            .setTitle(context.getString(R.string.error))
             .setMessage(throwable.toString())
             .setPositiveButton(context.getString(R.string.ok), listener)
             .show()
