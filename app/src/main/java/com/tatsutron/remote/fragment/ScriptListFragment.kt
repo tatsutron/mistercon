@@ -102,7 +102,11 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
                         enableButton()
                     },
                     onFailure = { throwable ->
-                        ErrorDialog.show(requireContext(), throwable)
+                        ErrorDialog.show(
+                            context = requireContext(),
+                            throwable = throwable,
+                            cb = { enableButton() },
+                        )
                     },
                 )
             }

@@ -59,6 +59,13 @@ class GameFragment : Fragment(), CoroutineScope by MainScope() {
                         }.toString()
                         Ssh.command(session, command)
                         session.disconnect()
+                    }.onFailure {
+                        requireActivity().runOnUiThread {
+                            ErrorDialog.show(
+                                context = requireContext(),
+                                throwable = it,
+                            )
+                        }
                     }
                 }
                 true

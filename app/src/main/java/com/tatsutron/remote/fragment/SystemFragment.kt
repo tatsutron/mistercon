@@ -86,6 +86,11 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
                     val session = Ssh.session()
                     Ssh.command(session, "reboot now")
                     session.disconnect()
+                }.onFailure {
+                    ErrorDialog.show(
+                        context = requireContext(),
+                        throwable = it,
+                    )
                 }
             }
         }
@@ -112,6 +117,10 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
                     val session = Ssh.session()
                     Ssh.command(session, "${Constants.MBC_PATH} raw_seq M")
                     session.disconnect()
+                }.onFailure {
+                    requireActivity().runOnUiThread {
+                        ErrorDialog.show(requireContext(), it)
+                    }
                 }
             }
         }
