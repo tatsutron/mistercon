@@ -79,18 +79,19 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
     }
 
     private fun setRebootButton(view: View) {
-        val rebootButton = view.findViewById<Button>(R.id.reboot_button)
-        rebootButton.setOnClickListener {
-            launch(Dispatchers.IO) {
-                runCatching {
-                    val session = Ssh.session()
-                    Ssh.command(session, "reboot now")
-                    session.disconnect()
-                }.onFailure {
-                    ErrorDialog.show(
-                        context = requireContext(),
-                        throwable = it,
-                    )
+        view.findViewById<Button>(R.id.reboot_button).apply {
+            setOnClickListener {
+                launch(Dispatchers.IO) {
+                    runCatching {
+                        val session = Ssh.session()
+                        Ssh.command(session, "reboot now")
+                        session.disconnect()
+                    }.onFailure {
+                        ErrorDialog.show(
+                            context = requireContext(),
+                            throwable = it,
+                        )
+                    }
                 }
             }
         }
@@ -110,16 +111,18 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
     }
 
     private fun setMenuButton(view: View) {
-        val menuButton = view.findViewById<Button>(R.id.menu_button)
-        menuButton.setOnClickListener {
-            launch(Dispatchers.IO) {
-                runCatching {
-                    val session = Ssh.session()
-                    Ssh.command(session, "${Constants.MBC_PATH} raw_seq M")
-                    session.disconnect()
-                }.onFailure {
-                    requireActivity().runOnUiThread {
-                        ErrorDialog.show(requireContext(), it)
+        view.findViewById<Button>(R.id.menu_button).apply {
+            setOnClickListener {
+                launch(Dispatchers.IO) {
+                    runCatching {
+                        val session = Ssh.session()
+                        Asset.put(requireContext(), session, "mbc")
+                        Ssh.command(session, "${Constants.MBC_PATH} raw_seq M")
+                        session.disconnect()
+                    }.onFailure {
+                        requireActivity().runOnUiThread {
+                            ErrorDialog.show(requireContext(), it)
+                        }
                     }
                 }
             }

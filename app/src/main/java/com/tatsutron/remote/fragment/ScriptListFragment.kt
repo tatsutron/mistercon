@@ -158,6 +158,7 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
                     launch(Dispatchers.IO) {
                         runCatching {
                             val session = Ssh.session()
+                            Asset.put(requireContext(), session, "mbc")
                             Ssh.command(
                                 session,
                                 "${Constants.MBC_PATH} load_rom SCRIPT $it",

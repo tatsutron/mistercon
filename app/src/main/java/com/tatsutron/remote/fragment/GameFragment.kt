@@ -44,30 +44,7 @@ class GameFragment : Fragment(), CoroutineScope by MainScope() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.play -> {
-                launch(Dispatchers.IO) {
-                    runCatching {
-                        val session = Ssh.session()
-                        val extension = File(game.path).extension
-                        val command = StringBuilder().apply {
-                            append("\"${Constants.MBC_PATH}\"")
-                            append(" ")
-                            append("load_rom")
-                            append(" ")
-                            append(game.core.commandsByExtension[extension])
-                            append(" ")
-                            append("\"${game.path}\"")
-                        }.toString()
-                        Ssh.command(session, command)
-                        session.disconnect()
-                    }.onFailure {
-                        requireActivity().runOnUiThread {
-                            ErrorDialog.show(
-                                context = requireContext(),
-                                throwable = it,
-                            )
-                        }
-                    }
-                }
+                play()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -170,6 +147,34 @@ class GameFragment : Fragment(), CoroutineScope by MainScope() {
             }
             view.findViewById<LinearLayout>(R.id.cartridge_layout)
                 .visibility = View.VISIBLE
+        }
+    }
+
+    private fun play() {
+        launch(Dispatchers.IO) {
+            runCatching {
+                val session = Ssh.session()
+                Asset.put(requireContext(), session, "mbc")
+                val extension = File(game.path).extension
+                val command = StringBuilder().apply {
+                    append("\"${Constants.MBC_PATH}\"")
+                    append(" ")
+                    append("load_rom")
+                    append(" ")
+                    append(game.core.commandsByExtension[extension])
+                    append(" ")
+                    append("\"${game.path}\"")
+                }.toString()
+                Ssh.command(session, command)
+                session.disconnect()
+            }.onFailure {
+                requireActivity().runOnUiThread {
+                    ErrorDialog.show(
+                        context = requireContext(),
+                        throwable = it,
+                    )
+                }
+            }
         }
     }
 }
