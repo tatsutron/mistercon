@@ -9,6 +9,7 @@ enum class Core(
     Gameboy(
         commandsByExtension = mapOf(
             Pair(".gb", "GAMEBOY"),
+            Pair(".gbc", "GAMEBOY"),
         ),
         displayName = "Game Boy",
     ),
