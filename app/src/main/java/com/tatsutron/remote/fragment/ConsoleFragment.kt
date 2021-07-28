@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -24,6 +25,7 @@ import java.io.File
 class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
     private lateinit var core: Core
     private lateinit var adapter: GameListAdapter
+    private lateinit var randomButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,6 +116,10 @@ class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
                 )
             }
         }
+        randomButton = view.findViewById(R.id.random_button)
+        randomButton.setOnClickListener {
+            adapter.itemList.random().onClick?.invoke()
+        }
         view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
             this@ConsoleFragment.adapter = GameListAdapter(
@@ -188,5 +194,10 @@ class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
         adapter.itemList.clear()
         adapter.itemList.addAll(items)
         adapter.notifyDataSetChanged()
+        randomButton.visibility = if (items.count() > 1) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
     }
 }
