@@ -31,6 +31,7 @@ enum class Core(
 
     NES(
         commandsByExtension = mapOf(
+            Pair(".fds", "NES"),
             Pair(".nes", "NES"),
         ),
         displayName = "Nintendo Entertainment System",
