@@ -173,7 +173,8 @@ class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
     private fun refresh() {
         val items = Persistence.getGamesByCore(core.name).map {
             GameItem(
-                label = it.release?.releaseTitleName ?: File(it.path).name,
+                label = it.release?.releaseTitleName
+                    ?: File(it.path).nameWithoutExtension,
                 onClick = {
                     requireActivity().supportFragmentManager
                         .beginTransaction()

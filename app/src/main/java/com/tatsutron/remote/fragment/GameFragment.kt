@@ -59,7 +59,7 @@ class GameFragment : Fragment(), CoroutineScope by MainScope() {
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(view.findViewById(R.id.game_toolbar))
             supportActionBar?.title = game.release?.releaseTitleName
-                ?: File(game.path).name
+                ?: File(game.path).nameWithoutExtension
         }
         game.release?.releasePublisher?.let {
             view.findViewById<TextInputEditText>(R.id.publisher_text)
