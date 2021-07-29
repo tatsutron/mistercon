@@ -16,13 +16,9 @@ import com.google.android.material.textfield.TextInputLayout
 import com.tatsutron.remote.*
 import com.tatsutron.remote.recycler.GameItem
 import com.tatsutron.remote.recycler.GameListAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 import java.io.File
 
-class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
+class ConsoleFragment : Fragment() {
     private lateinit var core: Core
     private lateinit var adapter: GameListAdapter
     private lateinit var randomButton: Button
@@ -54,10 +50,22 @@ class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         core = Core.valueOf(arguments?.getString(FragmentMaker.KEY_CORE)!!)
+        setToolbar(view)
+        setPathInput(view)
+        setSyncButton(view)
+        setRecycler(view)
+        setRandomButton(view)
+        refresh(view)
+    }
+
+    private fun setToolbar(view: View) {
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(view.findViewById(R.id.toolbar))
             supportActionBar?.title = core.displayName
         }
+    }
+
+    private fun setPathInput(view: View) {
         view.findViewById<TextInputEditText>(R.id.games_path_text).apply {
             setText(Persistence.getGamesPath(core.name))
             addTextChangedListener(object : TextWatcher {
@@ -81,10 +89,13 @@ class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
                 override fun afterTextChanged(s: Editable?) {}
             })
         }
+    }
+
+    private fun setSyncButton(view: View) {
         view.findViewById<TextInputLayout>(R.id.games_path_layout).apply {
             setEndIconOnClickListener {
                 val context = requireContext()
-                val disableButton = {
+                val disable = {
                     isEnabled = false
                     setEndIconTintList(
                         ColorStateList.valueOf(
@@ -92,7 +103,7 @@ class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
                         ),
                     )
                 }
-                val enableButton = {
+                val enable = {
                     setEndIconTintList(
                         ColorStateList.valueOf(
                             context.getColor(R.color.white),
@@ -100,83 +111,71 @@ class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
                     )
                     isEnabled = true
                 }
-                disableButton()
-                sync(
-                    onSuccess = {
-                        refresh()
-                        enableButton()
+                disable()
+                Persistence.clearGamesByCore(core.name)
+                Coroutine.launch(
+                    activity = requireActivity(),
+                    run = {
+                        val session = Ssh.session()
+                        Asset.put(requireContext(), session, "scan")
+                        val extensions = core.commandsByExtension
+                            .map {
+                                it.key
+                            }
+                            .reduce { acc, string ->
+                                "$acc|$string"
+                            }
+                        val gamesPath = Constants.GAMES_PATH
+                        val regex = "($extensions)$"
+                        val command = StringBuilder().apply {
+                            append("\"${Constants.SCAN_PATH}\"")
+                            append(" ")
+                            append("\"${File(gamesPath, core.name).path}\"")
+                            append(" ")
+                            append("\"$regex\"")
+                            append(" ")
+                            append(core.headerSizeInBytes.toString())
+                        }.toString()
+                        val list = Ssh.command(session, command)
+                        list.split("\n")
+                            .filter {
+                                it.isNotBlank()
+                            }
+                            .forEach {
+                                val (path, hash) = it.split("\t")
+                                Persistence.saveGame(core.name, path, hash)
+                            }
+                        session.disconnect()
                     },
-                    onFailure = { throwable ->
-                        Dialog.error(
-                            context = requireContext(),
-                            throwable = throwable,
-                            ok = {
-                                enableButton()
-                            },
-                        )
+                    success = {
+                        refresh()
+                        enable()
+                    },
+                    failure = {
+                        enable()
                     },
                 )
             }
         }
-        randomButton = view.findViewById(R.id.random_button)
-        randomButton.setOnClickListener {
-            adapter.itemList.random().onClick?.invoke()
-        }
+    }
+
+    private fun setRecycler(view: View) {
         view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
             this@ConsoleFragment.adapter = GameListAdapter(
                 context = requireContext(),
             )
             adapter = this@ConsoleFragment.adapter
-            refresh()
         }
     }
 
-    private fun sync(
-        onSuccess: () -> Unit,
-        onFailure: (throwable: Throwable) -> Unit,
-    ) {
-        Persistence.clearGamesByCore(core.name)
-        launch(Dispatchers.IO) {
-            runCatching {
-                val session = Ssh.session()
-                Asset.put(requireContext(), session, "scan")
-                val extensions = core.commandsByExtension
-                    .map {
-                        it.key
-                    }
-                    .reduce { acc, string ->
-                        "$acc|$string"
-                    }
-                val regex = "($extensions)$"
-                val command = StringBuilder().apply {
-                    append("\"${Constants.SCAN_PATH}\"")
-                    append(" ")
-                    append("\"${File(Constants.GAMES_PATH, core.name).path}\"")
-                    append(" ")
-                    append("\"$regex\"")
-                    append(" ")
-                    append(core.headerSizeInBytes.toString())
-                }.toString()
-                val list = Ssh.command(session, command)
-                list.split("\n")
-                    .filter {
-                        it.isNotBlank()
-                    }
-                    .forEach {
-                        val (path, hash) = it.split("\t")
-                        Persistence.saveGame(core.name, path, hash)
-                    }
-                session.disconnect()
-            }.onSuccess {
-                requireActivity().runOnUiThread(onSuccess)
-            }.onFailure {
-                requireActivity().runOnUiThread {
-                    onFailure(it)
-                }
-            }
+    private fun setRandomButton(view: View) {
+        randomButton = view.findViewById(R.id.random_button)
+        randomButton.setOnClickListener {
+            adapter.itemList.random().onClick?.invoke()
         }
     }
+
 
     private fun refresh() {
         val items = Persistence.getGamesByCore(core.name).map {

@@ -11,12 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.textfield.TextInputEditText
 import com.tatsutron.remote.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 
-class SystemFragment : Fragment(), CoroutineScope by MainScope() {
+class SystemFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,17 +82,14 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
                     context = context,
                     messageId = R.string.confirm_reboot,
                     ok = {
-                        launch(Dispatchers.IO) {
-                            runCatching {
+                        Coroutine.launch(
+                            activity = requireActivity(),
+                            run = {
                                 val session = Ssh.session()
                                 Ssh.command(session, "reboot now")
                                 session.disconnect()
-                            }.onFailure {
-                                requireActivity().runOnUiThread {
-                                    Dialog.error(context, it)
-                                }
-                            }
-                        }
+                            },
+                        )
                     },
                 )
             }
@@ -119,18 +112,15 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
     private fun setMenuButton(view: View) {
         view.findViewById<Button>(R.id.menu_button).apply {
             setOnClickListener {
-                launch(Dispatchers.IO) {
-                    runCatching {
+                Coroutine.launch(
+                    activity = requireActivity(),
+                    run = {
                         val session = Ssh.session()
                         Asset.put(requireContext(), session, "mbc")
                         Ssh.command(session, "${Constants.MBC_PATH} raw_seq M")
                         session.disconnect()
-                    }.onFailure {
-                        requireActivity().runOnUiThread {
-                            Dialog.error(requireContext(), it)
-                        }
-                    }
-                }
+                    },
+                )
             }
         }
     }

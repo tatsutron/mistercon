@@ -14,13 +14,9 @@ import com.google.android.material.textfield.TextInputLayout
 import com.tatsutron.remote.*
 import com.tatsutron.remote.recycler.ScriptItem
 import com.tatsutron.remote.recycler.ScriptListAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 import java.io.File
 
-class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
+class ScriptListFragment : Fragment() {
     private lateinit var adapter: ScriptListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,10 +45,21 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setToolbar(view)
+        setPathInput(view)
+        setSyncButton(view)
+        setRecycler(view)
+        refresh()
+    }
+
+    private fun setToolbar(view: View) {
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(view.findViewById(R.id.toolbar))
             supportActionBar?.title = context?.getString(R.string.scripts)
         }
+    }
+
+    private fun setPathInput(view: View) {
         view.findViewById<TextInputEditText>(R.id.scripts_path_text).apply {
             setText(Persistence.getConfig()?.scriptsPath)
             addTextChangedListener(object : TextWatcher {
@@ -76,10 +83,13 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
                 override fun afterTextChanged(s: Editable?) {}
             })
         }
+    }
+
+    private fun setSyncButton(view: View) {
         view.findViewById<TextInputLayout>(R.id.scripts_path_layout).apply {
             setEndIconOnClickListener {
                 val context = requireContext()
-                val disableButton = {
+                val disable = {
                     isEnabled = false
                     setEndIconTintList(
                         ColorStateList.valueOf(
@@ -87,7 +97,7 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
                         ),
                     )
                 }
-                val enableButton = {
+                val enable = {
                     setEndIconTintList(
                         ColorStateList.valueOf(
                             context.getColor(R.color.white),
@@ -95,60 +105,43 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
                     )
                     isEnabled = true
                 }
-                disableButton()
-                sync(
-                    onSuccess = {
-                        refresh()
-                        enableButton()
+                disable()
+                Persistence.clearScripts()
+                Coroutine.launch(
+                    activity = requireActivity(),
+                    run = {
+                        val session = Ssh.session()
+                        Asset.put(requireContext(), session, "mbc")
+                        val scriptsPath = Persistence.getConfig()?.scriptsPath
+                        Ssh.command(session, "ls $scriptsPath")
+                            .split("\n")
+                            .filter {
+                                it.endsWith(".sh")
+                            }
+                            .forEach {
+                                Persistence.saveScript(it)
+                            }
+                        session.disconnect()
                     },
-                    onFailure = { throwable ->
-                        Dialog.error(
-                            context = requireContext(),
-                            throwable = throwable,
-                            ok = {
-                                enableButton()
-                            },
-                        )
+                    success = {
+                        refresh()
+                        enable()
+                    },
+                    failure = {
+                        enable()
                     },
                 )
             }
         }
+    }
+
+    private fun setRecycler(view: View) {
         view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
             this@ScriptListFragment.adapter = ScriptListAdapter(
                 context = requireContext(),
             )
             adapter = this@ScriptListFragment.adapter
-            refresh()
-        }
-    }
-
-    private fun sync(
-        onSuccess: () -> Unit,
-        onFailure: (throwable: Throwable) -> Unit,
-    ) {
-        Persistence.clearScripts()
-        launch(Dispatchers.IO) {
-            runCatching {
-                val session = Ssh.session()
-                Asset.put(requireContext(), session, "mbc")
-                val scriptsPath = Persistence.getConfig()?.scriptsPath
-                Ssh.command(session, "ls $scriptsPath")
-                    .split("\n")
-                    .filter {
-                        it.endsWith(".sh")
-                    }
-                    .forEach {
-                        Persistence.saveScript(it)
-                    }
-                session.disconnect()
-            }.onSuccess {
-                requireActivity().runOnUiThread(onSuccess)
-            }.onFailure {
-                requireActivity().runOnUiThread {
-                    onFailure(it)
-                }
-            }
         }
     }
 
@@ -162,24 +155,19 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
                         context = context,
                         messageId = R.string.confirm_run_script,
                         ok = {
-                            launch(Dispatchers.IO) {
-                                runCatching {
+                            Coroutine.launch(
+                                activity = requireActivity(),
+                                run = {
                                     val session = Ssh.session()
-                                    Asset.put(requireContext(), session, "mbc")
+                                    Asset.put(context, session, "mbc")
                                     val mbc = Constants.MBC_PATH
                                     Ssh.command(
                                         session,
                                         "$mbc load_rom SCRIPT $it",
                                     )
                                     session.disconnect()
-                                }.onSuccess {
-                                    requireActivity().runOnUiThread {}
-                                }.onFailure { throwable ->
-                                    requireActivity().runOnUiThread {
-                                        Dialog.error(context, throwable)
-                                    }
-                                }
-                            }
+                                },
+                            )
                         }
                     )
                 },

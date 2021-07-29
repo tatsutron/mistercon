@@ -14,13 +14,9 @@ import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.tatsutron.remote.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 import java.io.File
 
-class GameFragment : Fragment(), CoroutineScope by MainScope() {
+class GameFragment : Fragment() {
     private lateinit var game: Game
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -176,8 +172,9 @@ class GameFragment : Fragment(), CoroutineScope by MainScope() {
     }
 
     private fun play() {
-        launch(Dispatchers.IO) {
-            runCatching {
+        Coroutine.launch(
+            activity = requireActivity(),
+            run = {
                 val session = Ssh.session()
                 Asset.put(requireContext(), session, "mbc")
                 val extension = File(game.path).extension
@@ -192,11 +189,7 @@ class GameFragment : Fragment(), CoroutineScope by MainScope() {
                 }.toString()
                 Ssh.command(session, command)
                 session.disconnect()
-            }.onFailure {
-                requireActivity().runOnUiThread {
-                    Dialog.error(requireContext(), it)
-                }
-            }
-        }
+            },
+        )
     }
 }
