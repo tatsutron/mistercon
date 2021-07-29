@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ScrollView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -147,6 +149,29 @@ class GameFragment : Fragment(), CoroutineScope by MainScope() {
             }
             view.findViewById<LinearLayout>(R.id.cartridge_layout)
                 .visibility = View.VISIBLE
+        }
+        listOfNotNull(
+            game.release?.releasePublisher,
+            game.release?.releaseDeveloper,
+            game.release?.releaseDate,
+            game.region?.regionName,
+            game.release?.releaseGenre,
+            game.release?.releaseDescription,
+            game.release?.releaseCoverFront,
+            game.release?.releaseCoverBack,
+            game.release?.releaseCoverCart,
+        ).isEmpty().let { noData ->
+            if (noData) {
+                view.findViewById<ScrollView>(R.id.scroll)
+                    .visibility = View.GONE
+                view.findViewById<TextView>(R.id.no_data_text).apply {
+                    text = context.getString(
+                        R.string.no_data_was_found_for_game,
+                        File(game.path).nameWithoutExtension,
+                    )
+                    visibility = View.VISIBLE
+                }
+            }
         }
     }
 

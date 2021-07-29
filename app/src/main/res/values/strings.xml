@@ -12,6 +12,7 @@
     <string name="host">Host</string>
     <string name="menu">Menu</string>
     <string name="mistercon">mistercon</string>
+    <string name="no_data_was_found_for_game">No data found for %s.</string>
     <string name="ok">OK</string>
     <string name="play">Play</string>
     <string name="please_enter_ip_address">Please enter IP address</string>

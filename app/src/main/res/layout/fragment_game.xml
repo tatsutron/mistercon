@@ -10,6 +10,7 @@
         android:id="@+id/game_toolbar" />
 
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/game_toolbar">
@@ -194,5 +195,15 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/no_data_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/game_toolbar"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_large"
+        android:visibility="gone" />
 
 </RelativeLayout>

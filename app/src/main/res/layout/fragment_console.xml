@@ -57,7 +57,6 @@
         android:layout_marginHorizontal="@dimen/margin_small"
         android:layout_marginBottom="@dimen/margin_small"
         android:textColor="@color/primary_200"
-        android:textAllCaps="false"
         android:text="@string/random"
         app:strokeColor="@color/primary_200"
         android:visibility="gone" />
