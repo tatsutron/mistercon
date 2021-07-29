@@ -1,5 +1,6 @@
 package com.tatsutron.remote.fragment
 
+import android.content.DialogInterface
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.tatsutron.remote.*
@@ -153,25 +155,36 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
     private fun refresh() {
         val items = Persistence.getScriptList().map {
             ScriptItem(
-                label = File(it).name,
+                label = File(it).nameWithoutExtension,
                 onClick = {
-                    launch(Dispatchers.IO) {
-                        runCatching {
-                            val session = Ssh.session()
-                            Asset.put(requireContext(), session, "mbc")
-                            Ssh.command(
-                                session,
-                                "${Constants.MBC_PATH} load_rom SCRIPT $it",
-                            )
-                            session.disconnect()
-                        }.onSuccess {
-                            requireActivity().runOnUiThread {}
-                        }.onFailure { throwable ->
-                            requireActivity().runOnUiThread {
-                                ErrorDialog.show(requireContext(), throwable)
+                    val context = requireContext()
+                    MaterialAlertDialogBuilder(context, R.style.AlertDialog)
+                        .setMessage(context.getString(R.string.run_script))
+                        .setNegativeButton(context.getString(R.string.cancel))
+                        { _: DialogInterface, _: Int ->
+                        }
+                        .setPositiveButton(context.getString(R.string.ok))
+                        { _: DialogInterface, _: Int ->
+                            launch(Dispatchers.IO) {
+                                runCatching {
+                                    val session = Ssh.session()
+                                    Asset.put(requireContext(), session, "mbc")
+                                    val mbc = Constants.MBC_PATH
+                                    Ssh.command(
+                                        session,
+                                        "$mbc load_rom SCRIPT $it",
+                                    )
+                                    session.disconnect()
+                                }.onSuccess {
+                                    requireActivity().runOnUiThread {}
+                                }.onFailure { throwable ->
+                                    requireActivity().runOnUiThread {
+                                        ErrorDialog.show(context, throwable)
+                                    }
+                                }
                             }
                         }
-                    }
+                        .show()
                 },
             )
         }
