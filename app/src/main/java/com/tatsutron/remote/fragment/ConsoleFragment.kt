@@ -55,7 +55,7 @@ class ConsoleFragment : Fragment() {
         setSyncButton(view)
         setRecycler(view)
         setRandomButton(view)
-        refresh(view)
+        refresh()
     }
 
     private fun setToolbar(view: View) {
