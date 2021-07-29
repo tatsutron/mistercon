@@ -1,6 +1,5 @@
 package com.tatsutron.remote.fragment
 
-import android.content.DialogInterface
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
@@ -10,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.tatsutron.remote.*
@@ -104,10 +102,12 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
                         enableButton()
                     },
                     onFailure = { throwable ->
-                        ErrorDialog.show(
+                        Dialog.error(
                             context = requireContext(),
                             throwable = throwable,
-                            cb = { enableButton() },
+                            ok = {
+                                enableButton()
+                            },
                         )
                     },
                 )
@@ -158,13 +158,10 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
                 label = File(it).nameWithoutExtension,
                 onClick = {
                     val context = requireContext()
-                    MaterialAlertDialogBuilder(context, R.style.AlertDialog)
-                        .setMessage(context.getString(R.string.run_script))
-                        .setNegativeButton(context.getString(R.string.cancel))
-                        { _: DialogInterface, _: Int ->
-                        }
-                        .setPositiveButton(context.getString(R.string.ok))
-                        { _: DialogInterface, _: Int ->
+                    Dialog.confirm(
+                        context = context,
+                        messageId = R.string.confirm_run_script,
+                        ok = {
                             launch(Dispatchers.IO) {
                                 runCatching {
                                     val session = Ssh.session()
@@ -179,12 +176,12 @@ class ScriptListFragment : Fragment(), CoroutineScope by MainScope() {
                                     requireActivity().runOnUiThread {}
                                 }.onFailure { throwable ->
                                     requireActivity().runOnUiThread {
-                                        ErrorDialog.show(context, throwable)
+                                        Dialog.error(context, throwable)
                                     }
                                 }
                             }
                         }
-                        .show()
+                    )
                 },
             )
         }

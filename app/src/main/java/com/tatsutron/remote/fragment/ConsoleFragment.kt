@@ -107,10 +107,12 @@ class ConsoleFragment : Fragment(), CoroutineScope by MainScope() {
                         enableButton()
                     },
                     onFailure = { throwable ->
-                        ErrorDialog.show(
+                        Dialog.error(
                             context = requireContext(),
                             throwable = throwable,
-                            cb = { enableButton() },
+                            ok = {
+                                enableButton()
+                            },
                         )
                     },
                 )

@@ -37,19 +37,19 @@
         <item name="cardCornerRadius">4dp</item>
     </style>
 
-    <style name="AlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="materialAlertDialogTitleTextStyle">@style/AlertDialogTitleText</item>
-        <item name="materialAlertDialogBodyTextStyle">@style/AlertDialogBodyText</item>
+    <style name="Dialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="materialAlertDialogTitleTextStyle">@style/DialogTitleText</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/DialogBodyText</item>
         <item name="colorSurface">@color/gray_900</item>
         <item name="colorPrimary">@color/primary_200</item>
     </style>
 
-    <style name="AlertDialogTitleText" parent="@style/MaterialAlertDialog.MaterialComponents.Title.Text">
+    <style name="DialogTitleText" parent="@style/MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="AlertDialogBodyText" parent="@style/MaterialAlertDialog.MaterialComponents.Body.Text">
+    <style name="DialogBodyText" parent="@style/MaterialAlertDialog.MaterialComponents.Body.Text">
         <item name="android:textColor">@color/white</item>
     </style>
 

@@ -1,6 +1,5 @@
 package com.tatsutron.remote.fragment
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.tatsutron.remote.*
 import kotlinx.coroutines.CoroutineScope
@@ -83,13 +81,11 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
     private fun setRebootButton(view: View) {
         view.findViewById<Button>(R.id.reboot_button).apply {
             setOnClickListener {
-                MaterialAlertDialogBuilder(context, R.style.AlertDialog)
-                    .setMessage(context.getString(R.string.reboot_the_mister))
-                    .setNegativeButton(context.getString(R.string.cancel))
-                    { _: DialogInterface, _: Int ->
-                    }
-                    .setPositiveButton(context.getString(R.string.ok))
-                    { _: DialogInterface, _: Int ->
+                val context = requireContext()
+                Dialog.confirm(
+                    context = context,
+                    messageId = R.string.confirm_reboot,
+                    ok = {
                         launch(Dispatchers.IO) {
                             runCatching {
                                 val session = Ssh.session()
@@ -97,12 +93,12 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
                                 session.disconnect()
                             }.onFailure {
                                 requireActivity().runOnUiThread {
-                                    ErrorDialog.show(context, it)
+                                    Dialog.error(context, it)
                                 }
                             }
                         }
-                    }
-                    .show()
+                    },
+                )
             }
         }
     }
@@ -131,7 +127,7 @@ class SystemFragment : Fragment(), CoroutineScope by MainScope() {
                         session.disconnect()
                     }.onFailure {
                         requireActivity().runOnUiThread {
-                            ErrorDialog.show(requireContext(), it)
+                            Dialog.error(requireContext(), it)
                         }
                     }
                 }

@@ -1,6 +1,8 @@
 <resources>
     <string name="app">MiSTer</string>
     <string name="cancel">Cancel</string>
+    <string name="confirm_reboot">Reboot the MiSTer?</string>
+    <string name="confirm_run_script">Run script?</string>
     <string name="consoles">Consoles</string>
     <string name="credits">Credits</string>
     <string name="description">Description</string>
@@ -19,10 +21,8 @@
     <string name="publisher">Publisher</string>
     <string name="random">Random</string>
     <string name="reboot">Reboot</string>
-    <string name="reboot_the_mister">Reboot the MiSTer?</string>
     <string name="region">Region</string>
     <string name="release_date">Release Date</string>
-    <string name="run_script">Run script?</string>
     <string name="scripts">Scripts</string>
     <string name="scripts_path">Scripts Path</string>
     <string name="sync">Sync</string>

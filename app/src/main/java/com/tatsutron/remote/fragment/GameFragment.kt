@@ -194,10 +194,7 @@ class GameFragment : Fragment(), CoroutineScope by MainScope() {
                 session.disconnect()
             }.onFailure {
                 requireActivity().runOnUiThread {
-                    ErrorDialog.show(
-                        context = requireContext(),
-                        throwable = it,
-                    )
+                    Dialog.error(requireContext(), it)
                 }
             }
         }
