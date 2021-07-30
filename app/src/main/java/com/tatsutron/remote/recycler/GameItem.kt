@@ -1,6 +1,7 @@
 package com.tatsutron.remote.recycler
 
+import com.tatsutron.remote.Game
+
 class GameItem(
-    val label: String,
-    var onClick: (() -> Unit)? = null,
+    val game: Game,
 )

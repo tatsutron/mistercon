@@ -14,7 +14,6 @@ import com.google.android.material.textfield.TextInputLayout
 import com.tatsutron.remote.*
 import com.tatsutron.remote.recycler.ScriptItem
 import com.tatsutron.remote.recycler.ScriptListAdapter
-import java.io.File
 
 class ScriptListFragment : Fragment() {
     private lateinit var adapter: ScriptListAdapter
@@ -136,41 +135,20 @@ class ScriptListFragment : Fragment() {
     }
 
     private fun setRecycler(view: View) {
+        adapter = ScriptListAdapter(
+            context = requireContext(),
+        )
         view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
-            this@ScriptListFragment.adapter = ScriptListAdapter(
-                context = requireContext(),
-            )
-            adapter = this@ScriptListFragment.adapter
+            this.adapter = adapter
         }
     }
 
     private fun refresh() {
         val items = Persistence.getScriptList().map {
             ScriptItem(
-                label = File(it).nameWithoutExtension,
-                onClick = {
-                    val context = requireContext()
-                    Dialog.confirm(
-                        context = context,
-                        messageId = R.string.confirm_run_script,
-                        ok = {
-                            Coroutine.launch(
-                                activity = requireActivity(),
-                                run = {
-                                    val session = Ssh.session()
-                                    Asset.put(context, session, "mbc")
-                                    val mbc = Constants.MBC_PATH
-                                    Ssh.command(
-                                        session,
-                                        "$mbc load_rom SCRIPT $it",
-                                    )
-                                    session.disconnect()
-                                },
-                            )
-                        }
-                    )
-                },
+                activity = requireActivity(),
+                path = it,
             )
         }
         adapter.itemList.clear()

@@ -8,7 +8,6 @@ import android.view.*
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
@@ -160,32 +159,27 @@ class ConsoleFragment : Fragment() {
     }
 
     private fun setRecycler(view: View) {
+        adapter = GameListAdapter(
+            context = requireContext(),
+        )
         view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
-            this@ConsoleFragment.adapter = GameListAdapter(
-                context = requireContext(),
-            )
-            adapter = this@ConsoleFragment.adapter
+            this.adapter = adapter
         }
     }
 
     private fun setRandomButton(view: View) {
         randomButton = view.findViewById(R.id.random_button)
         randomButton.setOnClickListener {
-            adapter.itemList.random().onClick?.invoke()
+            Navigator.show(
+                FragmentMaker.game(adapter.itemList.random().game.id),
+            )
         }
     }
 
-
     private fun refresh() {
         val items = Persistence.getGamesByCore(core.name).map {
-            GameItem(
-                label = it.release?.releaseTitleName
-                    ?: File(it.path).nameWithoutExtension,
-                onClick = {
-                    Navigator.show(FragmentMaker.game(it.id))
-                },
-            )
+            GameItem(it)
         }
         adapter.itemList.clear()
         adapter.itemList.addAll(items)

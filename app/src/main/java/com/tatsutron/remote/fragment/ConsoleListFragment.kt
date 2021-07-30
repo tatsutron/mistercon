@@ -30,11 +30,11 @@ class ConsoleListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = ConsoleListAdapter(
-            activity = requireActivity() as MainActivity,
             context = requireContext(),
         )
-        val recycler = view.findViewById<RecyclerView>(R.id.recycler)
-        recycler.layoutManager = LinearLayoutManager(context)
-        recycler.adapter = adapter
+        view.findViewById<RecyclerView>(R.id.recycler).apply {
+            layoutManager = LinearLayoutManager(context)
+            this.adapter = adapter
+        }
     }
 }

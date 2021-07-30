@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tatsutron.remote.Core
-import com.tatsutron.remote.FragmentMaker
-import com.tatsutron.remote.Navigator
 import com.tatsutron.remote.R
 
 class ConsoleListAdapter(
@@ -18,12 +16,7 @@ class ConsoleListAdapter(
             it.displayName
         }
         .map {
-            ConsoleItem(
-                label = it.displayName,
-                onClick = {
-                    Navigator.show(FragmentMaker.console(it.name))
-                },
-            )
+            ConsoleItem(it)
         }
 
     override fun onCreateViewHolder(

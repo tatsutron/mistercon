@@ -1,6 +1,7 @@
 package com.tatsutron.remote.recycler
 
+import com.tatsutron.remote.Core
+
 class ConsoleItem(
-    val label: String,
-    var onClick: (() -> Unit)? = null,
+    val core: Core,
 )

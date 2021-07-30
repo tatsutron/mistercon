@@ -1,6 +1,8 @@
 package com.tatsutron.remote.recycler
 
+import android.app.Activity
+
 class ScriptItem(
-    val label: String,
-    var onClick: (() -> Unit)? = null,
+    val activity: Activity,
+    val path: String,
 )
