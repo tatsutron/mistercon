@@ -9,7 +9,6 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -101,12 +100,7 @@ class GameFragment : Fragment() {
                     .load(Uri.parse(url))
                     .into(this)
                 setOnClickListener {
-                    activity?.supportFragmentManager
-                        ?.beginTransaction()
-                        ?.setTransition(FragmentTransaction.TRANSIT_NONE)
-                        ?.add(R.id.root, FragmentMaker.image(url))
-                        ?.addToBackStack(null)
-                        ?.commit()
+                    Navigator.show(FragmentMaker.image(url))
                 }
             }
             view.findViewById<LinearLayout>(R.id.front_cover_layout)
@@ -118,12 +112,7 @@ class GameFragment : Fragment() {
                     .load(Uri.parse(url))
                     .into(this)
                 setOnClickListener {
-                    activity?.supportFragmentManager
-                        ?.beginTransaction()
-                        ?.setTransition(FragmentTransaction.TRANSIT_NONE)
-                        ?.add(R.id.root, FragmentMaker.image(url))
-                        ?.addToBackStack(null)
-                        ?.commit()
+                    Navigator.show(FragmentMaker.image(url))
                 }
             }
             view.findViewById<LinearLayout>(R.id.back_cover_layout)
@@ -135,12 +124,7 @@ class GameFragment : Fragment() {
                     .load(Uri.parse(url))
                     .into(this)
                 setOnClickListener {
-                    activity?.supportFragmentManager
-                        ?.beginTransaction()
-                        ?.setTransition(FragmentTransaction.TRANSIT_NONE)
-                        ?.add(R.id.root, FragmentMaker.image(url))
-                        ?.addToBackStack(null)
-                        ?.commit()
+                    Navigator.show(FragmentMaker.image(url))
                 }
             }
             view.findViewById<LinearLayout>(R.id.cartridge_layout)

@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.textfield.TextInputEditText
 import com.tatsutron.remote.*
 
@@ -64,12 +63,7 @@ class SystemFragment : Fragment() {
     private fun setCreditsButton(view: View) {
         view.findViewById<Button>(R.id.credits_button).apply {
             setOnClickListener {
-                requireActivity().supportFragmentManager
-                    .beginTransaction()
-                    .setTransition(FragmentTransaction.TRANSIT_NONE)
-                    .add(R.id.root, FragmentMaker.credits())
-                    .addToBackStack(null)
-                    .commit()
+                Navigator.show(FragmentMaker.credits())
             }
         }
     }
@@ -99,12 +93,7 @@ class SystemFragment : Fragment() {
     private fun setScriptsButton(view: View) {
         view.findViewById<Button>(R.id.scripts_button).apply {
             setOnClickListener {
-                requireActivity().supportFragmentManager
-                    .beginTransaction()
-                    .setTransition(FragmentTransaction.TRANSIT_NONE)
-                    .add(R.id.root, FragmentMaker.scriptList())
-                    .addToBackStack(null)
-                    .commit()
+                Navigator.show(FragmentMaker.scriptList())
             }
         }
     }

@@ -183,12 +183,7 @@ class ConsoleFragment : Fragment() {
                 label = it.release?.releaseTitleName
                     ?: File(it.path).nameWithoutExtension,
                 onClick = {
-                    requireActivity().supportFragmentManager
-                        .beginTransaction()
-                        .setTransition(FragmentTransaction.TRANSIT_NONE)
-                        .add(R.id.root, FragmentMaker.game(it.id))
-                        .addToBackStack(null)
-                        .commit()
+                    Navigator.show(FragmentMaker.game(it.id))
                 },
             )
         }
