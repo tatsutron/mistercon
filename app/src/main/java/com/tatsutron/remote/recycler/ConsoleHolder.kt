@@ -5,7 +5,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tatsutron.remote.R
 
-class ConsoleHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ConsoleHolder(
+    itemView: View,
+) : RecyclerView.ViewHolder(itemView) {
 
     private val label: TextView = itemView.findViewById(R.id.label)
 

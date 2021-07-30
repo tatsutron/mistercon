@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tatsutron.remote.R
 
 class GameHolder(
-    itemView: View
+    itemView: View,
 ) : RecyclerView.ViewHolder(itemView) {
 
     private val label: TextView = itemView.findViewById(R.id.label)
