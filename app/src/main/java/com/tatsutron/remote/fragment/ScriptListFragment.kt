@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.tatsutron.remote.*
 import com.tatsutron.remote.recycler.ScriptItem
 import com.tatsutron.remote.recycler.ScriptListAdapter
+import java.io.File
 
 class ScriptListFragment : Fragment() {
     private lateinit var adapter: ScriptListAdapter
@@ -118,7 +119,7 @@ class ScriptListFragment : Fragment() {
                                 it.endsWith(".sh")
                             }
                             .forEach {
-                                Persistence.saveScript(it)
+                                Persistence.saveScript(File(scriptsPath, it).path)
                             }
                         session.disconnect()
                     },

@@ -24,11 +24,16 @@ class ScriptHolder(
                         run = {
                             val session = Ssh.session()
                             Asset.put(item.activity, session, "mbc")
-                            val mbc = Constants.MBC_PATH
-                            Ssh.command(
-                                session,
-                                "$mbc load_rom SCRIPT $it",
-                            )
+                            val command = StringBuilder().apply {
+                                append("\"${Constants.MBC_PATH}\"")
+                                append(" ")
+                                append("load_rom")
+                                append(" ")
+                                append("SCRIPT")
+                                append(" ")
+                                append("\"${item.path}\"")
+                            }.toString()
+                            Ssh.command(session, command)
                             session.disconnect()
                         },
                     )
