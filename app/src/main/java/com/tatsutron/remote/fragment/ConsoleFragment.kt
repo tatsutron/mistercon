@@ -124,12 +124,12 @@ class ConsoleFragment : Fragment() {
                             .reduce { acc, string ->
                                 "$acc|$string"
                             }
-                        val gamesPath = Constants.GAMES_PATH
+                        val gamesPath = Persistence.getGamesPath(core.name)
                         val regex = "($extensions)$"
                         val command = StringBuilder().apply {
                             append("\"${Constants.SCAN_PATH}\"")
                             append(" ")
-                            append("\"${File(gamesPath, core.name).path}\"")
+                            append("\"${gamesPath}\"")
                             append(" ")
                             append("\"$regex\"")
                             append(" ")
