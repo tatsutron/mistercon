@@ -164,7 +164,7 @@ class ConsoleFragment : Fragment() {
         )
         view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
-            this.adapter = adapter
+            adapter = this@ConsoleFragment.adapter
         }
     }
 

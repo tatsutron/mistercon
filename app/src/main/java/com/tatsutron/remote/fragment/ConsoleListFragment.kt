@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tatsutron.remote.MainActivity
 import com.tatsutron.remote.R
 import com.tatsutron.remote.recycler.ConsoleListAdapter
 
@@ -34,7 +33,7 @@ class ConsoleListFragment : Fragment() {
         )
         view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
-            this.adapter = adapter
+            adapter = this@ConsoleListFragment.adapter
         }
     }
 }

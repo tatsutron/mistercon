@@ -140,7 +140,7 @@ class ScriptListFragment : Fragment() {
         )
         view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
-            this.adapter = adapter
+            adapter = this@ScriptListFragment.adapter
         }
     }
 
