@@ -8,32 +8,32 @@ enum class Core(
 
     Gameboy(
         commandsByExtension = mapOf(
-            Pair(".gb", "GAMEBOY"),
-            Pair(".gbc", "GAMEBOY"),
+            Pair("gb", "GAMEBOY"),
+            Pair("gbc", "GAMEBOY"),
         ),
         displayName = "Game Boy",
     ),
 
     GBA(
         commandsByExtension = mapOf(
-            Pair(".gba", "GBA"),
+            Pair("gba", "GBA"),
         ),
         displayName = "Game Boy Advance",
     ),
 
     Genesis(
         commandsByExtension = mapOf(
-            Pair(".bin", "MEGADRIVE.BIN"),
-            Pair(".gen", "GENESIS"),
-            Pair(".md", "MEGADRIVE"),
+            Pair("bin", "MEGADRIVE.BIN"),
+            Pair("gen", "GENESIS"),
+            Pair("md", "MEGADRIVE"),
         ),
         displayName = "Sega Genesis",
     ),
 
     NES(
         commandsByExtension = mapOf(
-            Pair(".fds", "NES"),
-            Pair(".nes", "NES"),
+            Pair("fds", "NES"),
+            Pair("nes", "NES"),
         ),
         displayName = "Nintendo Entertainment System",
         headerSizeInBytes = 16,
@@ -41,14 +41,14 @@ enum class Core(
 
     SNES(
         commandsByExtension = mapOf(
-            Pair(".sfc", "SNES"),
+            Pair("sfc", "SNES"),
         ),
         displayName = "Super NES",
     ),
 
     TGFX16(
         commandsByExtension = mapOf(
-            Pair(".pce", "TGFX16"),
+            Pair("pce", "TGFX16"),
         ),
         displayName = "TurboGrafx-16",
     )
