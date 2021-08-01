@@ -9,4 +9,4 @@ mistercon is an Android app for use with [MiSTer](https://github.com/MiSTer-deve
 
 # Credits
 
-This project is made possible DoOoM, KremlingKuthroat19, Luke Earnshaw, and Mist Sonata.
+This project is made possible by DoOoM, KremlingKuthroat19, Luke Earnshaw, and Mist Sonata.
