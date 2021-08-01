@@ -1,4 +1,4 @@
-# MiSTer Controller
+# mistercon
 
 mistercon is an Android app for use with [MiSTer](https://github.com/MiSTer-devel/Main_MiSTer/wiki). It is designed to support features which MiSTer eschews e.g. displaying metadata and artwork.
 
