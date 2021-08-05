@@ -23,6 +23,7 @@
     <string name="reboot">Reboot</string>
     <string name="region">Region</string>
     <string name="release_date">Release Date</string>
+    <string name="scan">Scan</string>
     <string name="scripts">Scripts</string>
     <string name="scripts_path">Scripts Path</string>
     <string name="sync">Sync</string>
