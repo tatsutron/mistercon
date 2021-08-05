@@ -15,7 +15,6 @@ import com.google.android.material.textfield.TextInputLayout
 import com.tatsutron.remote.*
 import com.tatsutron.remote.recycler.GameItem
 import com.tatsutron.remote.recycler.GameListAdapter
-import java.io.File
 
 class ConsoleFragment : Fragment() {
     private lateinit var core: Core
