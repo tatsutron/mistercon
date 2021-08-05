@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.tatsutron.remote.FragmentMaker
 import com.tatsutron.remote.FragmentPagerAdapter
+import com.tatsutron.remote.Navigator
 import com.tatsutron.remote.R
 
 class MainFragment : Fragment() {
@@ -27,6 +29,16 @@ class MainFragment : Fragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(R.layout.fragment_main, container, false)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.scan -> {
+                Navigator.show(FragmentMaker.scan())
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

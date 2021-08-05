@@ -30,4 +30,6 @@ object FragmentMaker {
             putString(KEY_URL, url)
         }
     }
+
+    fun scan() = ScanFragment()
 }
