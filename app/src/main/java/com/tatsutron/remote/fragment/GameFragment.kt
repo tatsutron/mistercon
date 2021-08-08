@@ -42,7 +42,7 @@ class GameFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.play -> {
-                play()
+                game.play(requireActivity())
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -154,27 +154,5 @@ class GameFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun play() {
-        Coroutine.launch(
-            activity = requireActivity(),
-            run = {
-                val session = Ssh.session()
-                Asset.put(requireContext(), session, "mbc")
-                val extension = File(game.path).extension
-                val command = StringBuilder().apply {
-                    append("\"${Constants.MBC_PATH}\"")
-                    append(" ")
-                    append("load_rom")
-                    append(" ")
-                    append(game.core.commandsByExtension[extension])
-                    append(" ")
-                    append("\"${game.path}\"")
-                }.toString()
-                Ssh.command(session, command)
-                session.disconnect()
-            },
-        )
     }
 }

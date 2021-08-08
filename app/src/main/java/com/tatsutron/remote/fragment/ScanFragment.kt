@@ -14,9 +14,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.tatsutron.remote.*
-import com.tatsutron.remote.model.Game
 import kotlinx.android.synthetic.main.fragment_scan.*
-import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -130,19 +128,19 @@ class ScanFragment : Fragment() {
 
     private fun handleResult(data: String) {
         Persistence.getGameBySha1(data)
-            ?.let {
+            ?.let { game ->
                 val context = requireContext()
                 Dialog.confirm(
                     context = context,
                     message = context.getString(
                         R.string.confirm_play_game,
-                        it.release?.releaseTitleName,
+                        game.release?.releaseTitleName,
                     ),
                     cancel = {
                         processingBarcode = false
                     },
                     ok = {
-                        play(it)
+                        game.play(requireActivity())
                         Handler(Looper.getMainLooper()).postDelayed({
                             (activity as? MainActivity)?.onBackPressed()
                         }, 100)
@@ -152,28 +150,5 @@ class ScanFragment : Fragment() {
             ?: run {
                 processingBarcode = false
             }
-    }
-
-    // TODO Fix duplication with GameFragment.play
-    private fun play(game: Game) {
-        Coroutine.launch(
-            activity = requireActivity(),
-            run = {
-                val session = Ssh.session()
-                Asset.put(requireContext(), session, "mbc")
-                val extension = File(game.path).extension
-                val command = StringBuilder().apply {
-                    append("\"${Constants.MBC_PATH}\"")
-                    append(" ")
-                    append("load_rom")
-                    append(" ")
-                    append(game.core.commandsByExtension[extension])
-                    append(" ")
-                    append("\"${game.path}\"")
-                }.toString()
-                Ssh.command(session, command)
-                session.disconnect()
-            },
-        )
     }
 }
