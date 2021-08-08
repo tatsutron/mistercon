@@ -74,7 +74,7 @@ class SystemFragment : Fragment() {
                 val context = requireContext()
                 Dialog.confirm(
                     context = context,
-                    messageId = R.string.confirm_reboot,
+                    message = context.getString(R.string.confirm_reboot),
                     ok = {
                         Coroutine.launch(
                             activity = requireActivity(),

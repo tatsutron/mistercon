@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.tatsutron.remote.*
+import com.tatsutron.remote.model.Game
 import java.io.File
 
 class GameFragment : Fragment() {

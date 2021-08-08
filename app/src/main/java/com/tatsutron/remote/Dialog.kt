@@ -8,12 +8,12 @@ object Dialog {
 
     fun confirm(
         context: Context,
-        messageId: Int,
+        message: String,
         cancel: () -> Unit = {},
         ok: () -> Unit = {},
     ) {
         MaterialAlertDialogBuilder(context, R.style.Dialog)
-            .setMessage(context.getString(messageId))
+            .setMessage(message)
             .setNegativeButton(context.getString(R.string.cancel))
             { _: DialogInterface, _: Int ->
                 cancel()
@@ -33,6 +33,20 @@ object Dialog {
         MaterialAlertDialogBuilder(context, R.style.Dialog)
             .setTitle(context.getString(R.string.error))
             .setMessage(throwable.toString())
+            .setPositiveButton(context.getString(R.string.ok))
+            { _: DialogInterface, _: Int ->
+                ok()
+            }
+            .show()
+    }
+
+    fun info(
+        context: Context,
+        message: String,
+        ok: () -> Unit = {},
+    ) {
+        MaterialAlertDialogBuilder(context, R.style.Dialog)
+            .setMessage(message)
             .setPositiveButton(context.getString(R.string.ok))
             { _: DialogInterface, _: Int ->
                 ok()

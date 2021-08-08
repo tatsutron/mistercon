@@ -18,6 +18,9 @@ SELECT * FROM Games WHERE core = ?;
 selectById:
 SELECT * FROM Games WHERE id = ?;
 
+selectBySha1:
+SELECT * FROM Games WHERE sha1 = ?;
+
 deleteAll:
 DELETE FROM Games;
 

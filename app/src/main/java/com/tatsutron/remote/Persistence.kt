@@ -3,6 +3,8 @@ package com.tatsutron.remote
 import android.content.Context
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.tatsutron.remote.data.Games
+import com.tatsutron.remote.model.Config
+import com.tatsutron.remote.model.Game
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
@@ -12,6 +14,7 @@ object Persistence {
     private var database: Database? = null
 
     fun init(context: Context) {
+        // TODO Fix (part of) hardcoded path
         val dir = "/data/data/com.tatsutron.remote/databases"
         val name = "app.db"
         val path = File(dir, name).path
@@ -106,9 +109,7 @@ object Persistence {
         database?.coresQueries
             ?.selectByName(core)
             ?.executeAsOneOrNull()
-            ?.let {
-                it.gamesPath
-            }
+            ?.gamesPath
             ?: File(Constants.GAMES_PATH, core).path
 
     fun saveGame(core: String, path: String, hash: String?) {
@@ -131,6 +132,14 @@ object Persistence {
     fun getGameById(id: Long) =
         database?.gamesQueries
             ?.selectById(id)
+            ?.executeAsOneOrNull()
+            ?.let {
+                game(it)
+            }
+
+    fun getGameBySha1(sha1: String) =
+        database?.gamesQueries
+            ?.selectBySha1(sha1)
             ?.executeAsOneOrNull()
             ?.let {
                 game(it)

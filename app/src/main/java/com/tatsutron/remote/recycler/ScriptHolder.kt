@@ -17,7 +17,7 @@ class ScriptHolder(
         itemView.setOnClickListener {
             Dialog.confirm(
                 context = item.activity,
-                messageId = R.string.confirm_run_script,
+                message = item.activity.getString(R.string.confirm_run_script),
                 ok = {
                     Coroutine.launch(
                         activity = item.activity,
