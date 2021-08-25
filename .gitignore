@@ -1,9 +1,10 @@
+*.DS_Store
 *.iml
-.DS_Store
-.gradle
-.idea
-app/release/
-build/
-local.properties
+android/.gradle
+android/.idea
+android/app/build/
+android/app/release/
+android/build/
+android/local.properties
+android/remote.jks
 notes.txt
-remote.jks
