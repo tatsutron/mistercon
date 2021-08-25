@@ -9,8 +9,8 @@ import java.io.File
 
 class Game(
     val core: Core,
-    val id: Long,
     val path: String,
+    val sha1: String?,
     val region: Regions?,
     val release: Releases?,
     val system: Systems?,

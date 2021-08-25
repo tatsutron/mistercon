@@ -3,10 +3,7 @@ package com.tatsutron.remote.fragment
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.ScrollView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -51,14 +48,54 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        game = Persistence.getGameById(
-            arguments?.getLong(FragmentMaker.KEY_ID)!!
+        game = Persistence.getGameByPath(
+            arguments?.getString(FragmentMaker.KEY_PATH)!!
         )!!
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(view.findViewById(R.id.game_toolbar))
             supportActionBar?.title = game.release?.releaseTitleName
                 ?: File(game.path).nameWithoutExtension
         }
+        if (game.sha1 == null) {
+            view.findViewById<ProgressBar>(R.id.progress_bar)
+                .visibility = View.VISIBLE
+            Coroutine.launch(
+                activity = requireActivity(),
+                run = {
+                    val session = Ssh.session()
+                    Asset.put(requireContext(), session, "hash")
+                    val command = StringBuilder().apply {
+                        append("\"${Constants.HASH_PATH}\"")
+                        append(" ")
+                        append("\"${game.path}\"")
+                        append(" ")
+                        append(game.core.headerSizeInBytes.toString())
+                    }.toString()
+                    val output = Ssh.command(session, command)
+                    Persistence.saveGame(
+                        core = game.core.name,
+                        path = game.path,
+                        hash = output.trim(),
+                    )
+                    session.disconnect()
+                },
+                success = {
+                    view.findViewById<ProgressBar>(R.id.progress_bar)
+                        .visibility = View.GONE
+                    game = Persistence.getGameByPath(game.path)!!
+                    populate(view)
+                },
+                failure = {
+                    view.findViewById<ProgressBar>(R.id.progress_bar)
+                        .visibility = View.GONE
+                }
+            )
+        } else {
+            populate(view)
+        }
+    }
+
+    private fun populate(view: View) {
         game.release?.releasePublisher?.let {
             view.findViewById<TextInputEditText>(R.id.publisher_text)
                 .setText(it)

@@ -129,9 +129,9 @@ object Persistence {
             }
             ?: listOf()
 
-    fun getGameById(id: Long) =
+    fun getGameByPath(path: String) =
         database?.gamesQueries
-            ?.selectById(id)
+            ?.selectByPath(path)
             ?.executeAsOneOrNull()
             ?.let {
                 game(it)
@@ -150,21 +150,25 @@ object Persistence {
             ?.deleteByCore(core)
     }
 
-    private fun game(dao: Games): Game {
-        val sha1 = dao.sha1?.toUpperCase(Locale.getDefault())
-        return Game(
+    private fun game(dao: Games) =
+        Game(
             core = Core.valueOf(dao.core),
-            id = dao.id,
             path = dao.path,
-            region = database?.regionsQueries
-                ?.selectBySha1(sha1)
-                ?.executeAsOneOrNull(),
-            release = database?.releasesQueries
-                ?.selectBySha1(sha1)
-                ?.executeAsOneOrNull(),
-            system = database?.systemsQueries
-                ?.selectBySha1(sha1)
-                ?.executeAsOneOrNull(),
+            sha1 = dao.sha1,
+            region = dao.sha1?.let {
+                database?.regionsQueries
+                    ?.selectBySha1(it.toUpperCase(Locale.getDefault()))
+                    ?.executeAsOneOrNull()
+            },
+            release = dao.sha1?.let {
+                database?.releasesQueries
+                    ?.selectBySha1(it.toUpperCase(Locale.getDefault()))
+                    ?.executeAsOneOrNull()
+            },
+            system = dao.sha1?.let {
+                database?.systemsQueries
+                    ?.selectBySha1(it.toUpperCase(Locale.getDefault()))
+                    ?.executeAsOneOrNull()
+            },
         )
-    }
 }

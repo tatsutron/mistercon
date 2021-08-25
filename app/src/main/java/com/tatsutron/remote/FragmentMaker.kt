@@ -6,7 +6,7 @@ import com.tatsutron.remote.fragment.*
 object FragmentMaker {
 
     const val KEY_CORE = "KEY_CORE"
-    const val KEY_ID = "KEY_ID"
+    const val KEY_PATH = "KEY_PATH"
     const val KEY_URL = "KEY_URL"
 
     fun credits() = CreditsFragment()
@@ -19,9 +19,9 @@ object FragmentMaker {
         }
     }
 
-    fun game(id: Long) = GameFragment().apply {
+    fun game(path: String) = GameFragment().apply {
         arguments = Bundle().apply {
-            putLong(KEY_ID, id)
+            putString(KEY_PATH, path)
         }
     }
 

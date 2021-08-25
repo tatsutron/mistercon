@@ -115,7 +115,8 @@ class ConsoleFragment : Fragment() {
                     activity = requireActivity(),
                     run = {
                         val session = Ssh.session()
-                        Asset.put(requireContext(), session, "scan")
+                        Asset.put(requireContext(), session, "list")
+                        val gamesPath = Persistence.getGamesPath(core.name)
                         val extensions = core.commandsByExtension
                             .map {
                                 it.key
@@ -123,16 +124,13 @@ class ConsoleFragment : Fragment() {
                             .reduce { acc, string ->
                                 "$acc|$string"
                             }
-                        val gamesPath = Persistence.getGamesPath(core.name)
                         val regex = "($extensions)$"
                         val command = StringBuilder().apply {
-                            append("\"${Constants.SCAN_PATH}\"")
+                            append("\"${Constants.LIST_PATH}\"")
                             append(" ")
                             append("\"${gamesPath}\"")
                             append(" ")
                             append("\"$regex\"")
-                            append(" ")
-                            append(core.headerSizeInBytes.toString())
                         }.toString()
                         val list = Ssh.command(session, command)
                         list.split("\n")
@@ -140,8 +138,11 @@ class ConsoleFragment : Fragment() {
                                 it.isNotBlank()
                             }
                             .forEach {
-                                val (path, hash) = it.split("\t")
-                                Persistence.saveGame(core.name, path, hash)
+                                Persistence.saveGame(
+                                    core = core.name,
+                                    path = it,
+                                    hash = null,
+                                )
                             }
                         session.disconnect()
                     },
@@ -171,7 +172,7 @@ class ConsoleFragment : Fragment() {
         randomButton = view.findViewById(R.id.random_button)
         randomButton.setOnClickListener {
             Navigator.show(
-                FragmentMaker.game(adapter.itemList.random().game.id),
+                FragmentMaker.game(adapter.itemList.random().game.path),
             )
         }
     }

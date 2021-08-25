@@ -18,7 +18,7 @@ class GameHolder(
         label.text = item.game.release?.releaseTitleName
             ?: File(item.game.path).nameWithoutExtension
         itemView.setOnClickListener {
-            Navigator.show(FragmentMaker.game(item.game.id))
+            Navigator.show(FragmentMaker.game(item.game.path))
         }
     }
 }
