@@ -97,7 +97,7 @@ class ConsoleFragment : Fragment() {
                     isEnabled = false
                     setEndIconTintList(
                         ColorStateList.valueOf(
-                            context.getColor(R.color.gray_700),
+                            context.getColor(R.color.gray_500),
                         ),
                     )
                 }
@@ -110,7 +110,6 @@ class ConsoleFragment : Fragment() {
                     isEnabled = true
                 }
                 disable()
-                Persistence.clearGamesByCore(core.name)
                 Coroutine.launch(
                     activity = requireActivity(),
                     run = {
@@ -133,17 +132,28 @@ class ConsoleFragment : Fragment() {
                             append("\"$regex\"")
                         }.toString()
                         val list = Ssh.command(session, command)
-                        list.split("\n")
+                        val new = list.split("\n")
                             .filter {
                                 it.isNotBlank()
                             }
-                            .forEach {
+                        val old = Persistence.getGamesByCore(core.name)
+                            .map {
+                                it.path
+                            }
+                        new.forEach {
+                            if (it !in old) {
                                 Persistence.saveGame(
                                     core = core.name,
                                     path = it,
                                     hash = null,
                                 )
                             }
+                        }
+                        old.forEach {
+                            if (it !in new) {
+                                Persistence.deleteGame(it)
+                            }
+                        }
                         session.disconnect()
                     },
                     success = {

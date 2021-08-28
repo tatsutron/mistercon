@@ -8,9 +8,6 @@ save:
 REPLACE INTO Games(core, path, sha1)
 VALUES (:core, :path, :sha1);
 
-selectAll:
-SELECT * FROM Games;
-
 selectByCore:
 SELECT * FROM Games WHERE core = ?;
 
@@ -20,8 +17,5 @@ SELECT * FROM Games WHERE path = ?;
 selectBySha1:
 SELECT * FROM Games WHERE sha1 = ?;
 
-deleteAll:
-DELETE FROM Games;
-
-deleteByCore:
-DELETE FROM Games WHERE core = ?;
+deleteByPath:
+DELETE FROM Games WHERE path = ?;

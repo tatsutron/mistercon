@@ -145,9 +145,9 @@ object Persistence {
                 game(it)
             }
 
-    fun clearGamesByCore(core: String) {
+    fun deleteGame(path: String) {
         database?.gamesQueries
-            ?.deleteByCore(core)
+            ?.deleteByPath(path)
     }
 
     private fun game(dao: Games) =
