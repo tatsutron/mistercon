@@ -90,11 +90,15 @@ class ConsoleFragment : Fragment() {
     }
 
     private fun setSyncButton(view: View) {
+        var enabled = true
         view.findViewById<TextInputLayout>(R.id.games_path_layout).apply {
             setEndIconOnClickListener {
+                if (!enabled) {
+                    return@setEndIconOnClickListener
+                }
                 val context = requireContext()
                 val disable = {
-                    isEnabled = false
+                    enabled = false
                     setEndIconTintList(
                         ColorStateList.valueOf(
                             context.getColor(R.color.gray_500),
@@ -107,7 +111,7 @@ class ConsoleFragment : Fragment() {
                             context.getColor(R.color.white),
                         ),
                     )
-                    isEnabled = true
+                    enabled = true
                 }
                 disable()
                 Coroutine.launch(
