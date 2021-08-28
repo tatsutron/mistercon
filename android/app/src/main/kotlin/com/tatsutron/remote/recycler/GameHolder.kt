@@ -15,8 +15,7 @@ class GameHolder(
     private val label: TextView = itemView.findViewById(R.id.label)
 
     fun bind(item: GameItem) {
-        label.text = item.game.release?.releaseTitleName
-            ?: File(item.game.path).nameWithoutExtension
+        label.text = item.game.name
         itemView.setOnClickListener {
             Navigator.show(FragmentMaker.game(item.game.path))
         }

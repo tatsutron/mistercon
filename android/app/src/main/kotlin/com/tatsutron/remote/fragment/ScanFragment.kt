@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.tatsutron.remote.*
 import kotlinx.android.synthetic.main.fragment_scan.*
+import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -134,7 +135,7 @@ class ScanFragment : Fragment() {
                     context = context,
                     message = context.getString(
                         R.string.confirm_play_game,
-                        game.release?.releaseTitleName,
+                        game.name,
                     ),
                     cancel = {
                         processingBarcode = false

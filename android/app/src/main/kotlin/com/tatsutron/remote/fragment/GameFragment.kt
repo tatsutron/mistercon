@@ -44,8 +44,7 @@ class GameFragment : Fragment() {
                     context = context,
                     message = context.getString(
                         R.string.confirm_play_game,
-                        game.release?.releaseTitleName
-                            ?: File(game.path).nameWithoutExtension,
+                        game.name,
                     ),
                     ok = {
                         game.play(requireActivity())
@@ -64,8 +63,7 @@ class GameFragment : Fragment() {
         )!!
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(view.findViewById(R.id.game_toolbar))
-            supportActionBar?.title = game.release?.releaseTitleName
-                ?: File(game.path).nameWithoutExtension
+            supportActionBar?.title = game.name
         }
         if (game.sha1 == null) {
             view.findViewById<ProgressBar>(R.id.progress_bar)
@@ -196,7 +194,7 @@ class GameFragment : Fragment() {
                 view.findViewById<TextView>(R.id.no_data_text).apply {
                     text = context.getString(
                         R.string.no_data_was_found_for_game,
-                        File(game.path).nameWithoutExtension,
+                        game.name,
                     )
                     visibility = View.VISIBLE
                 }

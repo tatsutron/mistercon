@@ -16,6 +16,9 @@ class Game(
     val system: Systems?,
 ) {
 
+    val name: String
+        get() = File(path).nameWithoutExtension
+
     fun play(activity: Activity) {
         Coroutine.launch(
             activity = activity,
