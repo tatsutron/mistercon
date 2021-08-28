@@ -39,7 +39,18 @@ class GameFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.play -> {
-                game.play(requireActivity())
+                val context = requireContext()
+                Dialog.confirm(
+                    context = context,
+                    message = context.getString(
+                        R.string.confirm_play_game,
+                        game.release?.releaseTitleName
+                            ?: File(game.path).nameWithoutExtension,
+                    ),
+                    ok = {
+                        game.play(requireActivity())
+                    },
+                )
                 true
             }
             else -> super.onOptionsItemSelected(item)

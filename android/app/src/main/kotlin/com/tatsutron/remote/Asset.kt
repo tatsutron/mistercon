@@ -11,7 +11,8 @@ object Asset {
         Ssh.sftp(session).apply {
             try {
                 mkdir(Constants.MISTERCON_PATH)
-            } catch (exception: Throwable) {
+            } catch (e: Throwable) {
+                e.printStackTrace()
             }
             disconnect()
         }
