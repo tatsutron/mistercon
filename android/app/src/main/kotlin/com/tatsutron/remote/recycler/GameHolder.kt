@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tatsutron.remote.FragmentMaker
 import com.tatsutron.remote.Navigator
 import com.tatsutron.remote.R
-import java.io.File
 
 class GameHolder(
     itemView: View,

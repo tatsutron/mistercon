@@ -22,6 +22,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
             android:hint="@string/scripts_path"
             app:endIconDrawable="@drawable/ic_sync"
             app:endIconMode="custom"
