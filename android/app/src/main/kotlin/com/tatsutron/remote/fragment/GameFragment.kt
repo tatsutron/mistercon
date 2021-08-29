@@ -111,98 +111,118 @@ class GameFragment : Fragment() {
 
     private fun populate(view: View) {
         game.release?.releasePublisher?.let {
-            view.findViewById<TextInputEditText>(R.id.publisher_text)
-                .setText(it)
-            view.findViewById<TextInputLayout>(R.id.publisher_layout)
-                .visibility = View.VISIBLE
+            if (it.isNotBlank()) {
+                view.findViewById<TextInputEditText>(R.id.publisher_text)
+                    .setText(it)
+                view.findViewById<TextInputLayout>(R.id.publisher_layout)
+                    .visibility = View.VISIBLE
+            }
         }
         game.release?.releaseDeveloper?.let {
-            view.findViewById<TextInputEditText>(R.id.developer_text)
-                .setText(it)
-            view.findViewById<TextInputLayout>(R.id.developer_layout)
-                .visibility = View.VISIBLE
+            if (it.isNotBlank()) {
+                view.findViewById<TextInputEditText>(R.id.developer_text)
+                    .setText(it)
+                view.findViewById<TextInputLayout>(R.id.developer_layout)
+                    .visibility = View.VISIBLE
+            }
         }
         game.release?.releaseDate?.let {
-            view.findViewById<TextInputEditText>(R.id.release_date_text)
-                .setText(it)
-            view.findViewById<TextInputLayout>(R.id.release_date_layout)
-                .visibility = View.VISIBLE
+            if (it.isNotBlank()) {
+                view.findViewById<TextInputEditText>(R.id.release_date_text)
+                    .setText(it)
+                view.findViewById<TextInputLayout>(R.id.release_date_layout)
+                    .visibility = View.VISIBLE
+            }
         }
         game.region?.regionName?.let {
-            view.findViewById<TextInputEditText>(R.id.region_text)
-                .setText(it)
-            view.findViewById<TextInputLayout>(R.id.region_layout)
-                .visibility = View.VISIBLE
+            if (it.isNotBlank()) {
+                view.findViewById<TextInputEditText>(R.id.region_text)
+                    .setText(it)
+                view.findViewById<TextInputLayout>(R.id.region_layout)
+                    .visibility = View.VISIBLE
+            }
         }
         game.release?.releaseGenre?.let {
-            view.findViewById<TextInputEditText>(R.id.genre_text)
-                .setText(it)
-            view.findViewById<TextInputLayout>(R.id.genre_layout)
-                .visibility = View.VISIBLE
+            if (it.isNotBlank()) {
+                view.findViewById<TextInputEditText>(R.id.genre_text)
+                    .setText(it)
+                view.findViewById<TextInputLayout>(R.id.genre_layout)
+                    .visibility = View.VISIBLE
+            }
         }
         game.release?.releaseDescription?.let {
-            view.findViewById<TextInputEditText>(R.id.description_text)
-                .setText(it)
-            view.findViewById<TextInputLayout>(R.id.description_layout)
-                .visibility = View.VISIBLE
+            if (it.isNotBlank()) {
+                view.findViewById<TextInputEditText>(R.id.description_text)
+                    .setText(it)
+                view.findViewById<TextInputLayout>(R.id.description_layout)
+                    .visibility = View.VISIBLE
+            }
         }
         game.release?.releaseCoverFront?.let { url ->
-            view.findViewById<ImageView>(R.id.front_cover_image).apply {
-                Glide.with(this@GameFragment)
-                    .load(Uri.parse(url))
-                    .into(this)
-                setOnClickListener {
-                    Navigator.show(FragmentMaker.image(url))
+            if (url.isNotBlank()) {
+                view.findViewById<ImageView>(R.id.front_cover_image).apply {
+                    Glide.with(this@GameFragment)
+                        .load(Uri.parse(url))
+                        .into(this)
+                    setOnClickListener {
+                        Navigator.show(FragmentMaker.image(url))
+                    }
                 }
+                view.findViewById<LinearLayout>(R.id.front_cover_layout)
+                    .visibility = View.VISIBLE
             }
-            view.findViewById<LinearLayout>(R.id.front_cover_layout)
-                .visibility = View.VISIBLE
         }
         game.release?.releaseCoverBack?.let { url ->
-            view.findViewById<ImageView>(R.id.back_cover_image).apply {
-                Glide.with(this@GameFragment)
-                    .load(Uri.parse(url))
-                    .into(this)
-                setOnClickListener {
-                    Navigator.show(FragmentMaker.image(url))
+            if (url.isNotBlank()) {
+                view.findViewById<ImageView>(R.id.back_cover_image).apply {
+                    Glide.with(this@GameFragment)
+                        .load(Uri.parse(url))
+                        .into(this)
+                    setOnClickListener {
+                        Navigator.show(FragmentMaker.image(url))
+                    }
                 }
+                view.findViewById<LinearLayout>(R.id.back_cover_layout)
+                    .visibility = View.VISIBLE
             }
-            view.findViewById<LinearLayout>(R.id.back_cover_layout)
-                .visibility = View.VISIBLE
         }
         game.release?.releaseCoverCart?.let { url ->
-            view.findViewById<ImageView>(R.id.cartridge_image).apply {
-                Glide.with(this@GameFragment)
-                    .load(Uri.parse(url))
-                    .into(this)
-                setOnClickListener {
-                    Navigator.show(FragmentMaker.image(url))
+            if (url.isNotBlank()) {
+                view.findViewById<ImageView>(R.id.cartridge_image).apply {
+                    Glide.with(this@GameFragment)
+                        .load(Uri.parse(url))
+                        .into(this)
+                    setOnClickListener {
+                        Navigator.show(FragmentMaker.image(url))
+                    }
                 }
+                view.findViewById<LinearLayout>(R.id.cartridge_layout)
+                    .visibility = View.VISIBLE
             }
-            view.findViewById<LinearLayout>(R.id.cartridge_layout)
-                .visibility = View.VISIBLE
         }
-        listOfNotNull(
-            game.release?.releasePublisher,
-            game.release?.releaseDeveloper,
-            game.release?.releaseDate,
-            game.region?.regionName,
-            game.release?.releaseGenre,
-            game.release?.releaseDescription,
-            game.release?.releaseCoverFront,
-            game.release?.releaseCoverBack,
-            game.release?.releaseCoverCart,
-        ).isEmpty().let { noData ->
-            if (noData) {
-                view.findViewById<ScrollView>(R.id.scroll)
-                    .visibility = View.GONE
-                view.findViewById<TextView>(R.id.no_data_text).apply {
-                    text = context.getString(
-                        R.string.no_data_was_found_for_game,
-                        game.name,
-                    )
-                    visibility = View.VISIBLE
-                }
+        if (
+            listOf(
+                game.release?.releasePublisher?.isNotBlank(),
+                game.release?.releaseDeveloper?.isNotBlank(),
+                game.release?.releaseDate?.isNotBlank(),
+                game.region?.regionName?.isNotBlank(),
+                game.release?.releaseGenre?.isNotBlank(),
+                game.release?.releaseDescription?.isNotBlank(),
+                game.release?.releaseCoverFront?.isNotBlank(),
+                game.release?.releaseCoverBack?.isNotBlank(),
+                game.release?.releaseCoverCart?.isNotBlank(),
+            ).none {
+                it == true
+            }
+        ) {
+            view.findViewById<ScrollView>(R.id.scroll)
+                .visibility = View.GONE
+            view.findViewById<TextView>(R.id.no_data_text).apply {
+                text = context.getString(
+                    R.string.no_data_was_found_for_game,
+                    game.name,
+                )
+                visibility = View.VISIBLE
             }
         }
     }
