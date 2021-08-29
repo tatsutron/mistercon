@@ -75,7 +75,7 @@
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:src="@drawable/ic_medal"
+                            android:src="@drawable/ic_star"
                             app:tint="@color/primary_200" />
 
                         <TextView
