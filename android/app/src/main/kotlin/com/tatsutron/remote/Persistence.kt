@@ -1,5 +1,6 @@
 package com.tatsutron.remote
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.tatsutron.remote.data.Games
@@ -13,8 +14,8 @@ object Persistence {
 
     private var database: Database? = null
 
+    @SuppressLint("SdCardPath")
     fun init(context: Context) {
-        // TODO Fix (part of) hardcoded path
         val dir = "/data/data/com.tatsutron.remote/databases"
         val name = "app.db"
         val path = File(dir, name).path
@@ -110,7 +111,7 @@ object Persistence {
             ?.selectByName(console.name)
             ?.executeAsOneOrNull()
             ?.gamesPath
-            ?: File(Constants.GAMES_PATH, console.core.name).path
+            ?: File(Constants.GAMES_PATH, console.gamesFolderDefault).path
 
     fun saveGame(core: String, path: String, hash: String?) {
         database?.gamesQueries
