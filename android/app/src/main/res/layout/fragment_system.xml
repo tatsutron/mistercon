@@ -25,7 +25,7 @@
                 android:id="@+id/host_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="textNoSuggestions"
                 android:maxLines="1"
                 android:textColor="@color/white"
                 android:textCursorDrawable="@null" />

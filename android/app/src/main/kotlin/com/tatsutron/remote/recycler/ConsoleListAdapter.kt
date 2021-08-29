@@ -4,14 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.tatsutron.remote.Core
+import com.tatsutron.remote.Console
 import com.tatsutron.remote.R
 
 class ConsoleListAdapter(
     private val context: Context,
 ) : RecyclerView.Adapter<ConsoleHolder>() {
 
-    private var itemList = Core.values()
+    private var itemList = Console.values()
         .sortedBy {
             it.displayName
         }

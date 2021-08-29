@@ -1,7 +1,7 @@
 package com.tatsutron.remote.recycler
 
-import com.tatsutron.remote.Core
+import com.tatsutron.remote.Console
 
 class ConsoleItem(
-    val core: Core,
+    val console: Console,
 )

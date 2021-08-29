@@ -1,11 +1,11 @@
-CREATE TABLE Cores (
+CREATE TABLE Consoles (
     gamesPath TEXT NOT NULL,
     name TEXT PRIMARY KEY
 );
 
 save:
-REPLACE INTO Cores(gamesPath, name)
+REPLACE INTO Consoles(gamesPath, name)
 VALUES (:gamesPath, :name);
 
 selectByName:
-SELECT * FROM Cores WHERE name = ?;
+SELECT * FROM Consoles WHERE name = ?;

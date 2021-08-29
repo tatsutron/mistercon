@@ -8,7 +8,7 @@ import com.tatsutron.remote.data.Systems
 import java.io.File
 
 class Game(
-    val core: Core,
+    val console: Console,
     val path: String,
     val sha1: String?,
     val region: Regions?,
@@ -25,13 +25,17 @@ class Game(
             run = {
                 val session = Ssh.session()
                 Asset.put(activity, session, "mbc")
-                val extension = File(path).extension
+                val mbcCommand = console.formats
+                    .find {
+                        it.extension == File(path).extension
+                    }
+                    ?.mbcCommand!!
                 val command = StringBuilder().apply {
                     append("\"${Constants.MBC_PATH}\"")
                     append(" ")
                     append("load_rom")
                     append(" ")
-                    append(core.commandsByExtension[extension])
+                    append(mbcCommand)
                     append(" ")
                     append("\"${path}\"")
                 }.toString()

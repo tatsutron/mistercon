@@ -11,6 +11,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.tatsutron.remote.*
 import com.tatsutron.remote.model.Game
+import java.io.File
 
 class GameFragment : Fragment() {
     private lateinit var game: Game
@@ -72,16 +73,21 @@ class GameFragment : Fragment() {
                 run = {
                     val session = Ssh.session()
                     Asset.put(requireContext(), session, "hash")
+                    val headerSizeInBytes = game.console.formats
+                        .find {
+                            it.extension == File(game.path).extension
+                        }
+                        ?.headerSizeInBytes!!
                     val command = StringBuilder().apply {
                         append("\"${Constants.HASH_PATH}\"")
                         append(" ")
                         append("\"${game.path}\"")
                         append(" ")
-                        append(game.core.headerSizeInBytes.toString())
+                        append(headerSizeInBytes.toString())
                     }.toString()
                     val output = Ssh.command(session, command)
                     Persistence.saveGame(
-                        core = game.core.name,
+                        core = game.console.name,
                         path = game.path,
                         hash = output.trim(),
                     )

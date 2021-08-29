@@ -100,26 +100,26 @@ object Persistence {
             ?.clear()
     }
 
-    fun saveGamesPath(core: String, gamesPath: String) {
-        database?.coresQueries
-            ?.save(gamesPath, core)
+    fun saveGamesPath(console: String, gamesPath: String) {
+        database?.consolesQueries
+            ?.save(gamesPath, console)
     }
 
-    fun getGamesPath(core: String): String =
-        database?.coresQueries
-            ?.selectByName(core)
+    fun getGamesPath(console: Console): String =
+        database?.consolesQueries
+            ?.selectByName(console.name)
             ?.executeAsOneOrNull()
             ?.gamesPath
-            ?: File(Constants.GAMES_PATH, core).path
+            ?: File(Constants.GAMES_PATH, console.core.name).path
 
     fun saveGame(core: String, path: String, hash: String?) {
         database?.gamesQueries
             ?.save(core, path, hash)
     }
 
-    fun getGamesByCore(core: String) =
+    fun getGamesByConsole(console: String) =
         database?.gamesQueries
-            ?.selectByCore(core)
+            ?.selectByConsole(console)
             ?.executeAsList()
             ?.map {
                 game(it)
@@ -152,7 +152,7 @@ object Persistence {
 
     private fun game(dao: Games) =
         Game(
-            core = Core.valueOf(dao.core),
+            console = Console.valueOf(dao.console),
             path = dao.path,
             sha1 = dao.sha1,
             region = dao.sha1?.let {

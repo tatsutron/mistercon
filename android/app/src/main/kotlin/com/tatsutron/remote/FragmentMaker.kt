@@ -5,7 +5,7 @@ import com.tatsutron.remote.fragment.*
 
 object FragmentMaker {
 
-    const val KEY_CORE = "KEY_CORE"
+    const val KEY_CONSOLE = "KEY_CONSOLE"
     const val KEY_PATH = "KEY_PATH"
     const val KEY_URL = "KEY_URL"
 
@@ -15,7 +15,7 @@ object FragmentMaker {
 
     fun console(core: String) = ConsoleFragment().apply {
         arguments = Bundle().apply {
-            putString(KEY_CORE, core)
+            putString(KEY_CONSOLE, core)
         }
     }
 

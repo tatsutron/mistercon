@@ -14,9 +14,9 @@ class ConsoleHolder(
     private val label: TextView = itemView.findViewById(R.id.label)
 
     fun bind(item: ConsoleItem) {
-        label.text = item.core.displayName
+        label.text = item.console.displayName
         itemView.setOnClickListener {
-            Navigator.show(FragmentMaker.console(item.core.name))
+            Navigator.show(FragmentMaker.console(item.console.name))
         }
     }
 }

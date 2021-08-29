@@ -1,15 +1,15 @@
 CREATE TABLE Games (
-    core TEXT NOT NULL,
+    console TEXT NOT NULL,
     path TEXT NOT NULL UNIQUE PRIMARY KEY,
     sha1 TEXT
 );
 
 save:
-REPLACE INTO Games(core, path, sha1)
-VALUES (:core, :path, :sha1);
+REPLACE INTO Games(console, path, sha1)
+VALUES (:console, :path, :sha1);
 
-selectByCore:
-SELECT * FROM Games WHERE core = ?;
+selectByConsole:
+SELECT * FROM Games WHERE console = ?;
 
 selectByPath:
 SELECT * FROM Games WHERE path = ?;

@@ -17,7 +17,7 @@ import com.tatsutron.remote.recycler.GameItem
 import com.tatsutron.remote.recycler.GameListAdapter
 
 class ConsoleFragment : Fragment() {
-    private lateinit var core: Core
+    private lateinit var console: Console
     private lateinit var adapter: GameListAdapter
     private lateinit var randomButton: Button
 
@@ -47,7 +47,9 @@ class ConsoleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        core = Core.valueOf(arguments?.getString(FragmentMaker.KEY_CORE)!!)
+        console = Console.valueOf(
+            arguments?.getString(FragmentMaker.KEY_CONSOLE)!!,
+        )
         setToolbar(view)
         setPathInput(view)
         setSyncButton(view)
@@ -59,13 +61,13 @@ class ConsoleFragment : Fragment() {
     private fun setToolbar(view: View) {
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(view.findViewById(R.id.toolbar))
-            supportActionBar?.title = core.displayName
+            supportActionBar?.title = console.displayName
         }
     }
 
     private fun setPathInput(view: View) {
         view.findViewById<TextInputEditText>(R.id.games_path_text).apply {
-            setText(Persistence.getGamesPath(core.name))
+            setText(Persistence.getGamesPath(console))
             addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,
@@ -81,7 +83,7 @@ class ConsoleFragment : Fragment() {
                     before: Int,
                     count: Int,
                 ) {
-                    Persistence.saveGamesPath(core.name, s.toString())
+                    Persistence.saveGamesPath(console.name, s.toString())
                 }
 
                 override fun afterTextChanged(s: Editable?) {}
@@ -119,10 +121,10 @@ class ConsoleFragment : Fragment() {
                     run = {
                         val session = Ssh.session()
                         Asset.put(requireContext(), session, "list")
-                        val gamesPath = Persistence.getGamesPath(core.name)
-                        val extensions = core.commandsByExtension
+                        val gamesPath = Persistence.getGamesPath(console)
+                        val extensions = console.formats
                             .map {
-                                it.key
+                                it.extension
                             }
                             .reduce { acc, string ->
                                 "$acc|$string"
@@ -140,14 +142,14 @@ class ConsoleFragment : Fragment() {
                             .filter {
                                 it.isNotBlank()
                             }
-                        val old = Persistence.getGamesByCore(core.name)
+                        val old = Persistence.getGamesByConsole(console.name)
                             .map {
                                 it.path
                             }
                         new.forEach {
                             if (it !in old) {
                                 Persistence.saveGame(
-                                    core = core.name,
+                                    core = console.name,
                                     path = it,
                                     hash = null,
                                 )
@@ -192,7 +194,7 @@ class ConsoleFragment : Fragment() {
     }
 
     private fun refresh() {
-        val items = Persistence.getGamesByCore(core.name).map {
+        val items = Persistence.getGamesByConsole(console.name).map {
             GameItem(it)
         }
         adapter.itemList.clear()
