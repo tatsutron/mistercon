@@ -29,9 +29,15 @@ class CreditsFragment : Fragment() {
         view.findViewById<LinearLayout>(R.id.credits_container).apply {
             listOf(
                 "DoOoM",
+                "Edward Mallett",
+                "Jeremy Hopkins",
                 "KremlingKuthroat19",
-                "Luke Earnshaw",
+                "Louis Martinez",
                 "Mist Sonata",
+                "peanutmans",
+                "Sergio L. Serrano",
+                "Tim Lehner",
+                "Weasel5053",
             ).forEach {
                 val item = layoutInflater.inflate(R.layout.item_credit, null)
                 item.findViewById<TextView>(R.id.label).text = it
