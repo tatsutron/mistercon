@@ -4,9 +4,9 @@ mistercon is an Android app for use with [MiSTer](https://github.com/MiSTer-deve
 
 # Features
 
-* Import data and artwork for Famicom Disk System, Game Boy, GBA, Genesis, NES, SNES, and TGFX16 games
-* Launch games, access the menu, run scripts, and reboot the MiSTer from your Android device
+* Import data and artwork for (most) console cores
+* Launch games, access the menu, run scripts, and reboot the MiSTer from your mobile device
 
 # Credits
 
-This project is made possible by DoOoM, KremlingKuthroat19, Luke Earnshaw, and Mist Sonata.
+This project is made possible by DoOoM, Edward Mallett, Jeremy Hopkins, KremlingKuthroat19, Louis Martinez, Mist Sonata, peanutmans, Sergio L. Serrano, Tim Lehner, and Weasel5053.
