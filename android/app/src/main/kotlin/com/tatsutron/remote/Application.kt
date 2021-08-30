@@ -7,21 +7,19 @@ class Application : android.app.Application() {
 
     override fun onCreate() {
         super.onCreate()
-        if (BuildConfig.DEBUG) {
-            getExternalFilesDir(null)?.let {
-                val dir = File("${it.absolutePath}/logs")
-                if (!dir.exists()) {
-                    dir.mkdir()
+        getExternalFilesDir(null)?.let {
+            val dir = File("${it.absolutePath}/logs")
+            if (!dir.exists()) {
+                dir.mkdir()
+            }
+            val file = File(dir, "log_${System.currentTimeMillis()}.txt")
+            try {
+                Runtime.getRuntime().apply {
+                    exec("logcat -c")
+                    exec("logcat -f $file")
                 }
-                val file = File(dir, "log_${System.currentTimeMillis()}.txt")
-                try {
-                    Runtime.getRuntime().apply {
-                        exec("logcat -c")
-                        exec("logcat -f $file")
-                    }
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
+            } catch (e: IOException) {
+                e.printStackTrace()
             }
         }
     }
