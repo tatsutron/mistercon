@@ -8,8 +8,8 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        style="@style/Toolbar"
-        android:id="@+id/toolbar" />
+        android:id="@+id/toolbar"
+        style="@style/Toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,13 +22,15 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
             android:hint="@string/games_path"
+            android:paddingBottom="5dp"
+            android:textColorHint="@color/gray_500"
+            app:boxStrokeColor="@color/text_input_layout_stroke_color"
+            app:boxStrokeWidth="2dp"
             app:endIconDrawable="@drawable/ic_sync"
             app:endIconMode="custom"
-            app:boxStrokeColor="@color/primary_200"
-            app:hintTextColor="@color/primary_200"
-            app:endIconTint="@color/white">
+            app:endIconTint="@color/white"
+            app:hintTextColor="@color/gray_500">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/games_path_text"
@@ -57,9 +59,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_small"
         android:layout_marginBottom="@dimen/margin_small"
-        android:textColor="@color/primary_200"
         android:text="@string/random"
-        app:strokeColor="@color/primary_200"
-        android:visibility="gone" />
+        android:textColor="@color/primary_200"
+        android:visibility="gone"
+        app:strokeColor="@color/primary_200" />
 
 </LinearLayout>

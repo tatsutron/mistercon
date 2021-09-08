@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/gray_800">
+    android:background="@color/gray_800"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,10 +16,15 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/margin_small"
             android:hint="@string/host"
-            app:boxStrokeColor="@color/primary_200"
-            app:hintTextColor="@color/primary_200">
+            android:paddingBottom="5dp"
+            android:textColorHint="@color/gray_500"
+            app:boxStrokeColor="@color/text_input_layout_stroke_color"
+            app:boxStrokeWidth="2dp"
+            app:endIconDrawable="@drawable/ic_sync"
+            app:endIconMode="custom"
+            app:endIconTint="@color/white"
+            app:hintTextColor="@color/gray_500">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/host_text"
@@ -44,15 +49,15 @@
             android:layout_height="wrap_content"
             android:background="@color/gray_800"
             android:clickable="true"
+            android:divider="@drawable/vertical_divider_small"
             android:orientation="vertical"
-            android:showDividers="middle"
-            android:divider="@drawable/vertical_divider_small">
+            android:showDividers="middle">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="175dp"
-                android:showDividers="middle"
-                android:divider="@drawable/horizontal_divider_medium">
+                android:divider="@drawable/horizontal_divider_medium"
+                android:showDividers="middle">
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -82,8 +87,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/credits"
-                            android:textSize="@dimen/text_size_large"
-                            android:textColor="@color/primary_200" />
+                            android:textColor="@color/primary_200"
+                            android:textSize="@dimen/text_size_large" />
 
                     </LinearLayout>
 
@@ -117,8 +122,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/reboot"
-                            android:textSize="@dimen/text_size_large"
-                            android:textColor="@color/primary_200" />
+                            android:textColor="@color/primary_200"
+                            android:textSize="@dimen/text_size_large" />
 
                     </LinearLayout>
 
@@ -129,8 +134,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="175dp"
-                android:showDividers="middle"
-                android:divider="@drawable/horizontal_divider_medium">
+                android:divider="@drawable/horizontal_divider_medium"
+                android:showDividers="middle">
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -160,8 +165,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/scripts"
-                            android:textSize="@dimen/text_size_large"
-                            android:textColor="@color/primary_200" />
+                            android:textColor="@color/primary_200"
+                            android:textSize="@dimen/text_size_large" />
 
                     </LinearLayout>
 
@@ -195,8 +200,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/menu"
-                            android:textSize="@dimen/text_size_large"
-                            android:textColor="@color/primary_200" />
+                            android:textColor="@color/primary_200"
+                            android:textSize="@dimen/text_size_large" />
 
                     </LinearLayout>
 
