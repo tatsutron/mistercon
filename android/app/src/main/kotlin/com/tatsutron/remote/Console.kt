@@ -50,17 +50,17 @@ enum class Console(
         gamesFolderDefault = "Coleco",
     ),
 
-//    FAMICOM_DISK_SYSTEM(
-//        displayName = "Famicom Disk System",
-//        formats = listOf(
-//            Format(
-//                extension = "fds",
-//                headerSizeInBytes = 16,
-//                mbcCommand = "NES.FDS",
-//            ),
-//        ),
-//        gamesFolderDefault = "NES",
-//    ),
+    FAMICOM_DISK_SYSTEM(
+        displayName = "Famicom Disk System",
+        formats = listOf(
+            Format(
+                extension = "fds",
+                headerSizeInBytes = 16,
+                mbcCommand = "NES",
+            ),
+        ),
+        gamesFolderDefault = "NES",
+    ),
 
     GAME_BOY(
         displayName = "Game Boy",
