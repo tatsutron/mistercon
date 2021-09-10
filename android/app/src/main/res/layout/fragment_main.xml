@@ -8,8 +8,8 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        style="@style/Toolbar"
-        android:id="@+id/toolbar" />
+        android:id="@+id/toolbar"
+        style="@style/Toolbar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,16 +17,16 @@
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_above="@id/bottom_navigation" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_gravity="start"
             android:layout_alignParentBottom="true"
+            android:layout_gravity="start"
             android:background="@color/gray_700"
             app:itemBackground="@color/gray_700"
             app:itemIconTint="@drawable/selector_item_bottom_navigation"

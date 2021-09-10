@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/gray_800">
+    android:background="@color/gray_800"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        style="@style/Toolbar"
-        android:id="@+id/game_toolbar" />
+        android:id="@+id/game_toolbar"
+        style="@style/Toolbar" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -23,10 +23,10 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                android:divider="@drawable/vertical_divider_small"
                 android:orientation="vertical"
                 android:padding="@dimen/margin_small"
-                android:showDividers="middle"
-                android:divider="@drawable/vertical_divider_small">
+                android:showDividers="middle">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/publisher_layout"
@@ -41,9 +41,9 @@
                         android:id="@+id/publisher_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:textColor="@color/white"
-                        android:textCursorDrawable="@null"
-                        android:enabled="false" />
+                        android:textCursorDrawable="@null" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,9 +60,9 @@
                         android:id="@+id/developer_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:textColor="@color/white"
-                        android:textCursorDrawable="@null"
-                        android:enabled="false" />
+                        android:textCursorDrawable="@null" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,9 +79,9 @@
                         android:id="@+id/release_date_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:textColor="@color/white"
-                        android:textCursorDrawable="@null"
-                        android:enabled="false" />
+                        android:textCursorDrawable="@null" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,9 +98,9 @@
                         android:id="@+id/region_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:textColor="@color/white"
-                        android:textCursorDrawable="@null"
-                        android:enabled="false" />
+                        android:textCursorDrawable="@null" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,9 +117,9 @@
                         android:id="@+id/genre_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:textColor="@color/white"
-                        android:textCursorDrawable="@null"
-                        android:enabled="false" />
+                        android:textCursorDrawable="@null" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,9 +136,9 @@
                         android:id="@+id/description_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:textColor="@color/white"
-                        android:textCursorDrawable="@null"
-                        android:enabled="false" />
+                        android:textCursorDrawable="@null" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -146,9 +146,9 @@
                     android:id="@+id/front_cover_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/margin_medium"
-                    android:orientation="vertical"
                     android:background="@drawable/rounded_background"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_medium"
                     android:visibility="gone">
 
                     <ImageView
@@ -164,9 +164,9 @@
                     android:id="@+id/back_cover_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/margin_medium"
-                    android:orientation="vertical"
                     android:background="@drawable/rounded_background"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_medium"
                     android:visibility="gone">
 
                     <ImageView
@@ -182,9 +182,9 @@
                     android:id="@+id/cartridge_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/margin_medium"
-                    android:orientation="vertical"
                     android:background="@drawable/rounded_background"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_medium"
                     android:visibility="gone">
 
                     <ImageView

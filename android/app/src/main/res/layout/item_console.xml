@@ -6,10 +6,10 @@
 
     <TextView
         android:id="@+id/label"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textSize="@dimen/text_size_medium"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
         android:textColor="@color/white"
-        android:singleLine="true" />
+        android:textSize="@dimen/text_size_medium" />
 
 </LinearLayout>
