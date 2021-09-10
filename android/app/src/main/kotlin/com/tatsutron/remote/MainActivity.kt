@@ -18,9 +18,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Persistence.init(baseContext)
         Navigator.init(this)
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.root, MainFragment())
-            .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.root, MainFragment())
+                .commit()
+        }
     }
 }
