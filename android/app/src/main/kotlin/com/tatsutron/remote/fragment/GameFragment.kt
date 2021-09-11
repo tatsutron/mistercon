@@ -42,26 +42,6 @@ class GameFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_game, container, false)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.play -> {
-                val context = requireContext()
-                Dialog.confirm(
-                    context = context,
-                    message = context.getString(
-                        R.string.confirm_play_game,
-                        game.name,
-                    ),
-                    ok = {
-                        game.play(requireActivity())
-                    },
-                )
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         game = Persistence.getGameByPath(
@@ -70,6 +50,10 @@ class GameFragment : Fragment() {
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(view.findViewById(R.id.game_toolbar))
             supportActionBar?.title = game.name
+        }
+        val refresh = {
+            setSpeedDial(view)
+            populate(view)
         }
         if (game.sha1 == null) {
             view.findViewById<ProgressBar>(R.id.progress_bar)
@@ -103,8 +87,7 @@ class GameFragment : Fragment() {
                     view.findViewById<ProgressBar>(R.id.progress_bar)
                         .visibility = View.GONE
                     game = Persistence.getGameByPath(game.path)!!
-                    setSpeedDial(view)
-                    populate(view)
+                    refresh()
                 },
                 failure = {
                     view.findViewById<ProgressBar>(R.id.progress_bar)
@@ -112,8 +95,7 @@ class GameFragment : Fragment() {
                 }
             )
         } else {
-            setSpeedDial(view)
-            populate(view)
+            refresh()
         }
     }
 
@@ -135,9 +117,23 @@ class GameFragment : Fragment() {
                     .setFabImageTintColor(color(R.color.primary_500))
                     .create()
             )
+            addActionItem(
+                SpeedDialActionItem.Builder(R.id.play, R.drawable.ic_play)
+                    .setLabel(string(R.string.play))
+                    .setLabelBackgroundColor(color(R.color.gray_900))
+                    .setLabelColor(color(R.color.primary_500))
+                    .setFabBackgroundColor(color(R.color.gray_900))
+                    .setFabImageTintColor(color(R.color.primary_500))
+                    .create()
+            )
             setOnActionSelectedListener(
                 SpeedDialView.OnActionSelectedListener { actionItem ->
                     when (actionItem.id) {
+                        R.id.play -> {
+                            game.play(requireActivity())
+                            close()
+                            return@OnActionSelectedListener true
+                        }
                         R.id.copy_qr -> {
                             val clipboard = getSystemService(context, ClipboardManager::class.java)
                             clipboard?.setPrimaryClip(ClipData.newPlainText("QR", game.sha1))
