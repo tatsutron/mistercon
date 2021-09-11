@@ -7,4 +7,3 @@
         android:title="@string/system"
         android:icon="@drawable/ic_system" />
 </menu>
-

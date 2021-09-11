@@ -45,6 +45,7 @@ dependencies {
     implementation "com.google.android.material:material:1.4.0"
     implementation "com.google.mlkit:barcode-scanning:16.0.3"
     implementation "com.jcraft:jsch:0.1.55"
+    implementation "com.leinardi.android:speed-dial:3.2.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.sqldelight:android-driver:1.4.3"

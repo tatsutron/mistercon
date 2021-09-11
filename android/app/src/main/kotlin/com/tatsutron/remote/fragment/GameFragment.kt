@@ -1,14 +1,20 @@
 package com.tatsutron.remote.fragment
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.leinardi.android.speeddial.SpeedDialActionItem
+import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.*
 import com.tatsutron.remote.model.Game
 import java.io.File
@@ -97,6 +103,7 @@ class GameFragment : Fragment() {
                     view.findViewById<ProgressBar>(R.id.progress_bar)
                         .visibility = View.GONE
                     game = Persistence.getGameByPath(game.path)!!
+                    setSpeedDial(view)
                     populate(view)
                 },
                 failure = {
@@ -105,7 +112,48 @@ class GameFragment : Fragment() {
                 }
             )
         } else {
+            setSpeedDial(view)
             populate(view)
+        }
+    }
+
+    private fun setSpeedDial(view: View) {
+        val context = requireContext()
+        val string = { id: Int ->
+            context.getString(id)
+        }
+        val color = { id: Int ->
+            ResourcesCompat.getColor(resources, id, context.theme)
+        }
+        view.findViewById<SpeedDialView>(R.id.speed_dial).apply {
+            addActionItem(
+                SpeedDialActionItem.Builder(R.id.copy_qr, R.drawable.ic_copy)
+                    .setLabel(string(R.string.copy_qr_data))
+                    .setLabelBackgroundColor(color(R.color.gray_900))
+                    .setLabelColor(color(R.color.primary_500))
+                    .setFabBackgroundColor(color(R.color.gray_900))
+                    .setFabImageTintColor(color(R.color.primary_500))
+                    .create()
+            )
+            setOnActionSelectedListener(
+                SpeedDialView.OnActionSelectedListener { actionItem ->
+                    when (actionItem.id) {
+                        R.id.copy_qr -> {
+                            val clipboard = getSystemService(context, ClipboardManager::class.java)
+                            clipboard?.setPrimaryClip(ClipData.newPlainText("QR", game.sha1))
+                            Toast.makeText(
+                                requireActivity(),
+                                "Copied QR Data to Clipboard",
+                                Toast.LENGTH_SHORT,
+                            ).show()
+                            close()
+                            return@OnActionSelectedListener true
+                        }
+                    }
+                    false
+                }
+            )
+            visibility = View.VISIBLE
         }
     }
 

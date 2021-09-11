@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app">MiSTer</string>
     <string name="cancel">Cancel</string>
@@ -5,6 +6,7 @@
     <string name="confirm_reboot">Reboot the MiSTer?</string>
     <string name="confirm_run_script">Run script?</string>
     <string name="consoles">Consoles</string>
+    <string name="copy_qr_data">Copy QR Data</string>
     <string name="credits">Credits</string>
     <string name="description">Description</string>
     <string name="developer">Developer</string>
