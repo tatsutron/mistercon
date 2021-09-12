@@ -109,8 +109,8 @@ class GameFragment : Fragment() {
         }
         view.findViewById<SpeedDialView>(R.id.speed_dial).apply {
             addActionItem(
-                SpeedDialActionItem.Builder(R.id.copy_qr, R.drawable.ic_copy)
-                    .setLabel(string(R.string.copy_qr_data))
+                SpeedDialActionItem.Builder(R.id.play, R.drawable.ic_play)
+                    .setLabel(string(R.string.play))
                     .setLabelBackgroundColor(color(R.color.gray_900))
                     .setLabelColor(color(R.color.primary_500))
                     .setFabBackgroundColor(color(R.color.gray_900))
@@ -118,8 +118,8 @@ class GameFragment : Fragment() {
                     .create()
             )
             addActionItem(
-                SpeedDialActionItem.Builder(R.id.play, R.drawable.ic_play)
-                    .setLabel(string(R.string.play))
+                SpeedDialActionItem.Builder(R.id.copy_qr, R.drawable.ic_copy)
+                    .setLabel(string(R.string.copy_qr_data))
                     .setLabelBackgroundColor(color(R.color.gray_900))
                     .setLabelColor(color(R.color.primary_500))
                     .setFabBackgroundColor(color(R.color.gray_900))
@@ -129,11 +129,6 @@ class GameFragment : Fragment() {
             setOnActionSelectedListener(
                 SpeedDialView.OnActionSelectedListener { actionItem ->
                     when (actionItem.id) {
-                        R.id.play -> {
-                            game.play(requireActivity())
-                            close()
-                            return@OnActionSelectedListener true
-                        }
                         R.id.copy_qr -> {
                             val clipboard = getSystemService(context, ClipboardManager::class.java)
                             clipboard?.setPrimaryClip(ClipData.newPlainText("QR", game.sha1))
@@ -142,6 +137,11 @@ class GameFragment : Fragment() {
                                 "Copied QR Data to Clipboard",
                                 Toast.LENGTH_SHORT,
                             ).show()
+                            close()
+                            return@OnActionSelectedListener true
+                        }
+                        R.id.play -> {
+                            game.play(requireActivity())
                             close()
                             return@OnActionSelectedListener true
                         }
