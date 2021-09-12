@@ -5,13 +5,15 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.leinardi.android.speeddial.SpeedDialActionItem
+import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.*
 import com.tatsutron.remote.recycler.GameItem
 import com.tatsutron.remote.recycler.GameListAdapter
@@ -19,7 +21,7 @@ import com.tatsutron.remote.recycler.GameListAdapter
 class ConsoleFragment : Fragment() {
     private lateinit var console: Console
     private lateinit var adapter: GameListAdapter
-    private lateinit var randomButton: Button
+    private lateinit var speedDial: SpeedDialView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +56,7 @@ class ConsoleFragment : Fragment() {
         setPathInput(view)
         setSyncButton(view)
         setRecycler(view)
-        setRandomButton(view)
+        speedDial = view.findViewById(R.id.speed_dial)
         refresh()
     }
 
@@ -184,15 +186,6 @@ class ConsoleFragment : Fragment() {
         }
     }
 
-    private fun setRandomButton(view: View) {
-        randomButton = view.findViewById(R.id.random_button)
-        randomButton.setOnClickListener {
-            Navigator.show(
-                FragmentMaker.game(adapter.itemList.random().game.path),
-            )
-        }
-    }
-
     private fun refresh() {
         val items = Persistence.getGamesByConsole(console.name).map {
             GameItem(it)
@@ -200,10 +193,44 @@ class ConsoleFragment : Fragment() {
         adapter.itemList.clear()
         adapter.itemList.addAll(items)
         adapter.notifyDataSetChanged()
-        randomButton.visibility = if (items.count() > 1) {
-            View.VISIBLE
-        } else {
-            View.GONE
+        setSpeedDial()
+    }
+
+    private fun setSpeedDial() {
+        val context = requireContext()
+        val string = { id: Int ->
+            context.getString(id)
+        }
+        val color = { id: Int ->
+            ResourcesCompat.getColor(resources, id, context.theme)
+        }
+        speedDial.apply {
+            clearActionItems()
+            if (adapter.itemList.count() > 1) {
+                addActionItem(
+                    SpeedDialActionItem.Builder(R.id.random, R.drawable.ic_random)
+                        .setLabel(string(R.string.random))
+                        .setLabelBackgroundColor(color(R.color.gray_900))
+                        .setLabelColor(color(R.color.primary_500))
+                        .setFabBackgroundColor(color(R.color.gray_900))
+                        .setFabImageTintColor(color(R.color.primary_500))
+                        .create()
+                )
+            }
+            setOnActionSelectedListener(
+                SpeedDialView.OnActionSelectedListener { actionItem ->
+                    when (actionItem.id) {
+                        R.id.random -> {
+                            Navigator.show(
+                                FragmentMaker.game(adapter.itemList.random().game.path),
+                            )
+                            close()
+                            return@OnActionSelectedListener true
+                        }
+                    }
+                    false
+                }
+            )
         }
     }
 }

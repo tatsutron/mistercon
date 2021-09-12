@@ -11,57 +11,76 @@
         android:id="@+id/toolbar"
         style="@style/Toolbar" />
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/gray_700"
-        android:padding="@dimen/margin_small">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/games_path_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/games_path"
-            android:paddingBottom="5dp"
-            android:textColorHint="@color/gray_500"
-            app:boxStrokeColor="@color/text_input_layout_stroke_color"
-            app:boxStrokeWidth="2dp"
-            app:endIconDrawable="@drawable/ic_sync"
-            app:endIconMode="custom"
-            app:endIconTint="@color/white"
-            app:hintTextColor="@color/gray_500">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/games_path_text"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textNoSuggestions"
-                android:maxLines="1"
-                android:textColor="@color/white"
-                android:textCursorDrawable="@null" />
+                android:background="@color/gray_700"
+                android:padding="@dimen/margin_small">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/games_path_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/games_path"
+                    android:paddingBottom="5dp"
+                    android:textColorHint="@color/gray_500"
+                    app:boxStrokeColor="@color/text_input_layout_stroke_color"
+                    app:boxStrokeWidth="2dp"
+                    app:endIconDrawable="@drawable/ic_sync"
+                    app:endIconMode="custom"
+                    app:endIconTint="@color/white"
+                    app:hintTextColor="@color/gray_500">
 
-    </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/games_path_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textNoSuggestions"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textCursorDrawable="@null" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="@dimen/margin_medium" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/random_button"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_small"
-        android:layout_marginBottom="@dimen/margin_small"
-        android:text="@string/random"
-        android:textColor="@color/primary_200"
-        android:visibility="gone"
-        app:strokeColor="@color/primary_200" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="@dimen/margin_medium" />
+
+        </LinearLayout>
+
+        <com.leinardi.android.speeddial.SpeedDialOverlayLayout
+            android:id="@+id/speed_dial_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/overlay"
+            app:clickable_overlay="true" />
+
+        <com.leinardi.android.speeddial.SpeedDialView
+            android:id="@+id/speed_dial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            app:sdMainFabClosedBackgroundColor="@color/gray_900"
+            app:sdMainFabClosedIconColor="@color/primary_500"
+            app:sdMainFabClosedSrc="@drawable/ic_plus"
+            app:sdMainFabOpenedBackgroundColor="@color/gray_900"
+            app:sdOverlayLayout="@id/speed_dial_overlay" />
+
+    </FrameLayout>
 
 </LinearLayout>
