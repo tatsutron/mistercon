@@ -1,4 +1,4 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.fragment
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,6 +6,7 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
+import com.tatsutron.remote.util.Dialog
 
 class BarcodeAnalyzer(
     private val context: Context,

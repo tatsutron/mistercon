@@ -1,14 +1,16 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.util
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.tatsutron.remote.MainActivity
+import com.tatsutron.remote.R
 
 object Navigator {
 
     private var activity: MainActivity? = null
 
     fun init(activity: MainActivity) {
-        this.activity = activity
+        Navigator.activity = activity
     }
 
     fun show(fragment: Fragment) {

@@ -1,4 +1,4 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.util
 
 import android.content.Context
 import com.jcraft.jsch.Session

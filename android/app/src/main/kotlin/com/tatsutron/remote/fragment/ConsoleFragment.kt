@@ -15,6 +15,7 @@ import com.tatsutron.remote.*
 import com.tatsutron.remote.model.Console
 import com.tatsutron.remote.recycler.GameItem
 import com.tatsutron.remote.recycler.GameListAdapter
+import com.tatsutron.remote.util.*
 
 class ConsoleFragment : Fragment() {
     private lateinit var console: Console

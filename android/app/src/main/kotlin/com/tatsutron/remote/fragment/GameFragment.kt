@@ -17,6 +17,7 @@ import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.*
 import com.tatsutron.remote.model.Game
+import com.tatsutron.remote.util.*
 import java.io.File
 
 class GameFragment : Fragment() {

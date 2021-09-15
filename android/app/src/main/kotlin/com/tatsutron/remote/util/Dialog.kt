@@ -1,4 +1,4 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.util
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,6 +7,7 @@ import com.afollestad.materialdialogs.DialogCallback
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.InputCallback
 import com.afollestad.materialdialogs.input.input
+import com.tatsutron.remote.R
 
 object Dialog {
 

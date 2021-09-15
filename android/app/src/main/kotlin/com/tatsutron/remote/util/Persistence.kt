@@ -1,8 +1,9 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.util
 
 import android.annotation.SuppressLint
 import android.content.Context
 import com.squareup.sqldelight.android.AndroidSqliteDriver
+import com.tatsutron.remote.Database
 import com.tatsutron.remote.data.Games
 import com.tatsutron.remote.model.Config
 import com.tatsutron.remote.model.Console

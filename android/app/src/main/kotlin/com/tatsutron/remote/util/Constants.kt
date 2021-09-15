@@ -1,4 +1,4 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.util
 
 object Constants {
     const val GAMES_PATH = "/media/fat/games"

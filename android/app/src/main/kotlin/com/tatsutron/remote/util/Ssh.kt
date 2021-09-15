@@ -1,4 +1,4 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.util
 
 import com.jcraft.jsch.*
 import java.util.*

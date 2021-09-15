@@ -1,4 +1,4 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.util
 
 import android.os.Bundle
 import com.tatsutron.remote.fragment.*

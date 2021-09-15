@@ -21,9 +21,6 @@
             android:textColorHint="@color/gray_500"
             app:boxStrokeColor="@color/text_input_layout_stroke_color"
             app:boxStrokeWidth="2dp"
-            app:endIconDrawable="@drawable/ic_sync"
-            app:endIconMode="custom"
-            app:endIconTint="@color/white"
             app:hintTextColor="@color/gray_500">
 
             <com.google.android.material.textfield.TextInputEditText

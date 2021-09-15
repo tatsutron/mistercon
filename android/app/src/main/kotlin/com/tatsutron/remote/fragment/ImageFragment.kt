@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.ortiz.touchview.TouchImageView
-import com.tatsutron.remote.FragmentMaker
 import com.tatsutron.remote.R
+import com.tatsutron.remote.util.FragmentMaker
 
 class ImageFragment : Fragment() {
 

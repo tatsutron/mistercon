@@ -1,4 +1,4 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.util
 
 import android.app.Activity
 import kotlinx.coroutines.CoroutineScope

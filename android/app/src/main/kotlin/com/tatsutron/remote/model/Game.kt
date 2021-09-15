@@ -1,10 +1,13 @@
 package com.tatsutron.remote.model
 
 import android.app.Activity
-import com.tatsutron.remote.*
 import com.tatsutron.remote.data.Regions
 import com.tatsutron.remote.data.Releases
 import com.tatsutron.remote.data.Systems
+import com.tatsutron.remote.util.Asset
+import com.tatsutron.remote.util.Constants
+import com.tatsutron.remote.util.Coroutine
+import com.tatsutron.remote.util.Ssh
 import java.io.File
 
 class Game(

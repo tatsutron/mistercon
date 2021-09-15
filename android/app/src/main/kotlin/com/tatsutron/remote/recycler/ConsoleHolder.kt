@@ -3,8 +3,8 @@ package com.tatsutron.remote.recycler
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.tatsutron.remote.FragmentMaker
-import com.tatsutron.remote.Navigator
+import com.tatsutron.remote.util.FragmentMaker
+import com.tatsutron.remote.util.Navigator
 import com.tatsutron.remote.R
 
 class ConsoleHolder(

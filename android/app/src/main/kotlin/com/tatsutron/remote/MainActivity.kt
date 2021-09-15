@@ -3,6 +3,8 @@ package com.tatsutron.remote
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.tatsutron.remote.fragment.MainFragment
+import com.tatsutron.remote.util.Navigator
+import com.tatsutron.remote.util.Persistence
 
 class MainActivity : AppCompatActivity() {
 
