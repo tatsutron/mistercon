@@ -9,25 +9,24 @@
         <item name="android:textColor">@color/gray_900</item>
     </style>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
         <item name="actionBarStyle">@style/ActionBar</item>
         <item name="android:windowBackground">@color/gray_900</item>
         <item name="android:colorControlActivated">@color/primary_200</item>
         <item name="colorAccent">@color/primary_500</item>
+        <item name="colorBackgroundFloating">@color/gray_800</item>
         <item name="colorPrimary">@color/gray_900</item>
         <item name="colorPrimaryDark">@color/gray_900</item>
+        <item name="md_color_button_text">@color/primary_500</item>
+        <item name="md_color_content">@color/white</item>
+        <item name="md_color_hint">@color/gray_700</item>
+        <item name="md_color_title">@color/white</item>
+        <item name="textInputStyle">@style/TextInputLayout</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Toolbar">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:background">@color/primary_700</item>
-        <item name="titleTextColor">@color/white</item>
     </style>
 
     <style name="Card">
@@ -44,13 +43,35 @@
         <item name="colorPrimary">@color/primary_200</item>
     </style>
 
+    <style name="DialogBodyText" parent="@style/MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="DialogTitleText" parent="@style/MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="DialogBodyText" parent="@style/MaterialAlertDialog.MaterialComponents.Body.Text">
-        <item name="android:textColor">@color/white</item>
+    <style name="TextInputEditText" parent="@style/Widget.MaterialComponents.TextInputEditText.FilledBox">
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="TextInputLayout" parent="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="materialThemeOverlay">@style/TextInputLayoutOverlay</item>
+        <item name="boxBackgroundColor">@color/gray_800</item>
+        <item name="boxStrokeColor">@color/primary_500</item>
+    </style>
+
+    <style name="TextInputLayoutOverlay">
+        <item name="editTextStyle">@style/TextInputEditText</item>
+    </style>
+
+    <style name="Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@color/primary_700</item>
+        <item name="titleTextColor">@color/white</item>
     </style>
 
 </resources>

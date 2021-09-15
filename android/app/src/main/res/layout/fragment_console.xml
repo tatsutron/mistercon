@@ -15,53 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/gray_700"
-                android:padding="@dimen/margin_small">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/games_path_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/games_path"
-                    android:paddingBottom="5dp"
-                    android:textColorHint="@color/gray_500"
-                    app:boxStrokeColor="@color/text_input_layout_stroke_color"
-                    app:boxStrokeWidth="2dp"
-                    app:endIconDrawable="@drawable/ic_sync"
-                    app:endIconMode="custom"
-                    app:endIconTint="@color/white"
-                    app:hintTextColor="@color/gray_500">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/games_path_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textNoSuggestions"
-                        android:maxLines="1"
-                        android:textColor="@color/white"
-                        android:textCursorDrawable="@null" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:padding="@dimen/margin_medium" />
-
-        </LinearLayout>
+            android:padding="@dimen/margin_medium" />
 
         <com.leinardi.android.speeddial.SpeedDialOverlayLayout
             android:id="@+id/speed_dial_overlay"
@@ -80,6 +38,14 @@
             app:sdMainFabClosedSrc="@drawable/ic_plus"
             app:sdMainFabOpenedBackgroundColor="@color/gray_900"
             app:sdOverlayLayout="@id/speed_dial_overlay" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/primary_200"
+            android:visibility="gone" />
 
     </FrameLayout>
 

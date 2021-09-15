@@ -31,7 +31,8 @@
     <color name="gray_700">#616161</color>
     <color name="gray_800">#424242</color>
     <color name="gray_900">#212121</color>
-    <color name="overlay">#1FFFFFFF</color>
+    <color name="overlay">#20000000</color>
+    <color name="mtrl_textinput_default_box_stroke_color">@color/primary_500</color>
     <color name="primary_100">#B4E3FA</color>
     <color name="primary_200">#83D0F6</color>
     <color name="primary_300">#56BEF0</color>

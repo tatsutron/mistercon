@@ -3,4 +3,5 @@
     <id name="copy_qr" />
     <id name="play" />
     <id name="random" />
+    <id name="sync" />
 </resources>

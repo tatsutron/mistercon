@@ -101,9 +101,9 @@ object Persistence {
             ?.clear()
     }
 
-    fun saveGamesPath(console: String, gamesPath: String) {
+    fun saveGamesPath(console: Console, gamesPath: String) {
         database?.consolesQueries
-            ?.save(gamesPath, console)
+            ?.save(gamesPath, console.name)
     }
 
     fun getGamesPath(console: Console): String =
