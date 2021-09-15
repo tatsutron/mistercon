@@ -1,4 +1,4 @@
-package com.tatsutron.remote
+package com.tatsutron.remote.model
 
 enum class Console(
     val displayName: String,

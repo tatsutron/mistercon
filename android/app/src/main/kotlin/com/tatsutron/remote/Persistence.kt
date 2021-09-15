@@ -5,6 +5,7 @@ import android.content.Context
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.tatsutron.remote.data.Games
 import com.tatsutron.remote.model.Config
+import com.tatsutron.remote.model.Console
 import com.tatsutron.remote.model.Game
 import java.io.File
 import java.io.FileOutputStream

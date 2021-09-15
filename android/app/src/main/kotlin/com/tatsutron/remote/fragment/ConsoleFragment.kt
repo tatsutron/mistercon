@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.*
+import com.tatsutron.remote.model.Console
 import com.tatsutron.remote.recycler.GameItem
 import com.tatsutron.remote.recycler.GameListAdapter
 
