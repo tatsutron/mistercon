@@ -2,20 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center_vertical"
     android:background="@color/gray_900"
+    android:clickable="true"
+    android:divider="@drawable/vertical_divider_small"
+    android:gravity="center_vertical"
     android:orientation="vertical"
     android:padding="@dimen/margin_large"
-    android:showDividers="middle"
-    android:divider="@drawable/vertical_divider_small">
+    android:showDividers="middle">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/mistercon"
-        android:textSize="@dimen/text_size_largest"
-        android:textColor="@color/primary_200" />
+        android:textColor="@color/primary_200"
+        android:textSize="@dimen/text_size_largest" />
 
     <View
         android:layout_width="match_parent"
@@ -43,7 +44,7 @@
         android:paddingHorizontal="@dimen/margin_large"
         android:paddingTop="@dimen/margin_small"
         android:text="@string/thank_you"
-        android:textSize="@dimen/text_size_smallest"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_smallest" />
 
 </LinearLayout>
