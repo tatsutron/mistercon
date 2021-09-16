@@ -3,7 +3,7 @@ package com.tatsutron.remote.recycler
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.tatsutron.remote.*
+import com.tatsutron.remote.R
 import com.tatsutron.remote.util.*
 import java.io.File
 
@@ -24,7 +24,7 @@ class ScriptHolder(
                         activity = item.activity,
                         run = {
                             val session = Ssh.session()
-                            Asset.put(item.activity, session, "mbc")
+                            Assets.require(item.activity, session, "mbc")
                             val command = StringBuilder().apply {
                                 append("\"${Constants.MBC_PATH}\"")
                                 append(" ")

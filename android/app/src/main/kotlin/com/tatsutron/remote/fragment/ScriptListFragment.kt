@@ -14,7 +14,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.tatsutron.remote.*
 import com.tatsutron.remote.recycler.ScriptItem
 import com.tatsutron.remote.recycler.ScriptListAdapter
-import com.tatsutron.remote.util.Asset
+import com.tatsutron.remote.util.Assets
 import com.tatsutron.remote.util.Coroutine
 import com.tatsutron.remote.util.Persistence
 import com.tatsutron.remote.util.Ssh
@@ -119,7 +119,7 @@ class ScriptListFragment : Fragment() {
                     activity = requireActivity(),
                     run = {
                         val session = Ssh.session()
-                        Asset.put(requireContext(), session, "mbc")
+                        Assets.require(requireContext(), session, "mbc")
                         val scriptsPath = Persistence.getConfig()?.scriptsPath
                         Ssh.command(session, "ls $scriptsPath")
                             .split("\n")

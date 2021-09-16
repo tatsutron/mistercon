@@ -147,7 +147,7 @@ class ConsoleFragment : Fragment() {
                     activity = requireActivity(),
                     run = {
                         val session = Ssh.session()
-                        Asset.put(requireContext(), session, "list")
+                        Assets.require(requireContext(), session, "list")
                         val gamesPath = Persistence.getGamesPath(console)
                         val extensions = console.formats
                             .map {

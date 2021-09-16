@@ -4,7 +4,7 @@ import android.app.Activity
 import com.tatsutron.remote.data.Regions
 import com.tatsutron.remote.data.Releases
 import com.tatsutron.remote.data.Systems
-import com.tatsutron.remote.util.Asset
+import com.tatsutron.remote.util.Assets
 import com.tatsutron.remote.util.Constants
 import com.tatsutron.remote.util.Coroutine
 import com.tatsutron.remote.util.Ssh
@@ -27,7 +27,7 @@ class Game(
             activity = activity,
             run = {
                 val session = Ssh.session()
-                Asset.put(activity, session, "mbc")
+                Assets.require(activity, session, "mbc")
                 val mbcCommand = console.formats
                     .find {
                         it.extension == File(path).extension

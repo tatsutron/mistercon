@@ -63,7 +63,7 @@ class GameFragment : Fragment() {
                 activity = requireActivity(),
                 run = {
                     val session = Ssh.session()
-                    Asset.put(requireContext(), session, "hash")
+                    Assets.require(requireContext(), session, "hash")
                     val headerSizeInBytes = game.console.formats
                         .find {
                             it.extension == File(game.path).extension

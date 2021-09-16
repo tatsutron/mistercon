@@ -106,7 +106,7 @@ class SystemFragment : Fragment() {
                     activity = requireActivity(),
                     run = {
                         val session = Ssh.session()
-                        Asset.put(requireContext(), session, "mbc")
+                        Assets.require(requireContext(), session, "mbc")
                         Ssh.command(session, "${Constants.MBC_PATH} raw_seq M")
                         session.disconnect()
                     },

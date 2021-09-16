@@ -5,9 +5,9 @@ import com.jcraft.jsch.Session
 import java.io.File
 import java.io.FileOutputStream
 
-object Asset {
+object Assets {
 
-    fun put(context: Context, session: Session, name: String) {
+    fun require(context: Context, session: Session, name: String) {
         Ssh.sftp(session).apply {
             try {
                 mkdir(Constants.MISTERCON_PATH)
