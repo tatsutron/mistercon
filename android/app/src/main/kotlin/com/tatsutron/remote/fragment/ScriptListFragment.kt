@@ -1,27 +1,23 @@
 package com.tatsutron.remote.fragment
 
-import android.content.res.ColorStateList
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.*
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
+import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.*
 import com.tatsutron.remote.recycler.ScriptItem
 import com.tatsutron.remote.recycler.ScriptListAdapter
-import com.tatsutron.remote.util.Assets
-import com.tatsutron.remote.util.Coroutine
-import com.tatsutron.remote.util.Persistence
-import com.tatsutron.remote.util.Ssh
+import com.tatsutron.remote.util.*
 import java.io.File
 
 class ScriptListFragment : Fragment() {
     private lateinit var adapter: ScriptListAdapter
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,10 +45,10 @@ class ScriptListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progressBar = view.findViewById(R.id.progress_bar)
         setToolbar(view)
-        setPathInput(view)
-        setSyncButton(view)
         setRecycler(view)
+        setSpeedDial(view)
         refresh()
     }
 
@@ -63,57 +59,50 @@ class ScriptListFragment : Fragment() {
         }
     }
 
-    private fun setPathInput(view: View) {
-        view.findViewById<TextInputEditText>(R.id.scripts_path_text).apply {
-            setText(Persistence.getConfig()?.scriptsPath)
-            addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
-
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int,
-                ) {
-                    Persistence.saveScriptsPath(s.toString())
-                }
-
-                override fun afterTextChanged(s: Editable?) {}
-            })
+    private fun setRecycler(view: View) {
+        adapter = ScriptListAdapter(
+            context = requireContext(),
+        )
+        view.findViewById<RecyclerView>(R.id.recycler).apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = this@ScriptListFragment.adapter
         }
     }
 
-    private fun setSyncButton(view: View) {
-        var enabled = true
-        view.findViewById<TextInputLayout>(R.id.scripts_path_layout).apply {
-            setEndIconOnClickListener {
-                if (!enabled) {
-                    return@setEndIconOnClickListener
+    private fun setSpeedDial(view: View) {
+        view.findViewById<SpeedDialView>(R.id.speed_dial).apply {
+            mainFab.apply {
+                setOnClickListener {
+                    onSync()
                 }
-                val context = requireContext()
-                val disable = {
-                    enabled = false
-                    setEndIconTintList(
-                        ColorStateList.valueOf(
-                            context.getColor(R.color.gray_700),
-                        ),
-                    )
-                }
-                val enable = {
-                    setEndIconTintList(
-                        ColorStateList.valueOf(
-                            context.getColor(R.color.white),
-                        ),
-                    )
-                    enabled = true
-                }
-                disable()
+                setImageDrawable(
+                    AppCompatResources.getDrawable(context, R.drawable.ic_sync)
+                )
+            }
+        }
+    }
+
+    private fun refresh() {
+        val items = Persistence.getScriptList().map {
+            ScriptItem(
+                activity = requireActivity(),
+                path = it,
+            )
+        }
+        adapter.itemList.clear()
+        adapter.itemList.addAll(items)
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun onSync() {
+        val context = requireContext()
+        Dialog.input(
+            context = context,
+            title = context.getString(R.string.sync),
+            text = Persistence.getConfig()?.scriptsPath ?: "",
+            ok = { _, text ->
+                progressBar.visibility = View.VISIBLE
+                Persistence.saveScriptsPath(text.toString())
                 Persistence.clearScripts()
                 Coroutine.launch(
                     activity = requireActivity(),
@@ -133,35 +122,13 @@ class ScriptListFragment : Fragment() {
                     },
                     success = {
                         refresh()
-                        enable()
+                        progressBar.visibility = View.GONE
                     },
                     failure = {
-                        enable()
+                        progressBar.visibility = View.GONE
                     },
                 )
-            }
-        }
-    }
-
-    private fun setRecycler(view: View) {
-        adapter = ScriptListAdapter(
-            context = requireContext(),
+            },
         )
-        view.findViewById<RecyclerView>(R.id.recycler).apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = this@ScriptListFragment.adapter
-        }
-    }
-
-    private fun refresh() {
-        val items = Persistence.getScriptList().map {
-            ScriptItem(
-                activity = requireActivity(),
-                path = it,
-            )
-        }
-        adapter.itemList.clear()
-        adapter.itemList.addAll(items)
-        adapter.notifyDataSetChanged()
     }
 }
