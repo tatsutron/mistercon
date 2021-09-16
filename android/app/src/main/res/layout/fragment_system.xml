@@ -39,7 +39,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/margin_medium">
+        android:padding="@dimen/margin_small">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,161 +50,49 @@
             android:orientation="vertical"
             android:showDividers="middle">
 
-            <LinearLayout
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/credits_button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
-                android:layout_height="175dp"
-                android:divider="@drawable/horizontal_divider_medium"
-                android:showDividers="middle">
+                android:layout_height="match_parent"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/credits"
+                android:textColor="@color/primary_200"
+                app:strokeColor="@color/primary_200" />
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/credits_button"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:strokeColor="@color/primary_200" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/ic_star"
-                            app:tint="@color/primary_200" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/credits"
-                            android:textColor="@color/primary_200"
-                            android:textSize="@dimen/text_size_large" />
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/reboot_button"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:strokeColor="@color/primary_200" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/ic_reboot"
-                            app:tint="@color/primary_200" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/reboot"
-                            android:textColor="@color/primary_200"
-                            android:textSize="@dimen/text_size_large" />
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/reboot_button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
-                android:layout_height="175dp"
-                android:divider="@drawable/horizontal_divider_medium"
-                android:showDividers="middle">
+                android:layout_height="match_parent"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/reboot"
+                android:textColor="@color/primary_200"
+                app:strokeColor="@color/primary_200" />
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/scripts_button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/scripts"
+                android:textColor="@color/primary_200"
+                app:strokeColor="@color/primary_200" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/scripts_button"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:strokeColor="@color/primary_200" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/ic_script"
-                            app:tint="@color/primary_200" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/scripts"
-                            android:textColor="@color/primary_200"
-                            android:textSize="@dimen/text_size_large" />
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/menu_button"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:strokeColor="@color/primary_200" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/ic_menu"
-                            app:tint="@color/primary_200" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/menu"
-                            android:textColor="@color/primary_200"
-                            android:textSize="@dimen/text_size_large" />
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-
-            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/menu_button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/menu"
+                android:textColor="@color/primary_200"
+                app:strokeColor="@color/primary_200" />
 
         </LinearLayout>
 
