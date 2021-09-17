@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
 import com.tatsutron.remote.R
@@ -64,7 +65,10 @@ class SystemFragment : Fragment() {
     private fun setCreditsButton(view: View) {
         view.findViewById<Button>(R.id.credits_button).apply {
             setOnClickListener {
-                Navigator.show(FragmentMaker.credits())
+                Navigator.show(
+                    activity as AppCompatActivity,
+                    FragmentMaker.credits(),
+                )
             }
         }
     }
@@ -94,7 +98,10 @@ class SystemFragment : Fragment() {
     private fun setScriptsButton(view: View) {
         view.findViewById<Button>(R.id.scripts_button).apply {
             setOnClickListener {
-                Navigator.show(FragmentMaker.scriptList())
+                Navigator.show(
+                    activity as AppCompatActivity,
+                    FragmentMaker.scriptList(),
+                )
             }
         }
     }

@@ -1,8 +1,8 @@
 package com.tatsutron.remote.fragment
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.*
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
@@ -23,7 +23,6 @@ class ConsoleFragment : Fragment() {
     private lateinit var recycler: RecyclerView
     private lateinit var adapter: GameListAdapter
     private lateinit var speedDial: SpeedDialView
-    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,15 +57,12 @@ class ConsoleFragment : Fragment() {
             supportActionBar?.title = console.displayName
         }
         recycler = view.findViewById(R.id.recycler)
-        adapter = GameListAdapter(
-            context = requireContext(),
-        )
+        adapter = GameListAdapter(activity as Activity)
         recycler.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = this@ConsoleFragment.adapter
         }
         speedDial = view.findViewById(R.id.speed_dial)
-        progressBar = view.findViewById(R.id.progress_bar)
         refresh()
     }
 
@@ -142,7 +138,7 @@ class ConsoleFragment : Fragment() {
             text = Persistence.getGamesPath(console),
             ok = { _, text ->
                 Persistence.saveGamesPath(console, text.toString())
-                progressBar.visibility = View.VISIBLE
+                Navigator.showLoadingScreen()
                 Coroutine.launch(
                     activity = requireActivity(),
                     run = {
@@ -191,10 +187,10 @@ class ConsoleFragment : Fragment() {
                     },
                     success = {
                         refresh()
-                        progressBar.visibility = View.GONE
+                        Navigator.hideLoadingScreen()
                     },
                     failure = {
-                        progressBar.visibility = View.GONE
+                        Navigator.hideLoadingScreen()
                     },
                 )
             },
@@ -203,6 +199,7 @@ class ConsoleFragment : Fragment() {
 
     private fun onRandom() {
         Navigator.show(
+            activity as AppCompatActivity,
             FragmentMaker.game(adapter.itemList.random().game.path),
         )
     }

@@ -57,8 +57,7 @@ class GameFragment : Fragment() {
             populate(view)
         }
         if (game.sha1 == null) {
-            view.findViewById<ProgressBar>(R.id.progress_bar)
-                .visibility = View.VISIBLE
+            Navigator.showLoadingScreen()
             Coroutine.launch(
                 activity = requireActivity(),
                 run = {
@@ -85,14 +84,12 @@ class GameFragment : Fragment() {
                     session.disconnect()
                 },
                 success = {
-                    view.findViewById<ProgressBar>(R.id.progress_bar)
-                        .visibility = View.GONE
                     game = Persistence.getGameByPath(game.path)!!
                     refresh()
+                    Navigator.hideLoadingScreen()
                 },
                 failure = {
-                    view.findViewById<ProgressBar>(R.id.progress_bar)
-                        .visibility = View.GONE
+                    Navigator.hideLoadingScreen()
                 }
             )
         } else {
@@ -210,7 +207,10 @@ class GameFragment : Fragment() {
                         .load(Uri.parse(url))
                         .into(this)
                     setOnClickListener {
-                        Navigator.show(FragmentMaker.image(url))
+                        Navigator.show(
+                            activity as AppCompatActivity,
+                            FragmentMaker.image(url),
+                        )
                     }
                 }
                 view.findViewById<LinearLayout>(R.id.front_cover_layout)
@@ -224,7 +224,10 @@ class GameFragment : Fragment() {
                         .load(Uri.parse(url))
                         .into(this)
                     setOnClickListener {
-                        Navigator.show(FragmentMaker.image(url))
+                        Navigator.show(
+                            activity as AppCompatActivity,
+                            FragmentMaker.image(url),
+                        )
                     }
                 }
                 view.findViewById<LinearLayout>(R.id.back_cover_layout)
@@ -238,7 +241,10 @@ class GameFragment : Fragment() {
                         .load(Uri.parse(url))
                         .into(this)
                     setOnClickListener {
-                        Navigator.show(FragmentMaker.image(url))
+                        Navigator.show(
+                            activity as AppCompatActivity,
+                            FragmentMaker.image(url),
+                        )
                     }
                 }
                 view.findViewById<LinearLayout>(R.id.cartridge_layout)

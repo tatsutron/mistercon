@@ -33,7 +33,10 @@ class MainFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.scan -> {
-                Navigator.show(FragmentMaker.scan())
+                Navigator.show(
+                    activity as AppCompatActivity,
+                    FragmentMaker.scan(),
+                )
                 true
             }
             else -> super.onOptionsItemSelected(item)

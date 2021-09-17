@@ -1,13 +1,16 @@
 package com.tatsutron.remote.recycler
 
+import android.app.Activity
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.tatsutron.remote.R
 import com.tatsutron.remote.util.FragmentMaker
 import com.tatsutron.remote.util.Navigator
-import com.tatsutron.remote.R
 
 class GameHolder(
+    private val activity: Activity,
     itemView: View,
 ) : RecyclerView.ViewHolder(itemView) {
 
@@ -21,7 +24,10 @@ class GameHolder(
             0.75f
         }
         itemView.setOnClickListener {
-            Navigator.show(FragmentMaker.game(item.game.path))
+            Navigator.show(
+                activity as AppCompatActivity,
+                FragmentMaker.game(item.game.path),
+            )
         }
     }
 }

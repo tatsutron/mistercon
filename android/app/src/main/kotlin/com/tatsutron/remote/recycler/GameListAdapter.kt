@@ -1,13 +1,13 @@
 package com.tatsutron.remote.recycler
 
-import android.content.Context
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tatsutron.remote.R
 
 class GameListAdapter(
-    private val context: Context,
+    private val activity: Activity,
     val itemList: MutableList<GameItem> = mutableListOf(),
 ) : RecyclerView.Adapter<GameHolder>() {
 
@@ -15,13 +15,13 @@ class GameListAdapter(
         parent: ViewGroup,
         viewType: Int,
     ): GameHolder {
-        val layoutInflater = LayoutInflater.from(context)
+        val layoutInflater = LayoutInflater.from(activity)
         val itemView = layoutInflater.inflate(
             R.layout.item_game,
             parent,
             false, // attachToRoot
         )
-        return GameHolder(itemView = itemView)
+        return GameHolder(activity, itemView)
     }
 
     override fun onBindViewHolder(holder: GameHolder, position: Int) {

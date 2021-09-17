@@ -1,14 +1,14 @@
 package com.tatsutron.remote.recycler
 
-import android.content.Context
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.tatsutron.remote.model.Console
 import com.tatsutron.remote.R
+import com.tatsutron.remote.model.Console
 
 class ConsoleListAdapter(
-    private val context: Context,
+    private val activity: Activity,
 ) : RecyclerView.Adapter<ConsoleHolder>() {
 
     private var itemList = Console.values()
@@ -23,17 +23,17 @@ class ConsoleListAdapter(
         parent: ViewGroup,
         viewType: Int,
     ): ConsoleHolder {
-        val layoutInflater = LayoutInflater.from(context)
+        val layoutInflater = LayoutInflater.from(activity)
         val itemView = layoutInflater.inflate(
             R.layout.item_console,
             parent,
             false, // attachToRoot
         )
-        return ConsoleHolder(itemView = itemView)
+        return ConsoleHolder(activity, itemView)
     }
 
     override fun onBindViewHolder(holder: ConsoleHolder, position: Int) {
-        holder.bind(item = itemList[position])
+        holder.bind(itemList[position])
     }
 
     override fun getItemCount() = itemList.size

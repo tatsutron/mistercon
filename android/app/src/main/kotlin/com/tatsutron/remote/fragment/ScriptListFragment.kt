@@ -2,7 +2,6 @@ package com.tatsutron.remote.fragment
 
 import android.os.Bundle
 import android.view.*
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
@@ -17,7 +16,6 @@ import java.io.File
 
 class ScriptListFragment : Fragment() {
     private lateinit var adapter: ScriptListAdapter
-    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +43,6 @@ class ScriptListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progressBar = view.findViewById(R.id.progress_bar)
         setToolbar(view)
         setRecycler(view)
         setSpeedDial(view)
@@ -101,7 +98,7 @@ class ScriptListFragment : Fragment() {
             title = context.getString(R.string.sync),
             text = Persistence.getConfig()?.scriptsPath ?: "",
             ok = { _, text ->
-                progressBar.visibility = View.VISIBLE
+                Navigator.showLoadingScreen()
                 Persistence.saveScriptsPath(text.toString())
                 Persistence.clearScripts()
                 Coroutine.launch(
@@ -122,10 +119,10 @@ class ScriptListFragment : Fragment() {
                     },
                     success = {
                         refresh()
-                        progressBar.visibility = View.GONE
+                        Navigator.hideLoadingScreen()
                     },
                     failure = {
-                        progressBar.visibility = View.GONE
+                        Navigator.hideLoadingScreen()
                     },
                 )
             },

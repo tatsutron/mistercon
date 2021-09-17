@@ -40,14 +40,6 @@
             app:sdMainFabOpenedBackgroundColor="@color/gray_900"
             app:sdOverlayLayout="@id/speed_dial_overlay" />
 
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/primary_200"
-            android:visibility="gone" />
-
     </FrameLayout>
 
 </LinearLayout>

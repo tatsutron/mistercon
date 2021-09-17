@@ -201,14 +201,6 @@
 
         </ScrollView>
 
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/primary_200"
-            android:visibility="gone" />
-
         <TextView
             android:id="@+id/no_data_text"
             android:layout_width="match_parent"
