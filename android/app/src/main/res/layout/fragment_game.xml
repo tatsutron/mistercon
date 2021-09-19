@@ -36,7 +36,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/publisher"
                     android:textColorHint="@color/primary_200"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    app:hintAnimationEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/publisher_text"
@@ -55,7 +56,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/developer"
                     android:textColorHint="@color/primary_200"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    app:hintAnimationEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/developer_text"
@@ -74,7 +76,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/release_date"
                     android:textColorHint="@color/primary_200"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    app:hintAnimationEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/release_date_text"
@@ -93,7 +96,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/region"
                     android:textColorHint="@color/primary_200"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    app:hintAnimationEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/region_text"
@@ -112,7 +116,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/genre"
                     android:textColorHint="@color/primary_200"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    app:hintAnimationEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/genre_text"
@@ -131,7 +136,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/description"
                     android:textColorHint="@color/primary_200"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    app:hintAnimationEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/description_text"
