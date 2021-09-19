@@ -213,7 +213,7 @@
             android:visibility="gone" />
 
         <com.leinardi.android.speeddial.SpeedDialOverlayLayout
-            android:id="@+id/speed_dial_overlay"
+            android:id="@+id/speed_dial_overlay_game"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/overlay"
@@ -224,12 +224,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:visibility="gone"
             app:sdMainFabClosedBackgroundColor="@color/gray_900"
             app:sdMainFabClosedIconColor="@color/primary_500"
             app:sdMainFabClosedSrc="@drawable/ic_plus"
             app:sdMainFabOpenedBackgroundColor="@color/gray_900"
-            app:sdOverlayLayout="@id/speed_dial_overlay" />
+            app:sdOverlayLayout="@id/speed_dial_overlay_game" />
 
     </FrameLayout>
 
