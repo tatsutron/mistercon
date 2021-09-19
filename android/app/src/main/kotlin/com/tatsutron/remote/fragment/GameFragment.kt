@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -48,56 +48,21 @@ class GameFragment : Fragment() {
         game = Persistence.getGameByPath(
             arguments?.getString(FragmentMaker.KEY_PATH)!!
         )!!
-        (activity as? AppCompatActivity)?.apply {
-            setSupportActionBar(view.findViewById(R.id.game_toolbar))
-            supportActionBar?.title = game.name
-        }
-        val refresh = {
-            setSpeedDial(view)
-            populate(view)
-        }
-        if (game.sha1 == null) {
-            Navigator.showLoadingScreen()
-            Coroutine.launch(
-                activity = requireActivity(),
-                run = {
-                    val session = Ssh.session()
-                    Assets.require(requireContext(), session, "hash")
-                    val headerSizeInBytes = game.console.formats
-                        .find {
-                            it.extension == File(game.path).extension
-                        }
-                        ?.headerSizeInBytes!!
-                    val command = StringBuilder().apply {
-                        append("\"${Constants.HASH_PATH}\"")
-                        append(" ")
-                        append("\"${game.path}\"")
-                        append(" ")
-                        append(headerSizeInBytes.toString())
-                    }.toString()
-                    val output = Ssh.command(session, command)
-                    Persistence.saveGame(
-                        core = game.console.name,
-                        path = game.path,
-                        hash = output.trim(),
-                    )
-                    session.disconnect()
-                },
-                success = {
-                    game = Persistence.getGameByPath(game.path)!!
-                    refresh()
-                    Navigator.hideLoadingScreen()
-                },
-                failure = {
-                    Navigator.hideLoadingScreen()
-                }
-            )
-        } else {
-            refresh()
+        setToolbar()
+        setSpeedDial()
+        if (game.sha1 != null) {
+            populate()
         }
     }
 
-    private fun setSpeedDial(view: View) {
+    private fun setToolbar() {
+        (activity as? AppCompatActivity)?.apply {
+            setSupportActionBar(view?.findViewById(R.id.game_toolbar))
+            supportActionBar?.title = game.name
+        }
+    }
+
+    private fun setSpeedDial() {
         val context = requireContext()
         val string = { id: Int ->
             context.getString(id)
@@ -105,7 +70,8 @@ class GameFragment : Fragment() {
         val color = { id: Int ->
             ResourcesCompat.getColor(resources, id, context.theme)
         }
-        view.findViewById<SpeedDialView>(R.id.speed_dial).apply {
+        view?.findViewById<SpeedDialView>(R.id.speed_dial)?.apply {
+            clearActionItems()
             addActionItem(
                 SpeedDialActionItem.Builder(R.id.play, R.drawable.ic_play)
                     .setLabel(string(R.string.play))
@@ -116,30 +82,40 @@ class GameFragment : Fragment() {
                     .create()
             )
             addActionItem(
-                SpeedDialActionItem.Builder(R.id.copy_qr, R.drawable.ic_copy)
-                    .setLabel(string(R.string.copy_qr_data))
+                SpeedDialActionItem.Builder(R.id.sync, R.drawable.ic_sync)
+                    .setLabel(string(R.string.sync))
                     .setLabelBackgroundColor(color(R.color.gray_900))
                     .setLabelColor(color(R.color.primary_500))
                     .setFabBackgroundColor(color(R.color.gray_900))
                     .setFabImageTintColor(color(R.color.primary_500))
                     .create()
             )
+            if (game.sha1 != null) {
+                addActionItem(
+                    SpeedDialActionItem.Builder(R.id.copy_qr, R.drawable.ic_copy)
+                        .setLabel(string(R.string.copy_qr_data))
+                        .setLabelBackgroundColor(color(R.color.gray_900))
+                        .setLabelColor(color(R.color.primary_500))
+                        .setFabBackgroundColor(color(R.color.gray_900))
+                        .setFabImageTintColor(color(R.color.primary_500))
+                        .create()
+                )
+            }
             setOnActionSelectedListener(
                 SpeedDialView.OnActionSelectedListener { actionItem ->
                     when (actionItem.id) {
                         R.id.copy_qr -> {
-                            val clipboard = getSystemService(context, ClipboardManager::class.java)
-                            clipboard?.setPrimaryClip(ClipData.newPlainText("QR", game.sha1))
-                            Toast.makeText(
-                                requireActivity(),
-                                "Copied QR Data to Clipboard",
-                                Toast.LENGTH_SHORT,
-                            ).show()
+                            onCopyQr()
                             close()
                             return@OnActionSelectedListener true
                         }
                         R.id.play -> {
-                            game.play(requireActivity())
+                            onPlay()
+                            close()
+                            return@OnActionSelectedListener true
+                        }
+                        R.id.sync -> {
+                            onSync()
                             close()
                             return@OnActionSelectedListener true
                         }
@@ -147,62 +123,61 @@ class GameFragment : Fragment() {
                     false
                 }
             )
-            visibility = View.VISIBLE
         }
     }
 
-    private fun populate(view: View) {
+    private fun populate() {
         game.release?.releasePublisher?.let {
             if (it.isNotBlank()) {
-                view.findViewById<TextInputEditText>(R.id.publisher_text)
-                    .setText(it)
-                view.findViewById<TextInputLayout>(R.id.publisher_layout)
-                    .visibility = View.VISIBLE
+                view?.findViewById<TextInputEditText>(R.id.publisher_text)
+                    ?.setText(it)
+                view?.findViewById<TextInputLayout>(R.id.publisher_layout)
+                    ?.visibility = View.VISIBLE
             }
         }
         game.release?.releaseDeveloper?.let {
             if (it.isNotBlank()) {
-                view.findViewById<TextInputEditText>(R.id.developer_text)
-                    .setText(it)
-                view.findViewById<TextInputLayout>(R.id.developer_layout)
-                    .visibility = View.VISIBLE
+                view?.findViewById<TextInputEditText>(R.id.developer_text)
+                    ?.setText(it)
+                view?.findViewById<TextInputLayout>(R.id.developer_layout)
+                    ?.visibility = View.VISIBLE
             }
         }
         game.release?.releaseDate?.let {
             if (it.isNotBlank()) {
-                view.findViewById<TextInputEditText>(R.id.release_date_text)
-                    .setText(it)
-                view.findViewById<TextInputLayout>(R.id.release_date_layout)
-                    .visibility = View.VISIBLE
+                view?.findViewById<TextInputEditText>(R.id.release_date_text)
+                    ?.setText(it)
+                view?.findViewById<TextInputLayout>(R.id.release_date_layout)
+                    ?.visibility = View.VISIBLE
             }
         }
         game.region?.regionName?.let {
             if (it.isNotBlank()) {
-                view.findViewById<TextInputEditText>(R.id.region_text)
-                    .setText(it)
-                view.findViewById<TextInputLayout>(R.id.region_layout)
-                    .visibility = View.VISIBLE
+                view?.findViewById<TextInputEditText>(R.id.region_text)
+                    ?.setText(it)
+                view?.findViewById<TextInputLayout>(R.id.region_layout)
+                    ?.visibility = View.VISIBLE
             }
         }
         game.release?.releaseGenre?.let {
             if (it.isNotBlank()) {
-                view.findViewById<TextInputEditText>(R.id.genre_text)
-                    .setText(it)
-                view.findViewById<TextInputLayout>(R.id.genre_layout)
-                    .visibility = View.VISIBLE
+                view?.findViewById<TextInputEditText>(R.id.genre_text)
+                    ?.setText(it)
+                view?.findViewById<TextInputLayout>(R.id.genre_layout)
+                    ?.visibility = View.VISIBLE
             }
         }
         game.release?.releaseDescription?.let {
             if (it.isNotBlank()) {
-                view.findViewById<TextInputEditText>(R.id.description_text)
-                    .setText(it)
-                view.findViewById<TextInputLayout>(R.id.description_layout)
-                    .visibility = View.VISIBLE
+                view?.findViewById<TextInputEditText>(R.id.description_text)
+                    ?.setText(it)
+                view?.findViewById<TextInputLayout>(R.id.description_layout)
+                    ?.visibility = View.VISIBLE
             }
         }
         game.release?.releaseCoverFront?.let { url ->
             if (url.isNotBlank()) {
-                view.findViewById<ImageView>(R.id.front_cover_image).apply {
+                view?.findViewById<ImageView>(R.id.front_cover_image)?.apply {
                     Glide.with(this@GameFragment)
                         .load(Uri.parse(url))
                         .into(this)
@@ -213,13 +188,13 @@ class GameFragment : Fragment() {
                         )
                     }
                 }
-                view.findViewById<LinearLayout>(R.id.front_cover_layout)
-                    .visibility = View.VISIBLE
+                view?.findViewById<LinearLayout>(R.id.front_cover_layout)
+                    ?.visibility = View.VISIBLE
             }
         }
         game.release?.releaseCoverBack?.let { url ->
             if (url.isNotBlank()) {
-                view.findViewById<ImageView>(R.id.back_cover_image).apply {
+                view?.findViewById<ImageView>(R.id.back_cover_image)?.apply {
                     Glide.with(this@GameFragment)
                         .load(Uri.parse(url))
                         .into(this)
@@ -230,13 +205,13 @@ class GameFragment : Fragment() {
                         )
                     }
                 }
-                view.findViewById<LinearLayout>(R.id.back_cover_layout)
-                    .visibility = View.VISIBLE
+                view?.findViewById<LinearLayout>(R.id.back_cover_layout)
+                    ?.visibility = View.VISIBLE
             }
         }
         game.release?.releaseCoverCart?.let { url ->
             if (url.isNotBlank()) {
-                view.findViewById<ImageView>(R.id.cartridge_image).apply {
+                view?.findViewById<ImageView>(R.id.cartridge_image)?.apply {
                     Glide.with(this@GameFragment)
                         .load(Uri.parse(url))
                         .into(this)
@@ -247,8 +222,8 @@ class GameFragment : Fragment() {
                         )
                     }
                 }
-                view.findViewById<LinearLayout>(R.id.cartridge_layout)
-                    .visibility = View.VISIBLE
+                view?.findViewById<LinearLayout>(R.id.cartridge_layout)
+                    ?.visibility = View.VISIBLE
             }
         }
         if (
@@ -266,9 +241,9 @@ class GameFragment : Fragment() {
                 it == true
             }
         ) {
-            view.findViewById<ScrollView>(R.id.scroll)
-                .visibility = View.GONE
-            view.findViewById<TextView>(R.id.no_data_text).apply {
+            view?.findViewById<ScrollView>(R.id.scroll)
+                ?.visibility = View.GONE
+            view?.findViewById<TextView>(R.id.no_data_text)?.apply {
                 text = context.getString(
                     R.string.no_data_was_found_for_game,
                     game.name,
@@ -276,5 +251,59 @@ class GameFragment : Fragment() {
                 visibility = View.VISIBLE
             }
         }
+    }
+
+    private fun onPlay() {
+        game.play(requireActivity())
+    }
+
+    private fun onSync() {
+        Navigator.showLoadingScreen()
+        Coroutine.launch(
+            activity = requireActivity(),
+            run = {
+                val session = Ssh.session()
+                Assets.require(requireContext(), session, "hash")
+                val headerSizeInBytes = game.console.formats
+                    .find {
+                        it.extension == File(game.path).extension
+                    }
+                    ?.headerSizeInBytes!!
+                val command = StringBuilder().apply {
+                    append("\"${Constants.HASH_PATH}\"")
+                    append(" ")
+                    append("\"${game.path}\"")
+                    append(" ")
+                    append(headerSizeInBytes.toString())
+                }.toString()
+                val output = Ssh.command(session, command)
+                Persistence.saveGame(
+                    core = game.console.name,
+                    path = game.path,
+                    hash = output.trim(),
+                )
+                session.disconnect()
+            },
+            success = {
+                game = Persistence.getGameByPath(game.path)!!
+                setSpeedDial()
+                populate()
+                Navigator.hideLoadingScreen()
+            },
+            failure = {
+                Navigator.hideLoadingScreen()
+            }
+        )
+    }
+
+    private fun onCopyQr() {
+        val context = requireContext()
+        val clipboard = ContextCompat.getSystemService(context, ClipboardManager::class.java)
+        clipboard?.setPrimaryClip(ClipData.newPlainText("QR", game.sha1))
+        Toast.makeText(
+            requireActivity(),
+            "Copied QR Data to Clipboard",
+            Toast.LENGTH_SHORT,
+        ).show()
     }
 }
