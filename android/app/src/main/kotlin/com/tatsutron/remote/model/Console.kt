@@ -203,6 +203,10 @@ enum class Console(
                 extension = "sfc",
                 mbcCommand = "SNES",
             ),
+            Format(
+                extension = "smc",
+                mbcCommand = "SNES",
+            ),
         ),
         gamesFolderDefault = "SNES",
     ),
