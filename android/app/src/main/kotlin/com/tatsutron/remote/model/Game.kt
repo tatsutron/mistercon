@@ -22,7 +22,11 @@ class Game(
     val name: String
         get() = File(path).nameWithoutExtension
 
-    fun play(activity: Activity) {
+    fun play(
+        activity: Activity,
+        success: (() -> Unit)? = null,
+        failure: (() -> Unit)? = null,
+    ) {
         Coroutine.launch(
             activity = activity,
             run = {
@@ -45,6 +49,8 @@ class Game(
                 Ssh.command(session, command)
                 session.disconnect()
             },
+            success = success,
+            failure = failure,
         )
     }
 }

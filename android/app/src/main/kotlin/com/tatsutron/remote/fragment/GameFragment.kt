@@ -48,17 +48,13 @@ class GameFragment : Fragment() {
         game = Persistence.getGameByPath(
             arguments?.getString(FragmentMaker.KEY_PATH)!!
         )!!
-        setToolbar()
-        setSpeedDial()
-        if (game.sha1 != null) {
-            populate()
-        }
-    }
-
-    private fun setToolbar() {
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(view?.findViewById(R.id.game_toolbar))
             supportActionBar?.title = game.name
+        }
+        setSpeedDial()
+        if (game.sha1 != null) {
+            populate()
         }
     }
 
@@ -254,7 +250,16 @@ class GameFragment : Fragment() {
     }
 
     private fun onPlay() {
-        game.play(requireActivity())
+        Navigator.showLoadingScreen()
+        game.play(
+            requireActivity(),
+            success = {
+                Navigator.hideLoadingScreen()
+            },
+            failure = {
+                Navigator.hideLoadingScreen()
+            },
+        )
     }
 
     private fun onSync() {
