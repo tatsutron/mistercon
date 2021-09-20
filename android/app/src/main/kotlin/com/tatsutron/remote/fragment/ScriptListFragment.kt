@@ -1,5 +1,6 @@
 package com.tatsutron.remote.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -79,6 +80,7 @@ class ScriptListFragment : Fragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun refresh() {
         val items = Persistence.getScriptList().map {
             ScriptItem(

@@ -1,9 +1,11 @@
 package com.tatsutron.remote.fragment
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -23,6 +25,7 @@ class ConsoleFragment : Fragment() {
     private lateinit var recycler: RecyclerView
     private lateinit var adapter: GameListAdapter
     private lateinit var speedDial: SpeedDialView
+    private var searchTerm = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +36,17 @@ class ConsoleFragment : Fragment() {
         menu.clear()
         inflater.inflate(R.menu.menu_console, menu)
         super.onCreateOptionsMenu(menu, inflater)
+        (menu.getItem(0).actionView as? SearchView)?.apply {
+            maxWidth = Integer.MAX_VALUE
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String) = true
+                override fun onQueryTextChange(newText: String): Boolean {
+                    searchTerm = newText
+                    setRecycler()
+                    return true
+                }
+            })
+        }
     }
 
     override fun onCreateView(
@@ -63,24 +77,29 @@ class ConsoleFragment : Fragment() {
             adapter = this@ConsoleFragment.adapter
         }
         speedDial = view.findViewById(R.id.speed_dial)
-        refresh()
+        setRecycler()
+        setSpeedDial()
     }
 
-    private fun refresh() {
-        refreshRecycler()
-        refreshSpeedDial()
-    }
-
-    private fun refreshRecycler() {
+    @SuppressLint("NotifyDataSetChanged")
+    private fun setRecycler() {
         val items = Persistence.getGamesByConsole(console.name).map {
             GameItem(it)
         }
         adapter.itemList.clear()
-        adapter.itemList.addAll(items)
+        if (searchTerm.isBlank()) {
+            adapter.itemList.addAll(items)
+        } else {
+            items.forEach {
+                if (it.game.name.contains(searchTerm, ignoreCase = true)) {
+                    adapter.itemList.add(it)
+                }
+            }
+        }
         adapter.notifyDataSetChanged()
     }
 
-    private fun refreshSpeedDial() {
+    private fun setSpeedDial() {
         val context = requireContext()
         val string = { id: Int ->
             context.getString(id)
@@ -186,7 +205,8 @@ class ConsoleFragment : Fragment() {
                         session.disconnect()
                     },
                     success = {
-                        refresh()
+                        setRecycler()
+                        setSpeedDial()
                         Navigator.hideLoadingScreen()
                     },
                     failure = {
