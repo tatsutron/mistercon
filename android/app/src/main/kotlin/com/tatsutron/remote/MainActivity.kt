@@ -5,6 +5,7 @@ import android.view.View
 import android.view.animation.AlphaAnimation
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.tatsutron.remote.fragment.ConsoleFragment
 import com.tatsutron.remote.fragment.MainFragment
 import com.tatsutron.remote.util.Navigator
 import com.tatsutron.remote.util.Persistence
@@ -37,6 +38,9 @@ class MainActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(R.id.root, MainFragment())
                 .commit()
+        }
+        supportFragmentManager.addOnBackStackChangedListener {
+            (supportFragmentManager.fragments.last() as? ConsoleFragment)?.onBackStackChanged()
         }
     }
 

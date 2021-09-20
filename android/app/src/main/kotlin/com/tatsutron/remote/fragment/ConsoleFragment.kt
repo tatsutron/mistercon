@@ -27,6 +27,10 @@ class ConsoleFragment : Fragment() {
     private lateinit var speedDial: SpeedDialView
     private var searchTerm = ""
 
+    fun onBackStackChanged() {
+        setRecycler()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)

@@ -28,7 +28,7 @@ class ImageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val url = arguments?.getString(FragmentMaker.KEY_URL)
-        Glide.with(requireContext())
+        Glide.with(activity?.baseContext!!)
             .asBitmap()
             .load(url)
             .into(object : CustomTarget<Bitmap?>() {

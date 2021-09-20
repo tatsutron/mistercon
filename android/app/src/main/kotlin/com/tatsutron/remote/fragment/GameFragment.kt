@@ -178,7 +178,7 @@ class GameFragment : Fragment() {
         game.release?.releaseCoverFront?.let { url ->
             if (url.isNotBlank()) {
                 view?.findViewById<ImageView>(R.id.front_cover_image)?.apply {
-                    Glide.with(this@GameFragment)
+                    Glide.with(activity?.baseContext!!)
                         .load(Uri.parse(url))
                         .into(this)
                     setOnClickListener {
@@ -195,7 +195,7 @@ class GameFragment : Fragment() {
         game.release?.releaseCoverBack?.let { url ->
             if (url.isNotBlank()) {
                 view?.findViewById<ImageView>(R.id.back_cover_image)?.apply {
-                    Glide.with(this@GameFragment)
+                    Glide.with(activity?.baseContext!!)
                         .load(Uri.parse(url))
                         .into(this)
                     setOnClickListener {
@@ -212,7 +212,7 @@ class GameFragment : Fragment() {
         game.release?.releaseCoverCart?.let { url ->
             if (url.isNotBlank()) {
                 view?.findViewById<ImageView>(R.id.cartridge_image)?.apply {
-                    Glide.with(this@GameFragment)
+                    Glide.with(activity?.baseContext!!)
                         .load(Uri.parse(url))
                         .into(this)
                     setOnClickListener {
