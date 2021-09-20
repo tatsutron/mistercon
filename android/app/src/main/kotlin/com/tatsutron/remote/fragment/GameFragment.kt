@@ -49,7 +49,7 @@ class GameFragment : Fragment() {
             arguments?.getString(FragmentMaker.KEY_PATH)!!
         )!!
         (activity as? AppCompatActivity)?.apply {
-            setSupportActionBar(view?.findViewById(R.id.game_toolbar))
+            setSupportActionBar(view.findViewById(R.id.game_toolbar))
             supportActionBar?.title = game.name
         }
         setSpeedDial()
@@ -291,8 +291,10 @@ class GameFragment : Fragment() {
             },
             success = {
                 game = Persistence.getGameByPath(game.path)!!
-                setSpeedDial()
-                populate()
+                if (context != null) {
+                    setSpeedDial()
+                    populate()
+                }
                 Navigator.hideLoadingScreen()
             },
             failure = {
