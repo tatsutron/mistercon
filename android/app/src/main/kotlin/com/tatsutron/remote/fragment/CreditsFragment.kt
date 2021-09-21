@@ -28,15 +28,20 @@ class CreditsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<LinearLayout>(R.id.credits_container).apply {
             listOf(
+                "Arufonsu",
                 "DoOoM",
                 "Edward Mallett",
+                "GeorgZ",
+                "Greg Dyke",
                 "Jeremy Hopkins",
                 "KremlingKuthroat19",
                 "Louis Martinez",
+                "Markus Kraus",
                 "Mist Sonata",
                 "peanutmans",
                 "Sergio L. Serrano",
                 "Tim Lehner",
+                "Tom B",
                 "Weasel5053",
             ).forEach {
                 val item = layoutInflater.inflate(R.layout.item_credit, null)
