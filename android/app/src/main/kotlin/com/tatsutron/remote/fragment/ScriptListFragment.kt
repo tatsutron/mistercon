@@ -120,9 +120,7 @@ class ScriptListFragment : Fragment() {
                         session.disconnect()
                     },
                     success = {
-                        if (this@ScriptListFragment.context != null) {
-                            refresh()
-                        }
+                        refresh()
                         Navigator.hideLoadingScreen()
                     },
                     failure = {

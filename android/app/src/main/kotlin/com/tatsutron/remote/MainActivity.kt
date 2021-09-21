@@ -20,12 +20,15 @@ class MainActivity : AppCompatActivity() {
         duration = 500
     }
 
-    override fun onBackPressed() =
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack()
-        } else {
-            super.onBackPressed()
+    override fun onBackPressed() {
+        if (loadingScreen.visibility != View.VISIBLE) {
+            if (supportFragmentManager.backStackEntryCount > 0) {
+                supportFragmentManager.popBackStack()
+            } else {
+                super.onBackPressed()
+            }
         }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

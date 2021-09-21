@@ -209,10 +209,8 @@ class ConsoleFragment : Fragment() {
                         session.disconnect()
                     },
                     success = {
-                        if (this@ConsoleFragment.context != null) {
-                            setRecycler()
-                            setSpeedDial()
-                        }
+                        setRecycler()
+                        setSpeedDial()
                         Navigator.hideLoadingScreen()
                     },
                     failure = {

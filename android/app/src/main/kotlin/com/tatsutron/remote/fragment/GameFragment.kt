@@ -291,10 +291,8 @@ class GameFragment : Fragment() {
             },
             success = {
                 game = Persistence.getGameByPath(game.path)!!
-                if (context != null) {
-                    setSpeedDial()
-                    populate()
-                }
+                setSpeedDial()
+                populate()
                 Navigator.hideLoadingScreen()
             },
             failure = {

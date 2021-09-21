@@ -24,7 +24,11 @@ object Navigator {
             .commit()
     }
 
-    fun showLoadingScreen() = showLoadingScreen.invoke()
+    fun showLoadingScreen() {
+        showLoadingScreen.invoke()
+    }
 
-    fun hideLoadingScreen() = hideLoadingScreen.invoke()
+    fun hideLoadingScreen() {
+        hideLoadingScreen.invoke()
+    }
 }
