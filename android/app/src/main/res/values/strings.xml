@@ -14,7 +14,7 @@
     <string name="games">Games</string>
     <string name="games_path">Games Path</string>
     <string name="genre">Genre</string>
-    <string name="host">Host</string>
+    <string name="hostname_or_ip_address">Hostname or IP Address</string>
     <string name="menu">Menu</string>
     <string name="mistercon">mistercon</string>
     <string name="no_data_was_found_for_game">No data found for %s.</string>

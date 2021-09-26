@@ -34,7 +34,7 @@ class SystemFragment : Fragment() {
     }
 
     private fun setHost(view: View) {
-        view.findViewById<TextInputEditText>(R.id.host_text).apply {
+        view.findViewById<TextInputEditText>(R.id.host_or_ip_text).apply {
             setText(Persistence.getConfig()?.host)
             text?.let {
                 setSelection(it.length)
