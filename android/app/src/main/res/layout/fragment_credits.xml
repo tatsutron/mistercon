@@ -60,6 +60,14 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/version_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|end"
+        android:padding="@dimen/margin_small"
+        android:textColor="@color/primary_200" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"

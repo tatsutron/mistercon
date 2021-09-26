@@ -5,8 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.tatsutron.remote.R
+
+
+
 
 class CreditsFragment : Fragment() {
 
@@ -27,7 +31,7 @@ class CreditsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<VerticalMarqueeTextView>(R.id.credits_scroll).apply {
             text = mutableListOf<String>().apply {
-                repeat(99) {
+                repeat(8) {
                     addAll(
                         listOf(
                             "Arufonsu",
@@ -49,6 +53,11 @@ class CreditsFragment : Fragment() {
                     )
                 }
             }.joinToString("\n")
+        }
+        view.findViewById<TextView>(R.id.version_name).apply {
+            text = context.packageManager
+                .getPackageInfo(context.packageName, 0)
+                .versionName
         }
     }
 }
