@@ -9,9 +9,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.tatsutron.remote.R
 
-
-
-
 class CreditsFragment : Fragment() {
 
     override fun onCreateView(
