@@ -1,11 +1,10 @@
 package com.tatsutron.remote.fragment
 
+import android.lib.widget.verticalmarqueetextview.VerticalMarqueeTextView
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.tatsutron.remote.R
 
@@ -26,28 +25,30 @@ class CreditsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<LinearLayout>(R.id.credits_container).apply {
-            listOf(
-                "Arufonsu",
-                "DoOoM",
-                "Edward Mallett",
-                "GeorgZ",
-                "Greg Dyke",
-                "Jeremy Hopkins",
-                "KremlingKuthroat19",
-                "Louis Martinez",
-                "Markus Kraus",
-                "Mist Sonata",
-                "peanutmans",
-                "Sergio L. Serrano",
-                "Tim Lehner",
-                "Tom B",
-                "Weasel5053",
-            ).forEach {
-                val item = layoutInflater.inflate(R.layout.item_credit, null)
-                item.findViewById<TextView>(R.id.label).text = it
-                addView(item)
-            }
+        view.findViewById<VerticalMarqueeTextView>(R.id.credits_scroll).apply {
+            text = mutableListOf<String>().apply {
+                repeat(99) {
+                    addAll(
+                        listOf(
+                            "Arufonsu",
+                            "DoOoM",
+                            "Edward Mallett",
+                            "GeorgZ",
+                            "Greg Dyke",
+                            "Jeremy Hopkins",
+                            "KremlingKuthroat19",
+                            "Louis Martinez",
+                            "Markus Kraus",
+                            "Mist Sonata",
+                            "peanutmans",
+                            "Sergio L. Serrano",
+                            "Tim Lehner",
+                            "Tom B",
+                            "Weasel5053",
+                        )
+                    )
+                }
+            }.joinToString("\n")
         }
     }
 }
