@@ -9,7 +9,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        style="@style/Toolbar" />
+        style="@style/Toolbar"
+        app:navigationIcon="@drawable/ic_back" />
 
     <FrameLayout
         android:layout_width="match_parent"

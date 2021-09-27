@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,8 +52,12 @@ class ScriptListFragment : Fragment() {
     }
 
     private fun setToolbar(view: View) {
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as? AppCompatActivity)?.apply {
-            setSupportActionBar(view.findViewById(R.id.toolbar))
+            setSupportActionBar(toolbar)
+            toolbar.setNavigationOnClickListener {
+                onBackPressed()
+            }
             supportActionBar?.title = context?.getString(R.string.scripts)
         }
     }

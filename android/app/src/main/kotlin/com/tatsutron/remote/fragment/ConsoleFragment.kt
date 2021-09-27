@@ -72,6 +72,9 @@ class ConsoleFragment : Fragment() {
         toolbar = view.findViewById(R.id.toolbar)
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(toolbar)
+            toolbar.setNavigationOnClickListener {
+                onBackPressed()
+            }
             supportActionBar?.title = console.displayName
         }
         recycler = view.findViewById(R.id.recycler)

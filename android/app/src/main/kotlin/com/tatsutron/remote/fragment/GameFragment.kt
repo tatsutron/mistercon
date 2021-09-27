@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -48,8 +49,12 @@ class GameFragment : Fragment() {
         game = Persistence.getGameByPath(
             arguments?.getString(FragmentMaker.KEY_PATH)!!
         )!!
+        val toolbar = view.findViewById<Toolbar>(R.id.game_toolbar)
         (activity as? AppCompatActivity)?.apply {
-            setSupportActionBar(view.findViewById(R.id.game_toolbar))
+            setSupportActionBar(toolbar)
+            toolbar.setNavigationOnClickListener {
+                onBackPressed()
+            }
             supportActionBar?.title = game.name
         }
         setSpeedDial()

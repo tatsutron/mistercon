@@ -10,7 +10,8 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/Toolbar"
-        app:collapseIcon="@drawable/ic_back" />
+        app:collapseIcon="@drawable/ic_back"
+        app:navigationIcon="@drawable/ic_back" />
 
     <FrameLayout
         android:layout_width="match_parent"
