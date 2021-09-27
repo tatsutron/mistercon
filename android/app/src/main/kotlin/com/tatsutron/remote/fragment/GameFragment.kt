@@ -58,7 +58,9 @@ class GameFragment : Fragment() {
             supportActionBar?.title = game.name
         }
         setSpeedDial()
-        if (game.sha1 != null) {
+        if (game.sha1 == null) {
+            onSync()
+        } else {
             populate()
         }
     }
