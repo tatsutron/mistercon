@@ -56,7 +56,7 @@ enum class Console(
             Format(
                 extension = "fds",
                 headerSizeInBytes = 16,
-                mbcCommand = "NES",
+                mbcCommand = "NES.FDS",
             ),
         ),
         gamesFolderDefault = "NES",
