@@ -218,20 +218,16 @@ enum class Console(
         gamesFolderDefault = "TGFX16",
     ),
 
-//    TURBO_GRAFX_CD(
-//        displayName = "TurboGrafx-CD",
-//        formats = listOf(
-//            Format(
-//                extension = "chd",
-//                mbcCommand = "TG16FX-CD",
-//            ),
-//            Format(
-//                extension = "cue",
-//                mbcCommand = "TG16FX-CD.CUE",
-//            ),
-//        ),
-//        gamesFolderDefault = "TGFX16-CD",
-//    ),
+    TURBO_GRAFX_CD(
+        displayName = "TurboGrafx-CD",
+        formats = listOf(
+            Format(
+                extension = "chd",
+                mbcCommand = "TGFX16-CD",
+            ),
+        ),
+        gamesFolderDefault = "TGFX16-CD",
+    ),
 
     VECTREX(
         displayName = "Vectrex",
