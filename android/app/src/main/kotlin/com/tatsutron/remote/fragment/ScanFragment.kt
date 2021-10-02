@@ -13,8 +13,11 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.tatsutron.remote.*
+import com.tatsutron.remote.MainActivity
+import com.tatsutron.remote.Permissions
+import com.tatsutron.remote.R
 import com.tatsutron.remote.util.Dialog
+import com.tatsutron.remote.util.Navigator
 import com.tatsutron.remote.util.Persistence
 import kotlinx.android.synthetic.main.fragment_scan.*
 import java.util.concurrent.ExecutorService
@@ -131,18 +134,17 @@ class ScanFragment : Fragment() {
     private fun handleResult(data: String) {
         Persistence.getGameBySha1(data)
             ?.let { game ->
-                val context = requireContext()
-                Dialog.confirm(
-                    context = context,
-                    message = context.getString(
-                        R.string.confirm_play_game,
-                        game.name,
-                    ),
-                    cancel = {
-                        processingBarcode = false
+                Navigator.showLoadingScreen()
+                game.play(
+                    requireActivity(),
+                    success = {
+                        Navigator.hideLoadingScreen()
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            (activity as? MainActivity)?.onBackPressed()
+                        }, 100)
                     },
-                    ok = {
-                        game.play(requireActivity())
+                    failure = {
+                        Navigator.hideLoadingScreen()
                         Handler(Looper.getMainLooper()).postDelayed({
                             (activity as? MainActivity)?.onBackPressed()
                         }, 100)
