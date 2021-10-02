@@ -9,7 +9,10 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/game_toolbar"
         style="@style/Toolbar"
-        app:navigationIcon="@drawable/ic_back" />
+        app:navigationIcon="@drawable/ic_back"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp" />
 
     <FrameLayout
         android:layout_width="match_parent"
