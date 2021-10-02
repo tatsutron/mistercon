@@ -6,16 +6,16 @@ enum class Console(
     val gamesFolderDefault: String,
 ) {
 
-//    BALLY_ASTROCADE(
-//        displayName = "Bally Astrocade",
-//        formats = listOf(
-//            Format(
-//                extension = "bin",
-//                mbcCommand = "ASTROCADE",
-//            ),
-//        ),
-//        gamesFolderDefault = "Astrocade",
-//    ),
+    BALLY_ASTROCADE(
+        displayName = "Bally Astrocade",
+        formats = listOf(
+            Format(
+                extension = "bin",
+                mbcCommand = "ASTROCADE",
+            ),
+        ),
+        gamesFolderDefault = "Astrocade",
+    ),
 
     ATARI_2600(
         displayName = "Atari 2600",
