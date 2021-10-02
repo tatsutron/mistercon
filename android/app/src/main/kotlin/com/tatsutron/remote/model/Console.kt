@@ -129,20 +129,16 @@ enum class Console(
         gamesFolderDefault = "Odyssey2",
     ),
 
-//    SEGA_CD(
-//        displayName = "Sega CD",
-//        formats = listOf(
-//            Format(
-//                extension = "chd",
-//                mbcCommand = "MEGACD",
-//            ),
-//            Format(
-//                extension = "cue",
-//                mbcCommand = "MEGACD.CUE",
-//            ),
-//        ),
-//        gamesFolderDefault = "MegaCD",
-//    ),
+    SEGA_CD(
+        displayName = "Sega CD",
+        formats = listOf(
+            Format(
+                extension = "chd",
+                mbcCommand = "MEGACD",
+            ),
+        ),
+        gamesFolderDefault = "MegaCD",
+    ),
 
     SEGA_GENESIS(
         displayName = "Sega Genesis",
