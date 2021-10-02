@@ -86,6 +86,9 @@ class ConsoleFragment : Fragment() {
         speedDial = view.findViewById(R.id.speed_dial)
         setRecycler()
         setSpeedDial()
+        if (Persistence.getGamesByConsole(console.name).isEmpty()) {
+            onSync()
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
