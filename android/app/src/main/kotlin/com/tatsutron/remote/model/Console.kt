@@ -119,6 +119,17 @@ enum class Console(
         gamesFolderDefault = "Gameboy",
     ),
 
+    INTELLIVISION(
+        displayName = "Intellivision",
+        formats = listOf(
+            Format(
+                extension = "bin",
+                mbcCommand = "INTELLIVISION",
+            ),
+        ),
+        gamesFolderDefault = "Intellivision",
+    ),
+
     NEO_GEO(
         displayName = "Neo Geo",
         formats = listOf(
@@ -251,6 +262,17 @@ enum class Console(
             ),
         ),
         gamesFolderDefault = "TGFX16-CD",
+    ),
+
+    VC4000(
+        displayName = "VC4000",
+        formats = listOf(
+            Format(
+                extension = "bin",
+                mbcCommand = "VC4000",
+            ),
+        ),
+        gamesFolderDefault = "VC4000",
     ),
 
     VECTREX(
