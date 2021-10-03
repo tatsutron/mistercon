@@ -39,6 +39,30 @@ enum class Console(
         gamesFolderDefault = "Atari5200",
     ),
 
+    ATARI_7800(
+        displayName = "Atari 7800",
+        formats = listOf(
+            Format(
+                extension = "a78",
+                headerSizeInBytes = 128,
+                mbcCommand = "ATARI7800",
+            ),
+        ),
+        gamesFolderDefault = "Atari7800",
+    ),
+
+    ATARI_LYNX(
+        displayName = "Atari Lynx",
+        formats = listOf(
+            Format(
+                extension = "lnx",
+                headerSizeInBytes = 64,
+                mbcCommand = "ATARILYNX",
+            ),
+        ),
+        gamesFolderDefault = "AtariLynx",
+    ),
+
     COLECOVISION(
         displayName = "ColecoVision",
         formats = listOf(
@@ -242,5 +266,27 @@ enum class Console(
             ),
         ),
         gamesFolderDefault = "Vectrex",
+    ),
+
+    WONDERSWAN(
+        displayName = "WonderSwan",
+        formats = listOf(
+            Format(
+                extension = "ws",
+                mbcCommand = "WONDERSWAN",
+            ),
+        ),
+        gamesFolderDefault = "WonderSwan",
+    ),
+
+    WONDERSWAN_COLOR(
+        displayName = "WonderSwan Color",
+        formats = listOf(
+            Format(
+                extension = "wsc",
+                mbcCommand = "WONDERSWAN.COL",
+            ),
+        ),
+        gamesFolderDefault = "WonderSwan",
     ),
 }
