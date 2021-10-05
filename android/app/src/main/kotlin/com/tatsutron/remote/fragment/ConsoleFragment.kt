@@ -221,9 +221,8 @@ class ConsoleFragment : BaseFragment() {
                     success = {
                         setRecycler()
                         setSpeedDial()
-                        Navigator.hideLoadingScreen()
                     },
-                    failure = {
+                    finally = {
                         Navigator.hideLoadingScreen()
                     },
                 )

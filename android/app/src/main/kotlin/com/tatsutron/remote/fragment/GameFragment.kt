@@ -262,10 +262,7 @@ class GameFragment : BaseFragment() {
         Navigator.showLoadingScreen()
         game.play(
             requireActivity(),
-            success = {
-                Navigator.hideLoadingScreen()
-            },
-            failure = {
+            callback = {
                 Navigator.hideLoadingScreen()
             },
         )
@@ -302,9 +299,8 @@ class GameFragment : BaseFragment() {
                 game = Persistence.getGameByPath(game.path)!!
                 setSpeedDial()
                 populate()
-                Navigator.hideLoadingScreen()
             },
-            failure = {
+            finally = {
                 Navigator.hideLoadingScreen()
             }
         )

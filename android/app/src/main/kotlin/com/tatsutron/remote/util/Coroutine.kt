@@ -13,6 +13,7 @@ object Coroutine : CoroutineScope by MainScope() {
         run: () -> Unit,
         success: (() -> Unit)? = null,
         failure: (() -> Unit)? = null,
+        finally: (() -> Unit)? = null,
     ) {
         launch(Dispatchers.IO) {
             runCatching {
@@ -20,10 +21,12 @@ object Coroutine : CoroutineScope by MainScope() {
             }.onSuccess {
                 activity.runOnUiThread {
                     success?.invoke()
+                    finally?.invoke()
                 }
             }.onFailure {
                 activity.runOnUiThread {
                     failure?.invoke()
+                    finally?.invoke()
                     Dialog.error(activity, it)
                 }
             }

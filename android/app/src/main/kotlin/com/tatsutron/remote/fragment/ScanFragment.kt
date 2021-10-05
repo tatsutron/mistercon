@@ -136,13 +136,7 @@ class ScanFragment : BaseFragment() {
                 Navigator.showLoadingScreen()
                 game.play(
                     requireActivity(),
-                    success = {
-                        Navigator.hideLoadingScreen()
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            (activity as? MainActivity)?.onBackPressed()
-                        }, 100)
-                    },
-                    failure = {
+                    callback = {
                         Navigator.hideLoadingScreen()
                         Handler(Looper.getMainLooper()).postDelayed({
                             (activity as? MainActivity)?.onBackPressed()

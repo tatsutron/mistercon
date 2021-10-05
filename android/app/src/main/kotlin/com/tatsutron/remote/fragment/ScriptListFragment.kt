@@ -127,9 +127,8 @@ class ScriptListFragment : BaseFragment() {
                     },
                     success = {
                         refresh()
-                        Navigator.hideLoadingScreen()
                     },
-                    failure = {
+                    finally = {
                         Navigator.hideLoadingScreen()
                     },
                 )

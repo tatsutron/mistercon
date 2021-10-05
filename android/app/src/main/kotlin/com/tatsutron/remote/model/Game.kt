@@ -24,8 +24,7 @@ class Game(
 
     fun play(
         activity: Activity,
-        success: (() -> Unit)? = null,
-        failure: (() -> Unit)? = null,
+        callback: (() -> Unit)? = null,
     ) {
         Coroutine.launch(
             activity = activity,
@@ -49,8 +48,7 @@ class Game(
                 Ssh.command(session, command)
                 session.disconnect()
             },
-            success = success,
-            failure = failure,
+            finally = callback,
         )
     }
 }
