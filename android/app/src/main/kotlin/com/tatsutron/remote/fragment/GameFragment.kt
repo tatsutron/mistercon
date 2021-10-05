@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -21,7 +20,7 @@ import com.tatsutron.remote.model.Game
 import com.tatsutron.remote.util.*
 import java.io.File
 
-class GameFragment : Fragment() {
+class GameFragment : BaseFragment() {
     private lateinit var game: Game
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,7 +94,10 @@ class GameFragment : Fragment() {
             )
             if (game.sha1 != null) {
                 addActionItem(
-                    SpeedDialActionItem.Builder(R.id.copy_qr, R.drawable.ic_copy)
+                    SpeedDialActionItem.Builder(
+                        R.id.copy_qr,
+                        R.drawable.ic_copy,
+                    )
                         .setLabel(string(R.string.copy_qr_data))
                         .setLabelBackgroundColor(color(R.color.gray_900))
                         .setLabelColor(color(R.color.primary_500))
@@ -310,7 +312,10 @@ class GameFragment : Fragment() {
 
     private fun onCopyQr() {
         val context = requireContext()
-        val clipboard = ContextCompat.getSystemService(context, ClipboardManager::class.java)
+        val clipboard = ContextCompat.getSystemService(
+            context,
+            ClipboardManager::class.java,
+        )
         clipboard?.setPrimaryClip(ClipData.newPlainText("QR", game.sha1))
         Toast.makeText(
             requireActivity(),

@@ -120,9 +120,9 @@ object Persistence {
             ?.save(core, path, hash)
     }
 
-    fun getGamesByConsole(console: String) =
+    fun getGamesByConsole(console: Console) =
         database?.gamesQueries
-            ?.selectByConsole(console)
+            ?.selectByConsole(console.name)
             ?.executeAsList()
             ?.map {
                 game(it)

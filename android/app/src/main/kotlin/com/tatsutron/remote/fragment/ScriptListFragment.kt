@@ -6,7 +6,6 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.leinardi.android.speeddial.SpeedDialView
@@ -16,7 +15,7 @@ import com.tatsutron.remote.recycler.ScriptListAdapter
 import com.tatsutron.remote.util.*
 import java.io.File
 
-class ScriptListFragment : Fragment() {
+class ScriptListFragment : BaseFragment() {
     private lateinit var adapter: ScriptListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -120,7 +119,9 @@ class ScriptListFragment : Fragment() {
                                 it.endsWith(".sh")
                             }
                             .forEach {
-                                Persistence.saveScript(File(scriptsPath, it).path)
+                                Persistence.saveScript(
+                                    File(scriptsPath, it).path,
+                                )
                             }
                         session.disconnect()
                     },

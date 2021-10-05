@@ -1,17 +1,17 @@
 package com.tatsutron.remote.fragment
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tatsutron.remote.R
 import com.tatsutron.remote.recycler.ConsoleListAdapter
 
-class ConsoleListFragment : Fragment() {
+class ConsoleListFragment : BaseFragment() {
     private lateinit var adapter: ConsoleListAdapter
 
     override fun onCreateView(
@@ -34,5 +34,10 @@ class ConsoleListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = this@ConsoleListFragment.adapter
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onBackStackChanged() {
+        adapter.notifyDataSetChanged()
     }
 }

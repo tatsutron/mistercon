@@ -8,12 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
 import com.tatsutron.remote.R
 import com.tatsutron.remote.util.*
 
-class SystemFragment : Fragment() {
+class SystemFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

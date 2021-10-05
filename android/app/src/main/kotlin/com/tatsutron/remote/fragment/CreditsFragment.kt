@@ -6,10 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import com.tatsutron.remote.R
 
-class CreditsFragment : Fragment() {
+class CreditsFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

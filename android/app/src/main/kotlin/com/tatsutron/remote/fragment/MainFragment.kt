@@ -3,14 +3,13 @@ package com.tatsutron.remote.fragment
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.tatsutron.remote.util.Navigator
 import com.tatsutron.remote.R
 import com.tatsutron.remote.util.FragmentMaker
+import com.tatsutron.remote.util.Navigator
 
-class MainFragment : Fragment() {
+class MainFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

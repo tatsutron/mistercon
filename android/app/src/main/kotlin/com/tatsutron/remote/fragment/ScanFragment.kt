@@ -12,7 +12,6 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.tatsutron.remote.MainActivity
 import com.tatsutron.remote.Permissions
 import com.tatsutron.remote.R
@@ -23,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_scan.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class ScanFragment : Fragment() {
+class ScanFragment : BaseFragment() {
 
     private lateinit var cameraExecutor: ExecutorService
     private var processingBarcode = false

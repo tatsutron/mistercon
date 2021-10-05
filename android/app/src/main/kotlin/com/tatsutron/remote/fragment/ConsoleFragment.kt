@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.leinardi.android.speeddial.SpeedDialActionItem
@@ -19,17 +18,13 @@ import com.tatsutron.remote.recycler.GameItem
 import com.tatsutron.remote.recycler.GameListAdapter
 import com.tatsutron.remote.util.*
 
-class ConsoleFragment : Fragment() {
+class ConsoleFragment : BaseFragment() {
     private lateinit var console: Console
     private lateinit var toolbar: Toolbar
     private lateinit var recycler: RecyclerView
     private lateinit var adapter: GameListAdapter
     private lateinit var speedDial: SpeedDialView
     private var searchTerm = ""
-
-    fun onBackStackChanged() {
-        setRecycler()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +63,9 @@ class ConsoleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        console = Console.valueOf(arguments?.getString(FragmentMaker.KEY_CONSOLE)!!)
+        console = Console.valueOf(
+            arguments?.getString(FragmentMaker.KEY_CONSOLE)!!
+        )
         toolbar = view.findViewById(R.id.toolbar)
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(toolbar)
@@ -86,14 +83,18 @@ class ConsoleFragment : Fragment() {
         speedDial = view.findViewById(R.id.speed_dial)
         setRecycler()
         setSpeedDial()
-        if (Persistence.getGamesByConsole(console.name).isEmpty()) {
+        if (Persistence.getGamesByConsole(console).isEmpty()) {
             onSync()
         }
     }
 
+    override fun onBackStackChanged() {
+        setRecycler()
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     private fun setRecycler() {
-        val items = Persistence.getGamesByConsole(console.name).map {
+        val items = Persistence.getGamesByConsole(console).map {
             GameItem(it)
         }
         adapter.itemList.clear()
@@ -130,7 +131,10 @@ class ConsoleFragment : Fragment() {
             )
             if (adapter.itemList.count() > 1) {
                 addActionItem(
-                    SpeedDialActionItem.Builder(R.id.random, R.drawable.ic_random)
+                    SpeedDialActionItem.Builder(
+                        R.id.random,
+                        R.drawable.ic_random,
+                    )
                         .setLabel(string(R.string.random))
                         .setLabelBackgroundColor(color(R.color.gray_900))
                         .setLabelColor(color(R.color.primary_500))
@@ -194,7 +198,7 @@ class ConsoleFragment : Fragment() {
                             .filter {
                                 it.isNotBlank()
                             }
-                        val old = Persistence.getGamesByConsole(console.name)
+                        val old = Persistence.getGamesByConsole(console)
                             .map {
                                 it.path
                             }

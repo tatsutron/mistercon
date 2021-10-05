@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tatsutron.remote.R
 import com.tatsutron.remote.util.FragmentMaker
 import com.tatsutron.remote.util.Navigator
+import com.tatsutron.remote.util.Persistence
 
 class ConsoleHolder(
     private val activity: Activity,
@@ -18,6 +19,13 @@ class ConsoleHolder(
 
     fun bind(item: ConsoleItem) {
         label.text = item.console.displayName
+        label.alpha = if (
+            Persistence.getGamesByConsole(item.console).isNotEmpty()
+        ) {
+            1.0f
+        } else {
+            0.75f
+        }
         itemView.setOnClickListener {
             Navigator.show(
                 activity as AppCompatActivity,
