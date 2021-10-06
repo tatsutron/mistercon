@@ -14,11 +14,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
-    compileSdkVersion 30
+    compileSdkVersion 31
     defaultConfig {
         applicationId "com.tatsutron.remote"
         minSdkVersion 26
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 11
         versionName "0.8.1"
     }
@@ -40,19 +40,18 @@ dependencies {
     implementation "android.lib.verticalmarqueetextview:VerticalMarqueeTextView:1.0.2"
     implementation "androidx.camera:camera-camera2:$camerax_version"
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
-    implementation "androidx.camera:camera-view:1.0.0-alpha27"
+    implementation "androidx.camera:camera-view:1.0.0-alpha29"
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation "com.afollestad.material-dialogs:input:3.3.0"
     implementation "com.github.bumptech.glide:glide:4.9.0"
     implementation "com.github.MikeOrtiz:TouchImageView:3.1.0"
     implementation "com.google.android.material:material:1.4.0"
-    implementation "com.google.mlkit:barcode-scanning:16.0.3"
+    implementation "com.google.mlkit:barcode-scanning:17.0.0"
     implementation "com.jcraft:jsch:0.1.55"
     implementation "com.leinardi.android:speed-dial:3.2.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.sqldelight:android-driver:1.4.4"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_version"
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
