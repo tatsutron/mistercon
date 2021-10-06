@@ -3,7 +3,6 @@ package com.tatsutron.remote.fragment
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tatsutron.remote.R
@@ -53,19 +52,21 @@ class MainFragment : BaseFragment() {
             supportActionBar?.title = bottomNavigation.menu.getItem(0).title
         }
         viewPager.adapter = FragmentStateAdapter(requireActivity())
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                val item = bottomNavigation.menu.getItem(position)
-                bottomNavigation.selectedItemId = item.itemId
-                (activity as? AppCompatActivity)?.apply {
-                    setSupportActionBar(
-                        view.findViewById(R.id.toolbar)
-                    )
-                    supportActionBar?.title = item.title
+        viewPager.registerOnPageChangeCallback(
+            object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    val item = bottomNavigation.menu.getItem(position)
+                    bottomNavigation.selectedItemId = item.itemId
+                    (activity as? AppCompatActivity)?.apply {
+                        setSupportActionBar(
+                            view.findViewById(R.id.toolbar)
+                        )
+                        supportActionBar?.title = item.title
+                    }
                 }
             }
-        })
+        )
         bottomNavigation.setOnItemSelectedListener { item ->
             for (i in 0 until bottomNavigation.menu.size()) {
                 if (bottomNavigation.menu.getItem(i) == item) {

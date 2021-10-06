@@ -17,8 +17,8 @@
     <string name="hostname_or_ip_address">Hostname or IP Address</string>
     <string name="menu">Menu</string>
     <string name="mistercon">mistercon</string>
+    <string name="no_camera_permission">Camera permission is required to use this feature.</string>
     <string name="no_data_was_found_for_game">No data found for %s.</string>
-    <string name="no_permission_camera">Camera permission is required to use this feature.</string>
     <string name="ok">OK</string>
     <string name="play">Play</string>
     <string name="please_enter_ip_address">Please enter IP address</string>

@@ -1,5 +1,6 @@
 package com.tatsutron.remote.fragment
 
+import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
@@ -7,13 +8,13 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.tatsutron.remote.MainActivity
-import com.tatsutron.remote.Permissions
 import com.tatsutron.remote.R
 import com.tatsutron.remote.util.Dialog
 import com.tatsutron.remote.util.Navigator
@@ -38,41 +39,6 @@ class ScanFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.fragment_scan, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        if (hasPermission()) {
-            startCamera()
-        } else {
-            requestPermissions(
-                arrayOf(Permissions.CAMERA.id),
-                Permissions.CAMERA.requestCode,
-            )
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray,
-    ) {
-        if (requestCode == Permissions.CAMERA.requestCode) {
-            if (hasPermission()) {
-                startCamera()
-            } else {
-                val context = requireContext()
-                Dialog.info(
-                    context = context,
-                    message = context.getString(
-                        Permissions.CAMERA.noPermissionStringId,
-                    ),
-                    ok = {
-                        (activity as? MainActivity)?.onBackPressed()
-                    },
-                )
-            }
-        }
-    }
-
     override fun onResume() {
         super.onResume()
         processingBarcode = false
@@ -81,6 +47,39 @@ class ScanFragment : BaseFragment() {
     override fun onDestroy() {
         cameraExecutor.shutdown()
         super.onDestroy()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val requestPermissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestPermission(),
+        ) { permissionGranted ->
+            if (permissionGranted) {
+                startCamera()
+            } else {
+                val context = requireContext()
+                Dialog.info(
+                    context = context,
+                    message = context.getString(
+                        R.string.no_camera_permission,
+                    ),
+                    ok = {
+                        (activity as? MainActivity)?.onBackPressed()
+                    },
+                )
+            }
+        }
+        val requiredPermission = Manifest.permission.CAMERA
+        if (
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                requiredPermission,
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            startCamera()
+        } else {
+            requestPermissionLauncher.launch(requiredPermission)
+        }
     }
 
     private fun startCamera() {
@@ -123,12 +122,6 @@ class ScanFragment : BaseFragment() {
             ContextCompat.getMainExecutor(context),
         )
     }
-
-    private fun hasPermission() =
-        ContextCompat.checkSelfPermission(
-            requireContext(),
-            Permissions.CAMERA.id,
-        ) == PackageManager.PERMISSION_GRANTED
 
     private fun handleResult(data: String) {
         Persistence.getGameBySha1(data)
