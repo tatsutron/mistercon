@@ -30,7 +30,6 @@ buildscript {
         classpath "com.squareup.sqldelight:gradle-plugin:1.4.4"
     }
     repositories {
-        jcenter()
         google()
         mavenCentral()
     }
