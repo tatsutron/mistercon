@@ -27,7 +27,7 @@ android {
 buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
-        classpath "com.squareup.sqldelight:gradle-plugin:1.4.3"
+        classpath "com.squareup.sqldelight:gradle-plugin:1.4.4"
     }
     repositories {
         jcenter()
@@ -50,7 +50,7 @@ dependencies {
     implementation "com.leinardi.android:speed-dial:3.2.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
-    implementation "com.squareup.sqldelight:android-driver:1.4.3"
+    implementation "com.squareup.sqldelight:android-driver:1.4.4"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_version"
