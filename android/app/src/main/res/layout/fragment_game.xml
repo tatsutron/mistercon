@@ -33,125 +33,41 @@
                 android:padding="@dimen/margin_small"
                 android:showDividers="middle">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/publisher_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <com.tatsutron.remote.component.MetadataCard
+                    android:id="@+id/publisher"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/publisher"
-                    android:textColorHint="@color/primary_200"
-                    android:visibility="gone"
-                    app:hintAnimationEnabled="false">
+                    app:hint="@string/publisher" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/publisher_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:textColor="@color/white"
-                        android:textCursorDrawable="@null" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/developer_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <com.tatsutron.remote.component.MetadataCard
+                    android:id="@+id/developer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/developer"
-                    android:textColorHint="@color/primary_200"
-                    android:visibility="gone"
-                    app:hintAnimationEnabled="false">
+                    app:hint="@string/developer" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/developer_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:textColor="@color/white"
-                        android:textCursorDrawable="@null" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/release_date_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <com.tatsutron.remote.component.MetadataCard
+                    android:id="@+id/release_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/release_date"
-                    android:textColorHint="@color/primary_200"
-                    android:visibility="gone"
-                    app:hintAnimationEnabled="false">
+                    app:hint="@string/release_date" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/release_date_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:textColor="@color/white"
-                        android:textCursorDrawable="@null" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/region_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <com.tatsutron.remote.component.MetadataCard
+                    android:id="@+id/region"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/region"
-                    android:textColorHint="@color/primary_200"
-                    android:visibility="gone"
-                    app:hintAnimationEnabled="false">
+                    app:hint="@string/region" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/region_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:textColor="@color/white"
-                        android:textCursorDrawable="@null" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/genre_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <com.tatsutron.remote.component.MetadataCard
+                    android:id="@+id/genre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/genre"
-                    android:textColorHint="@color/primary_200"
-                    android:visibility="gone"
-                    app:hintAnimationEnabled="false">
+                    app:hint="@string/genre" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/genre_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:textColor="@color/white"
-                        android:textCursorDrawable="@null" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/description_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <com.tatsutron.remote.component.MetadataCard
+                    android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/description"
-                    android:textColorHint="@color/primary_200"
-                    android:visibility="gone"
-                    app:hintAnimationEnabled="false">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/description_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:textColor="@color/white"
-                        android:textCursorDrawable="@null" />
-
-                </com.google.android.material.textfield.TextInputLayout>
+                    app:hint="@string/description" />
 
                 <LinearLayout
                     android:id="@+id/front_cover_layout"

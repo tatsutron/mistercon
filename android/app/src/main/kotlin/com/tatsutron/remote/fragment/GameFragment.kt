@@ -11,11 +11,10 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.*
+import com.tatsutron.remote.component.MetadataCard
 import com.tatsutron.remote.model.Game
 import com.tatsutron.remote.util.*
 import java.io.File
@@ -134,50 +133,32 @@ class GameFragment : BaseFragment() {
     private fun populate() {
         game.release?.releasePublisher?.let {
             if (it.isNotBlank()) {
-                view?.findViewById<TextInputEditText>(R.id.publisher_text)
-                    ?.setText(it)
-                view?.findViewById<TextInputLayout>(R.id.publisher_layout)
-                    ?.visibility = View.VISIBLE
+                view?.findViewById<MetadataCard>(R.id.publisher)?.set(it)
             }
         }
         game.release?.releaseDeveloper?.let {
             if (it.isNotBlank()) {
-                view?.findViewById<TextInputEditText>(R.id.developer_text)
-                    ?.setText(it)
-                view?.findViewById<TextInputLayout>(R.id.developer_layout)
-                    ?.visibility = View.VISIBLE
+                view?.findViewById<MetadataCard>(R.id.developer)?.set(it)
             }
         }
         game.release?.releaseDate?.let {
             if (it.isNotBlank()) {
-                view?.findViewById<TextInputEditText>(R.id.release_date_text)
-                    ?.setText(it)
-                view?.findViewById<TextInputLayout>(R.id.release_date_layout)
-                    ?.visibility = View.VISIBLE
+                view?.findViewById<MetadataCard>(R.id.release_date)?.set(it)
             }
         }
         game.region?.regionName?.let {
             if (it.isNotBlank()) {
-                view?.findViewById<TextInputEditText>(R.id.region_text)
-                    ?.setText(it)
-                view?.findViewById<TextInputLayout>(R.id.region_layout)
-                    ?.visibility = View.VISIBLE
+                view?.findViewById<MetadataCard>(R.id.region)?.set(it)
             }
         }
         game.release?.releaseGenre?.let {
             if (it.isNotBlank()) {
-                view?.findViewById<TextInputEditText>(R.id.genre_text)
-                    ?.setText(it)
-                view?.findViewById<TextInputLayout>(R.id.genre_layout)
-                    ?.visibility = View.VISIBLE
+                view?.findViewById<MetadataCard>(R.id.genre)?.set(it)
             }
         }
         game.release?.releaseDescription?.let {
             if (it.isNotBlank()) {
-                view?.findViewById<TextInputEditText>(R.id.description_text)
-                    ?.setText(it)
-                view?.findViewById<TextInputLayout>(R.id.description_layout)
-                    ?.visibility = View.VISIBLE
+                view?.findViewById<MetadataCard>(R.id.description)?.set(it)
             }
         }
         game.release?.releaseCoverFront?.let { url ->
