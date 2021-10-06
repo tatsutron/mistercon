@@ -66,7 +66,7 @@ class MainFragment : BaseFragment() {
                 }
             }
         })
-        bottomNavigation.setOnNavigationItemSelectedListener { item ->
+        bottomNavigation.setOnItemSelectedListener { item ->
             for (i in 0 until bottomNavigation.menu.size()) {
                 if (bottomNavigation.menu.getItem(i) == item) {
                     viewPager.currentItem = i
