@@ -44,13 +44,6 @@ class ScriptListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setToolbar(view)
-        setRecycler(view)
-        setSpeedDial(view)
-        refresh()
-    }
-
-    private fun setToolbar(view: View) {
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(toolbar)
@@ -59,9 +52,6 @@ class ScriptListFragment : BaseFragment() {
             }
             supportActionBar?.title = context?.getString(R.string.scripts)
         }
-    }
-
-    private fun setRecycler(view: View) {
         adapter = ScriptListAdapter(
             context = requireContext(),
         )
@@ -69,23 +59,12 @@ class ScriptListFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = this@ScriptListFragment.adapter
         }
-    }
-
-    private fun setSpeedDial(view: View) {
-        view.findViewById<SpeedDialView>(R.id.speed_dial).apply {
-            mainFab.apply {
-                setOnClickListener {
-                    onSync()
-                }
-                setImageDrawable(
-                    AppCompatResources.getDrawable(context, R.drawable.ic_sync)
-                )
-            }
-        }
+        setRecycler()
+        setSpeedDial()
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun refresh() {
+    private fun setRecycler() {
         val items = Persistence.getScriptList().map {
             ScriptItem(
                 activity = requireActivity(),
@@ -95,6 +74,19 @@ class ScriptListFragment : BaseFragment() {
         adapter.itemList.clear()
         adapter.itemList.addAll(items)
         adapter.notifyDataSetChanged()
+    }
+
+    private fun setSpeedDial() {
+        view?.findViewById<SpeedDialView>(R.id.speed_dial)?.apply {
+            mainFab.apply {
+                setOnClickListener {
+                    onSync()
+                }
+                setImageDrawable(
+                    AppCompatResources.getDrawable(context, R.drawable.ic_sync)
+                )
+            }
+        }
     }
 
     private fun onSync() {
@@ -126,7 +118,7 @@ class ScriptListFragment : BaseFragment() {
                         session.disconnect()
                     },
                     success = {
-                        refresh()
+                        setRecycler()
                     },
                     finally = {
                         Navigator.hideLoadingScreen()

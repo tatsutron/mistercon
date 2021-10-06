@@ -20,10 +20,7 @@ import com.tatsutron.remote.util.*
 
 class ConsoleFragment : BaseFragment() {
     private lateinit var console: Console
-    private lateinit var toolbar: Toolbar
-    private lateinit var recycler: RecyclerView
     private lateinit var adapter: GameListAdapter
-    private lateinit var speedDial: SpeedDialView
     private var searchTerm = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +63,7 @@ class ConsoleFragment : BaseFragment() {
         console = Console.valueOf(
             arguments?.getString(FragmentMaker.KEY_CONSOLE)!!
         )
-        toolbar = view.findViewById(R.id.toolbar)
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(toolbar)
             toolbar.setNavigationOnClickListener {
@@ -74,13 +71,11 @@ class ConsoleFragment : BaseFragment() {
             }
             supportActionBar?.title = console.displayName
         }
-        recycler = view.findViewById(R.id.recycler)
         adapter = GameListAdapter(activity as Activity)
-        recycler.apply {
+        view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
             adapter = this@ConsoleFragment.adapter
         }
-        speedDial = view.findViewById(R.id.speed_dial)
         setRecycler()
         setSpeedDial()
         if (Persistence.getGamesByConsole(console).isEmpty()) {
@@ -118,7 +113,7 @@ class ConsoleFragment : BaseFragment() {
         val color = { id: Int ->
             ResourcesCompat.getColor(resources, id, context.theme)
         }
-        speedDial.apply {
+        view?.findViewById<SpeedDialView>(R.id.speed_dial)?.apply {
             clearActionItems()
             addActionItem(
                 SpeedDialActionItem.Builder(R.id.sync, R.drawable.ic_sync)

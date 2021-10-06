@@ -58,7 +58,7 @@ class GameFragment : BaseFragment() {
         if (game.sha1 == null) {
             onSync()
         } else {
-            populate()
+            setMetadata()
         }
     }
 
@@ -129,7 +129,7 @@ class GameFragment : BaseFragment() {
         }
     }
 
-    private fun populate() {
+    private fun setMetadata() {
         game.release?.releasePublisher?.let {
             if (it.isNotBlank()) {
                 view?.findViewById<MetadataCard>(R.id.publisher)?.set(it)
@@ -245,7 +245,7 @@ class GameFragment : BaseFragment() {
             success = {
                 game = Persistence.getGameByPath(game.path)!!
                 setSpeedDial()
-                populate()
+                setMetadata()
             },
             finally = {
                 Navigator.hideLoadingScreen()
