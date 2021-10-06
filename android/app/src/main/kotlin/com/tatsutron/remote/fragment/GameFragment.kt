@@ -2,7 +2,6 @@ package com.tatsutron.remote.fragment
 
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.*
@@ -10,10 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import com.bumptech.glide.Glide
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.*
+import com.tatsutron.remote.component.ImageCard
 import com.tatsutron.remote.component.MetadataCard
 import com.tatsutron.remote.model.Game
 import com.tatsutron.remote.util.*
@@ -163,53 +162,20 @@ class GameFragment : BaseFragment() {
         }
         game.release?.releaseCoverFront?.let { url ->
             if (url.isNotBlank()) {
-                view?.findViewById<ImageView>(R.id.front_cover_image)?.apply {
-                    Glide.with(activity?.baseContext!!)
-                        .load(Uri.parse(url))
-                        .into(this)
-                    setOnClickListener {
-                        Navigator.show(
-                            activity as AppCompatActivity,
-                            FragmentMaker.image(url),
-                        )
-                    }
-                }
-                view?.findViewById<LinearLayout>(R.id.front_cover_layout)
-                    ?.visibility = View.VISIBLE
+                view?.findViewById<ImageCard>(R.id.front_cover)
+                    ?.set(requireActivity(), url)
             }
         }
         game.release?.releaseCoverBack?.let { url ->
             if (url.isNotBlank()) {
-                view?.findViewById<ImageView>(R.id.back_cover_image)?.apply {
-                    Glide.with(activity?.baseContext!!)
-                        .load(Uri.parse(url))
-                        .into(this)
-                    setOnClickListener {
-                        Navigator.show(
-                            activity as AppCompatActivity,
-                            FragmentMaker.image(url),
-                        )
-                    }
-                }
-                view?.findViewById<LinearLayout>(R.id.back_cover_layout)
-                    ?.visibility = View.VISIBLE
+                view?.findViewById<ImageCard>(R.id.back_cover)
+                    ?.set(requireActivity(), url)
             }
         }
         game.release?.releaseCoverCart?.let { url ->
             if (url.isNotBlank()) {
-                view?.findViewById<ImageView>(R.id.cartridge_image)?.apply {
-                    Glide.with(activity?.baseContext!!)
-                        .load(Uri.parse(url))
-                        .into(this)
-                    setOnClickListener {
-                        Navigator.show(
-                            activity as AppCompatActivity,
-                            FragmentMaker.image(url),
-                        )
-                    }
-                }
-                view?.findViewById<LinearLayout>(R.id.cartridge_layout)
-                    ?.visibility = View.VISIBLE
+                view?.findViewById<ImageCard>(R.id.cartridge)
+                    ?.set(requireActivity(), url)
             }
         }
         if (
