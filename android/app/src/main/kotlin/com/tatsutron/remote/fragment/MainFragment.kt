@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tatsutron.remote.R
 import com.tatsutron.remote.util.FragmentMaker
@@ -44,36 +45,27 @@ class MainFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewPager = view.findViewById<ViewPager>(R.id.view_pager)
+        val viewPager = view.findViewById<ViewPager2>(R.id.view_pager)
         val bottomNavigation = view
             .findViewById<BottomNavigationView>(R.id.bottom_navigation)
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(view.findViewById(R.id.toolbar))
             supportActionBar?.title = bottomNavigation.menu.getItem(0).title
         }
-        viewPager.adapter = FragmentPagerAdapter(fragmentManager!!)
-        viewPager.addOnPageChangeListener(
-            object : ViewPager.OnPageChangeListener {
-                override fun onPageScrollStateChanged(state: Int) {}
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int,
-                ) {
-                }
-
-                override fun onPageSelected(position: Int) {
-                    val item = bottomNavigation.menu.getItem(position)
-                    bottomNavigation.selectedItemId = item.itemId
-                    (activity as? AppCompatActivity)?.apply {
-                        setSupportActionBar(
-                            view.findViewById(R.id.toolbar)
-                        )
-                        supportActionBar?.title = item.title
-                    }
+        viewPager.adapter = FragmentStateAdapter(requireActivity())
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                val item = bottomNavigation.menu.getItem(position)
+                bottomNavigation.selectedItemId = item.itemId
+                (activity as? AppCompatActivity)?.apply {
+                    setSupportActionBar(
+                        view.findViewById(R.id.toolbar)
+                    )
+                    supportActionBar?.title = item.title
                 }
             }
-        )
+        })
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
             for (i in 0 until bottomNavigation.menu.size()) {
                 if (bottomNavigation.menu.getItem(i) == item) {

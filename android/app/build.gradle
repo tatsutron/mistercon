@@ -41,6 +41,7 @@ dependencies {
     implementation "androidx.camera:camera-camera2:$camerax_version"
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
     implementation "androidx.camera:camera-view:1.0.0-alpha27"
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation "com.afollestad.material-dialogs:input:3.3.0"
     implementation "com.github.bumptech.glide:glide:4.9.0"
     implementation "com.github.MikeOrtiz:TouchImageView:3.1.0"
@@ -54,4 +55,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_version"
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 }
