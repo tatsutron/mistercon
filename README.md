@@ -4,8 +4,44 @@ mistercon is an Android app for use with [MiSTer](https://github.com/MiSTer-deve
 
 # Features
 
-* Import data and artwork for (most) console cores
-* Launch games, access the menu, run scripts, and reboot the MiSTer from your mobile device
+* Import and launch games for supported console platforms
+* Load metadata and artwork for most formats
+* Toggle the MiSTer menu
+* Import and run scripts
+* Reboot the MiSTer
+* Launch known games by scanning QR codes
+
+# Console Support
+
+
+Platform  | Format(s) | Metadata
+| - | - | - |
+Atari 2600 | `.rom` | :white_check_mark:
+Atari 5200 | `.rom` | :white_check_mark:
+Atari 7800 | `.a78` | :white_check_mark:
+Atari Lynx | `.lnx` | :white_check_mark:
+Bally Astrocade | `.bin` | :x:
+ColecoVision | `.col` | :white_check_mark:
+Famicom Disk System | `.fds` | :white_check_mark:
+Game Boy | `.gb` | :white_check_mark:
+Game Boy Advance | `.gba` | :white_check_mark:
+Game Boy Color | `.gbc` | :white_check_mark:
+Intellivision | `.bin` | :white_check_mark:
+Neo Geo | `.neo` | :x:
+Nintendo Entertainment System | `.nes` | :white_check_mark:
+Odyssey 2 | `.bin` | :white_check_mark:
+Sega CD | `.chd` | :x:
+Sega Genesis | `.bin` `.gen` `.md` | :white_check_mark:
+Sega Master System | `.sms` | :white_check_mark:
+SG-1000 | `.sg` | :white_check_mark:
+Super Nintendo | `.sfc` `.smc` | :white_check_mark:
+SuperGrafx | `.sgx` | :white_check_mark:
+TurboGrafx-16 | `.pce` | :white_check_mark:
+TurboGrafx-CD | `.chd` | :x:
+VC4000 | `.bin` | :x:
+Vectrex | `.ovr` `.vec` | :white_check_mark:
+WonderSwan | `.ws` | :white_check_mark:
+WonderSwan Color | `.wsc` | :white_check_mark:
 
 # Credits
 
