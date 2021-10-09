@@ -20,6 +20,7 @@ class ScriptHolder(
                 context = item.activity,
                 message = item.activity.getString(R.string.confirm_run_script),
                 ok = {
+                    Navigator.showLoadingScreen()
                     Coroutine.launch(
                         activity = item.activity,
                         run = {
@@ -36,6 +37,9 @@ class ScriptHolder(
                             }.toString()
                             Ssh.command(session, command)
                             session.disconnect()
+                        },
+                        finally = {
+                            Navigator.hideLoadingScreen()
                         },
                     )
                 }

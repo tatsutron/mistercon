@@ -80,12 +80,16 @@ class SystemFragment : BaseFragment() {
                     context = context,
                     message = context.getString(R.string.confirm_reboot),
                     ok = {
+                        Navigator.showLoadingScreen()
                         Coroutine.launch(
                             activity = requireActivity(),
                             run = {
                                 val session = Ssh.session()
                                 Ssh.command(session, "reboot now")
                                 session.disconnect()
+                            },
+                            finally = {
+                                Navigator.hideLoadingScreen()
                             },
                         )
                     },
@@ -108,6 +112,7 @@ class SystemFragment : BaseFragment() {
     private fun setMenuButton(view: View) {
         view.findViewById<Button>(R.id.menu_button).apply {
             setOnClickListener {
+                Navigator.showLoadingScreen()
                 Coroutine.launch(
                     activity = requireActivity(),
                     run = {
@@ -115,6 +120,9 @@ class SystemFragment : BaseFragment() {
                         Assets.require(requireContext(), session, "mbc")
                         Ssh.command(session, "${Constants.MBC_PATH} raw_seq M")
                         session.disconnect()
+                    },
+                    finally = {
+                        Navigator.hideLoadingScreen()
                     },
                 )
             }
