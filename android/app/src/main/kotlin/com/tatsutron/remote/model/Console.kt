@@ -119,6 +119,17 @@ enum class Console(
         gamesFolderDefault = "Gameboy",
     ),
 
+    GAME_GEAR(
+        displayName = "Game Gear",
+        formats = listOf(
+            Format(
+                extension = "gg",
+                mbcCommand = "SMS.GG",
+            ),
+        ),
+        gamesFolderDefault = "SMS",
+    ),
+
     INTELLIVISION(
         displayName = "Intellivision",
         formats = listOf(
