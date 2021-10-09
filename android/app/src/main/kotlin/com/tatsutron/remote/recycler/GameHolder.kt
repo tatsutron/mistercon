@@ -24,7 +24,7 @@ class GameHolder(
             0.75f
         }
         itemView.setOnClickListener {
-            Navigator.show(
+            Navigator.showScreen(
                 activity as AppCompatActivity,
                 FragmentMaker.game(item.game.path),
             )

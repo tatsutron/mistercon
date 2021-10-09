@@ -64,7 +64,7 @@ class SystemFragment : BaseFragment() {
     private fun setCreditsButton(view: View) {
         view.findViewById<Button>(R.id.credits_button).apply {
             setOnClickListener {
-                Navigator.show(
+                Navigator.showScreen(
                     activity as AppCompatActivity,
                     FragmentMaker.credits(),
                 )
@@ -101,7 +101,7 @@ class SystemFragment : BaseFragment() {
     private fun setScriptsButton(view: View) {
         view.findViewById<Button>(R.id.scripts_button).apply {
             setOnClickListener {
-                Navigator.show(
+                Navigator.showScreen(
                     activity as AppCompatActivity,
                     FragmentMaker.scriptList(),
                 )

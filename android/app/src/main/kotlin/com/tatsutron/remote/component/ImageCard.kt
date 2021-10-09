@@ -42,7 +42,7 @@ class ImageCard(
             .load(Uri.parse(url))
             .into(image)
         setOnClickListener {
-            Navigator.show(
+            Navigator.showScreen(
                 activity as AppCompatActivity,
                 FragmentMaker.image(url),
             )

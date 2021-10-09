@@ -227,7 +227,7 @@ class ConsoleFragment : BaseFragment() {
     }
 
     private fun onRandom() {
-        Navigator.show(
+        Navigator.showScreen(
             activity as AppCompatActivity,
             FragmentMaker.game(adapter.itemList.random().game.path),
         )

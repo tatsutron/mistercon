@@ -32,7 +32,7 @@ class MainFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.scan -> {
-                Navigator.show(
+                Navigator.showScreen(
                     activity as AppCompatActivity,
                     FragmentMaker.scan(),
                 )

@@ -27,7 +27,7 @@ class ConsoleHolder(
             0.75f
         }
         itemView.setOnClickListener {
-            Navigator.show(
+            Navigator.showScreen(
                 activity as AppCompatActivity,
                 FragmentMaker.console(item.console.name),
             )
