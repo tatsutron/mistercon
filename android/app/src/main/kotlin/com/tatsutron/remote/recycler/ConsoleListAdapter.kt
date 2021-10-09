@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tatsutron.remote.R
 import com.tatsutron.remote.model.Console
+import java.util.*
 
 class ConsoleListAdapter(
     private val activity: Activity,
@@ -13,7 +14,7 @@ class ConsoleListAdapter(
 
     private var itemList = Console.values()
         .sortedBy {
-            it.displayName
+            it.displayName.toLowerCase(Locale.getDefault())
         }
         .map {
             ConsoleItem(it)

@@ -128,7 +128,7 @@ object Persistence {
                 game(it)
             }
             ?.sortedBy {
-                File(it.path).name
+                File(it.path).name.toLowerCase(Locale.getDefault())
             }
             ?: listOf()
 
