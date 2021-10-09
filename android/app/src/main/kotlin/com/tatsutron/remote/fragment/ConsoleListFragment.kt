@@ -12,6 +12,7 @@ import com.tatsutron.remote.R
 import com.tatsutron.remote.recycler.ConsoleListAdapter
 
 class ConsoleListFragment : BaseFragment() {
+
     private lateinit var adapter: ConsoleListAdapter
 
     override fun onCreateView(

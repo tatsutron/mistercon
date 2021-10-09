@@ -9,15 +9,13 @@ object FragmentMaker {
     const val KEY_PATH = "KEY_PATH"
     const val KEY_URL = "KEY_URL"
 
-    fun credits() = CreditsFragment()
-
-    fun scriptList() = ScriptListFragment()
-
     fun console(core: String) = ConsoleFragment().apply {
         arguments = Bundle().apply {
             putString(KEY_CONSOLE, core)
         }
     }
+
+    fun credits() = CreditsFragment()
 
     fun game(path: String) = GameFragment().apply {
         arguments = Bundle().apply {
@@ -32,4 +30,6 @@ object FragmentMaker {
     }
 
     fun scan() = ScanFragment()
+
+    fun scriptList() = ScriptListFragment()
 }

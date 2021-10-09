@@ -19,6 +19,7 @@ import com.tatsutron.remote.util.*
 import java.io.File
 
 class GameFragment : BaseFragment() {
+
     private lateinit var game: Game
 
     override fun onCreate(savedInstanceState: Bundle?) {

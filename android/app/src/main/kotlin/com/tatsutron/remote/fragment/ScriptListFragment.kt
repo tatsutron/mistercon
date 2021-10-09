@@ -16,6 +16,7 @@ import com.tatsutron.remote.util.*
 import java.io.File
 
 class ScriptListFragment : BaseFragment() {
+
     private lateinit var adapter: ScriptListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {

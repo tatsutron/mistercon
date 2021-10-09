@@ -19,6 +19,7 @@ import com.tatsutron.remote.recycler.GameListAdapter
 import com.tatsutron.remote.util.*
 
 class ConsoleFragment : BaseFragment() {
+
     private lateinit var console: Console
     private lateinit var adapter: GameListAdapter
     private var searchTerm = ""
