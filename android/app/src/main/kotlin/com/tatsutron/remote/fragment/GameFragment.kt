@@ -22,7 +22,7 @@ import java.io.File
 class GameFragment : BaseFragment() {
 
     private lateinit var game: Game
-    private lateinit var metadata: Metadata
+    private var metadata: Metadata? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +50,7 @@ class GameFragment : BaseFragment() {
             arguments?.getString(FragmentMaker.KEY_PATH)!!
         )!!
         if (game.sha1 != null) {
-            metadata = Persistence.getMetadataBySha1(game.sha1!!)!!
+            metadata = Persistence.getMetadataBySha1(game.sha1!!)
         }
         val toolbar = view.findViewById<Toolbar>(R.id.game_toolbar)
         (activity as? AppCompatActivity)?.apply {
@@ -136,80 +136,78 @@ class GameFragment : BaseFragment() {
     }
 
     private fun setMetadata() {
-        with(metadata) {
-            publisher?.let {
-                if (it.isNotBlank()) {
-                    view?.findViewById<MetadataCard>(R.id.publisher)?.set(it)
-                }
+        metadata?.publisher?.let {
+            if (it.isNotBlank()) {
+                view?.findViewById<MetadataCard>(R.id.publisher)?.set(it)
             }
-            developer?.let {
-                if (it.isNotBlank()) {
-                    view?.findViewById<MetadataCard>(R.id.developer)?.set(it)
-                }
+        }
+        metadata?.developer?.let {
+            if (it.isNotBlank()) {
+                view?.findViewById<MetadataCard>(R.id.developer)?.set(it)
             }
-            releaseDate?.let {
-                if (it.isNotBlank()) {
-                    view?.findViewById<MetadataCard>(R.id.release_date)
-                        ?.set(it)
-                }
+        }
+        metadata?.releaseDate?.let {
+            if (it.isNotBlank()) {
+                view?.findViewById<MetadataCard>(R.id.release_date)
+                    ?.set(it)
             }
-            region?.let {
-                if (it.isNotBlank()) {
-                    view?.findViewById<MetadataCard>(R.id.region)?.set(it)
-                }
+        }
+        metadata?.region?.let {
+            if (it.isNotBlank()) {
+                view?.findViewById<MetadataCard>(R.id.region)?.set(it)
             }
-            genre?.let {
-                if (it.isNotBlank()) {
-                    view?.findViewById<MetadataCard>(R.id.genre)?.set(it)
-                }
+        }
+        metadata?.genre?.let {
+            if (it.isNotBlank()) {
+                view?.findViewById<MetadataCard>(R.id.genre)?.set(it)
             }
-            description?.let {
-                if (it.isNotBlank()) {
-                    view?.findViewById<MetadataCard>(R.id.description)?.set(it)
-                }
+        }
+        metadata?.description?.let {
+            if (it.isNotBlank()) {
+                view?.findViewById<MetadataCard>(R.id.description)?.set(it)
             }
-            frontCover?.let { url ->
-                if (url.isNotBlank()) {
-                    view?.findViewById<ImageCard>(R.id.front_cover)
-                        ?.set(requireActivity(), url)
-                }
+        }
+        metadata?.frontCover?.let { url ->
+            if (url.isNotBlank()) {
+                view?.findViewById<ImageCard>(R.id.front_cover)
+                    ?.set(requireActivity(), url)
             }
-            backCover?.let { url ->
-                if (url.isNotBlank()) {
-                    view?.findViewById<ImageCard>(R.id.back_cover)
-                        ?.set(requireActivity(), url)
-                }
+        }
+        metadata?.backCover?.let { url ->
+            if (url.isNotBlank()) {
+                view?.findViewById<ImageCard>(R.id.back_cover)
+                    ?.set(requireActivity(), url)
             }
-            cartridge?.let { url ->
-                if (url.isNotBlank()) {
-                    view?.findViewById<ImageCard>(R.id.cartridge)
-                        ?.set(requireActivity(), url)
-                }
+        }
+        metadata?.cartridge?.let { url ->
+            if (url.isNotBlank()) {
+                view?.findViewById<ImageCard>(R.id.cartridge)
+                    ?.set(requireActivity(), url)
             }
-            if (
-                listOf(
-                    publisher?.isNotBlank(),
-                    developer?.isNotBlank(),
-                    releaseDate?.isNotBlank(),
-                    region?.isNotBlank(),
-                    genre?.isNotBlank(),
-                    description?.isNotBlank(),
-                    frontCover?.isNotBlank(),
-                    backCover?.isNotBlank(),
-                    cartridge?.isNotBlank(),
-                ).none {
-                    it == true
-                }
-            ) {
-                view?.findViewById<ScrollView>(R.id.scroll)
-                    ?.visibility = View.GONE
-                view?.findViewById<TextView>(R.id.no_data_text)?.apply {
-                    text = context.getString(
-                        R.string.no_data_was_found_for_game,
-                        game.name,
-                    )
-                    visibility = View.VISIBLE
-                }
+        }
+        if (
+            listOf(
+                metadata?.publisher?.isNotBlank(),
+                metadata?.developer?.isNotBlank(),
+                metadata?.releaseDate?.isNotBlank(),
+                metadata?.region?.isNotBlank(),
+                metadata?.genre?.isNotBlank(),
+                metadata?.description?.isNotBlank(),
+                metadata?.frontCover?.isNotBlank(),
+                metadata?.backCover?.isNotBlank(),
+                metadata?.cartridge?.isNotBlank(),
+            ).none {
+                it == true
+            }
+        ) {
+            view?.findViewById<ScrollView>(R.id.scroll)
+                ?.visibility = View.GONE
+            view?.findViewById<TextView>(R.id.no_data_text)?.apply {
+                text = context.getString(
+                    R.string.no_data_was_found_for_game,
+                    game.name,
+                )
+                visibility = View.VISIBLE
             }
         }
     }
@@ -254,7 +252,7 @@ class GameFragment : BaseFragment() {
             },
             success = {
                 game = Persistence.getGameByPath(game.path)!!
-                metadata = Persistence.getMetadataBySha1(game.sha1!!)!!
+                metadata = Persistence.getMetadataBySha1(game.sha1!!)
                 setSpeedDial()
                 setMetadata()
             },

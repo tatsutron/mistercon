@@ -19,4 +19,5 @@ AND r2.romID = (
     SELECT romID
     FROM Roms
     WHERE romHashSHA1 = :sha1
-);
+)
+LIMIT 1;

@@ -18,13 +18,3 @@ CREATE TABLE IF NOT EXISTS Releases (
     releaseReferenceURL TEXT,
     releaseReferenceImageURL TEXT
 );
-
-selectBySha1:
-SELECT *
-FROM Releases
-WHERE romID = (
-    SELECT romID
-    FROM Roms
-    WHERE romHashSHA1 = ?
-)
-LIMIT 1;
