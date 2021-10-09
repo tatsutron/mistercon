@@ -14,6 +14,7 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.tatsutron.remote.Application
 import com.tatsutron.remote.MainActivity
 import com.tatsutron.remote.R
 import com.tatsutron.remote.util.Dialog
@@ -127,8 +128,9 @@ class ScanFragment : BaseFragment() {
         Persistence.getGameBySha1(data)
             ?.let { game ->
                 Navigator.showLoadingScreen()
-                game.play(
-                    requireActivity(),
+                Application.loadGame(
+                    activity = requireActivity(),
+                    game = game,
                     callback = {
                         Navigator.hideLoadingScreen()
                         Handler(Looper.getMainLooper()).postDelayed({

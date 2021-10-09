@@ -216,8 +216,9 @@ class GameFragment : BaseFragment() {
 
     private fun onPlay() {
         Navigator.showLoadingScreen()
-        game.play(
-            requireActivity(),
+        Application.loadGame(
+            activity = requireActivity(),
+            game = game,
             callback = {
                 Navigator.hideLoadingScreen()
             },
