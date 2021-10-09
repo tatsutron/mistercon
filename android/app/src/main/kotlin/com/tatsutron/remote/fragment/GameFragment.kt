@@ -15,12 +15,14 @@ import com.tatsutron.remote.*
 import com.tatsutron.remote.component.ImageCard
 import com.tatsutron.remote.component.MetadataCard
 import com.tatsutron.remote.model.Game
+import com.tatsutron.remote.model.Metadata
 import com.tatsutron.remote.util.*
 import java.io.File
 
 class GameFragment : BaseFragment() {
 
     private lateinit var game: Game
+    private lateinit var metadata: Metadata
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +49,9 @@ class GameFragment : BaseFragment() {
         game = Persistence.getGameByPath(
             arguments?.getString(FragmentMaker.KEY_PATH)!!
         )!!
+        if (game.sha1 != null) {
+            metadata = Persistence.getMetadataBySha1(game.sha1!!)!!
+        }
         val toolbar = view.findViewById<Toolbar>(R.id.game_toolbar)
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(toolbar)
@@ -131,77 +136,80 @@ class GameFragment : BaseFragment() {
     }
 
     private fun setMetadata() {
-        game.release?.releasePublisher?.let {
-            if (it.isNotBlank()) {
-                view?.findViewById<MetadataCard>(R.id.publisher)?.set(it)
+        with(metadata) {
+            publisher?.let {
+                if (it.isNotBlank()) {
+                    view?.findViewById<MetadataCard>(R.id.publisher)?.set(it)
+                }
             }
-        }
-        game.release?.releaseDeveloper?.let {
-            if (it.isNotBlank()) {
-                view?.findViewById<MetadataCard>(R.id.developer)?.set(it)
+            developer?.let {
+                if (it.isNotBlank()) {
+                    view?.findViewById<MetadataCard>(R.id.developer)?.set(it)
+                }
             }
-        }
-        game.release?.releaseDate?.let {
-            if (it.isNotBlank()) {
-                view?.findViewById<MetadataCard>(R.id.release_date)?.set(it)
+            releaseDate?.let {
+                if (it.isNotBlank()) {
+                    view?.findViewById<MetadataCard>(R.id.release_date)
+                        ?.set(it)
+                }
             }
-        }
-        game.region?.regionName?.let {
-            if (it.isNotBlank()) {
-                view?.findViewById<MetadataCard>(R.id.region)?.set(it)
+            region?.let {
+                if (it.isNotBlank()) {
+                    view?.findViewById<MetadataCard>(R.id.region)?.set(it)
+                }
             }
-        }
-        game.release?.releaseGenre?.let {
-            if (it.isNotBlank()) {
-                view?.findViewById<MetadataCard>(R.id.genre)?.set(it)
+            genre?.let {
+                if (it.isNotBlank()) {
+                    view?.findViewById<MetadataCard>(R.id.genre)?.set(it)
+                }
             }
-        }
-        game.release?.releaseDescription?.let {
-            if (it.isNotBlank()) {
-                view?.findViewById<MetadataCard>(R.id.description)?.set(it)
+            description?.let {
+                if (it.isNotBlank()) {
+                    view?.findViewById<MetadataCard>(R.id.description)?.set(it)
+                }
             }
-        }
-        game.release?.releaseCoverFront?.let { url ->
-            if (url.isNotBlank()) {
-                view?.findViewById<ImageCard>(R.id.front_cover)
-                    ?.set(requireActivity(), url)
+            frontCover?.let { url ->
+                if (url.isNotBlank()) {
+                    view?.findViewById<ImageCard>(R.id.front_cover)
+                        ?.set(requireActivity(), url)
+                }
             }
-        }
-        game.release?.releaseCoverBack?.let { url ->
-            if (url.isNotBlank()) {
-                view?.findViewById<ImageCard>(R.id.back_cover)
-                    ?.set(requireActivity(), url)
+            backCover?.let { url ->
+                if (url.isNotBlank()) {
+                    view?.findViewById<ImageCard>(R.id.back_cover)
+                        ?.set(requireActivity(), url)
+                }
             }
-        }
-        game.release?.releaseCoverCart?.let { url ->
-            if (url.isNotBlank()) {
-                view?.findViewById<ImageCard>(R.id.cartridge)
-                    ?.set(requireActivity(), url)
+            cartridge?.let { url ->
+                if (url.isNotBlank()) {
+                    view?.findViewById<ImageCard>(R.id.cartridge)
+                        ?.set(requireActivity(), url)
+                }
             }
-        }
-        if (
-            listOf(
-                game.release?.releasePublisher?.isNotBlank(),
-                game.release?.releaseDeveloper?.isNotBlank(),
-                game.release?.releaseDate?.isNotBlank(),
-                game.region?.regionName?.isNotBlank(),
-                game.release?.releaseGenre?.isNotBlank(),
-                game.release?.releaseDescription?.isNotBlank(),
-                game.release?.releaseCoverFront?.isNotBlank(),
-                game.release?.releaseCoverBack?.isNotBlank(),
-                game.release?.releaseCoverCart?.isNotBlank(),
-            ).none {
-                it == true
-            }
-        ) {
-            view?.findViewById<ScrollView>(R.id.scroll)
-                ?.visibility = View.GONE
-            view?.findViewById<TextView>(R.id.no_data_text)?.apply {
-                text = context.getString(
-                    R.string.no_data_was_found_for_game,
-                    game.name,
-                )
-                visibility = View.VISIBLE
+            if (
+                listOf(
+                    publisher?.isNotBlank(),
+                    developer?.isNotBlank(),
+                    releaseDate?.isNotBlank(),
+                    region?.isNotBlank(),
+                    genre?.isNotBlank(),
+                    description?.isNotBlank(),
+                    frontCover?.isNotBlank(),
+                    backCover?.isNotBlank(),
+                    cartridge?.isNotBlank(),
+                ).none {
+                    it == true
+                }
+            ) {
+                view?.findViewById<ScrollView>(R.id.scroll)
+                    ?.visibility = View.GONE
+                view?.findViewById<TextView>(R.id.no_data_text)?.apply {
+                    text = context.getString(
+                        R.string.no_data_was_found_for_game,
+                        game.name,
+                    )
+                    visibility = View.VISIBLE
+                }
             }
         }
     }
@@ -245,6 +253,7 @@ class GameFragment : BaseFragment() {
             },
             success = {
                 game = Persistence.getGameByPath(game.path)!!
+                metadata = Persistence.getMetadataBySha1(game.sha1!!)!!
                 setSpeedDial()
                 setMetadata()
             },

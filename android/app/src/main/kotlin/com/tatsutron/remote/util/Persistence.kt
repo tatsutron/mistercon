@@ -5,9 +5,11 @@ import android.content.Context
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.tatsutron.remote.Database
 import com.tatsutron.remote.data.Games
+import com.tatsutron.remote.data.SelectBySha1
 import com.tatsutron.remote.model.Config
 import com.tatsutron.remote.model.Console
 import com.tatsutron.remote.model.Game
+import com.tatsutron.remote.model.Metadata
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
@@ -153,25 +155,31 @@ object Persistence {
             ?.deleteByPath(path)
     }
 
+    fun getMetadataBySha1(sha1: String) =
+        database?.metadataQueries
+            ?.selectBySha1(sha1.toUpperCase(Locale.getDefault()))
+            ?.executeAsOneOrNull()
+            ?.let {
+                metadata(it)
+            }
+
     private fun game(dao: Games) =
         Game(
             console = Console.valueOf(dao.console),
             path = dao.path,
             sha1 = dao.sha1,
-            region = dao.sha1?.let {
-                database?.regionsQueries
-                    ?.selectBySha1(it.toUpperCase(Locale.getDefault()))
-                    ?.executeAsOneOrNull()
-            },
-            release = dao.sha1?.let {
-                database?.releasesQueries
-                    ?.selectBySha1(it.toUpperCase(Locale.getDefault()))
-                    ?.executeAsOneOrNull()
-            },
-            system = dao.sha1?.let {
-                database?.systemsQueries
-                    ?.selectBySha1(it.toUpperCase(Locale.getDefault()))
-                    ?.executeAsOneOrNull()
-            },
+        )
+
+    private fun metadata(dao: SelectBySha1) =
+        Metadata(
+            backCover = dao.backCover,
+            cartridge = dao.cartridge,
+            description = dao.description,
+            developer = dao.developer,
+            frontCover = dao.frontCover,
+            genre = dao.genre,
+            publisher = dao.publisher,
+            releaseDate = dao.releaseDate,
+            region = dao.region,
         )
 }

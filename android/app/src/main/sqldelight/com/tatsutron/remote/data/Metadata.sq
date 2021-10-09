@@ -1,0 +1,22 @@
+selectBySha1:
+SELECT
+    r2.releaseCoverBack AS backCover,
+    r2.releaseCoverCart AS cartridge,
+    r2.releaseDescription AS description,
+    r2.releaseDeveloper AS developer,
+    r2.releaseCoverFront AS frontCover,
+    r2.releaseGenre AS genre,
+    r2.releasePublisher AS publisher,
+    r2.releaseDate AS releaseDate,
+    r1.regionName AS region
+FROM Regions r1 JOIN Releases r2
+ON r1.regionID = (
+    SELECT regionID
+    FROM Roms
+    WHERE romHashSHA1 = :sha1
+)
+AND r2.romID = (
+    SELECT romID
+    FROM Roms
+    WHERE romHashSHA1 = :sha1
+);

@@ -1,9 +1,6 @@
 package com.tatsutron.remote.model
 
 import android.app.Activity
-import com.tatsutron.remote.data.Regions
-import com.tatsutron.remote.data.Releases
-import com.tatsutron.remote.data.Systems
 import com.tatsutron.remote.util.Assets
 import com.tatsutron.remote.util.Constants
 import com.tatsutron.remote.util.Coroutine
@@ -14,9 +11,6 @@ class Game(
     val console: Console,
     val path: String,
     val sha1: String?,
-    val region: Regions?,
-    val release: Releases?,
-    val system: Systems?,
 ) {
 
     val name: String
