@@ -6,17 +6,6 @@ enum class Console(
     val gamesFolderDefault: String,
 ) {
 
-    BALLY_ASTROCADE(
-        displayName = "Bally Astrocade",
-        formats = listOf(
-            Format(
-                extension = "bin",
-                mbcCommand = "ASTROCADE",
-            ),
-        ),
-        gamesFolderDefault = "Astrocade",
-    ),
-
     ATARI_2600(
         displayName = "Atari 2600",
         formats = listOf(
@@ -61,6 +50,17 @@ enum class Console(
             ),
         ),
         gamesFolderDefault = "AtariLynx",
+    ),
+
+    BALLY_ASTROCADE(
+        displayName = "Bally Astrocade",
+        formats = listOf(
+            Format(
+                extension = "bin",
+                mbcCommand = "ASTROCADE",
+            ),
+        ),
+        gamesFolderDefault = "Astrocade",
     ),
 
     COLECOVISION(
@@ -141,6 +141,28 @@ enum class Console(
         gamesFolderDefault = "Intellivision",
     ),
 
+    INTERTON_VC_4000(
+        displayName = "Interton VC 4000",
+        formats = listOf(
+            Format(
+                extension = "bin",
+                mbcCommand = "VC4000",
+            ),
+        ),
+        gamesFolderDefault = "VC4000",
+    ),
+
+    MASTER_SYSTEM(
+        displayName = "Master System",
+        formats = listOf(
+            Format(
+                extension = "sms",
+                mbcCommand = "SMS",
+            ),
+        ),
+        gamesFolderDefault = "SMS",
+    ),
+
     NEO_GEO(
         displayName = "Neo Geo",
         formats = listOf(
@@ -205,17 +227,6 @@ enum class Console(
         gamesFolderDefault = "Genesis",
     ),
 
-    SEGA_MASTER_SYSTEM(
-        displayName = "Sega Master System",
-        formats = listOf(
-            Format(
-                extension = "sms",
-                mbcCommand = "SMS",
-            ),
-        ),
-        gamesFolderDefault = "SMS",
-    ),
-
     SG_1000(
         displayName = "SG-1000",
         formats = listOf(
@@ -273,17 +284,6 @@ enum class Console(
             ),
         ),
         gamesFolderDefault = "TGFX16-CD",
-    ),
-
-    VC4000(
-        displayName = "VC4000",
-        formats = listOf(
-            Format(
-                extension = "bin",
-                mbcCommand = "VC4000",
-            ),
-        ),
-        gamesFolderDefault = "VC4000",
     ),
 
     VECTREX(
