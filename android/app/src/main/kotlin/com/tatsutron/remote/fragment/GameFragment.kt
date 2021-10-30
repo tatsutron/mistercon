@@ -44,6 +44,16 @@ class GameFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_game, container, false)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.play -> {
+                onPlay()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         game = Persistence.getGameByPath(
