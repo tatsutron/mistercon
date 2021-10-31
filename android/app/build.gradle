@@ -17,7 +17,7 @@ android {
     compileSdkVersion 31
     defaultConfig {
         applicationId "com.tatsutron.remote"
-        minSdkVersion 26
+        minSdkVersion 23
         targetSdkVersion 31
         versionCode 14
         versionName "1.0.2"
