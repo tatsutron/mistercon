@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.tatsutron.remote.Application
 import com.tatsutron.remote.R
-import com.tatsutron.remote.util.Dialog
 import com.tatsutron.remote.util.FragmentMaker
 import com.tatsutron.remote.util.Navigator
 
@@ -32,22 +31,13 @@ class GameHolder(
             )
         }
         itemView.setOnLongClickListener {
-            Dialog.confirm(
-                context = activity,
-                message = activity.getString(
-                    R.string.confirm_play_game,
-                    item.game.name,
-                ),
-                ok = {
-                    Navigator.showLoadingScreen()
-                    Application.loadGame(
-                        activity = activity,
-                        game = item.game,
-                        callback = {
-                            Navigator.hideLoadingScreen()
-                        }
-                    )
-                },
+            Navigator.showLoadingScreen()
+            Application.loadGame(
+                activity = activity,
+                game = item.game,
+                callback = {
+                    Navigator.hideLoadingScreen()
+                }
             )
             true
         }
