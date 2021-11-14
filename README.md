@@ -45,4 +45,4 @@ WonderSwan Color | `.wsc` | :white_check_mark:
 
 # Credits
 
-This project is made possible by **Arufonsu**, **DoOoM**, **Edward Mallett**, **GeorgZ**, **Greg Dyke**, **Gryzor/CPCwiki**, **Jason Carps**, **Jeremy Hopkins**, **Keith Gordon**, **KremlingKuthroat19**, **Lakhdar Omar**, **Levi Prinzing**, **Louis Martinez**, **Markus Kraus**, **Mist Sonata**, **peanutmans**, **Sergio L. Serrano**, **Tim Lehner**, **Tom B**, and **Weasel5053**.
+This project is made possible by **Arufonsu**, **Daniel Lugo**, **DoOoM**, **Edward Mallett**, **GeorgZ**, **Greg Dyke**, **Gryzor/CPCwiki**, **Jason Carps**, **Jeremy Hopkins**, **Keith Gordon**, **KremlingKuthroat19**, **Lakhdar Omar**, **Levi Prinzing**, **Louis Martinez**, **Marc SE**, **Markus Kraus**, **Mist Sonata**, **peanutmans**, **Sergio L. Serrano**, **Tim Lehner**, **Tom B**, and **Weasel5053**.
