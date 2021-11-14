@@ -1,0 +1,15 @@
+CREATE TABLE Games_ (
+    console TEXT NOT NULL,
+    favorite INTEGER NOT NULL DEFAULT 0,
+    path TEXT NOT NULL UNIQUE PRIMARY KEY,
+    sha1 TEXT
+);
+
+INSERT INTO Games_(console, path, sha1)
+SELECT console, path, sha1
+FROM Games;
+
+DROP TABLE Games;
+
+ALTER TABLE Games_
+RENAME TO Games;
