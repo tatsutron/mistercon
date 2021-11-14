@@ -31,6 +31,7 @@ class CreditsFragment : BaseFragment() {
                     addAll(
                         listOf(
                             "Arufonsu",
+                            "Daniel Lugo",
                             "DoOoM",
                             "Edward Mallett",
                             "GeorgZ",
@@ -43,6 +44,7 @@ class CreditsFragment : BaseFragment() {
                             "Lakhdar Omar",
                             "Levi Prinzing",
                             "Louis Martinez",
+                            "Marc SE",
                             "Markus Kraus",
                             "Mist Sonata",
                             "peanutmans",
