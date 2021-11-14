@@ -150,6 +150,23 @@ object Persistence {
                 game(it)
             }
 
+    fun favoriteGame(game: Game, favorite: Boolean) {
+        database?.gamesQueries
+            ?.favoriteByPath(if (favorite) 1L else 0L, game.path)
+    }
+
+    fun getGamesByFavorite() =
+        database?.gamesQueries
+            ?.selectByFavorite()
+            ?.executeAsList()
+            ?.map {
+                game(it)
+            }
+            ?.sortedBy {
+                File(it.path).name.toLowerCase(Locale.getDefault())
+            }
+            ?: listOf()
+
     fun deleteGame(path: String) {
         database?.gamesQueries
             ?.deleteByPath(path)
@@ -166,6 +183,7 @@ object Persistence {
     private fun game(dao: Games) =
         Game(
             console = Console.valueOf(dao.console),
+            favorite = dao.favorite != 0L,
             path = dao.path,
             sha1 = dao.sha1,
         )

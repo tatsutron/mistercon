@@ -1,5 +1,6 @@
 CREATE TABLE Games (
     console TEXT NOT NULL,
+    favorite INTEGER NOT NULL DEFAULT 0,
     path TEXT NOT NULL UNIQUE PRIMARY KEY,
     sha1 TEXT
 );
@@ -16,6 +17,12 @@ SELECT * FROM Games WHERE path = ?;
 
 selectBySha1:
 SELECT * FROM Games WHERE sha1 = ?;
+
+selectByFavorite:
+SELECT * FROM Games WHERE favorite != 0;
+
+favoriteByPath:
+UPDATE Games SET favorite = ? WHERE path = ?;
 
 deleteByPath:
 DELETE FROM Games WHERE path = ?;

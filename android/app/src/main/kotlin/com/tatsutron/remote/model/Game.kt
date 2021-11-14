@@ -4,6 +4,7 @@ import java.io.File
 
 class Game(
     val console: Console,
+    val favorite: Boolean,
     val path: String,
     val sha1: String?,
 ) {

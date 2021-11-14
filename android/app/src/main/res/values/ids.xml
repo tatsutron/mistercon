@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <id name="copy_qr" />
+    <id name="favorite" />
     <id name="play" />
     <id name="random" />
     <id name="sync" />
+    <id name="unfavorite" />
 </resources>

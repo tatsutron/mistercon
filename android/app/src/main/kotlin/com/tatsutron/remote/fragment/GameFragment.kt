@@ -97,6 +97,33 @@ class GameFragment : BaseFragment() {
                     .setFabImageTintColor(color(R.color.primary_500))
                     .create()
             )
+            if (game.favorite) {
+                addActionItem(
+                    SpeedDialActionItem.Builder(
+                        R.id.unfavorite,
+                        R.drawable.ic_star_fill
+                    )
+                        .setLabel(string(R.string.unfavorite))
+                        .setLabelBackgroundColor(color(R.color.gray_900))
+                        .setLabelColor(color(R.color.primary_500))
+                        .setFabBackgroundColor(color(R.color.gray_900))
+                        .setFabImageTintColor(color(R.color.primary_500))
+                        .create()
+                )
+            } else {
+                addActionItem(
+                    SpeedDialActionItem.Builder(
+                        R.id.favorite,
+                        R.drawable.ic_star_outline
+                    )
+                        .setLabel(string(R.string.favorite))
+                        .setLabelBackgroundColor(color(R.color.gray_900))
+                        .setLabelColor(color(R.color.primary_500))
+                        .setFabBackgroundColor(color(R.color.gray_900))
+                        .setFabImageTintColor(color(R.color.primary_500))
+                        .create()
+                )
+            }
             addActionItem(
                 SpeedDialActionItem.Builder(R.id.sync, R.drawable.ic_sync)
                     .setLabel(string(R.string.sync))
@@ -128,6 +155,11 @@ class GameFragment : BaseFragment() {
                             close()
                             return@OnActionSelectedListener true
                         }
+                        R.id.favorite -> {
+                            onToggleFavorite()
+                            close()
+                            return@OnActionSelectedListener true
+                        }
                         R.id.play -> {
                             onPlay()
                             close()
@@ -135,6 +167,11 @@ class GameFragment : BaseFragment() {
                         }
                         R.id.sync -> {
                             onSync()
+                            close()
+                            return@OnActionSelectedListener true
+                        }
+                        R.id.unfavorite -> {
+                            onToggleFavorite()
                             close()
                             return@OnActionSelectedListener true
                         }
@@ -231,6 +268,12 @@ class GameFragment : BaseFragment() {
                 Navigator.hideLoadingScreen()
             },
         )
+    }
+
+    private fun onToggleFavorite() {
+        Persistence.favoriteGame(game, !game.favorite)
+        game = Persistence.getGameByPath(game.path)!!
+        setSpeedDial()
     }
 
     private fun onSync() {

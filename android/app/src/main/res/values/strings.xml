@@ -11,6 +11,8 @@
     <string name="description">Description</string>
     <string name="developer">Developer</string>
     <string name="error">Error</string>
+    <string name="favorite">Favorite</string>
+    <string name="favorites">Favorites</string>
     <string name="games">Games</string>
     <string name="games_path">Games Path</string>
     <string name="genre">Genre</string>
@@ -35,4 +37,5 @@
     <string name="system">System</string>
     <string name="thank_you">Thank you so much to those who make this project possible!</string>
     <string name="unable_to_sync">Unable to sync</string>
+    <string name="unfavorite">Unfavorite</string>
 </resources>
