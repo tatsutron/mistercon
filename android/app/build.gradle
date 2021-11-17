@@ -41,6 +41,7 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
     implementation "androidx.camera:camera-view:1.0.0-alpha29"
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation "com.afollestad.material-dialogs:input:3.3.0"
     implementation "com.github.bumptech.glide:glide:4.9.0"
     implementation "com.github.MikeOrtiz:TouchImageView:3.1.0"
@@ -51,7 +52,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.sqldelight:android-driver:1.4.4"
+    implementation "io.github.l4digital:fastscroll:2.0.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_version"
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 }

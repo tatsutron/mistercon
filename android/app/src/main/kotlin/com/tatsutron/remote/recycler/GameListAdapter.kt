@@ -4,12 +4,14 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.l4digital.fastscroll.FastScroller
 import com.tatsutron.remote.R
+import java.util.*
 
 class GameListAdapter(
     private val activity: Activity,
     val itemList: MutableList<GameItem> = mutableListOf(),
-) : RecyclerView.Adapter<GameHolder>() {
+) : RecyclerView.Adapter<GameHolder>(), FastScroller.SectionIndexer {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -29,4 +31,8 @@ class GameListAdapter(
     }
 
     override fun getItemCount() = itemList.size
+
+    override fun getSectionText(position: Int) =
+        itemList[position].game.name
+            .first().toString().toUpperCase(Locale.getDefault())
 }
