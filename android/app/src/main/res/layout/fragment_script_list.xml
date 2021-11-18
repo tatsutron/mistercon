@@ -23,8 +23,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/margin_medium" />
+            android:layout_height="match_parent" />
 
         <com.leinardi.android.speeddial.SpeedDialOverlayLayout
             android:id="@+id/speed_dial_overlay_script_list"
