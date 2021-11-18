@@ -19,8 +19,8 @@ android {
         applicationId "com.tatsutron.remote"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 15
-        versionName "1.1.0"
+        versionCode 16
+        versionName "1.1.2"
     }
 }
 
