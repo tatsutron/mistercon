@@ -80,7 +80,7 @@ class ConsoleFragment : BaseFragment() {
         setRecycler()
         setSpeedDial()
         if (Persistence.getGamesByConsole(console).isEmpty()) {
-            onSync()
+            onSync(automatic = true)
         }
     }
 
@@ -159,7 +159,7 @@ class ConsoleFragment : BaseFragment() {
         }
     }
 
-    private fun onSync() {
+    private fun onSync(automatic: Boolean? = null) {
         val context = requireContext()
         Dialog.input(
             context = context,
@@ -222,6 +222,11 @@ class ConsoleFragment : BaseFragment() {
                         Navigator.hideLoadingScreen()
                     },
                 )
+            },
+            cancel = {
+                if (automatic == true) {
+                    activity?.onBackPressed()
+                }
             },
         )
     }

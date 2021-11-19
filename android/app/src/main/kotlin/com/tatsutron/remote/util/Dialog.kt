@@ -45,10 +45,11 @@ object Dialog {
         context: Context,
         title: String,
         text: String,
+        cancel: DialogCallback? = null,
         ok: InputCallback,
     ) = MaterialDialog(context).show {
         title(text = title)
-        negativeButton(R.string.cancel)
+        negativeButton(R.string.cancel, click = cancel)
         positiveButton(R.string.ok)
         input(
             inputType = TYPE_TEXT_FLAG_NO_SUGGESTIONS,
