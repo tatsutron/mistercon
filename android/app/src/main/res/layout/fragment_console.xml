@@ -24,6 +24,7 @@
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:hideScrollbar="false"
             app:bubbleColor="@color/gray_900"
             app:bubbleTextColor="@color/primary_500"
             app:handleColor="@color/gray_500" />
