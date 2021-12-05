@@ -14,10 +14,13 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val loadingScreen = findViewById<RelativeLayout>(R.id.loading_screen)
         if (loadingScreen.visibility != View.VISIBLE) {
-            if (supportFragmentManager.backStackEntryCount > 0) {
-                supportFragmentManager.popBackStack()
-            } else {
-                super.onBackPressed()
+            val fragment = supportFragmentManager.fragments.last()
+            if ((fragment as? BaseFragment)?.onBackPressed() != true) {
+                if (supportFragmentManager.backStackEntryCount > 0) {
+                    supportFragmentManager.popBackStack()
+                } else {
+                    super.onBackPressed()
+                }
             }
         }
     }

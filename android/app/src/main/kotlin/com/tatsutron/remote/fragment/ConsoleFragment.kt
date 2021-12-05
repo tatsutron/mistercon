@@ -14,13 +14,17 @@ import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.*
 import com.tatsutron.remote.model.Console
+import com.tatsutron.remote.model.Game
+import com.tatsutron.remote.recycler.FolderItem
 import com.tatsutron.remote.recycler.GameItem
 import com.tatsutron.remote.recycler.GameListAdapter
 import com.tatsutron.remote.util.*
+import java.io.File
 
 class ConsoleFragment : BaseFragment() {
 
     private lateinit var console: Console
+    private lateinit var currentFolder: String
     private lateinit var adapter: GameListAdapter
     private var searchTerm = ""
 
@@ -64,6 +68,7 @@ class ConsoleFragment : BaseFragment() {
         console = Console.valueOf(
             arguments?.getString(FragmentMaker.KEY_CONSOLE)!!
         )
+        currentFolder = Persistence.getGamesPath(console)
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(toolbar)
@@ -84,21 +89,69 @@ class ConsoleFragment : BaseFragment() {
         }
     }
 
+    override fun onBackPressed(): Boolean {
+        val gamesPath = Persistence.getGamesPath(console)
+        return if (currentFolder.length > gamesPath.length) {
+            currentFolder = File(currentFolder).parent!!
+            setRecycler()
+            true
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     override fun onBackStackChanged() {
         setRecycler()
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setRecycler() {
-        val items = Persistence.getGamesByConsole(console).map {
-            GameItem(it)
+        val subfolder: Game.() -> String? = {
+            val relativePath = path
+                .removePrefix("$currentFolder${File.separator}")
+            val tokens = relativePath.split(File.separator)
+            if (tokens.size <= 1) {
+                null
+            } else {
+                tokens[0]
+            }
         }
+        val games = mutableListOf<Game>()
+        val folders = mutableSetOf<String>()
+        Persistence.getGamesByConsole(console)
+            .filter {
+                it.path.startsWith(currentFolder)
+            }
+            .forEach {
+                val folder = it.subfolder()
+                if (folder != null) {
+                    folders.add(folder)
+                } else {
+                    games.add(it)
+                }
+            }
+        val folderItems = folders
+            .sorted()
+            .map {
+                FolderItem(
+                    name = it,
+                    onClick = {
+                        currentFolder = File(currentFolder, it).path
+                        setRecycler()
+                    },
+                )
+            }
+        val gameItems = games
+            .map {
+                GameItem(it)
+            }
+        val items = folderItems + gameItems
         adapter.itemList.clear()
         if (searchTerm.isBlank()) {
             adapter.itemList.addAll(items)
         } else {
             items.forEach {
-                if (it.game.name.contains(searchTerm, ignoreCase = true)) {
+                if (it.text.contains(searchTerm, ignoreCase = true)) {
                     adapter.itemList.add(it)
                 }
             }
@@ -234,7 +287,12 @@ class ConsoleFragment : BaseFragment() {
     private fun onRandom() {
         Navigator.showScreen(
             activity as AppCompatActivity,
-            FragmentMaker.game(adapter.itemList.random().game.path),
+            FragmentMaker.game(
+                adapter.itemList
+                    .filterIsInstance<GameItem>()
+                    .random()
+                    .game.path
+            )
         )
     }
 }
