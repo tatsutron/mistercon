@@ -62,6 +62,9 @@ class ScriptListFragment : BaseFragment() {
         }
         setRecycler()
         setSpeedDial()
+        if (Persistence.getScriptList().isEmpty()) {
+            onSync(automatic = true)
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -90,7 +93,7 @@ class ScriptListFragment : BaseFragment() {
         }
     }
 
-    private fun onSync() {
+    private fun onSync(automatic: Boolean = false) {
         val context = requireContext()
         Dialog.input(
             context = context,
@@ -104,7 +107,6 @@ class ScriptListFragment : BaseFragment() {
                     activity = requireActivity(),
                     run = {
                         val session = Ssh.session()
-                        Assets.require(requireContext(), session, "mbc")
                         val scriptsPath = Persistence.getConfig()?.scriptsPath
                         Ssh.command(session, "ls $scriptsPath")
                             .split("\n")
@@ -125,6 +127,11 @@ class ScriptListFragment : BaseFragment() {
                         Navigator.hideLoadingScreen()
                     },
                 )
+            },
+            cancel = {
+                if (automatic) {
+                    activity?.onBackPressed()
+                }
             },
         )
     }
