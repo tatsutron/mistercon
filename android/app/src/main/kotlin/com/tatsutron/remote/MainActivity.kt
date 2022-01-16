@@ -36,10 +36,5 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.root, MainFragment())
                 .commit()
         }
-        supportFragmentManager.addOnBackStackChangedListener {
-            supportFragmentManager.fragments.forEach {
-                (it as? BaseFragment)?.onBackStackChanged()
-            }
-        }
     }
 }

@@ -19,11 +19,6 @@ class GameHolder(
 
     fun bind(item: GameItem) {
         label.text = item.game.name
-        label.alpha = if (item.game.sha1?.isNotBlank() == true) {
-            1.0f
-        } else {
-            0.75f
-        }
         itemView.setOnClickListener {
             Navigator.showScreen(
                 activity as AppCompatActivity,

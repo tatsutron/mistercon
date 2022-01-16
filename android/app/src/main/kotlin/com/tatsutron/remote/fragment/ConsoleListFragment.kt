@@ -1,6 +1,5 @@
 package com.tatsutron.remote.fragment
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -35,10 +34,5 @@ class ConsoleListFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = this@ConsoleListFragment.adapter
         }
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    override fun onBackStackChanged() {
-        adapter.notifyDataSetChanged()
     }
 }

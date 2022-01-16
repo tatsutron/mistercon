@@ -100,10 +100,6 @@ class ConsoleFragment : BaseFragment() {
         }
     }
 
-    override fun onBackStackChanged() {
-        setRecycler()
-    }
-
     @SuppressLint("NotifyDataSetChanged")
     private fun setRecycler() {
         val subfolder: Game.() -> String? = {

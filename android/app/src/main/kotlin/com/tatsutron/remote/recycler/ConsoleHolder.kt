@@ -33,13 +33,6 @@ class ConsoleHolder(
             )
         )
         label.text = item.console.displayName
-        label.alpha = if (
-            Persistence.getGamesByConsole(item.console).isNotEmpty()
-        ) {
-            1.0f
-        } else {
-            0.75f
-        }
         itemView.setOnClickListener {
             Navigator.showScreen(
                 activity as AppCompatActivity,
