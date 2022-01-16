@@ -3,33 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="72dp"
-    android:orientation="horizontal"
-    android:padding="@dimen/margin_small">
+    android:orientation="horizontal">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_medium"
-        app:cardBackgroundColor="@color/gray_900"
-        app:cardCornerRadius="28dp">
+    <FrameLayout
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="@dimen/margin_medium">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            app:cardBackgroundColor="@color/gray_900"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="0dp" />
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:scaleType="fitCenter"
-            android:translationX="-4dp"
-            android:translationY="-4dp" />
+            android:scaleType="fitCenter" />
 
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 
     <TextView
         android:id="@+id/label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start|center_vertical"
+        android:layout_gravity="center_vertical"
         android:singleLine="true"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_medium" />
