@@ -79,8 +79,7 @@ class ArcadeListFragment : BaseFragment() {
             text = arcadePath,
             ok = { _, text ->
                 Navigator.showLoadingScreen()
-                Persistence.saveScriptsPath(text.toString())
-                Persistence.clearScripts()
+                // TODO Save arcade path in config
                 Coroutine.launch(
                     activity = requireActivity(),
                     run = {
@@ -91,6 +90,8 @@ class ArcadeListFragment : BaseFragment() {
                                 it.endsWith(".mra")
                             }
                             .forEach {
+                                // TODO Handle old vs. new here
+                                //  a la `ConsoleFragment.onSync`
                                 Persistence.saveGame(
                                     core = Console.ARCADE.name,
                                     path = File(arcadePath, it).path,
