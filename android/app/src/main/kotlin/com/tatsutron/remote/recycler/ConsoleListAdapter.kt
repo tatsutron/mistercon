@@ -13,8 +13,11 @@ class ConsoleListAdapter(
 ) : RecyclerView.Adapter<ConsoleHolder>() {
 
     private var itemList = Console.values()
+        .filter {
+            it != Console.ARCADE
+        }
         .sortedBy {
-            it.displayName.toLowerCase(Locale.getDefault())
+            it.displayName?.toLowerCase(Locale.getDefault())
         }
         .map {
             ConsoleItem(it)

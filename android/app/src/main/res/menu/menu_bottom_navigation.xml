@@ -3,6 +3,9 @@
     <item android:id="@+id/consoles"
         android:title="@string/consoles"
         android:icon="@drawable/ic_consoles" />
+    <item android:id="@+id/arcades"
+        android:title="@string/arcades"
+        android:icon="@drawable/ic_arcades" />
     <item android:id="@+id/favorites"
         android:title="@string/favorites"
         android:icon="@drawable/ic_star_fill" />

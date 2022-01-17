@@ -1,10 +1,20 @@
 package com.tatsutron.remote.model
 
+// TODO Rename `Platform`
 enum class Console(
-    val displayName: String,
+    val displayName: String? = null,
     val formats: List<Format>,
-    val gamesFolderDefault: String,
+    val gamesFolderDefault: String? = null,
 ) {
+
+    ARCADE(
+        formats = listOf(
+            Format(
+                extension = "mra",
+                mbcCommand = "ARCADE",
+            ),
+        ),
+    ),
 
     ATARI_2600(
         displayName = "Atari 2600",

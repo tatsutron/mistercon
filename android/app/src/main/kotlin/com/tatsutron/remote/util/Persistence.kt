@@ -115,13 +115,15 @@ object Persistence {
             ?.selectByName(console.name)
             ?.executeAsOneOrNull()
             ?.gamesPath
-            ?: File(Constants.GAMES_PATH, console.gamesFolderDefault).path
+            ?: File(Constants.GAMES_PATH, console.gamesFolderDefault!!).path
 
+    // TODO Rename `core` to `platform`
     fun saveGame(core: String, path: String, hash: String?) {
         database?.gamesQueries
             ?.save(core, path, hash)
     }
 
+    // TODO Rename to `getGamesByPlatform`
     fun getGamesByConsole(console: Console) =
         database?.gamesQueries
             ?.selectByConsole(console.name)
@@ -172,6 +174,7 @@ object Persistence {
             ?.deleteByPath(path)
     }
 
+    // TODO Rename to `getMetadataByIdentifier`
     fun getMetadataBySha1(sha1: String) =
         database?.metadataQueries
             ?.selectBySha1(sha1.toUpperCase(Locale.getDefault()))

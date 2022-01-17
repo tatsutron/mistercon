@@ -1,4 +1,4 @@
-CREATE TABLE Consoles (
+CREATE TABLE Consoles ( -- TODO Rename to `Platforms`
     gamesPath TEXT NOT NULL,
     name TEXT PRIMARY KEY
 );

@@ -1,6 +1,8 @@
 package com.tatsutron.remote.util
 
 object Constants {
+    const val ARCADE_PATH = "/media/fat/_Arcade"
+    const val CONSOLE_PATH = "/media/fat/_Console"
     const val GAMES_PATH = "/media/fat/games"
     const val HASH_PATH = "/media/fat/mistercon/hash"
     const val HOST = "MiSTer"

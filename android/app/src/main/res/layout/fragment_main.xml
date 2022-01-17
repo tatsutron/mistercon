@@ -12,9 +12,9 @@
         style="@style/Toolbar" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
@@ -31,6 +31,7 @@
             app:itemBackground="@color/gray_700"
             app:itemIconTint="@drawable/selector_item_bottom_navigation"
             app:itemTextColor="@drawable/selector_item_bottom_navigation"
+            app:labelVisibilityMode="labeled"
             app:menu="@menu/menu_bottom_navigation" />
 
     </LinearLayout>

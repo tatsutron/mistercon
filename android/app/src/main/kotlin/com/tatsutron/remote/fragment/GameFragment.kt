@@ -287,7 +287,8 @@ class GameFragment : BaseFragment() {
                     .find {
                         it.extension == File(game.path).extension
                     }
-                    ?.headerSizeInBytes!!
+                    ?.headerSizeInBytes
+                    ?: 0
                 val command = StringBuilder().apply {
                     append("\"${Constants.HASH_PATH}\"")
                     append(" ")

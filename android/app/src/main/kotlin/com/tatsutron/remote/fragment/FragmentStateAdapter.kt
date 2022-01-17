@@ -8,6 +8,7 @@ class FragmentStateAdapter(
 
     private val items = listOf(
         ConsoleListFragment(),
+        ArcadeListFragment(),
         FavoriteListFragment(),
         SystemFragment(),
     )

@@ -208,7 +208,7 @@ class ConsoleFragment : BaseFragment() {
         }
     }
 
-    private fun onSync(automatic: Boolean? = null) {
+    private fun onSync(automatic: Boolean = false) {
         val context = requireContext()
         Dialog.input(
             context = context,
@@ -273,7 +273,7 @@ class ConsoleFragment : BaseFragment() {
                 )
             },
             cancel = {
-                if (automatic == true) {
+                if (automatic) {
                     activity?.onBackPressed()
                 }
             },
