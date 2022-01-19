@@ -212,7 +212,10 @@ class ConsoleFragment : BaseFragment() {
         val context = requireContext()
         Dialog.input(
             context = context,
-            title = context.getString(R.string.sync),
+            title = context.getString(
+                R.string.sync_specific,
+                platform.displayName,
+            ),
             text = platform.gamesPath!!,
             ok = { _, text ->
                 Persistence.savePlatform(

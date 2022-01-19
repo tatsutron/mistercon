@@ -79,7 +79,10 @@ class ArcadeListFragment : BaseFragment() {
         var arcadePath = config.arcadePath
         Dialog.input(
             context = context,
-            title = context.getString(R.string.sync),
+            title = context.getString(
+                R.string.sync_specific,
+                context.getString(R.string.arcades),
+            ),
             text = arcadePath,
             ok = { _, text ->
                 arcadePath = text.toString()

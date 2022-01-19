@@ -99,7 +99,10 @@ class ScriptListFragment : BaseFragment() {
         var scriptsPath = config.scriptsPath
         Dialog.input(
             context = context,
-            title = context.getString(R.string.sync),
+            title = context.getString(
+                R.string.sync_specific,
+                context.getString(R.string.scripts),
+            ),
             text = scriptsPath,
             ok = { _, text ->
                 scriptsPath = text.toString()

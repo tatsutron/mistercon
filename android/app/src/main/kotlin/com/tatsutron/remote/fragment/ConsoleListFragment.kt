@@ -82,7 +82,10 @@ class ConsoleListFragment : BaseFragment() {
         var consolePath = config.consolePath
         Dialog.input(
             context = context,
-            title = context.getString(R.string.sync),
+            title = context.getString(
+                R.string.sync_specific,
+                context.getString(R.string.consoles),
+            ),
             text = consolePath,
             ok = { _, text ->
                 consolePath = text.toString()
