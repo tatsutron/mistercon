@@ -45,6 +45,9 @@ class MainFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val viewPager = view.findViewById<ViewPager2>(R.id.view_pager)
+            .apply {
+                isUserInputEnabled = false
+            }
         val bottomNavigation = view
             .findViewById<BottomNavigationView>(R.id.bottom_navigation)
         (activity as? AppCompatActivity)?.apply {
@@ -70,7 +73,7 @@ class MainFragment : BaseFragment() {
         bottomNavigation.setOnItemSelectedListener { item ->
             for (i in 0 until bottomNavigation.menu.size()) {
                 if (bottomNavigation.menu.getItem(i) == item) {
-                    viewPager.currentItem = i
+                    viewPager.setCurrentItem(i, false)
                     (activity as? AppCompatActivity)?.apply {
                         setSupportActionBar(
                             view.findViewById(R.id.toolbar)
