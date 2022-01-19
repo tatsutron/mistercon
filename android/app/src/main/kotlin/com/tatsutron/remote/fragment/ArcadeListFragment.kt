@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.*
-import com.tatsutron.remote.model.Console
+import com.tatsutron.remote.model.Platform
 import com.tatsutron.remote.recycler.GameItem
 import com.tatsutron.remote.recycler.GameListAdapter
 import com.tatsutron.remote.util.*
@@ -31,6 +31,13 @@ class ArcadeListFragment : BaseFragment() {
         )
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (Persistence.getGamesByPlatform(Platform.ARCADE).isEmpty()) {
+            onSync()
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = GameListAdapter(requireActivity())
@@ -40,14 +47,11 @@ class ArcadeListFragment : BaseFragment() {
         }
         setRecycler()
         setSpeedDial()
-        if (Persistence.getGamesByConsole(Console.ARCADE).isEmpty()) {
-            onSync()
-        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setRecycler() {
-        val items = Persistence.getGamesByConsole(Console.ARCADE)
+        val items = Persistence.getGamesByPlatform(Platform.ARCADE)
             .map {
                 GameItem(it)
             }
@@ -71,15 +75,19 @@ class ArcadeListFragment : BaseFragment() {
 
     private fun onSync() {
         val context = requireContext()
-        // TODO Replace with `Persistence.getConfig()?.arcadePath ?: ""`
-        val arcadePath = Constants.ARCADE_PATH
+        val config = Persistence.getConfig()!!
+        var arcadePath = config.arcadePath
         Dialog.input(
             context = context,
             title = context.getString(R.string.sync),
             text = arcadePath,
             ok = { _, text ->
+                arcadePath = text.toString()
+                Persistence.saveConfig(
+                    config.copy(arcadePath = arcadePath),
+                )
                 Navigator.showLoadingScreen()
-                // TODO Save arcade path in config
+                Persistence.clearGamesByPlatform(Platform.ARCADE)
                 Coroutine.launch(
                     activity = requireActivity(),
                     run = {
@@ -90,12 +98,10 @@ class ArcadeListFragment : BaseFragment() {
                                 it.endsWith(".mra")
                             }
                             .forEach {
-                                // TODO Handle old vs. new here
-                                //  a la `ConsoleFragment.onSync`
                                 Persistence.saveGame(
-                                    core = Console.ARCADE.name,
                                     path = File(arcadePath, it).path,
-                                    hash = null,
+                                    platform = Platform.ARCADE,
+                                    sha1 = null,
                                 )
                             }
                         session.disconnect()

@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.*
-import com.tatsutron.remote.model.Console
 import com.tatsutron.remote.model.Game
+import com.tatsutron.remote.model.Platform
 import com.tatsutron.remote.recycler.FolderItem
 import com.tatsutron.remote.recycler.GameItem
 import com.tatsutron.remote.recycler.GameListAdapter
@@ -23,7 +23,7 @@ import java.io.File
 
 class ConsoleFragment : BaseFragment() {
 
-    private lateinit var console: Console
+    private lateinit var platform: Platform
     private lateinit var currentFolder: String
     private lateinit var adapter: GameListAdapter
     private var searchTerm = ""
@@ -65,17 +65,19 @@ class ConsoleFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        console = Console.valueOf(
-            arguments?.getString(FragmentMaker.KEY_CONSOLE)!!
-        )
-        currentFolder = Persistence.getGamesPath(console)
+        platform = Persistence.getPlatform(
+            Platform.valueOf(
+                arguments?.getString(FragmentMaker.KEY_PLATFORM)!!,
+            )
+        )!!
+        currentFolder = platform.gamesPath!!
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(toolbar)
             toolbar.setNavigationOnClickListener {
                 onBackPressed()
             }
-            supportActionBar?.title = console.displayName
+            supportActionBar?.title = platform.displayName
         }
         adapter = GameListAdapter(activity as Activity)
         view.findViewById<RecyclerView>(R.id.recycler).apply {
@@ -84,21 +86,19 @@ class ConsoleFragment : BaseFragment() {
         }
         setRecycler()
         setSpeedDial()
-        if (Persistence.getGamesByConsole(console).isEmpty()) {
+        if (Persistence.getGamesByPlatform(platform).isEmpty()) {
             onSync(automatic = true)
         }
     }
 
-    override fun onBackPressed(): Boolean {
-        val gamesPath = Persistence.getGamesPath(console)
-        return if (currentFolder.length > gamesPath.length) {
+    override fun onBackPressed() =
+        if (currentFolder.length > platform.gamesPath?.length!!) {
             currentFolder = File(currentFolder).parent!!
             setRecycler()
             true
         } else {
             super.onBackPressed()
         }
-    }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setRecycler() {
@@ -114,7 +114,7 @@ class ConsoleFragment : BaseFragment() {
         }
         val games = mutableListOf<Game>()
         val folders = mutableSetOf<String>()
-        Persistence.getGamesByConsole(console)
+        Persistence.getGamesByPlatform(platform)
             .filter {
                 it.path.startsWith(currentFolder)
             }
@@ -213,17 +213,21 @@ class ConsoleFragment : BaseFragment() {
         Dialog.input(
             context = context,
             title = context.getString(R.string.sync),
-            text = Persistence.getGamesPath(console),
+            text = platform.gamesPath!!,
             ok = { _, text ->
-                Persistence.saveGamesPath(console, text.toString())
+                Persistence.savePlatform(
+                    corePath = platform.corePath!!,
+                    gamesPath = text.toString(),
+                    platform = platform,
+                )
+                platform = Persistence.getPlatform(platform)!!
                 Navigator.showLoadingScreen()
                 Coroutine.launch(
                     activity = requireActivity(),
                     run = {
                         val session = Ssh.session()
                         Assets.require(requireContext(), session, "list")
-                        val gamesPath = Persistence.getGamesPath(console)
-                        val extensions = console.formats
+                        val extensions = platform.formats
                             .map {
                                 it.extension
                             }
@@ -234,7 +238,7 @@ class ConsoleFragment : BaseFragment() {
                         val command = StringBuilder().apply {
                             append("\"${Constants.LIST_PATH}\"")
                             append(" ")
-                            append("\"${gamesPath}\"")
+                            append("\"${platform.gamesPath!!}\"")
                             append(" ")
                             append("\"$regex\"")
                         }.toString()
@@ -243,16 +247,16 @@ class ConsoleFragment : BaseFragment() {
                             .filter {
                                 it.isNotBlank()
                             }
-                        val old = Persistence.getGamesByConsole(console)
+                        val old = Persistence.getGamesByPlatform(platform)
                             .map {
                                 it.path
                             }
                         new.forEach {
                             if (it !in old) {
                                 Persistence.saveGame(
-                                    core = console.name,
                                     path = it,
-                                    hash = null,
+                                    platform = platform,
+                                    sha1 = null,
                                 )
                             }
                         }

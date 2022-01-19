@@ -1,6 +1,4 @@
-/*
-    Add column `favorite` to table `Games`
-*/
+-- Add column `favorite` to table `Games`
 
 CREATE TABLE Games_ (
     console TEXT NOT NULL,

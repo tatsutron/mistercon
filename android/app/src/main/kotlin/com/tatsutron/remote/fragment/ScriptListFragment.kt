@@ -95,19 +95,23 @@ class ScriptListFragment : BaseFragment() {
 
     private fun onSync(automatic: Boolean = false) {
         val context = requireContext()
+        val config = Persistence.getConfig()!!
+        var scriptsPath = config.scriptsPath
         Dialog.input(
             context = context,
             title = context.getString(R.string.sync),
-            text = Persistence.getConfig()?.scriptsPath ?: "",
+            text = scriptsPath,
             ok = { _, text ->
+                scriptsPath = text.toString()
+                Persistence.saveConfig(
+                    config.copy(scriptsPath = scriptsPath),
+                )
                 Navigator.showLoadingScreen()
-                Persistence.saveScriptsPath(text.toString())
                 Persistence.clearScripts()
                 Coroutine.launch(
                     activity = requireActivity(),
                     run = {
                         val session = Ssh.session()
-                        val scriptsPath = Persistence.getConfig()?.scriptsPath
                         Ssh.command(session, "ls $scriptsPath")
                             .split("\n")
                             .filter {

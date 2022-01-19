@@ -1,10 +1,12 @@
 package com.tatsutron.remote.model
 
-// TODO Rename `Platform`
-enum class Console(
+enum class Platform(
+    val coreId: String? = null,
+    var corePath: String? = null,
     val displayName: String? = null,
     val formats: List<Format>,
     val gamesFolderDefault: String? = null,
+    var gamesPath: String? = null,
 ) {
 
     ARCADE(
@@ -17,6 +19,7 @@ enum class Console(
     ),
 
     ATARI_2600(
+        coreId = "Atari2600",
         displayName = "Atari 2600",
         formats = listOf(
             Format(
@@ -28,6 +31,7 @@ enum class Console(
     ),
 
     ATARI_5200(
+        coreId = "Atari5200",
         displayName = "Atari 5200",
         formats = listOf(
             Format(
@@ -39,6 +43,7 @@ enum class Console(
     ),
 
     ATARI_7800(
+        coreId = "Atari7800",
         displayName = "Atari 7800",
         formats = listOf(
             Format(
@@ -51,6 +56,7 @@ enum class Console(
     ),
 
     ATARI_LYNX(
+        coreId = "AtariLynx",
         displayName = "Atari Lynx",
         formats = listOf(
             Format(
@@ -63,6 +69,7 @@ enum class Console(
     ),
 
     BALLY_ASTROCADE(
+        coreId = "Astrocade",
         displayName = "Bally Astrocade",
         formats = listOf(
             Format(
@@ -74,6 +81,7 @@ enum class Console(
     ),
 
     COLECOVISION(
+        coreId = "ColecoVision",
         displayName = "ColecoVision",
         formats = listOf(
             Format(
@@ -85,6 +93,7 @@ enum class Console(
     ),
 
     FAMICOM_DISK_SYSTEM(
+        coreId = "NES",
         displayName = "Famicom Disk System",
         formats = listOf(
             Format(
@@ -97,6 +106,7 @@ enum class Console(
     ),
 
     GAME_BOY(
+        coreId = "Gameboy",
         displayName = "Game Boy",
         formats = listOf(
             Format(
@@ -108,6 +118,7 @@ enum class Console(
     ),
 
     GAME_BOY_ADVANCE(
+        coreId = "GBA",
         displayName = "Game Boy Advance",
         formats = listOf(
             Format(
@@ -119,6 +130,7 @@ enum class Console(
     ),
 
     GAME_BOY_COLOR(
+        coreId = "Gameboy",
         displayName = "Game Boy Color",
         formats = listOf(
             Format(
@@ -130,6 +142,7 @@ enum class Console(
     ),
 
     GAME_GEAR(
+        coreId = "SMS",
         displayName = "Game Gear",
         formats = listOf(
             Format(
@@ -141,6 +154,7 @@ enum class Console(
     ),
 
     INTELLIVISION(
+        coreId = "Intellivision",
         displayName = "Intellivision",
         formats = listOf(
             Format(
@@ -152,6 +166,7 @@ enum class Console(
     ),
 
     INTERTON_VC_4000(
+        coreId = "VC4000",
         displayName = "Interton VC 4000",
         formats = listOf(
             Format(
@@ -163,6 +178,7 @@ enum class Console(
     ),
 
     MASTER_SYSTEM(
+        coreId = "SMS",
         displayName = "Master System",
         formats = listOf(
             Format(
@@ -174,6 +190,7 @@ enum class Console(
     ),
 
     NEO_GEO(
+        coreId = "NeoGeo",
         displayName = "Neo Geo",
         formats = listOf(
             Format(
@@ -185,6 +202,7 @@ enum class Console(
     ),
 
     NINTENDO_ENTERTAINMENT_SYSTEM(
+        coreId = "NES",
         displayName = "Nintendo Entertainment System",
         formats = listOf(
             Format(
@@ -197,6 +215,7 @@ enum class Console(
     ),
 
     ODYSSEY_2(
+        coreId = "Odyssey2",
         displayName = "Odyssey 2",
         formats = listOf(
             Format(
@@ -208,6 +227,7 @@ enum class Console(
     ),
 
     SEGA_CD(
+        coreId = "MegaCD",
         displayName = "Sega CD",
         formats = listOf(
             Format(
@@ -219,6 +239,7 @@ enum class Console(
     ),
 
     SEGA_GENESIS(
+        coreId = "Genesis",
         displayName = "Sega Genesis",
         formats = listOf(
             Format(
@@ -238,6 +259,7 @@ enum class Console(
     ),
 
     SG_1000(
+        coreId = "ColecoVision",
         displayName = "SG-1000",
         formats = listOf(
             Format(
@@ -249,6 +271,7 @@ enum class Console(
     ),
 
     SUPER_GRAFX(
+        coreId = "TurboGrafx16",
         displayName = "SuperGrafx",
         formats = listOf(
             Format(
@@ -260,6 +283,7 @@ enum class Console(
     ),
 
     SUPER_NINTENDO(
+        coreId = "SNES",
         displayName = "Super Nintendo",
         formats = listOf(
             Format(
@@ -275,6 +299,7 @@ enum class Console(
     ),
 
     TURBO_GRAFX_16(
+        coreId = "TurboGrafx16",
         displayName = "TurboGrafx-16",
         formats = listOf(
             Format(
@@ -286,6 +311,7 @@ enum class Console(
     ),
 
     TURBO_GRAFX_CD(
+        coreId = "TurboGrafx16",
         displayName = "TurboGrafx-CD",
         formats = listOf(
             Format(
@@ -297,6 +323,7 @@ enum class Console(
     ),
 
     VECTREX(
+        coreId = "Vectrex",
         displayName = "Vectrex",
         formats = listOf(
             Format(
@@ -312,6 +339,7 @@ enum class Console(
     ),
 
     WONDERSWAN(
+        coreId = "WonderSwan",
         displayName = "WonderSwan",
         formats = listOf(
             Format(
@@ -323,6 +351,7 @@ enum class Console(
     ),
 
     WONDERSWAN_COLOR(
+        coreId = "WonderSwan",
         displayName = "WonderSwan Color",
         formats = listOf(
             Format(
@@ -331,5 +360,5 @@ enum class Console(
             ),
         ),
         gamesFolderDefault = "WonderSwan",
-    ),
+    );
 }

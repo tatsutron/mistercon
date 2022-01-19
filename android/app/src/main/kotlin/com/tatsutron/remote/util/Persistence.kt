@@ -6,10 +6,7 @@ import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.tatsutron.remote.Database
 import com.tatsutron.remote.data.Games
 import com.tatsutron.remote.data.SelectBySha1
-import com.tatsutron.remote.model.Config
-import com.tatsutron.remote.model.Console
-import com.tatsutron.remote.model.Game
-import com.tatsutron.remote.model.Metadata
+import com.tatsutron.remote.model.*
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
@@ -38,6 +35,8 @@ object Persistence {
         if (config == null) {
             saveConfig(
                 Config(
+                    arcadePath = Constants.ARCADE_PATH,
+                    consolePath = Constants.CONSOLE_PATH,
                     host = Constants.HOST,
                     scriptsPath = Constants.SCRIPTS_PATH,
                 ),
@@ -45,9 +44,11 @@ object Persistence {
         }
     }
 
-    private fun saveConfig(config: Config) {
+    fun saveConfig(config: Config) {
         database?.configQueries
             ?.save(
+                arcadePath = config.arcadePath,
+                consolePath = config.consolePath,
                 host = config.host,
                 id = 0,
                 scriptsPath = config.scriptsPath,
@@ -60,34 +61,12 @@ object Persistence {
             ?.executeAsOneOrNull()
             ?.let {
                 Config(
+                    arcadePath = it.arcadePath,
+                    consolePath = it.consolePath,
                     host = it.host,
                     scriptsPath = it.scriptsPath,
                 )
             }
-
-    fun saveHost(host: String) {
-        getConfig()
-            ?.let {
-                saveConfig(
-                    Config(
-                        host = host,
-                        scriptsPath = it.scriptsPath,
-                    ),
-                )
-            }
-    }
-
-    fun saveScriptsPath(scriptsPath: String) {
-        getConfig()
-            ?.let {
-                saveConfig(
-                    Config(
-                        host = it.host,
-                        scriptsPath = scriptsPath,
-                    ),
-                )
-            }
-    }
 
     fun saveScript(filename: String) {
         database?.scriptsQueries
@@ -105,28 +84,48 @@ object Persistence {
             ?.clear()
     }
 
-    fun saveGamesPath(console: Console, gamesPath: String) {
-        database?.consolesQueries
-            ?.save(gamesPath, console.name)
+    fun savePlatform(corePath: String, gamesPath: String, platform: Platform) {
+        database?.platformsQueries
+            ?.save(corePath, gamesPath, platform.name)
     }
 
-    fun getGamesPath(console: Console): String =
-        database?.consolesQueries
-            ?.selectByName(console.name)
+    fun getPlatform(platform: Platform): Platform? =
+        database?.platformsQueries
+            ?.selectByName(platform.name)
             ?.executeAsOneOrNull()
-            ?.gamesPath
-            ?: File(Constants.GAMES_PATH, console.gamesFolderDefault!!).path
+            ?.let {
+                Platform.valueOf(it.name).apply {
+                    corePath = it.corePath
+                    gamesPath = it.gamesPath
+                }
+            }
 
-    // TODO Rename `core` to `platform`
-    fun saveGame(core: String, path: String, hash: String?) {
-        database?.gamesQueries
-            ?.save(core, path, hash)
+    fun getConsolePlatforms() =
+        database?.platformsQueries
+            ?.selectAll()
+            ?.executeAsList()
+            ?.map {
+                Platform.valueOf(it.name)
+            }
+            ?.filter {
+                it != Platform.ARCADE
+            }
+            ?.sorted()
+            ?: listOf()
+
+    fun clearPlatforms() {
+        database?.platformsQueries
+            ?.clear()
     }
 
-    // TODO Rename to `getGamesByPlatform`
-    fun getGamesByConsole(console: Console) =
+    fun saveGame(path: String, platform: Platform, sha1: String?) {
         database?.gamesQueries
-            ?.selectByConsole(console.name)
+            ?.save(path, platform.name, sha1)
+    }
+
+    fun getGamesByPlatform(platform: Platform) =
+        database?.gamesQueries
+            ?.selectByPlatform(platform.name)
             ?.executeAsList()
             ?.map {
                 game(it)
@@ -174,7 +173,11 @@ object Persistence {
             ?.deleteByPath(path)
     }
 
-    // TODO Rename to `getMetadataByIdentifier`
+    fun clearGamesByPlatform(platform: Platform) {
+        database?.gamesQueries
+            ?.deleteByPlatform(platform.name)
+    }
+
     fun getMetadataBySha1(sha1: String) =
         database?.metadataQueries
             ?.selectBySha1(sha1.toUpperCase(Locale.getDefault()))
@@ -185,7 +188,7 @@ object Persistence {
 
     private fun game(dao: Games) =
         Game(
-            console = Console.valueOf(dao.console),
+            platform = Platform.valueOf(dao.platform),
             favorite = dao.favorite != 0L,
             path = dao.path,
             sha1 = dao.sha1,

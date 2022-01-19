@@ -1,4 +1,6 @@
 CREATE TABLE Config (
+    arcadePath TEXT NOT NULL,
+    consolePath TEXT NOT NULL,
     host TEXT NOT NULL,
     id INTEGER PRIMARY KEY CHECK (id = 0),
     scriptsPath TEXT NOT NULL
@@ -8,5 +10,17 @@ select:
 SELECT * FROM Config WHERE id='0';
 
 save:
-REPLACE INTO Config(host, id, scriptsPath)
-VALUES (:host, :id, :scriptsPath);
+REPLACE INTO Config(
+    arcadePath,
+    consolePath,
+    host,
+    id,
+    scriptsPath
+)
+VALUES (
+    :arcadePath,
+    :consolePath,
+    :host,
+    :id,
+    :scriptsPath
+);

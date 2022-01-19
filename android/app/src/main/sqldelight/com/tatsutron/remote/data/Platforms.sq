@@ -1,0 +1,18 @@
+CREATE TABLE Platforms (
+    corePath TEXT,
+    gamesPath TEXT,
+    name TEXT NOT NULL PRIMARY KEY
+);
+
+save:
+REPLACE INTO Platforms(corePath, gamesPath, name)
+VALUES (:corePath, :gamesPath, :name);
+
+selectAll:
+SELECT * FROM Platforms;
+
+selectByName:
+SELECT * FROM Platforms WHERE name = ?;
+
+clear:
+DELETE FROM Platforms;

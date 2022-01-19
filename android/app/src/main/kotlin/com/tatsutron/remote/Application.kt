@@ -38,7 +38,7 @@ class Application : android.app.Application() {
                 run = {
                     val session = Ssh.session()
                     Assets.require(activity, session, "mbc")
-                    val mbcCommand = game.console.formats
+                    val mbcCommand = game.platform.formats
                         .find {
                             it.extension == File(game.path).extension
                         }

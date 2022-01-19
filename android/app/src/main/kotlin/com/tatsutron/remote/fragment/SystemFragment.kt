@@ -53,7 +53,11 @@ class SystemFragment : BaseFragment() {
                     before: Int,
                     count: Int,
                 ) {
-                    Persistence.saveHost(s.toString())
+                    Persistence.saveConfig(
+                        Persistence.getConfig()!!.copy(
+                            host = s.toString(),
+                        ),
+                    )
                 }
 
                 override fun afterTextChanged(s: Editable?) {}

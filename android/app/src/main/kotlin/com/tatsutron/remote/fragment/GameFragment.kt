@@ -283,7 +283,7 @@ class GameFragment : BaseFragment() {
             run = {
                 val session = Ssh.session()
                 Assets.require(requireContext(), session, "hash")
-                val headerSizeInBytes = game.console.formats
+                val headerSizeInBytes = game.platform.formats
                     .find {
                         it.extension == File(game.path).extension
                     }
@@ -298,9 +298,9 @@ class GameFragment : BaseFragment() {
                 }.toString()
                 val output = Ssh.command(session, command)
                 Persistence.saveGame(
-                    core = game.console.name,
                     path = game.path,
-                    hash = output.trim(),
+                    platform = game.platform,
+                    sha1 = output.trim(),
                 )
                 session.disconnect()
             },

@@ -1,21 +1,21 @@
 CREATE TABLE Games (
-    console TEXT NOT NULL, -- TODO Rename to `platform`
     favorite INTEGER NOT NULL DEFAULT 0,
     path TEXT NOT NULL UNIQUE PRIMARY KEY,
-    sha1 TEXT -- TODO Rename to `identifier`
+    platform TEXT NOT NULL,
+    sha1 TEXT
 );
 
 save:
-REPLACE INTO Games(console, path, sha1)
-VALUES (:console, :path, :sha1);
+REPLACE INTO Games(path, platform, sha1)
+VALUES (:path, :platform, :sha1);
 
-selectByConsole: -- TODO Rename to `selectByPlatform`
-SELECT * FROM Games WHERE console = ?;
+selectByPlatform:
+SELECT * FROM Games WHERE platform = ?;
 
 selectByPath:
 SELECT * FROM Games WHERE path = ?;
 
-selectBySha1: -- TODO Rename to `selectByIdentifier`
+selectBySha1:
 SELECT * FROM Games WHERE sha1 = ?;
 
 selectByFavorite:
@@ -26,3 +26,6 @@ UPDATE Games SET favorite = ? WHERE path = ?;
 
 deleteByPath:
 DELETE FROM Games WHERE path = ?;
+
+deleteByPlatform:
+DELETE FROM Games WHERE platform = ?;

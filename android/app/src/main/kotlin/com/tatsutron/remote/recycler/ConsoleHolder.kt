@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tatsutron.remote.R
 import com.tatsutron.remote.util.FragmentMaker
 import com.tatsutron.remote.util.Navigator
-import com.tatsutron.remote.util.Persistence
 import java.util.*
 
 class ConsoleHolder(
@@ -26,17 +25,17 @@ class ConsoleHolder(
             AppCompatResources.getDrawable(
                 image.context,
                 image.resources.getIdentifier(
-                    item.console.name.toLowerCase(Locale.getDefault()),
+                    item.platform.name.toLowerCase(Locale.getDefault()),
                     "drawable",
                     image.context.packageName,
                 )
             )
         )
-        label.text = item.console.displayName
+        label.text = item.platform.displayName
         itemView.setOnClickListener {
             Navigator.showScreen(
                 activity as AppCompatActivity,
-                FragmentMaker.console(item.console.name),
+                FragmentMaker.console(item.platform),
             )
         }
     }

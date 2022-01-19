@@ -2,12 +2,12 @@ CREATE TABLE Scripts (
     path TEXT NOT NULL UNIQUE
 );
 
-selectAll:
-SELECT * FROM Scripts;
-
 save:
 REPLACE INTO Scripts(path)
 VALUES (:path);
+
+selectAll:
+SELECT * FROM Scripts;
 
 clear:
 DELETE FROM Scripts;

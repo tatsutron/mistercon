@@ -5,23 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tatsutron.remote.R
-import com.tatsutron.remote.model.Console
+import com.tatsutron.remote.model.Platform
 import java.util.*
 
 class ConsoleListAdapter(
     private val activity: Activity,
+    val itemList: MutableList<ConsoleItem> = mutableListOf(),
 ) : RecyclerView.Adapter<ConsoleHolder>() {
-
-    private var itemList = Console.values()
-        .filter {
-            it != Console.ARCADE
-        }
-        .sortedBy {
-            it.displayName?.toLowerCase(Locale.getDefault())
-        }
-        .map {
-            ConsoleItem(it)
-        }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

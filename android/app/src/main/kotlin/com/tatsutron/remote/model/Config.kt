@@ -1,8 +1,8 @@
 package com.tatsutron.remote.model
 
-// TODO Add `arcadesPath` (for use in `ArcadeListFragment`)
-// TODO Add `consolesPath` (for use in `ConsoleListFragment`)
-class Config(
+data class Config(
+    val arcadePath: String,
+    val consolePath: String,
     val host: String,
     val scriptsPath: String,
 )

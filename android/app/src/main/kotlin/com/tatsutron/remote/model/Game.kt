@@ -3,7 +3,7 @@ package com.tatsutron.remote.model
 import java.io.File
 
 class Game(
-    val console: Console,
+    val platform: Platform,
     val favorite: Boolean,
     val path: String,
     val sha1: String?,
