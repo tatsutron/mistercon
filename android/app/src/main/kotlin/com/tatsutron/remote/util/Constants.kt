@@ -9,5 +9,5 @@ object Constants {
     const val LIST_PATH = "/media/fat/mistercon/list"
     const val MBC_PATH = "/media/fat/mistercon/mbc"
     const val MISTERCON_PATH = "/media/fat/mistercon"
-    const val SCRIPTS_PATH = "/media/fat/_Scripts"
+    const val SCRIPTS_PATH = "/media/fat/Scripts"
 }
