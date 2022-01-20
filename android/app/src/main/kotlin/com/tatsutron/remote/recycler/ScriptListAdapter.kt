@@ -17,9 +17,9 @@ class ScriptListAdapter(
     ): ScriptHolder {
         val layoutInflater = LayoutInflater.from(context)
         val itemView = layoutInflater.inflate(
-            R.layout.item_script,
+            R.layout.list_item_with_icon,
             parent,
-            false, // attachToRoot
+            false,
         )
         return ScriptHolder(itemView = itemView)
     }

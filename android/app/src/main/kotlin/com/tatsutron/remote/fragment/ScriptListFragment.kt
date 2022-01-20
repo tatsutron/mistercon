@@ -39,7 +39,7 @@ class ScriptListFragment : BaseFragment() {
         return inflater.inflate(
             R.layout.fragment_script_list,
             container,
-            false, // attachToRoot
+            false,
         )
     }
 

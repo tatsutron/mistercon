@@ -30,7 +30,7 @@ class ConsoleListFragment : BaseFragment() {
         return inflater.inflate(
             R.layout.fragment_console_list,
             container,
-            false, // attachToRoot
+            false,
         )
     }
 

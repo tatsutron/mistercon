@@ -19,7 +19,7 @@ class CreditsFragment : BaseFragment() {
         return inflater.inflate(
             R.layout.fragment_credits,
             container,
-            false, // attachToRoot
+            false,
         )
     }
 

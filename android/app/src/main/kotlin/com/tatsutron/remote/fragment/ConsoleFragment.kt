@@ -59,7 +59,7 @@ class ConsoleFragment : BaseFragment() {
         return inflater.inflate(
             R.layout.fragment_console,
             container,
-            false, // attachToRoot
+            false,
         )
     }
 

@@ -27,7 +27,7 @@ class ArcadeListFragment : BaseFragment() {
         return inflater.inflate(
             R.layout.fragment_arcade_list,
             container,
-            false, // attachToRoot
+            false,
         )
     }
 

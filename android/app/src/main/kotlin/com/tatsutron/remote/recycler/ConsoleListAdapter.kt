@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tatsutron.remote.R
-import com.tatsutron.remote.model.Platform
-import java.util.*
 
 class ConsoleListAdapter(
     private val activity: Activity,
@@ -19,9 +17,9 @@ class ConsoleListAdapter(
     ): ConsoleHolder {
         val layoutInflater = LayoutInflater.from(activity)
         val itemView = layoutInflater.inflate(
-            R.layout.item_console,
+            R.layout.list_item_console,
             parent,
-            false, // attachToRoot
+            false,
         )
         return ConsoleHolder(activity, itemView)
     }

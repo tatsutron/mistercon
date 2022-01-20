@@ -24,7 +24,7 @@ class FavoriteListFragment : BaseFragment() {
         return inflater.inflate(
             R.layout.fragment_favorite_list,
             container,
-            false, // attachToRoot
+            false,
         )
     }
 

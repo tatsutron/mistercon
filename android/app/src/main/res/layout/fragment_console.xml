@@ -11,10 +11,10 @@
         android:id="@+id/toolbar"
         style="@style/Toolbar"
         app:collapseIcon="@drawable/ic_back"
-        app:navigationIcon="@drawable/ic_back"
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
-        app:contentInsetStartWithNavigation="0dp" />
+        app:contentInsetStartWithNavigation="0dp"
+        app:navigationIcon="@drawable/ic_back" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -24,10 +24,12 @@
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:hideScrollbar="false"
+            android:clipToPadding="false"
+            android:paddingVertical="@dimen/margin_small"
             app:bubbleColor="@color/gray_900"
             app:bubbleTextColor="@color/primary_500"
-            app:handleColor="@color/gray_500" />
+            app:handleColor="@color/gray_500"
+            app:hideScrollbar="false" />
 
         <com.leinardi.android.speeddial.SpeedDialOverlayLayout
             android:id="@+id/speed_dial_overlay_console"

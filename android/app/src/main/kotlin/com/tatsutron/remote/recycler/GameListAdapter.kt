@@ -22,22 +22,18 @@ class GameListAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ) = if (viewType == TYPE_FOLDER) {
+    ): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(activity)
         val itemView = layoutInflater.inflate(
-            R.layout.item_folder,
+            R.layout.list_item_with_icon,
             parent,
-            false, // attachToRoot
+            false,
         )
-        FolderHolder(itemView)
-    } else {
-        val layoutInflater = LayoutInflater.from(activity)
-        val itemView = layoutInflater.inflate(
-            R.layout.item_game,
-            parent,
-            false, // attachToRoot
-        )
-        GameHolder(activity, itemView)
+        return if (viewType == TYPE_FOLDER) {
+            FolderHolder(itemView)
+        } else {
+            GameHolder(activity, itemView)
+        }
     }
 
     override fun onBindViewHolder(
@@ -60,7 +56,10 @@ class GameListAdapter(
             else -> TYPE_GAME
         }
 
-    override fun getSectionText(position: Int) =
-        itemList[position].text
-            .first().toString().toUpperCase(Locale.getDefault())
+    override fun getSectionText(position: Int): String {
+        val item = itemList.getOrNull(position)
+        return item?.text
+            ?.first()?.toString()?.toUpperCase(Locale.getDefault())
+            ?: ""
+    }
 }
