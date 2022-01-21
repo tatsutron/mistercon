@@ -25,9 +25,9 @@ class ScriptListFragment : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
-        inflater.inflate(R.menu.menu_script_list, menu)
         super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.menu_empty, menu)
     }
 
     override fun onCreateView(

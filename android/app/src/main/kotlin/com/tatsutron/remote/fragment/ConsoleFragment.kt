@@ -34,9 +34,9 @@ class ConsoleFragment : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
-        inflater.inflate(R.menu.menu_game_list, menu)
         super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.menu_search, menu)
         (menu.getItem(0).actionView as? SearchView)?.apply {
             maxWidth = Integer.MAX_VALUE
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {

@@ -6,7 +6,6 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.leinardi.android.speeddial.SpeedDialView
@@ -31,9 +30,9 @@ class ArcadeListFragment : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
-        inflater.inflate(R.menu.menu_game_list, menu)
         super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.menu_search, menu)
         (menu.getItem(0).actionView as? SearchView)?.apply {
             maxWidth = Integer.MAX_VALUE
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -62,6 +61,10 @@ class ArcadeListFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
+        (activity as? AppCompatActivity)?.apply {
+            setSupportActionBar(view?.findViewById(R.id.toolbar))
+            supportActionBar?.title = context?.getString(R.string.arcades)
+        }
         if (Persistence.getGamesByPlatform(Platform.ARCADE).isEmpty()) {
             onSync()
         }

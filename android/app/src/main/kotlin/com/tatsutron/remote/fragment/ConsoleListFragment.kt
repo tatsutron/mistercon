@@ -3,9 +3,8 @@ package com.tatsutron.remote.fragment
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +19,17 @@ import java.io.File
 class ConsoleListFragment : BaseFragment() {
 
     private lateinit var adapter: ConsoleListAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.menu_empty, menu)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +46,10 @@ class ConsoleListFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
+        (activity as? AppCompatActivity)?.apply {
+            setSupportActionBar(view?.findViewById(R.id.toolbar))
+            supportActionBar?.title = context?.getString(R.string.consoles)
+        }
         if (Persistence.getConsolePlatforms().isEmpty()) {
             onSync()
         }
