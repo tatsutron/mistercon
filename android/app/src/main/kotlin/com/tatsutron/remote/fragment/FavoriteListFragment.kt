@@ -64,7 +64,7 @@ class FavoriteListFragment : BaseFragment() {
         adapter.itemList.clear()
         adapter.itemList.addAll(
             Persistence.getGamesByFavorite().map {
-                GameItem(it)
+                GameItem(it, markAsFavorite = true)
             },
         )
         adapter.notifyDataSetChanged()
