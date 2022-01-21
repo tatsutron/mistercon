@@ -52,6 +52,7 @@
             android:background="@color/gray_800"
             android:clickable="true"
             android:divider="@drawable/vertical_divider_small"
+            android:focusable="true"
             android:orientation="vertical"
             android:showDividers="middle">
 

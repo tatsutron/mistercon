@@ -1,54 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/gray_800"
     android:clickable="true"
-    android:orientation="vertical">
+    android:focusable="true">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/Toolbar"
-        app:collapseIcon="@drawable/ic_back"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        app:contentInsetStartWithNavigation="0dp"
-        app:navigationIcon="@drawable/ic_back" />
-
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.l4digital.fastscroll.FastScrollRecyclerView
-            android:id="@+id/recycler"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            app:collapseIcon="@drawable/ic_back"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="@drawable/ic_back" />
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingVertical="@dimen/margin_small"
-            app:bubbleColor="@color/gray_900"
-            app:bubbleTextColor="@color/primary_500"
-            app:handleColor="@color/gray_500"
-            app:hideScrollbar="false" />
+            android:layout_height="match_parent">
 
-        <com.leinardi.android.speeddial.SpeedDialOverlayLayout
-            android:id="@+id/speed_dial_overlay_console"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/overlay"
-            app:clickable_overlay="true" />
+            <com.l4digital.fastscroll.FastScrollRecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingVertical="@dimen/margin_small"
+                app:bubbleColor="@color/gray_900"
+                app:bubbleTextColor="@color/primary_500"
+                app:handleColor="@color/gray_500"
+                app:hideScrollbar="false" />
 
-        <com.leinardi.android.speeddial.SpeedDialView
-            android:id="@+id/speed_dial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            app:sdMainFabClosedBackgroundColor="@color/gray_900"
-            app:sdMainFabClosedIconColor="@color/primary_500"
-            app:sdMainFabClosedSrc="@drawable/ic_plus"
-            app:sdMainFabOpenedBackgroundColor="@color/gray_900"
-            app:sdOverlayLayout="@id/speed_dial_overlay_console" />
+        </FrameLayout>
 
-    </FrameLayout>
+    </LinearLayout>
 
-</LinearLayout>
+    <com.leinardi.android.speeddial.SpeedDialOverlayLayout
+        android:id="@+id/speed_dial_overlay_console"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/overlay"
+        app:clickable_overlay="true" />
+
+    <com.leinardi.android.speeddial.SpeedDialView
+        android:id="@+id/speed_dial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:sdMainFabClosedBackgroundColor="@color/gray_900"
+        app:sdMainFabClosedIconColor="@color/primary_500"
+        app:sdMainFabClosedSrc="@drawable/ic_plus"
+        app:sdMainFabOpenedBackgroundColor="@color/gray_900"
+        app:sdOverlayLayout="@id/speed_dial_overlay_console" />
+
+</FrameLayout>
