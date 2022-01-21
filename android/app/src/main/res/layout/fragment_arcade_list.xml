@@ -5,12 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.l4digital.fastscroll.FastScrollRecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingVertical="@dimen/margin_small" />
+        android:paddingVertical="@dimen/margin_small"
+        app:bubbleColor="@color/gray_900"
+        app:bubbleTextColor="@color/primary_500"
+        app:handleColor="@color/gray_500"
+        app:hideScrollbar="false" />
 
     <com.leinardi.android.speeddial.SpeedDialOverlayLayout
         android:id="@+id/speed_dial_overlay_script_list"

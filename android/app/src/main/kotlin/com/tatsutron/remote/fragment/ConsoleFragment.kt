@@ -35,7 +35,7 @@ class ConsoleFragment : BaseFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
-        inflater.inflate(R.menu.menu_console, menu)
+        inflater.inflate(R.menu.menu_game_list, menu)
         super.onCreateOptionsMenu(menu, inflater)
         (menu.getItem(0).actionView as? SearchView)?.apply {
             maxWidth = Integer.MAX_VALUE
@@ -63,6 +63,13 @@ class ConsoleFragment : BaseFragment() {
         )
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (Persistence.getGamesByPlatform(platform).isEmpty()) {
+            onSync(automatic = true)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         platform = Persistence.getPlatform(
@@ -86,9 +93,6 @@ class ConsoleFragment : BaseFragment() {
         }
         setRecycler()
         setSpeedDial()
-        if (Persistence.getGamesByPlatform(platform).isEmpty()) {
-            onSync(automatic = true)
-        }
     }
 
     override fun onBackPressed() =
