@@ -15,6 +15,7 @@ mistercon is an Android app for use with [MiSTer](https://github.com/MiSTer-deve
 
 Platform  | Format(s) | Metadata
 | - | - | - |
+Arcade | `.mra` | :x:
 Atari 2600 | `.rom` | :white_check_mark:
 Atari 5200 | `.rom` | :white_check_mark:
 Atari 7800 | `.a78` | :white_check_mark:
