@@ -7,3 +7,14 @@ android/app/release/
 android/build/
 android/local.properties
 android/remote.jks
+expo/*.jks
+expo/*.key
+expo/*.mobileprovision
+expo/*.orig.*
+expo/*.p12
+expo/*.p8
+expo/.expo/
+expo/dist/
+expo/node_modules/
+expo/npm-debug.*
+expo/web-build/
