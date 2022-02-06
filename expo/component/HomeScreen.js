@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, SafeAreaView, ScrollView } from "react-native";
+import { Button, ScrollView } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
-import consoles from "../model/consoles.js";
+import consoles from "../model/consoles";
 import util from "../util/util";
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -41,23 +41,22 @@ const HomeScreen = ({ navigation }) => {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView>
-        {consoleList.map((console, index) => {
-          return (
-            <Button
-              key={index}
-              title={console.name}
-              onPress={() => {
-                navigation.navigate("Console", {
-                  console,
-                });
-              }}
-            />
-          );
-        })}
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView>
+      {consoleList.map((console, index) => {
+        return (
+          <Button
+            key={index}
+            onPress={() => {
+              navigation.navigate("Console", {
+                console,
+              });
+            }}
+          >
+            {console.name}
+          </Button>
+        );
+      })}
+    </ScrollView>
   );
 };
 

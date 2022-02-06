@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, SafeAreaView, ScrollView } from "react-native";
+import { Button, ScrollView } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
 import util from "../util/util";
@@ -37,24 +37,23 @@ const ConsoleScreen = ({ navigation, route }) => {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView>
-        {gameList.map((path, index) => {
-          return (
-            <Button
-              key={index}
-              title={util.getFilename({ path })}
-              onPress={() => {
-                navigation.navigate("Game", {
-                  console,
-                  path,
-                });
-              }}
-            />
-          );
-        })}
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView>
+      {gameList.map((path, index) => {
+        return (
+          <Button
+            key={index}
+            onPress={() => {
+              navigation.navigate("Game", {
+                console,
+                path,
+              });
+            }}
+          >
+            {util.getFilename({ path })}
+          </Button>
+        );
+      })}
+    </ScrollView>
   );
 };
 

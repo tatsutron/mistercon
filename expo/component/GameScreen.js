@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, SafeAreaView } from "react-native";
+import { Image } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
 import util from "../util/util";
@@ -41,28 +41,23 @@ const GameScreen = ({ navigation, route }) => {
     });
   }, [navigation]);
 
-  return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      {metadata !== null && (
-        <Image
-          style={{
-            width: "100%",
-            height: "100%",
-            resizeMode: "contain",
-          }}
-          source={{
-            uri: metadata.frontCover,
-          }}
-        />
-      )}
-    </SafeAreaView>
-  );
+  if (metadata !== null) {
+    return (
+      <Image
+        alt="Front cover"
+        source={{
+          uri: metadata.frontCover,
+        }}
+        style={{
+          width: "100%",
+          height: "100%",
+          resizeMode: "contain",
+        }}
+      />
+    );
+  } else {
+    return null;
+  }
 };
 
 //////////////////////////////////////////////////////////////////////////////
