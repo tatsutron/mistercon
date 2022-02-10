@@ -45,6 +45,7 @@ const HomeScreen = ({ navigation }) => {
       {consoleList.map((console, index) => {
         return (
           <Pressable
+            key={index}
             margin={2}
             onPress={() => {
               navigation.navigate("Console", {

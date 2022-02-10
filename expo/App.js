@@ -1,6 +1,7 @@
-import { Button, NativeBaseProvider } from "native-base";
+import { Button, NativeBaseProvider, StatusBar } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -18,42 +19,63 @@ const Stack = createNativeStackNavigator();
 ///////////////////////////////////////////////////////////////////////////////
 const App = () => {
   return (
-    <NativeBaseProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen
-            name="Console"
-            component={ConsoleScreen}
-            options={({ route }) => {
-              const { console } = route.params;
-              return {
-                title: console.name,
-              };
+    <SafeAreaProvider>
+      <NativeBaseProvider>
+        <NavigationContainer>
+          <StatusBar hidden />
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              animationEnabled: false,
+              headerStyle: {
+                backgroundColor: "#171717",
+              },
+              headerTintColor: "white",
+              headerTitleStyle: {
+                fontWeight: "bold",
+              },
             }}
-          />
-          <Stack.Screen
-            name="Game"
-            component={GameScreen}
-            options={({ route }) => {
-              const { console, path } = route.params;
-              return {
-                title: util.getFilename({ path }),
-                headerRight: () => (
-                  <Button
-                    onPress={() => {
-                      util.loadGame({ console, path });
-                    }}
-                  >
-                    Play
-                  </Button>
-                ),
-              };
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </NativeBaseProvider>
+          >
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{
+                title: "Consoles",
+              }}
+            />
+            <Stack.Screen
+              name="Console"
+              component={ConsoleScreen}
+              options={({ route }) => {
+                const { console } = route.params;
+                return {
+                  title: console.name,
+                };
+              }}
+            />
+            <Stack.Screen
+              name="Game"
+              component={GameScreen}
+              options={({ route }) => {
+                const { console, path } = route.params;
+                return {
+                  title: util.getFilename({ path }),
+                  headerRight: () => (
+                    <Button
+                      onPress={() => {
+                        util.loadGame({ console, path });
+                      }}
+                    >
+                      Play
+                    </Button>
+                  ),
+                };
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </NativeBaseProvider>
+    </SafeAreaProvider>
   );
 };
 
