@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ScrollView } from "native-base";
+import { Avatar, HStack, Pressable, ScrollView, Text } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
 import consoles from "../model/consoles";
@@ -41,19 +41,29 @@ const HomeScreen = ({ navigation }) => {
   }, [navigation]);
 
   return (
-    <ScrollView>
+    <ScrollView bg="black">
       {consoleList.map((console, index) => {
         return (
-          <Button
-            key={index}
+          <Pressable
+            margin={2}
             onPress={() => {
               navigation.navigate("Console", {
                 console,
               });
             }}
           >
-            {console.name}
-          </Button>
+            <HStack key={index} alignItems="center">
+              <Avatar
+                bg="black"
+                borderWidth={1}
+                borderColor="white"
+                source={console.image}
+              />
+              <Text fontSize="lg" color="white" marginLeft={4}>
+                {console.name}
+              </Text>
+            </HStack>
+          </Pressable>
         );
       })}
     </ScrollView>
