@@ -1,4 +1,4 @@
-import { Button, NativeBaseProvider, StatusBar } from "native-base";
+import { Button, NativeBaseProvider, StatusBar, View } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -19,61 +19,64 @@ const Stack = createNativeStackNavigator();
 ///////////////////////////////////////////////////////////////////////////////
 const App = () => {
   return (
-    <SafeAreaProvider>
-      <NativeBaseProvider>
-        <NavigationContainer>
-          <StatusBar hidden />
-          <Stack.Navigator
-            initialRouteName="Home"
-            screenOptions={{
-              animationEnabled: false,
-              headerStyle: {
-                backgroundColor: "#171717",
-              },
-              headerTintColor: "white",
-              headerTitleStyle: {
-                fontWeight: "bold",
-              },
-            }}
-          >
-            <Stack.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{
-                title: "Consoles",
+    <SafeAreaProvider backgroundColor="#000">
+      <NativeBaseProvider bg="#000">
+        <View style={{ flex: 1 }} backgroundColor="#000">
+          <NavigationContainer bg="#000">
+            <StatusBar hidden />
+            <Stack.Navigator
+              initialRouteName="Home"
+              mode="modal"
+              screenOptions={{
+                animationEnabled: false,
+                headerStyle: {
+                  backgroundColor: "#171717",
+                },
+                headerTintColor: "white",
+                headerTitleStyle: {
+                  fontWeight: "bold",
+                },
               }}
-            />
-            <Stack.Screen
-              name="Console"
-              component={ConsoleScreen}
-              options={({ route }) => {
-                const { console } = route.params;
-                return {
-                  title: console.name,
-                };
-              }}
-            />
-            <Stack.Screen
-              name="Game"
-              component={GameScreen}
-              options={({ route }) => {
-                const { console, path } = route.params;
-                return {
-                  title: util.getFilename({ path }),
-                  headerRight: () => (
-                    <Button
-                      onPress={() => {
-                        util.loadGame({ console, path });
-                      }}
-                    >
-                      Play
-                    </Button>
-                  ),
-                };
-              }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+            >
+              <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                  title: "Consoles",
+                }}
+              />
+              <Stack.Screen
+                name="Console"
+                component={ConsoleScreen}
+                options={({ route }) => {
+                  const { console } = route.params;
+                  return {
+                    title: console.name,
+                  };
+                }}
+              />
+              <Stack.Screen
+                name="Game"
+                component={GameScreen}
+                options={({ route }) => {
+                  const { console, path } = route.params;
+                  return {
+                    title: util.getFilename({ path }),
+                    headerRight: () => (
+                      <Button
+                        onPress={() => {
+                          util.loadGame({ console, path });
+                        }}
+                      >
+                        Play
+                      </Button>
+                    ),
+                  };
+                }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </View>
       </NativeBaseProvider>
     </SafeAreaProvider>
   );

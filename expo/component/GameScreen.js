@@ -1,5 +1,5 @@
 import React from "react";
-import { Image } from "native-base";
+import { Image, View } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
 import util from "../util/util";
@@ -45,6 +45,7 @@ const GameScreen = ({ navigation, route }) => {
     return (
       <Image
         alt="Front cover"
+        bg="black"
         source={{
           uri: metadata.frontCover,
         }}
@@ -56,7 +57,7 @@ const GameScreen = ({ navigation, route }) => {
       />
     );
   } else {
-    return null;
+    return <View style={{ flex: 1 }} bg="black" />;
   }
 };
 

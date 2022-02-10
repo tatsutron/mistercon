@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ScrollView } from "native-base";
+import { Pressable, ScrollView, Text } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
 import util from "../util/util";
@@ -37,11 +37,12 @@ const ConsoleScreen = ({ navigation, route }) => {
   }, [navigation]);
 
   return (
-    <ScrollView>
+    <ScrollView bg="black">
       {gameList.map((path, index) => {
         return (
-          <Button
+          <Pressable
             key={index}
+            margin={2}
             onPress={() => {
               navigation.navigate("Game", {
                 console,
@@ -49,8 +50,10 @@ const ConsoleScreen = ({ navigation, route }) => {
               });
             }}
           >
-            {util.getFilename({ path })}
-          </Button>
+            <Text fontSize="lg" color="white" marginLeft={16}>
+              {util.getFilename({ path })}
+            </Text>
+          </Pressable>
         );
       })}
     </ScrollView>
