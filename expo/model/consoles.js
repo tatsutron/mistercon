@@ -1,5 +1,5 @@
-const consoles = {
-  atari2600: {
+const consoles = [
+  {
     core: "Atari2600",
     folder: "Atari2600",
     format: [
@@ -8,9 +8,10 @@ const consoles = {
         mbcCommand: "ATARI2600",
       },
     ],
+    image: require("../assets/atari_2600.png"),
     name: "Atari 2600",
   },
-  atari5200: {
+  {
     core: "Atari5200",
     folder: "Atari5200",
     format: [
@@ -19,9 +20,10 @@ const consoles = {
         mbcCommand: "ATARI5200",
       },
     ],
+    image: require("../assets/atari_5200.png"),
     name: "Atari 5200",
   },
-  atari7800: {
+  {
     core: "Atari7800",
     folder: "Atari7800",
     format: [
@@ -31,9 +33,10 @@ const consoles = {
         mbcCommand: "ATARI7800",
       },
     ],
+    image: require("../assets/atari_7800.png"),
     name: "Atari 7800",
   },
-  atariLynx: {
+  {
     core: "AtariLynx",
     folder: "AtariLynx",
     format: [
@@ -43,9 +46,10 @@ const consoles = {
         mbcCommand: "ATARILYNX",
       },
     ],
+    image: require("../assets/atari_lynx.png"),
     name: "Atari Lynx",
   },
-  ballyAstrocade: {
+  {
     core: "Astrocade",
     folder: "Astrocade",
     format: [
@@ -54,9 +58,10 @@ const consoles = {
         mbcCommand: "ASTROCADE",
       },
     ],
+    image: require("../assets/bally_astrocade.png"),
     name: "Bally Astrocade",
   },
-  colecoVision: {
+  {
     core: "ColecoVision",
     folder: "Coleco",
     format: [
@@ -65,9 +70,10 @@ const consoles = {
         mbcCommand: "COLECO",
       },
     ],
+    image: require("../assets/colecovision.png"),
     name: "ColecoVision",
   },
-  famicomDiskSystem: {
+  {
     core: "NES",
     folder: "NES",
     format: [
@@ -77,9 +83,10 @@ const consoles = {
         mbcCommand: "NES.FDS",
       },
     ],
+    image: require("../assets/famicom_disk_system.png"),
     name: "Famicom Disk System",
   },
-  gameBoy: {
+  {
     core: "Gameboy",
     folder: "Gameboy",
     format: [
@@ -88,9 +95,10 @@ const consoles = {
         mbcCommand: "GAMEBOY",
       },
     ],
+    image: require("../assets/game_boy.png"),
     name: "Game Boy",
   },
-  gameBoyAdvance: {
+  {
     core: "GBA",
     folder: "GBA",
     format: [
@@ -99,9 +107,10 @@ const consoles = {
         mbcCommand: "GBA",
       },
     ],
+    image: require("../assets/game_boy_advance.png"),
     name: "Game Boy Advance",
   },
-  gameBoyColor: {
+  {
     core: "Gameboy",
     folder: "Gameboy",
     format: [
@@ -110,9 +119,10 @@ const consoles = {
         mbcCommand: "GAMEBOY.COL",
       },
     ],
+    image: require("../assets/game_boy_color.png"),
     name: "Game Boy Color",
   },
-  gameGear: {
+  {
     core: "SMS",
     folder: "SMS",
     format: [
@@ -121,9 +131,10 @@ const consoles = {
         mbcCommand: "SMS.GG",
       },
     ],
+    image: require("../assets/game_gear.png"),
     name: "Game Gear",
   },
-  intellivision: {
+  {
     core: "Intellivision",
     folder: "Intellivision",
     format: [
@@ -132,9 +143,10 @@ const consoles = {
         mbcCommand: "INTELLIVISION",
       },
     ],
+    image: require("../assets/intellivision.png"),
     name: "Intellivision",
   },
-  intertonVc4000: {
+  {
     core: "VC4000",
     folder: "VC4000",
     format: [
@@ -143,9 +155,10 @@ const consoles = {
         mbcCommand: "VC4000",
       },
     ],
+    image: require("../assets/interton_vc_4000.png"),
     name: "Interton VC 4000",
   },
-  masterSystem: {
+  {
     core: "SMS",
     folder: "SMS",
     format: [
@@ -154,9 +167,10 @@ const consoles = {
         mbcCommand: "SMS",
       },
     ],
+    image: require("../assets/master_system.png"),
     name: "Master System",
   },
-  neoGeo: {
+  {
     core: "NeoGeo",
     folder: "NeoGeo",
     format: [
@@ -165,9 +179,10 @@ const consoles = {
         mbcCommand: "NEOGEO",
       },
     ],
+    image: require("../assets/neo_geo.png"),
     name: "Neo Geo",
   },
-  nintendoEntertainmentSystem: {
+  {
     core: "NES",
     folder: "NES",
     format: [
@@ -177,9 +192,10 @@ const consoles = {
         mbcCommand: "NES",
       },
     ],
+    image: require("../assets/nintendo_entertainment_system.png"),
     name: "Nintendo Entertainment System",
   },
-  odyssey2: {
+  {
     core: "Odyssey2",
     folder: "Odyssey2",
     format: [
@@ -188,9 +204,10 @@ const consoles = {
         mbcCommand: "ODYSSEY2",
       },
     ],
+    image: require("../assets/odyssey_2.png"),
     name: "Odyssey 2",
   },
-  segaCd: {
+  {
     core: "MegaCD",
     folder: "MegaCD",
     format: [
@@ -199,9 +216,10 @@ const consoles = {
         mbcCommand: "MEGACD",
       },
     ],
+    image: require("../assets/sega_cd.png"),
     name: "Sega CD",
   },
-  segaGenesis: {
+  {
     core: "Genesis",
     folder: "Genesis",
     format: [
@@ -218,9 +236,10 @@ const consoles = {
         mbcCommand: "MEGADRIVE",
       },
     ],
+    image: require("../assets/sega_genesis.png"),
     name: "Sega Genesis",
   },
-  sg1000: {
+  {
     core: "ColecoVision",
     folder: "Coleco",
     format: [
@@ -229,9 +248,10 @@ const consoles = {
         mbcCommand: "COLECO.SG",
       },
     ],
+    image: require("../assets/sg_1000.png"),
     name: "SG-1000",
   },
-  superGrafx: {
+  {
     core: "TurboGrafx16",
     folder: "TGFX16",
     format: [
@@ -240,9 +260,10 @@ const consoles = {
         mbcCommand: "SUPERGRAFX",
       },
     ],
+    image: require("../assets/super_grafx.png"),
     name: "SuperGrafx",
   },
-  superNintendo: {
+  {
     core: "SNES",
     folder: "SNES",
     format: [
@@ -255,9 +276,10 @@ const consoles = {
         mbcCommand: "SNES",
       },
     ],
+    image: require("../assets/super_nintendo.png"),
     name: "Super Nintendo",
   },
-  turboGrafx16: {
+  {
     core: "TurboGrafx16",
     folder: "TGFX16",
     format: [
@@ -266,9 +288,10 @@ const consoles = {
         mbcCommand: "TGFX16",
       },
     ],
+    image: require("../assets/turbo_grafx_16.png"),
     name: "TurboGrafx-16",
   },
-  turboGrafxCd: {
+  {
     core: "TurboGrafx16",
     folder: "TGFX16-CD",
     format: [
@@ -277,9 +300,10 @@ const consoles = {
         mbcCommand: "TGFX16-CD",
       },
     ],
+    image: require("../assets/turbo_grafx_cd.png"),
     name: "TurboGrafx-CD",
   },
-  vectrex: {
+  {
     core: "Vectrex",
     folder: "Vectrex",
     format: [
@@ -292,9 +316,10 @@ const consoles = {
         mbcCommand: "VECTREX",
       },
     ],
+    image: require("../assets/vectrex.png"),
     name: "Vectrex",
   },
-  wonderSwan: {
+  {
     core: "WonderSwan",
     folder: "WonderSwan",
     format: [
@@ -303,9 +328,10 @@ const consoles = {
         mbcCommand: "WONDERSWAN",
       },
     ],
+    image: require("../assets/wonderswan.png"),
     name: "WonderSwan",
   },
-  wonderSwanColor: {
+  {
     core: "WonderSwan",
     folder: "WonderSwan",
     format: [
@@ -314,9 +340,10 @@ const consoles = {
         mbcCommand: "WONDERSWAN.COL",
       },
     ],
+    image: require("../assets/wonderswan_color.png"),
     name: "WonderSwan Color",
   },
-};
+];
 
 ///////////////////////////////////////////////////////////////////////////////
 export default consoles;
