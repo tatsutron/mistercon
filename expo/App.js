@@ -19,10 +19,10 @@ const Stack = createNativeStackNavigator();
 ///////////////////////////////////////////////////////////////////////////////
 const App = () => {
   return (
-    <SafeAreaProvider backgroundColor="#000">
-      <NativeBaseProvider bg="#000">
+    <SafeAreaProvider>
+      <NativeBaseProvider>
         <View style={{ flex: 1 }} backgroundColor="#000">
-          <NavigationContainer bg="#000">
+          <NavigationContainer>
             <StatusBar hidden />
             <Stack.Navigator
               initialRouteName="Home"
