@@ -50,7 +50,7 @@ const ConsoleScreen = ({ navigation, route }) => {
               });
             }}
           >
-            <Text fontSize="lg" color="white" marginLeft={16}>
+            <Text fontSize="lg" color="white">
               {util.getFilename({ path })}
             </Text>
           </Pressable>
