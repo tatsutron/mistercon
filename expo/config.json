@@ -1,6 +1,10 @@
 {
+    "arcade": "/media/fat/_Arcade",
+    "computer": "/media/fat/_Computer",
     "console": "/media/fat/_Console",
     "games": "/media/fat/games",
-    "host": "192.168.50.169",
-    "port": 8080
+    "host": "MiSTer",
+    "port": 8080,
+    "scripts": "/media/fat/Scripts",
+    "tatsudb": "54.84.164.224"
 }
