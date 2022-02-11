@@ -21,7 +21,7 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <NativeBaseProvider>
-        <View style={{ flex: 1 }} backgroundColor="#000">
+        <View backgroundColor="#000" style={{ flex: 1 }}>
           <NavigationContainer>
             <StatusBar hidden />
             <Stack.Navigator
@@ -33,15 +33,13 @@ const App = () => {
                   backgroundColor: "#171717",
                 },
                 headerTintColor: "white",
-                headerTitleStyle: {
-                  fontWeight: "bold",
-                },
               }}
             >
               <Stack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
+                  headerShown: false,
                   title: "Consoles",
                 }}
               />
@@ -67,6 +65,7 @@ const App = () => {
                         onPress={() => {
                           util.loadGame({ console, path });
                         }}
+                        variant="outline"
                       >
                         Play
                       </Button>
