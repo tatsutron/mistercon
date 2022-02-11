@@ -29,8 +29,8 @@ const GameScreen = ({ navigation, route }) => {
         alert(error);
       }
       try {
-        const host = "54.84.164.224";
-        const port = "8080";
+        const host = config.tatsudb;
+        const port = config.port;
         const url = `http://${host}:${port}/metadata/${sha1}`;
         const response = await fetch(url);
         const json = await response.json();
