@@ -1,11 +1,13 @@
 import React from "react";
+import { Image } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
-import { FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 ///////////////////////////////////////////////////////////////////////////////
 import ArcadeListScreen from "./ArcadeListScreen";
+import ComputerListScreen from "./ComputerListScreen";
 import ConsoleListScreen from "./ConsoleListScreen";
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -35,10 +37,10 @@ const HomeScreen = () => {
         options={{
           title: "Consoles",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons
-              color={color}
-              name="game-controller-outline"
+            <MaterialCommunityIcons
+              name="gamepad-square"
               size={size}
+              color={color}
             />
           ),
         }}
@@ -49,7 +51,23 @@ const HomeScreen = () => {
         options={{
           title: "Arcades",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name="coins" size={size} color={color} />
+            <Image
+              alt="Icon"
+              fadeDuration={0}
+              source={require("../assets/joystick-icon.png")}
+              style={{ width: size, height: size }}
+              tintColor={color}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ComputerList"
+        component={ComputerListScreen}
+        options={{
+          title: "Computers",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="keyboard" size={size} color={color} />
           ),
         }}
       />
