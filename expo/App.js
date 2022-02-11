@@ -62,12 +62,17 @@ const App = () => {
                     title: util.getFilename({ path }),
                     headerRight: () => (
                       <Button
+                        _pressed={{
+                          backgroundColor: "#000000",
+                          borderColor: "white",
+                        }}
+                        borderColor="#28a4ea"
                         onPress={() => {
                           util.loadGame({ console, path });
                         }}
                         variant="outline"
                       >
-                        Play
+                        PLAY
                       </Button>
                     ),
                   };
