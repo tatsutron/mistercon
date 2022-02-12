@@ -23,15 +23,14 @@ const ConsoleListScreen = ({ navigation }) => {
       const host = config.host;
       const port = config.port;
       const path = config.console;
-      const url = `http://${host}:${port}/list/rbf/${path}`;
+      const url = `http://${host}:${port}/scan/rbf/${path}`;
       try {
         const response = await fetch(url);
-        const text = await response.text();
-        const lines = text.split("\n").filter((s) => s.length > 0);
+        const entries = await response.json();
         const arr = [];
         Object.keys(consoles).forEach((key) => {
           const console = consoles[key];
-          const match = lines.find((path) => {
+          const match = entries.find((path) => {
             const filename = util.getFilename({ path });
             return filename.startsWith(console.core);
           });
