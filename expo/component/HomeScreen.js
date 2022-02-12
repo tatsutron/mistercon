@@ -1,8 +1,8 @@
 import React from "react";
-import { Image, View } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Image } from "native-base";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 ///////////////////////////////////////////////////////////////////////////////

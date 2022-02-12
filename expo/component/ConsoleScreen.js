@@ -1,8 +1,8 @@
 import React from "react";
-import { Pressable, ScrollView, Text } from "native-base";
+import { ScrollView } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
-import util from "../util/util";
+import GameListItem from "./GameListItem";
 
 ///////////////////////////////////////////////////////////////////////////////
 const config = require("../config.json");
@@ -36,32 +36,14 @@ const ConsoleScreen = ({ navigation, route }) => {
 
   return (
     <ScrollView bg="black">
-      {gameList.map((path, index) => {
-        const isFolder = util.isFolder({ path });
+      {gameList.map((path) => {
         return (
-          <Pressable
-            key={index}
-            margin={2}
-            onPress={() => {
-              if (isFolder) {
-                navigation.push("Console", {
-                  console,
-                  path,
-                });
-              } else {
-                navigation.navigate("Game", {
-                  console,
-                  path,
-                });
-              }
-            }}
-          >
-            <Text fontSize="lg" color="white">
-              {isFolder
-                ? util.getFolderName({ path })
-                : util.getFileName({ path })}
-            </Text>
-          </Pressable>
+          <GameListItem
+            console={console}
+            key={path}
+            navigation={navigation}
+            path={path}
+          />
         );
       })}
     </ScrollView>
