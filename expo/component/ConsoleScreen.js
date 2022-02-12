@@ -37,21 +37,19 @@ const ConsoleScreen = ({ navigation, route }) => {
   return (
     <ScrollView bg="black">
       {gameList.map((path, index) => {
-        // TODO This could use a rewrite
-        const filename = util.getFilename({ path });
-        const tokens = util.tokenizePath({ path });
+        const isFolder = util.isFolder({ path });
         return (
           <Pressable
             key={index}
             margin={2}
             onPress={() => {
-              if (filename) {
-                navigation.navigate("Game", {
+              if (isFolder) {
+                navigation.push("Console", {
                   console,
                   path,
                 });
               } else {
-                navigation.push("Console", {
+                navigation.navigate("Game", {
                   console,
                   path,
                 });
@@ -59,7 +57,9 @@ const ConsoleScreen = ({ navigation, route }) => {
             }}
           >
             <Text fontSize="lg" color="white">
-              {filename || tokens[tokens.length - 1]}
+              {isFolder
+                ? util.getFolderName({ path })
+                : util.getFileName({ path })}
             </Text>
           </Pressable>
         );

@@ -59,7 +59,7 @@ const App = () => {
                 options={({ route }) => {
                   const { console, path } = route.params;
                   return {
-                    title: util.getFilename({ path }),
+                    title: util.getFileName({ path }),
                     headerRight: () => (
                       <Button
                         _pressed={{

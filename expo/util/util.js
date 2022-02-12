@@ -4,11 +4,26 @@ const config = require("../config.json");
 const getExtension = ({ path }) => /(?:\.([^.]+))?$/.exec(path)[1];
 
 ///////////////////////////////////////////////////////////////////////////////
-const getFilename = ({ path }) =>
+const getFileName = ({ path }) =>
   path
     .split("/")
     .pop()
     .replace(`.${getExtension({ path })}`, "");
+
+///////////////////////////////////////////////////////////////////////////////
+const getFolderName = ({ path }) =>
+  path
+    .split("/")
+    .map((token) => {
+      return token.match(/[^ ]+/g);
+    })
+    .filter((token) => {
+      return token != null;
+    })
+    .pop();
+
+///////////////////////////////////////////////////////////////////////////////
+const isFolder = ({ path }) => path.endsWith("/");
 
 ///////////////////////////////////////////////////////////////////////////////
 const loadGame = ({ console, path }) => {
@@ -26,20 +41,10 @@ const loadGame = ({ console, path }) => {
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-const tokenizePath = ({ path }) =>
-  path
-    .split("/")
-    .map((token) => {
-      return token.match(/[^ ]+/g);
-    })
-    .filter((token) => {
-      return token != null;
-    });
-
-///////////////////////////////////////////////////////////////////////////////
 export default {
   getExtension,
-  getFilename,
+  getFileName,
+  getFolderName,
+  isFolder,
   loadGame,
-  tokenizePath,
 };

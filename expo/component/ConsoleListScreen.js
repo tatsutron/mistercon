@@ -31,7 +31,7 @@ const ConsoleListScreen = ({ navigation }) => {
         Object.keys(consoles).forEach((key) => {
           const console = consoles[key];
           const match = entries.find((path) => {
-            const filename = util.getFilename({ path });
+            const filename = util.getFileName({ path });
             return filename.startsWith(console.core);
           });
           if (match) {
