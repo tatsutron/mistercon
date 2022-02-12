@@ -21,7 +21,7 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <NativeBaseProvider>
-        <View backgroundColor="#000" style={{ flex: 1 }}>
+        <View backgroundColor="black" style={{ flex: 1 }}>
           <NavigationContainer>
             <StatusBar hidden />
             <Stack.Navigator

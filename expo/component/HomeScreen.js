@@ -1,5 +1,5 @@
 import React from "react";
-import { Image } from "native-base";
+import { Image, View } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
 import { MaterialCommunityIcons } from "@expo/vector-icons";

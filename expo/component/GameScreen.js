@@ -1,5 +1,13 @@
 import React from "react";
-import { Image, View } from "native-base";
+import {
+  Center,
+  Divider,
+  Image,
+  ScrollView,
+  Text,
+  View,
+  VStack,
+} from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
 import util from "../util/util";
@@ -43,18 +51,129 @@ const GameScreen = ({ navigation, route }) => {
 
   if (metadata !== null) {
     return (
-      <Image
-        alt="Front cover"
+      <ScrollView
+        _contentContainerStyle={{
+          padding: "10",
+        }}
         bg="black"
-        source={{
-          uri: metadata.frontCover,
-        }}
-        style={{
-          width: "100%",
-          height: "100%",
-          resizeMode: "contain",
-        }}
-      />
+      >
+        <VStack space={5}>
+          {metadata.publisher && (
+            <VStack space={1}>
+              <Text color="white">Publisher</Text>
+              <Divider />
+              <Text color="#28a4ea" fontSize={"md"}>
+                {metadata.publisher}
+              </Text>
+            </VStack>
+          )}
+          {metadata.developer && (
+            <VStack space={1}>
+              <Text color="white">Developer</Text>
+              <Divider />
+              <Text color="#28a4ea" fontSize={"md"}>
+                {metadata.developer}
+              </Text>
+            </VStack>
+          )}
+          {metadata.releaseDate && (
+            <VStack space={1}>
+              <Text color="white">Release Date</Text>
+              <Divider />
+              <Text color="#28a4ea" fontSize={"md"}>
+                {metadata.releaseDate}
+              </Text>
+            </VStack>
+          )}
+          {metadata.region && (
+            <VStack space={1}>
+              <Text color="white">Region</Text>
+              <Divider />
+              <Text color="#28a4ea" fontSize={"md"}>
+                {metadata.region}
+              </Text>
+            </VStack>
+          )}
+          {metadata.genre && (
+            <VStack space={1}>
+              <Text color="white">Genre</Text>
+              <Divider />
+              <Text color="#28a4ea" fontSize={"md"}>
+                {metadata.genre}
+              </Text>
+            </VStack>
+          )}
+          {metadata.description && (
+            <VStack space={1}>
+              <Text color="white">Description</Text>
+              <Divider />
+              <Text color="#28a4ea" fontSize={"md"}>
+                {metadata.description}
+              </Text>
+            </VStack>
+          )}
+          {metadata.frontCover && (
+            <VStack space={1}>
+              <Text color="white">Front Cover</Text>
+              <Divider />
+              <Center>
+                <Image
+                  alt="Front Cover"
+                  bg="black"
+                  resizeMode="cover"
+                  size={"2xl"}
+                  source={{
+                    uri: metadata.frontCover,
+                  }}
+                  style={{
+                    resizeMode: "contain",
+                  }}
+                />
+              </Center>
+            </VStack>
+          )}
+          {metadata.backCover && (
+            <VStack space={1}>
+              <Text color="white">Back Cover</Text>
+              <Divider />
+              <Center>
+                <Image
+                  alt="Back Cover"
+                  bg="black"
+                  resizeMode="cover"
+                  size={"2xl"}
+                  source={{
+                    uri: metadata.backCover,
+                  }}
+                  style={{
+                    resizeMode: "contain",
+                  }}
+                />
+              </Center>
+            </VStack>
+          )}
+          {metadata.cartridge && (
+            <VStack space={1}>
+              <Text color="white">Cartridge</Text>
+              <Divider />
+              <Center>
+                <Image
+                  alt="Cartridge"
+                  bg="black"
+                  resizeMode="cover"
+                  size={"2xl"}
+                  source={{
+                    uri: metadata.cartridge,
+                  }}
+                  style={{
+                    resizeMode: "contain",
+                  }}
+                />
+              </Center>
+            </VStack>
+          )}
+        </VStack>
+      </ScrollView>
     );
   } else {
     return <View style={{ flex: 1 }} bg="black" />;
