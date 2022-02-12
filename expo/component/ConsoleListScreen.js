@@ -54,9 +54,9 @@ const ConsoleListScreen = ({ navigation }) => {
             key={index}
             margin={2}
             onPress={() => {
-              navigation.navigate("Console", {
-                console,
+              navigation.navigate("GameList", {
                 path: `${config.games}/${console.folder}`,
+                platform: console,
               });
             }}
           >

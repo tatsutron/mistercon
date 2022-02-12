@@ -19,7 +19,7 @@ const config = require("../config.json");
 
 ///////////////////////////////////////////////////////////////////////////////
 const GameScreen = ({ navigation, route }) => {
-  const { console, path } = route.params;
+  const { path, platform } = route.params;
   const [metadata, setMetadata] = React.useState(null);
 
   React.useEffect(() => {
@@ -28,7 +28,7 @@ const GameScreen = ({ navigation, route }) => {
       try {
         const host = config.host;
         const port = config.port;
-        const headerSize = console.format.find((format) => {
+        const headerSize = platform.format.find((format) => {
           return format.extension === util.getExtension({ path });
         }).headerSizeInBytes;
         const url = `http://${host}:${port}/hash/${headerSize}/${path}`;

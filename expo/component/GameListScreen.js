@@ -10,15 +10,15 @@ import GameListItem from "./GameListItem";
 const config = require("../config.json");
 
 ///////////////////////////////////////////////////////////////////////////////
-const ConsoleScreen = ({ navigation, route }) => {
-  const { console, path } = route.params;
+const GameListScreen = ({ navigation, route }) => {
+  const { path, platform } = route.params;
   const [gameList, setGameList] = React.useState([]);
 
   React.useEffect(() => {
     return navigation.addListener("focus", async () => {
       const host = config.host;
       const port = config.port;
-      const extensions = console.format
+      const extensions = platform.format
         .map((format) => {
           return format.extension;
         })
@@ -41,10 +41,10 @@ const ConsoleScreen = ({ navigation, route }) => {
       {gameList.map((path) => {
         return (
           <GameListItem
-            console={console}
             key={path}
             navigation={navigation}
             path={path}
+            platform={platform}
           />
         );
       })}
@@ -53,4 +53,4 @@ const ConsoleScreen = ({ navigation, route }) => {
 };
 
 //////////////////////////////////////////////////////////////////////////////
-export default ConsoleScreen;
+export default GameListScreen;

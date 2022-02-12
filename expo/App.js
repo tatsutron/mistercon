@@ -9,7 +9,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import util from "./util/util";
 
 ///////////////////////////////////////////////////////////////////////////////
-import ConsoleScreen from "./component/ConsoleScreen";
+import GameListScreen from "./component/GameListScreen";
 import GameScreen from "./component/GameScreen";
 import HomeScreen from "./component/HomeScreen";
 
@@ -44,12 +44,12 @@ const App = () => {
                 }}
               />
               <Stack.Screen
-                name="Console"
-                component={ConsoleScreen}
+                name="GameList"
+                component={GameListScreen}
                 options={({ route }) => {
-                  const { console } = route.params;
+                  const { platform } = route.params;
                   return {
-                    title: console.name,
+                    title: platform.name,
                   };
                 }}
               />

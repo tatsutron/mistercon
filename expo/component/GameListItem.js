@@ -8,21 +8,21 @@ import util from "../util/util";
 
 ///////////////////////////////////////////////////////////////////////////////
 const GameListItem = (props) => {
-  const { console, navigation, path } = props;
+  const { navigation, path, platform } = props;
   return (
     <Pressable
       height={10}
       margin={2}
       onPress={() => {
         if (util.isFolder({ path })) {
-          navigation.push("Console", {
-            console,
+          navigation.push("GameList", {
             path,
+            platform,
           });
         } else {
           navigation.navigate("Game", {
-            console,
             path,
+            platform,
           });
         }
       }}
