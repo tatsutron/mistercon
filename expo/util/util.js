@@ -26,8 +26,20 @@ const loadGame = ({ console, path }) => {
 };
 
 ///////////////////////////////////////////////////////////////////////////////
+const tokenizePath = ({ path }) =>
+  path
+    .split("/")
+    .map((token) => {
+      return token.match(/[^ ]+/g);
+    })
+    .filter((token) => {
+      return token != null;
+    });
+
+///////////////////////////////////////////////////////////////////////////////
 export default {
   getExtension,
   getFilename,
   loadGame,
+  tokenizePath,
 };

@@ -9,7 +9,7 @@ const config = require("../config.json");
 
 ///////////////////////////////////////////////////////////////////////////////
 const ConsoleScreen = ({ navigation, route }) => {
-  const { console } = route.params;
+  const { console, path } = route.params;
   const [gameList, setGameList] = React.useState([]);
 
   React.useEffect(() => {
@@ -23,7 +23,6 @@ const ConsoleScreen = ({ navigation, route }) => {
         .reduce((previousValue, currentValue) => {
           return `${previousValue}|${currentValue}`;
         });
-      const path = `${config.games}/${console.folder}`;
       const url = `http://${host}:${port}/scan/${extensions}/${path}`;
       try {
         const response = await fetch(url);
@@ -38,19 +37,29 @@ const ConsoleScreen = ({ navigation, route }) => {
   return (
     <ScrollView bg="black">
       {gameList.map((path, index) => {
+        // TODO This could use a rewrite
+        const filename = util.getFilename({ path });
+        const tokens = util.tokenizePath({ path });
         return (
           <Pressable
             key={index}
             margin={2}
             onPress={() => {
-              navigation.navigate("Game", {
-                console,
-                path,
-              });
+              if (filename) {
+                navigation.navigate("Game", {
+                  console,
+                  path,
+                });
+              } else {
+                navigation.push("Console", {
+                  console,
+                  path,
+                });
+              }
             }}
           >
             <Text fontSize="lg" color="white">
-              {util.getFilename({ path })}
+              {filename || tokens[tokens.length - 1]}
             </Text>
           </Pressable>
         );
