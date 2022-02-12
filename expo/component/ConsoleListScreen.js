@@ -50,6 +50,7 @@ const ConsoleListScreen = ({ navigation }) => {
       {consoleList.map((console, index) => {
         return (
           <Pressable
+            height={10}
             key={index}
             margin={2}
             onPress={() => {
