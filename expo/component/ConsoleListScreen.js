@@ -1,7 +1,7 @@
 import React from "react";
-import { Avatar, HStack, Pressable, ScrollView, Text } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
+import { Avatar, HStack, Pressable, ScrollView, Text } from "native-base";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 ///////////////////////////////////////////////////////////////////////////////
