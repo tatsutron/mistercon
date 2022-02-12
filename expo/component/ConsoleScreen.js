@@ -24,12 +24,11 @@ const ConsoleScreen = ({ navigation, route }) => {
           return `${previousValue}|${currentValue}`;
         });
       const path = `${config.games}/${console.folder}`;
-      const url = `http://${host}:${port}/list/${extensions}/${path}`;
+      const url = `http://${host}:${port}/scan/${extensions}/${path}`;
       try {
         const response = await fetch(url);
-        const text = await response.text();
-        const lines = text.split("\n").filter((s) => s.length > 0);
-        setGameList(lines.sort());
+        const entries = await response.json();
+        setGameList(entries.sort());
       } catch (error) {
         alert(error);
       }
