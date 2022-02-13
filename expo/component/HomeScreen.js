@@ -6,9 +6,12 @@ import { Image } from "native-base";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 ///////////////////////////////////////////////////////////////////////////////
-import ArcadeListScreen from "./ArcadeListScreen";
+import arcades from "../model/arcades";
+
+///////////////////////////////////////////////////////////////////////////////
 import ComputerListScreen from "./ComputerListScreen";
 import ConsoleListScreen from "./ConsoleListScreen";
+import GameListScreen from "./GameListScreen";
 
 ///////////////////////////////////////////////////////////////////////////////
 const Tab = createBottomTabNavigator();
@@ -47,7 +50,11 @@ const HomeScreen = () => {
       />
       <Tab.Screen
         name="ArcadeList"
-        component={ArcadeListScreen}
+        component={GameListScreen}
+        initialParams={{
+          path: require("../config").arcade,
+          platform: arcades[0],
+        }}
         options={{
           title: "Arcades",
           tabBarIcon: ({ color, size }) => (

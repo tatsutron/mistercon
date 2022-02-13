@@ -15,15 +15,9 @@ const GameListItem = (props) => {
       margin={2}
       onPress={() => {
         if (util.isFolder({ path })) {
-          navigation.push("GameList", {
-            path,
-            platform,
-          });
+          navigation.push("GameList", { path, platform });
         } else {
-          navigation.navigate("Game", {
-            path,
-            platform,
-          });
+          navigation.navigate("Game", { path, platform });
         }
       }}
     >

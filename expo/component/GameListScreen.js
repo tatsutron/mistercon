@@ -29,7 +29,11 @@ const GameListScreen = ({ navigation, route }) => {
       try {
         const response = await fetch(url);
         const entries = await response.json();
-        setGameList(entries.sort());
+        setGameList(
+          entries.sort((a, b) => {
+            return a.toLowerCase().localeCompare(b.toLowerCase());
+          })
+        );
       } catch (error) {
         alert(error);
       }
