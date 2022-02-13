@@ -4,7 +4,7 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 ///////////////////////////////////////////////////////////////////////////////
-import StackNavigator from "./StackNavigator";
+import NativeStackNavigator from "./NativeStackNavigator";
 
 ///////////////////////////////////////////////////////////////////////////////
 const Drawer = createDrawerNavigator();
@@ -14,8 +14,8 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator>
       <Drawer.Screen
-        component={StackNavigator}
-        name="StackNavigator"
+        component={NativeStackNavigator}
+        name="NativeStackNavigator"
         options={{
           headerShown: false,
           title: "Games",

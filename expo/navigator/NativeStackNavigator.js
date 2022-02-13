@@ -13,20 +13,20 @@ import GameListScreen from "../component/GameListScreen";
 import util from "../util/util";
 
 ///////////////////////////////////////////////////////////////////////////////
-const Stack = createNativeStackNavigator();
+const NativeStack = createNativeStackNavigator();
 
 ///////////////////////////////////////////////////////////////////////////////
-const StackNavigator = () => {
+const NativeStackNavigator = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
+    <NativeStack.Navigator>
+      <NativeStack.Screen
         name="BottomTab"
         component={BottomTabNavigator}
         options={{
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <NativeStack.Screen
         name="GameList"
         component={GameListScreen}
         options={({ route }) => {
@@ -36,7 +36,7 @@ const StackNavigator = () => {
           };
         }}
       />
-      <Stack.Screen
+      <NativeStack.Screen
         name="GameDetail"
         component={GameDetailScreen}
         options={({ route }) => {
@@ -61,9 +61,9 @@ const StackNavigator = () => {
           };
         }}
       />
-    </Stack.Navigator>
+    </NativeStack.Navigator>
   );
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-export default StackNavigator;
+export default NativeStackNavigator;
