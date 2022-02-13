@@ -38,7 +38,7 @@ const BottomTabNavigator = () => {
         }}
         name="ConsoleList"
         options={{
-          title: "Consoles",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="gamepad-square"
@@ -46,6 +46,7 @@ const BottomTabNavigator = () => {
               color={color}
             />
           ),
+          title: "Consoles",
         }}
       />
       <Tab.Screen
@@ -56,7 +57,7 @@ const BottomTabNavigator = () => {
         }}
         name="HandheldList"
         options={{
-          title: "Handhelds",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="nintendo-game-boy"
@@ -64,6 +65,7 @@ const BottomTabNavigator = () => {
               color={color}
             />
           ),
+          title: "Handhelds",
         }}
       />
       <Tab.Screen
@@ -74,7 +76,7 @@ const BottomTabNavigator = () => {
         }}
         name="ArcadeList"
         options={{
-          title: "Arcades",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Image
               alt="Icon"
@@ -84,6 +86,7 @@ const BottomTabNavigator = () => {
               tintColor={color}
             />
           ),
+          title: "Arcades",
         }}
       />
       <Tab.Screen
@@ -94,10 +97,11 @@ const BottomTabNavigator = () => {
         }}
         name="ComputerList"
         options={{
-          title: "Computers",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="keyboard" size={size} color={color} />
           ),
+          title: "Computers",
         }}
       />
     </Tab.Navigator>

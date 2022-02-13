@@ -12,12 +12,15 @@ const Drawer = createDrawerNavigator();
 ///////////////////////////////////////////////////////////////////////////////
 const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator>
+    <Drawer.Navigator
+      screenOptions={{
+        headerTintColor: "white",
+      }}
+    >
       <Drawer.Screen
         component={NativeStackNavigator}
         name="NativeStackNavigator"
         options={{
-          headerShown: false,
           title: "Library",
         }}
       />
