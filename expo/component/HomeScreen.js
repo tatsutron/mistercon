@@ -7,10 +7,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 ///////////////////////////////////////////////////////////////////////////////
 import arcades from "../model/arcades";
+import computers from "../model/computers";
 import consoles from "../model/consoles";
+import handhelds from "../model/handhelds";
 
 ///////////////////////////////////////////////////////////////////////////////
-import ComputerListScreen from "./ComputerListScreen";
 import GameListScreen from "./GameListScreen";
 import PlatformListScreen from "./PlatformListScreen";
 
@@ -54,6 +55,24 @@ const HomeScreen = () => {
         }}
       />
       <Tab.Screen
+        component={PlatformListScreen}
+        initialParams={{
+          model: handhelds,
+          path: require("../config").console,
+        }}
+        name="HandheldList"
+        options={{
+          title: "Handhelds",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="nintendo-game-boy"
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
         component={GameListScreen}
         initialParams={{
           path: require("../config").arcade,
@@ -74,7 +93,11 @@ const HomeScreen = () => {
         }}
       />
       <Tab.Screen
-        component={ComputerListScreen}
+        component={PlatformListScreen}
+        initialParams={{
+          model: computers,
+          path: require("../config").computer,
+        }}
         name="ComputerList"
         options={{
           title: "Computers",
