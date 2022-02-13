@@ -35,9 +35,8 @@ const GameDetailScreen = ({ navigation, route }) => {
         alert(error);
       }
       try {
-        const host = config.tatsudb;
-        const port = config.port;
-        const url = `http://${host}:${port}/metadata/${sha1}`;
+        const { port, tatsudb } = require("../config");
+        const url = `http://${tatsudb}:${port}/metadata/${sha1}`;
         const response = await fetch(url);
         const json = await response.json();
         setMetadata(json);
