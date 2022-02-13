@@ -10,8 +10,8 @@ import arcades from "../model/arcades";
 
 ///////////////////////////////////////////////////////////////////////////////
 import ComputerListScreen from "./ComputerListScreen";
-import ConsoleListScreen from "./ConsoleListScreen";
 import GameListScreen from "./GameListScreen";
+import PlatformListScreen from "./PlatformListScreen";
 
 ///////////////////////////////////////////////////////////////////////////////
 const Tab = createBottomTabNavigator();
@@ -36,7 +36,7 @@ const HomeScreen = () => {
     >
       <Tab.Screen
         name="ConsoleList"
-        component={ConsoleListScreen}
+        component={PlatformListScreen}
         options={{
           title: "Consoles",
           tabBarIcon: ({ color, size }) => (

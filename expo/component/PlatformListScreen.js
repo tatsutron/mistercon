@@ -1,7 +1,14 @@
 import React from "react";
 
 ///////////////////////////////////////////////////////////////////////////////
-import { Avatar, HStack, Pressable, ScrollView, Text } from "native-base";
+import {
+  Avatar,
+  HStack,
+  Pressable,
+  ScrollView,
+  Text,
+  VStack,
+} from "native-base";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -15,8 +22,8 @@ const config = require("../config.json");
 const Tab = createBottomTabNavigator();
 
 ///////////////////////////////////////////////////////////////////////////////
-const ConsoleListScreen = ({ navigation }) => {
-  const [consoleList, setConsoleList] = React.useState([]);
+const PlatformListScreen = ({ navigation }) => {
+  const [platformList, setPlatformList] = React.useState([]);
 
   React.useEffect(() => {
     return navigation.addListener("focus", async () => {
@@ -38,7 +45,7 @@ const ConsoleListScreen = ({ navigation }) => {
             arr.push(console);
           }
         });
-        setConsoleList(arr);
+        setPlatformList(arr);
       } catch (error) {
         alert(error);
       }
@@ -47,31 +54,37 @@ const ConsoleListScreen = ({ navigation }) => {
 
   return (
     <ScrollView bg="black">
-      {consoleList.map((console, index) => {
+      {platformList.map((platform, index) => {
         return (
-          <Pressable
-            height={10}
-            key={index}
-            margin={2}
-            onPress={() => {
-              navigation.navigate("GameList", {
-                path: `${config.games}/${console.folder}`,
-                platform: console,
-              });
+          <VStack
+            justifyContent="center"
+            style={{
+              height: 55,
             }}
           >
-            <HStack key={index} alignItems="center">
-              <Avatar
-                bg="black"
-                borderWidth={1}
-                borderColor="white"
-                source={console.image}
-              />
-              <Text fontSize="lg" color="white" marginLeft={4}>
-                {console.name}
-              </Text>
-            </HStack>
-          </Pressable>
+            <Pressable
+              key={index}
+              onPress={() => {
+                navigation.navigate("GameList", {
+                  path: `${require("../config").games}/${platform.folder}`,
+                  platform,
+                });
+              }}
+            >
+              <HStack key={index} alignItems="center">
+                <Avatar
+                  bg="black"
+                  borderWidth={1}
+                  borderColor="white"
+                  marginLeft={2}
+                  source={platform.image}
+                />
+                <Text fontSize="lg" color="white" marginLeft={4}>
+                  {platform.name}
+                </Text>
+              </HStack>
+            </Pressable>
+          </VStack>
         );
       })}
     </ScrollView>
@@ -79,4 +92,4 @@ const ConsoleListScreen = ({ navigation }) => {
 };
 
 //////////////////////////////////////////////////////////////////////////////
-export default ConsoleListScreen;
+export default PlatformListScreen;
