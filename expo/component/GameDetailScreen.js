@@ -15,10 +15,7 @@ import {
 import util from "../util/util";
 
 ///////////////////////////////////////////////////////////////////////////////
-const config = require("../config.json");
-
-///////////////////////////////////////////////////////////////////////////////
-const GameScreen = ({ navigation, route }) => {
+const GameDetailScreen = ({ navigation, route }) => {
   const { path, platform } = route.params;
   const [metadata, setMetadata] = React.useState(null);
 
@@ -26,8 +23,7 @@ const GameScreen = ({ navigation, route }) => {
     return navigation.addListener("focus", async () => {
       let sha1;
       try {
-        const host = config.host;
-        const port = config.port;
+        const { host, port } = require("../config");
         const headerSize = platform.format.find((format) => {
           return format.extension === util.getExtension({ path });
         }).headerSizeInBytes;
@@ -183,4 +179,4 @@ const GameScreen = ({ navigation, route }) => {
 };
 
 //////////////////////////////////////////////////////////////////////////////
-export default GameScreen;
+export default GameDetailScreen;

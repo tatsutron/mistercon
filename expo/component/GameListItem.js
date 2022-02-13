@@ -17,7 +17,7 @@ const GameListItem = (props) => {
         if (util.isFolder({ path })) {
           navigation.push("GameList", { path, platform });
         } else {
-          navigation.navigate("Game", { path, platform });
+          navigation.navigate("GameDetail", { path, platform });
         }
       }}
     >
