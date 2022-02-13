@@ -1,17 +1,13 @@
 import React from "react";
 
 ///////////////////////////////////////////////////////////////////////////////
-import {
-  Avatar,
-  HStack,
-  Pressable,
-  ScrollView,
-  Text,
-  VStack,
-} from "native-base";
+import { ScrollView } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
 import util from "../util/util";
+
+///////////////////////////////////////////////////////////////////////////////
+import PlatformListItem from "./PlatformListItem";
 
 ///////////////////////////////////////////////////////////////////////////////
 const PlatformListScreen = ({ navigation, route }) => {
@@ -47,35 +43,11 @@ const PlatformListScreen = ({ navigation, route }) => {
     <ScrollView bg="black">
       {platformList.map((platform, index) => {
         return (
-          <VStack
-            justifyContent="center"
+          <PlatformListItem
             key={index}
-            style={{
-              height: 55,
-            }}
-          >
-            <Pressable
-              onPress={() => {
-                navigation.navigate("GameList", {
-                  path: `${require("../config").games}/${platform.folder}`,
-                  platform,
-                });
-              }}
-            >
-              <HStack key={index} alignItems="center">
-                <Avatar
-                  bg="black"
-                  borderWidth={1}
-                  borderColor="white"
-                  marginLeft={2}
-                  source={platform.image}
-                />
-                <Text fontSize="lg" color="white" marginLeft={4}>
-                  {platform.name}
-                </Text>
-              </HStack>
-            </Pressable>
-          </VStack>
+            navigation={navigation}
+            platform={platform}
+          />
         );
       })}
     </ScrollView>

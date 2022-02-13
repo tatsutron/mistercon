@@ -7,17 +7,13 @@ import { ScrollView } from "native-base";
 import GameListItem from "./GameListItem";
 
 ///////////////////////////////////////////////////////////////////////////////
-const config = require("../config.json");
-
-///////////////////////////////////////////////////////////////////////////////
 const GameListScreen = ({ navigation, route }) => {
   const { path, platform } = route.params;
   const [gameList, setGameList] = React.useState([]);
 
   React.useEffect(() => {
     return navigation.addListener("focus", async () => {
-      const host = config.host;
-      const port = config.port;
+      const { host, port } = require("../config");
       const extensions = platform.format
         .map((format) => {
           return format.extension;

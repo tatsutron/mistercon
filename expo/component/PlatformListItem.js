@@ -4,11 +4,8 @@ import React from "react";
 import { Avatar, HStack, Pressable, Text, VStack } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
-import util from "../util/util";
-
-///////////////////////////////////////////////////////////////////////////////
-const GameListItem = (props) => {
-  const { navigation, path, platform } = props;
+const PlatformListItem = (props) => {
+  const { navigation, platform } = props;
   return (
     <VStack
       justifyContent="center"
@@ -18,27 +15,22 @@ const GameListItem = (props) => {
     >
       <Pressable
         onPress={() => {
-          if (util.isFolder({ path })) {
-            navigation.push("GameList", { path, platform });
-          } else {
-            navigation.navigate("GameDetail", { path, platform });
-          }
+          navigation.navigate("GameList", {
+            path: `${require("../config").games}/${platform.folder}`,
+            platform,
+          });
         }}
       >
         <HStack alignItems="center">
           <Avatar
             bg="black"
+            borderWidth={1}
+            borderColor="white"
             marginLeft={2}
-            source={
-              util.isFolder({ path })
-                ? require("../assets/folder-icon.png")
-                : null
-            }
+            source={platform.image}
           />
           <Text color="white" fontSize="lg" marginLeft={4}>
-            {util.isFolder({ path })
-              ? util.getFolderName({ path: props.path })
-              : util.getFileName({ path: props.path })}
+            {platform.name}
           </Text>
         </HStack>
       </Pressable>
@@ -47,4 +39,4 @@ const GameListItem = (props) => {
 };
 
 //////////////////////////////////////////////////////////////////////////////
-export default GameListItem;
+export default PlatformListItem;
