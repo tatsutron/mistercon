@@ -18,7 +18,7 @@ const DrawerNavigator = () => {
         name="NativeStackNavigator"
         options={{
           headerShown: false,
-          title: "Games",
+          title: "Library",
         }}
       />
     </Drawer.Navigator>
