@@ -29,6 +29,7 @@ const PlatformListScreen = ({ navigation }) => {
     return navigation.addListener("focus", async () => {
       const host = config.host;
       const port = config.port;
+      // TODO Make this platform agnostic
       const path = config.console;
       const url = `http://${host}:${port}/scan/rbf/${path}`;
       try {
@@ -58,12 +59,12 @@ const PlatformListScreen = ({ navigation }) => {
         return (
           <VStack
             justifyContent="center"
+            key={index}
             style={{
               height: 55,
             }}
           >
             <Pressable
-              key={index}
               onPress={() => {
                 navigation.navigate("GameList", {
                   path: `${require("../config").games}/${platform.folder}`,
