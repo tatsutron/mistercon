@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 ///////////////////////////////////////////////////////////////////////////////
 import arcades from "../model/arcades";
+import consoles from "../model/consoles";
 
 ///////////////////////////////////////////////////////////////////////////////
 import ComputerListScreen from "./ComputerListScreen";
@@ -35,8 +36,12 @@ const HomeScreen = () => {
       }}
     >
       <Tab.Screen
-        name="ConsoleList"
         component={PlatformListScreen}
+        initialParams={{
+          model: consoles,
+          path: require("../config").console,
+        }}
+        name="ConsoleList"
         options={{
           title: "Consoles",
           tabBarIcon: ({ color, size }) => (
@@ -49,12 +54,12 @@ const HomeScreen = () => {
         }}
       />
       <Tab.Screen
-        name="ArcadeList"
         component={GameListScreen}
         initialParams={{
           path: require("../config").arcade,
           platform: arcades[0],
         }}
+        name="ArcadeList"
         options={{
           title: "Arcades",
           tabBarIcon: ({ color, size }) => (
@@ -69,8 +74,8 @@ const HomeScreen = () => {
         }}
       />
       <Tab.Screen
-        name="ComputerList"
         component={ComputerListScreen}
+        name="ComputerList"
         options={{
           title: "Computers",
           tabBarIcon: ({ color, size }) => (

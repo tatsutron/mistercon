@@ -12,38 +12,32 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 ///////////////////////////////////////////////////////////////////////////////
-import consoles from "../model/consoles";
 import util from "../util/util";
-
-///////////////////////////////////////////////////////////////////////////////
-const config = require("../config.json");
 
 ///////////////////////////////////////////////////////////////////////////////
 const Tab = createBottomTabNavigator();
 
 ///////////////////////////////////////////////////////////////////////////////
-const PlatformListScreen = ({ navigation }) => {
+const PlatformListScreen = ({ navigation, route }) => {
+  const { model, path } = route.params;
   const [platformList, setPlatformList] = React.useState([]);
 
   React.useEffect(() => {
     return navigation.addListener("focus", async () => {
-      const host = config.host;
-      const port = config.port;
-      // TODO Make this platform agnostic
-      const path = config.console;
+      const { host, port } = require("../config");
       const url = `http://${host}:${port}/scan/rbf/${path}`;
       try {
         const response = await fetch(url);
         const entries = await response.json();
         const arr = [];
-        Object.keys(consoles).forEach((key) => {
-          const console = consoles[key];
+        Object.keys(model).forEach((key) => {
+          const platform = model[key];
           const match = entries.find((path) => {
             const filename = util.getFileName({ path });
-            return filename.startsWith(console.core);
+            return filename.startsWith(platform.core);
           });
           if (match) {
-            arr.push(console);
+            arr.push(platform);
           }
         });
         setPlatformList(arr);
