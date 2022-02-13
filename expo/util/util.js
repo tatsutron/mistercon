@@ -1,6 +1,3 @@
-const config = require("../config.json");
-
-///////////////////////////////////////////////////////////////////////////////
 const getExtension = ({ path }) => /(?:\.([^.]+))?$/.exec(path)[1];
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -27,8 +24,7 @@ const isFolder = ({ path }) => path.endsWith("/");
 
 ///////////////////////////////////////////////////////////////////////////////
 const loadGame = ({ console, path }) => {
-  const host = config.host;
-  const port = config.port;
+  const { host, port } = require("../config");
   const command = console.format.find((format) => {
     return format.extension === getExtension({ path });
   }).mbcCommand;
