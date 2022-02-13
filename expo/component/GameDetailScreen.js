@@ -3,12 +3,12 @@ import React from "react";
 ///////////////////////////////////////////////////////////////////////////////
 import {
   Center,
+  Column,
   Divider,
   Image,
   ScrollView,
   Text,
   View,
-  VStack,
 } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -54,63 +54,63 @@ const GameDetailScreen = ({ navigation, route }) => {
         }}
         bg="black"
       >
-        <VStack space={5}>
+        <Column space={5}>
           {metadata.publisher && (
-            <VStack space={1}>
+            <Column space={1}>
               <Text color="white">Publisher</Text>
               <Divider />
               <Text color="#28a4ea" fontSize={"md"}>
                 {metadata.publisher}
               </Text>
-            </VStack>
+            </Column>
           )}
           {metadata.developer && (
-            <VStack space={1}>
+            <Column space={1}>
               <Text color="white">Developer</Text>
               <Divider />
               <Text color="#28a4ea" fontSize={"md"}>
                 {metadata.developer}
               </Text>
-            </VStack>
+            </Column>
           )}
           {metadata.releaseDate && (
-            <VStack space={1}>
+            <Column space={1}>
               <Text color="white">Release Date</Text>
               <Divider />
               <Text color="#28a4ea" fontSize={"md"}>
                 {metadata.releaseDate}
               </Text>
-            </VStack>
+            </Column>
           )}
           {metadata.region && (
-            <VStack space={1}>
+            <Column space={1}>
               <Text color="white">Region</Text>
               <Divider />
               <Text color="#28a4ea" fontSize={"md"}>
                 {metadata.region}
               </Text>
-            </VStack>
+            </Column>
           )}
           {metadata.genre && (
-            <VStack space={1}>
+            <Column space={1}>
               <Text color="white">Genre</Text>
               <Divider />
               <Text color="#28a4ea" fontSize={"md"}>
                 {metadata.genre}
               </Text>
-            </VStack>
+            </Column>
           )}
           {metadata.description && (
-            <VStack space={1}>
+            <Column space={1}>
               <Text color="white">Description</Text>
               <Divider />
               <Text color="#28a4ea" fontSize={"md"}>
                 {metadata.description}
               </Text>
-            </VStack>
+            </Column>
           )}
           {metadata.frontCover && (
-            <VStack space={1}>
+            <Column space={1}>
               <Text color="white">Front Cover</Text>
               <Divider />
               <Center>
@@ -127,10 +127,10 @@ const GameDetailScreen = ({ navigation, route }) => {
                   }}
                 />
               </Center>
-            </VStack>
+            </Column>
           )}
           {metadata.backCover && (
-            <VStack space={1}>
+            <Column space={1}>
               <Text color="white">Back Cover</Text>
               <Divider />
               <Center>
@@ -147,10 +147,10 @@ const GameDetailScreen = ({ navigation, route }) => {
                   }}
                 />
               </Center>
-            </VStack>
+            </Column>
           )}
           {metadata.cartridge && (
-            <VStack space={1}>
+            <Column space={1}>
               <Text color="white">Cartridge</Text>
               <Divider />
               <Center>
@@ -167,9 +167,9 @@ const GameDetailScreen = ({ navigation, route }) => {
                   }}
                 />
               </Center>
-            </VStack>
+            </Column>
           )}
-        </VStack>
+        </Column>
       </ScrollView>
     );
   } else {

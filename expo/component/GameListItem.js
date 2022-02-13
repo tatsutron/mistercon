@@ -1,7 +1,7 @@
 import React from "react";
 
 ///////////////////////////////////////////////////////////////////////////////
-import { Avatar, HStack, Pressable, Text, VStack } from "native-base";
+import { Avatar, Column, Pressable, Row, Text } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
 import util from "../util/util";
@@ -10,7 +10,7 @@ import util from "../util/util";
 const GameListItem = (props) => {
   const { navigation, path, platform } = props;
   return (
-    <VStack
+    <Column
       justifyContent="center"
       style={{
         height: 55,
@@ -25,7 +25,7 @@ const GameListItem = (props) => {
           }
         }}
       >
-        <HStack alignItems="center">
+        <Row alignItems="center">
           <Avatar
             bg="black"
             marginLeft={2}
@@ -40,9 +40,9 @@ const GameListItem = (props) => {
               ? util.getFolderName({ path: props.path })
               : util.getFileName({ path: props.path })}
           </Text>
-        </HStack>
+        </Row>
       </Pressable>
-    </VStack>
+    </Column>
   );
 };
 

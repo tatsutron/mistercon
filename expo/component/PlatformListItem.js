@@ -1,13 +1,13 @@
 import React from "react";
 
 ///////////////////////////////////////////////////////////////////////////////
-import { Avatar, HStack, Pressable, Text, VStack } from "native-base";
+import { Avatar, Column, Pressable, Row, Text } from "native-base";
 
 ///////////////////////////////////////////////////////////////////////////////
 const PlatformListItem = (props) => {
   const { navigation, platform } = props;
   return (
-    <VStack
+    <Column
       justifyContent="center"
       style={{
         height: 55,
@@ -21,7 +21,7 @@ const PlatformListItem = (props) => {
           });
         }}
       >
-        <HStack alignItems="center">
+        <Row alignItems="center">
           <Avatar
             bg="black"
             borderWidth={1}
@@ -32,9 +32,9 @@ const PlatformListItem = (props) => {
           <Text color="white" fontSize="lg" marginLeft={4}>
             {platform.name}
           </Text>
-        </HStack>
+        </Row>
       </Pressable>
-    </VStack>
+    </Column>
   );
 };
 
