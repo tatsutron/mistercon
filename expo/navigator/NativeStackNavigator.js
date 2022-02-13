@@ -46,7 +46,7 @@ const NativeStackNavigator = () => {
             headerRight: () => (
               <Button
                 _pressed={{
-                  backgroundColor: "#000000",
+                  backgroundColor: "black",
                   borderColor: "white",
                 }}
                 borderColor="#28a4ea"
