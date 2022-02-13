@@ -18,21 +18,12 @@ const Stack = createNativeStackNavigator();
 ///////////////////////////////////////////////////////////////////////////////
 const StackNavigator = () => {
   return (
-    <Stack.Navigator
-      initialRouteName="Tabs"
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#171717",
-        },
-        headerTintColor: "white",
-      }}
-    >
+    <Stack.Navigator>
       <Stack.Screen
         name="Tabs"
         component={TabNavigator}
         options={{
           headerShown: false,
-          title: "Consoles",
         }}
       />
       <Stack.Screen

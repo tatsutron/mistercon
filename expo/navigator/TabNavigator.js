@@ -22,11 +22,7 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName="ConsoleList"
       screenOptions={{
-        headerStyle: {
-          backgroundColor: "#171717",
-        },
         headerTintColor: "white",
         tabBarStyle: {
           backgroundColor: "black",
