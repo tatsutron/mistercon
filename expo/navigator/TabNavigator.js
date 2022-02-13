@@ -12,20 +12,18 @@ import consoles from "../model/consoles";
 import handhelds from "../model/handhelds";
 
 ///////////////////////////////////////////////////////////////////////////////
-import GameListScreen from "./GameListScreen";
-import PlatformListScreen from "./PlatformListScreen";
+import GameListScreen from "../component/GameListScreen";
+import PlatformListScreen from "../component/PlatformListScreen";
 
 ///////////////////////////////////////////////////////////////////////////////
 const Tab = createBottomTabNavigator();
 
 ///////////////////////////////////////////////////////////////////////////////
-const HomeScreen = () => {
+const TabNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName="ConsoleList"
-      mode="modal"
       screenOptions={{
-        animationEnabled: false,
         headerStyle: {
           backgroundColor: "#171717",
         },
@@ -110,5 +108,5 @@ const HomeScreen = () => {
   );
 };
 
-//////////////////////////////////////////////////////////////////////////////
-export default HomeScreen;
+///////////////////////////////////////////////////////////////////////////////
+export default TabNavigator;
