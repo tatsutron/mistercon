@@ -19,7 +19,7 @@ import PlatformListScreen from "../component/PlatformListScreen";
 const Tab = createBottomTabNavigator();
 
 ///////////////////////////////////////////////////////////////////////////////
-const TabNavigator = () => {
+const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -105,4 +105,4 @@ const TabNavigator = () => {
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-export default TabNavigator;
+export default BottomTabNavigator;

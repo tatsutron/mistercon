@@ -5,9 +5,9 @@ import { Button } from "native-base";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 ///////////////////////////////////////////////////////////////////////////////
+import BottomTabNavigator from "./BottomTabNavigator";
 import GameDetailScreen from "../component/GameDetailScreen";
 import GameListScreen from "../component/GameListScreen";
-import TabNavigator from "./TabNavigator";
 
 ///////////////////////////////////////////////////////////////////////////////
 import util from "../util/util";
@@ -20,8 +20,8 @@ const StackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Tabs"
-        component={TabNavigator}
+        name="BottomTab"
+        component={BottomTabNavigator}
         options={{
           headerShown: false,
         }}
