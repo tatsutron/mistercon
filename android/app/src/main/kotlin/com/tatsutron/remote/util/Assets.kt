@@ -10,7 +10,7 @@ object Assets {
     fun require(context: Context, session: Session, name: String) {
         Ssh.sftp(session).apply {
             try {
-                mkdir(Constants.MISTERCON_PATH)
+                mkdir(Constants.MISTERCON_ROOT)
             } catch (e: Throwable) {
                 e.printStackTrace()
             }
@@ -25,7 +25,7 @@ object Assets {
             close()
         }
         Ssh.sftp(session).apply {
-            put(file.path, File(Constants.MISTERCON_PATH, name).path)
+            put(file.path, File(Constants.MISTERCON_ROOT, name).path)
             disconnect()
         }
     }
