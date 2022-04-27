@@ -11,5 +11,6 @@ object Constants {
     const val HOST = "MiSTer"
     const val LIST_PATH = "${MISTERCON_ROOT}/list"
     const val MBC_PATH = "${MISTERCON_ROOT}/mbc"
+    const val PORT = 8080
     const val SCRIPTS_PATH = "${VOLUME}/Scripts"
 }
