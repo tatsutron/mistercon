@@ -114,18 +114,12 @@ class ScriptListFragment : BaseFragment() {
                 Coroutine.launch(
                     activity = requireActivity(),
                     run = {
-                        val session = Ssh.session()
-                        Ssh.command(session, "ls $scriptsPath")
-                            .split("\n")
-                            .filter {
-                                it.endsWith(".sh")
-                            }
-                            .forEach {
-                                Persistence.saveScript(
-                                    File(scriptsPath, it).path,
-                                )
-                            }
-                        session.disconnect()
+                        val scriptPaths = Http.scan("sh", scriptsPath)
+                        scriptPaths.forEach {
+                            Persistence.saveScript(
+                                File(scriptsPath, it).path,
+                            )
+                        }
                     },
                     success = {
                         setRecycler()

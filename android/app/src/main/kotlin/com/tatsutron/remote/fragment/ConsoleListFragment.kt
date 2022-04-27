@@ -111,38 +111,30 @@ class ConsoleListFragment : BaseFragment() {
                 Coroutine.launch(
                     activity = requireActivity(),
                     run = {
-                        val session = Ssh.session()
-                        Ssh.command(session, "ls $consolePath")
-                            .split("\n")
-                            .filter {
-                                it.endsWith(".rbf")
-                            }
-                            .forEach {
-                                val coreId = File(it).name
-                                    .split("_")
-                                    .firstOrNull()
-                                Platform.values().forEach { platform ->
-                                    if (platform.coreId == coreId) {
-                                        Persistence.savePlatform(
-                                            corePath =
-                                            File(
-                                                consolePath,
-                                                it,
+                        val corePaths = Http.scan(
+                            extensions = "rbf",
+                            path = consolePath,
+                        )
+                        corePaths.forEach {
+                            val coreId = File(it).name
+                                .split("_")
+                                .firstOrNull()
+                            Platform.values().forEach { platform ->
+                                if (platform.coreId == coreId) {
+                                    Persistence.savePlatform(
+                                        corePath = File(consolePath, it).path,
+                                        gamesPath = Persistence
+                                            .getPlatform(platform)
+                                            ?.gamesPath
+                                            ?: File(
+                                                Constants.GAMES_PATH,
+                                                platform.gamesFolderDefault!!,
                                             ).path,
-                                            gamesPath = Persistence
-                                                .getPlatform(platform)
-                                                ?.gamesPath
-                                                ?: File(
-                                                    Constants.GAMES_PATH,
-                                                    platform
-                                                        .gamesFolderDefault!!,
-                                                ).path,
-                                            platform = platform,
-                                        )
-                                    }
+                                        platform = platform,
+                                    )
                                 }
                             }
-                        session.disconnect()
+                        }
                     },
                     success = {
                         setRecycler()

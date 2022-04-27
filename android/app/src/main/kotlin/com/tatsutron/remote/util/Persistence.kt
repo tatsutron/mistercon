@@ -77,6 +77,7 @@ object Persistence {
         database?.scriptsQueries
             ?.selectAll()
             ?.executeAsList()
+            ?.sorted()
             ?: listOf()
 
     fun clearScripts() {
