@@ -22,15 +22,20 @@ enum class Platform(
     ),
 
     ATARI_2600(
-        coreId = "Atari2600",
+        coreId = "Atari7800",
         displayName = "Atari 2600",
         formats = listOf(
             Format(
-                extension = "rom",
-                mbcCommand = "ATARI2600",
+                extension = "a26",
             ),
         ),
-        gamesFolderDefault = "Atari2600",
+        gamesFolderDefault = "ATARI7800",
+        mgl = Mgl(
+            delay = "2",
+            index = "0",
+            rbf = "_Console/Atari7800",
+            type = "f",
+        ),
     ),
 
     ATARI_5200(

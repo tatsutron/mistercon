@@ -40,7 +40,7 @@ object Http {
 
     fun play(game: Game) {
         val mgl = game.platform.mgl!!
-        val path = game.path.replace(game.platform.gamesPath!!, "")
+        val path = File(game.path).name
         val body = mapOf(
             Pair("rbf", mgl.rbf),
             Pair("delay", mgl.delay),
