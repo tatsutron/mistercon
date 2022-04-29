@@ -133,11 +133,16 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "gb",
-                mbcCommand = "GAMEBOY",
             ),
         ),
         gamesFolderDefault = "Gameboy",
         metadata = true,
+        mgl = Mgl(
+            delay = "2",
+            index = "0",
+            rbf = "_Console/Gameboy",
+            type = "f",
+        ),
     ),
 
     GAME_BOY_ADVANCE(
