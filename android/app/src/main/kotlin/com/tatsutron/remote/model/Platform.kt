@@ -115,11 +115,16 @@ enum class Platform(
             Format(
                 extension = "fds",
                 headerSizeInBytes = 16,
-                mbcCommand = "NES.FDS",
             ),
         ),
         gamesFolderDefault = "NES",
         metadata = true,
+        mgl = Mgl(
+            delay = "2",
+            index = "0",
+            rbf = "_Console/NES",
+            type = "f",
+        ),
     ),
 
     GAME_BOY(
