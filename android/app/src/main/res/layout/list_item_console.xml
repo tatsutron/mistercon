@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
-    android:orientation="horizontal">
+    android:layout_height="72dp">
 
-    <FrameLayout
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginHorizontal="@dimen/margin_medium">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_gravity="center"
-            app:cardBackgroundColor="@color/gray_900"
-            app:cardCornerRadius="28dp"
-            app:cardElevation="0dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="100dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/shape_border"
             android:scaleType="fitCenter" />
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_medium" />
 
-    <TextView
-        android:id="@+id/label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_medium" />
+    </LinearLayout>
 
-</LinearLayout>
+    <View
+        android:layout_width="244dp"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom|end"
+        android:background="@color/gray_700" />
+
+</FrameLayout>

@@ -44,6 +44,7 @@
     <color name="primary_700">#2182C7</color>
     <color name="primary_800">#1E72B3</color>
     <color name="primary_900">#185291</color>
+    <color name="transparent_black">#00000000</color>
     <color name="triadic_100">#F1BAE1</color>
     <color name="triadic_200">#EC8CCC</color>
     <color name="triadic_300">#EA59B6</color>
