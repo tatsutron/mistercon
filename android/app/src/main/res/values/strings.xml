@@ -18,6 +18,7 @@
     <string name="genre">Genre</string>
     <string name="hostname_or_ip_address">Hostname or IP Address</string>
     <string name="menu">Menu</string>
+    <string name="metadata_not_supported">Metadata is not yet supported for this platform.</string>
     <string name="mistercon">mistercon</string>
     <string name="no_camera_permission">Camera permission is required to use this feature.</string>
     <string name="no_data_was_found_for_game">No data found for %s.</string>

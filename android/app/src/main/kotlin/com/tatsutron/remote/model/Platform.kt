@@ -9,6 +9,7 @@ enum class Platform(
     val formats: List<Format>,
     val gamesFolderDefault: String? = null,
     var gamesPath: String? = null,
+    val metadata: Boolean,
     val mgl: Mgl? = null,
 ) {
 
@@ -19,6 +20,7 @@ enum class Platform(
                 mbcCommand = "ARCADE",
             ),
         ),
+        metadata = false,
     ),
 
     ATARI_2600(
@@ -30,6 +32,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "ATARI7800",
+        metadata = true,
         mgl = Mgl(
             delay = "2",
             index = "0",
@@ -48,6 +51,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "Atari5200",
+        metadata = true,
     ),
 
     ATARI_7800(
@@ -61,6 +65,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "Atari7800",
+        metadata = true,
     ),
 
     ATARI_LYNX(
@@ -74,6 +79,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "AtariLynx",
+        metadata = true,
     ),
 
     BALLY_ASTROCADE(
@@ -86,6 +92,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "Astrocade",
+        metadata = false,
     ),
 
     COLECOVISION(
@@ -98,6 +105,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "Coleco",
+        metadata = true,
     ),
 
     FAMICOM_DISK_SYSTEM(
@@ -111,6 +119,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "NES",
+        metadata = true,
     ),
 
     GAME_BOY(
@@ -123,6 +132,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "Gameboy",
+        metadata = true,
     ),
 
     GAME_BOY_ADVANCE(
@@ -135,6 +145,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "GBA",
+        metadata = true,
     ),
 
     GAME_BOY_COLOR(
@@ -147,6 +158,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "Gameboy",
+        metadata = true,
     ),
 
     GAME_GEAR(
@@ -159,6 +171,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "SMS",
+        metadata = true,
     ),
 
     INTELLIVISION(
@@ -171,6 +184,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "Intellivision",
+        metadata = true,
     ),
 
     INTERTON_VC_4000(
@@ -183,6 +197,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "VC4000",
+        metadata = false,
     ),
 
     MASTER_SYSTEM(
@@ -195,6 +210,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "SMS",
+        metadata = true,
     ),
 
     NEO_GEO(
@@ -207,6 +223,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "NeoGeo",
+        metadata = false,
     ),
 
     NINTENDO_ENTERTAINMENT_SYSTEM(
@@ -220,6 +237,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "NES",
+        metadata = true,
     ),
 
     ODYSSEY_2(
@@ -232,6 +250,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "Odyssey2",
+        metadata = true,
     ),
 
     PLAYSTATION(
@@ -243,6 +262,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "PSX",
+        metadata = false,
         mgl = Mgl(
             delay = "1",
             index = "1",
@@ -261,6 +281,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "MegaCD",
+        metadata = false,
     ),
 
     SEGA_GENESIS(
@@ -281,6 +302,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "Genesis",
+        metadata = true,
     ),
 
     SG_1000(
@@ -293,6 +315,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "Coleco",
+        metadata = true,
     ),
 
     SUPER_GRAFX(
@@ -305,6 +328,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "TGFX16",
+        metadata = true,
     ),
 
     SUPER_NINTENDO(
@@ -321,6 +345,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "SNES",
+        metadata = true,
     ),
 
     TURBO_GRAFX_16(
@@ -333,6 +358,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "TGFX16",
+        metadata = true,
     ),
 
     TURBO_GRAFX_CD(
@@ -345,6 +371,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "TGFX16-CD",
+        metadata = false,
     ),
 
     VECTREX(
@@ -361,6 +388,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "Vectrex",
+        metadata = true,
     ),
 
     WONDERSWAN(
@@ -373,6 +401,7 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "WonderSwan",
+        metadata = true,
     ),
 
     WONDERSWAN_COLOR(
@@ -385,5 +414,6 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "WonderSwan",
+        metadata = true,
     );
 }

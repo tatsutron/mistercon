@@ -71,7 +71,9 @@ class GameFragment : BaseFragment() {
             supportActionBar?.title = game.name
         }
         setSpeedDial()
-        if (game.sha1 == null) {
+        if (!game.platform.metadata) {
+            setText(requireContext().getString(R.string.metadata_not_supported))
+        } else if (game.sha1 == null) {
             onSync()
         } else {
             setMetadata()
@@ -124,15 +126,17 @@ class GameFragment : BaseFragment() {
                         .create()
                 )
             }
-            addActionItem(
-                SpeedDialActionItem.Builder(R.id.sync, R.drawable.ic_sync)
-                    .setLabel(string(R.string.sync))
-                    .setLabelBackgroundColor(color(R.color.gray_900))
-                    .setLabelColor(color(R.color.primary_500))
-                    .setFabBackgroundColor(color(R.color.gray_900))
-                    .setFabImageTintColor(color(R.color.primary_500))
-                    .create()
-            )
+            if (game.platform.metadata) {
+                addActionItem(
+                    SpeedDialActionItem.Builder(R.id.sync, R.drawable.ic_sync)
+                        .setLabel(string(R.string.sync))
+                        .setLabelBackgroundColor(color(R.color.gray_900))
+                        .setLabelColor(color(R.color.primary_500))
+                        .setFabBackgroundColor(color(R.color.gray_900))
+                        .setFabImageTintColor(color(R.color.primary_500))
+                        .create()
+                )
+            }
             if (game.sha1 != null) {
                 addActionItem(
                     SpeedDialActionItem.Builder(
@@ -247,15 +251,21 @@ class GameFragment : BaseFragment() {
                 it == true
             }
         ) {
-            view?.findViewById<ScrollView>(R.id.scroll)
-                ?.visibility = View.GONE
-            view?.findViewById<TextView>(R.id.no_data_text)?.apply {
-                text = context.getString(
+            setText(
+                requireContext().getString(
                     R.string.no_data_was_found_for_game,
                     game.name,
                 )
-                visibility = View.VISIBLE
-            }
+            )
+        }
+    }
+
+    private fun setText(text: String) {
+        view?.findViewById<ScrollView>(R.id.scroll)
+            ?.visibility = View.GONE
+        view?.findViewById<TextView>(R.id.no_data_text)?.apply {
+            this.text = text
+            visibility = View.VISIBLE
         }
     }
 
