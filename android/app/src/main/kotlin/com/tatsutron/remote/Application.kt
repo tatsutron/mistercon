@@ -2,10 +2,7 @@ package com.tatsutron.remote
 
 import android.app.Activity
 import com.tatsutron.remote.model.Game
-import com.tatsutron.remote.util.Assets
-import com.tatsutron.remote.util.Constants
-import com.tatsutron.remote.util.Coroutine
-import com.tatsutron.remote.util.Ssh
+import com.tatsutron.remote.util.*
 import java.io.File
 import java.io.IOException
 
@@ -36,24 +33,28 @@ class Application : android.app.Application() {
             Coroutine.launch(
                 activity = activity,
                 run = {
-                    val session = Ssh.session()
-                    Assets.require(activity, session, "mbc")
-                    val mbcCommand = game.platform.formats
-                        .find {
-                            it.extension == File(game.path).extension
-                        }
-                        ?.mbcCommand!!
-                    val command = StringBuilder().apply {
-                        append("\"${Constants.MBC_PATH}\"")
-                        append(" ")
-                        append("load_rom")
-                        append(" ")
-                        append(mbcCommand)
-                        append(" ")
-                        append("\"${game.path}\"")
-                    }.toString()
-                    Ssh.command(session, command)
-                    session.disconnect()
+                    if (game.platform.mgl != null) {
+                        Http.play(game)
+                    } else {
+                        val session = Ssh.session()
+                        Assets.require(activity, session, "mbc")
+                        val mbcCommand = game.platform.formats
+                            .find {
+                                it.extension == File(game.path).extension
+                            }
+                            ?.mbcCommand!!
+                        val command = StringBuilder().apply {
+                            append("\"${Constants.MBC_PATH}\"")
+                            append(" ")
+                            append("load_rom")
+                            append(" ")
+                            append(mbcCommand)
+                            append(" ")
+                            append("\"${game.path}\"")
+                        }.toString()
+                        Ssh.command(session, command)
+                        session.disconnect()
+                    }
                 },
                 finally = callback,
             )

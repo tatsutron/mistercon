@@ -1,5 +1,7 @@
 package com.tatsutron.remote.model
 
+// TODO Make this whole thing immutable
+//  and find another way to deal with the paths
 enum class Platform(
     val coreId: String? = null,
     var corePath: String? = null,
@@ -7,6 +9,7 @@ enum class Platform(
     val formats: List<Format>,
     val gamesFolderDefault: String? = null,
     var gamesPath: String? = null,
+    val mgl: Mgl? = null,
 ) {
 
     ARCADE(
@@ -224,6 +227,23 @@ enum class Platform(
             ),
         ),
         gamesFolderDefault = "Odyssey2",
+    ),
+
+    PLAYSTATION(
+        coreId = "PSX",
+        displayName = "PlayStation",
+        formats = listOf(
+            Format(
+                extension = "chd",
+            ),
+        ),
+        gamesFolderDefault = "PSX",
+        mgl = Mgl(
+            delay = "1",
+            index = "1",
+            rbf = "_Console/PSX",
+            type = "s",
+        ),
     ),
 
     SEGA_CD(
