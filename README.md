@@ -16,7 +16,7 @@ mistercon is an Android app for use with [MiSTer](https://github.com/MiSTer-deve
 Platform  | Format(s) | Metadata
 | - | - | - |
 Arcade | `.mra` | :x:
-Atari 2600 | `.rom` | :white_check_mark:
+Atari 2600 | `.a26` | :white_check_mark:
 Atari 5200 | `.rom` | :white_check_mark:
 Atari 7800 | `.a78` | :white_check_mark:
 Atari Lynx | `.lnx` | :white_check_mark:
@@ -33,6 +33,7 @@ Master System | `.sms` | :white_check_mark:
 Neo Geo | `.neo` | :x:
 Nintendo Entertainment System | `.nes` | :white_check_mark:
 Odyssey 2 | `.bin` | :white_check_mark:
+PlayStation | `.chd` | :x:
 Sega CD | `.chd` | :x:
 Sega Genesis | `.bin` `.gen` `.md` | :white_check_mark:
 SG-1000 | `.sg` | :white_check_mark:
