@@ -306,6 +306,24 @@ enum class Platform(
         ),
     ),
 
+    SEGA_32X(
+        coreId = "S32X",
+        displayName = "Sega 32X",
+        formats = listOf(
+            Format(
+                extension = "32x",
+            ),
+        ),
+        gamesFolderDefault = "S32X",
+        metadata = true,
+        mgl = Mgl(
+            delay = "1",
+            index = "0",
+            rbf = "_Console/S32X",
+            type = "f",
+        ),
+    ),
+
     SEGA_CD(
         coreId = "MegaCD",
         displayName = "Sega CD",
