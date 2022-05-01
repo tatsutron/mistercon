@@ -25,8 +25,9 @@ interface PlayService {
 
 object Http {
 
+    // TODO This needs to handle the host changing
     private val retrofit = Retrofit.Builder()
-        .baseUrl("http://${Constants.HOST}:${Constants.PORT}")
+        .baseUrl("http://${Persistence.getConfig()?.host}:${Constants.PORT}")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private val scanService = retrofit.create(ScanService::class.java)
