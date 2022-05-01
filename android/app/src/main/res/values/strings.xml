@@ -4,7 +4,6 @@
     <string name="arcades">Arcades</string>
     <string name="cancel">Cancel</string>
     <string name="confirm_play_game">Play %s?</string>
-    <string name="confirm_reboot">Reboot the MiSTer?</string>
     <string name="confirm_run_script">Run script?</string>
     <string name="consoles">Consoles</string>
     <string name="copy_qr_data">Copy QR Data</string>
@@ -27,7 +26,6 @@
     <string name="please_enter_ip_address">Please enter IP address</string>
     <string name="publisher">Publisher</string>
     <string name="random">Random</string>
-    <string name="reboot">Reboot</string>
     <string name="region">Region</string>
     <string name="release_date">Release Date</string>
     <string name="scan">Scan</string>

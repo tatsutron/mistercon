@@ -57,7 +57,6 @@ class SystemFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setHost(view)
         setCreditsButton(view)
-        setRebootButton(view)
         setScriptsButton(view)
         setMenuButton(view)
     }
@@ -101,32 +100,6 @@ class SystemFragment : BaseFragment() {
                 Navigator.showScreen(
                     activity as AppCompatActivity,
                     FragmentMaker.credits(),
-                )
-            }
-        }
-    }
-
-    private fun setRebootButton(view: View) {
-        view.findViewById<Button>(R.id.reboot_button).apply {
-            setOnClickListener {
-                val context = requireContext()
-                Dialog.confirm(
-                    context = context,
-                    message = context.getString(R.string.confirm_reboot),
-                    ok = {
-                        Navigator.showLoadingScreen()
-                        Coroutine.launch(
-                            activity = requireActivity(),
-                            run = {
-                                val session = Ssh.session()
-                                Ssh.command(session, "reboot now")
-                                session.disconnect()
-                            },
-                            finally = {
-                                Navigator.hideLoadingScreen()
-                            },
-                        )
-                    },
                 )
             }
         }
