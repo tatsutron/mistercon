@@ -151,11 +151,16 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "gba",
-                mbcCommand = "GBA",
             ),
         ),
         gamesFolderDefault = "GBA",
         metadata = true,
+        mgl = Mgl(
+            delay = "2",
+            index = "0",
+            rbf = "_Console/GBA",
+            type = "f",
+        ),
     ),
 
     GAME_BOY_COLOR(
@@ -164,11 +169,16 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "gbc",
-                mbcCommand = "GAMEBOY.COL",
             ),
         ),
         gamesFolderDefault = "Gameboy",
         metadata = true,
+        mgl = Mgl(
+            delay = "2",
+            index = "0",
+            rbf = "_Console/Gameboy",
+            type = "f",
+        ),
     ),
 
     GAME_GEAR(
@@ -177,11 +187,16 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "gg",
-                mbcCommand = "SMS.GG",
             ),
         ),
         gamesFolderDefault = "SMS",
         metadata = true,
+        mgl = Mgl(
+            delay = "1",
+            index = "2",
+            rbf = "_Console/SMS",
+            type = "f",
+        ),
     ),
 
     INTELLIVISION(
@@ -216,11 +231,16 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "sms",
-                mbcCommand = "SMS",
             ),
         ),
         gamesFolderDefault = "SMS",
         metadata = true,
+        mgl = Mgl(
+            delay = "1",
+            index = "1",
+            rbf = "_Console/SMS",
+            type = "f",
+        ),
     ),
 
     NEO_GEO(
@@ -243,11 +263,16 @@ enum class Platform(
             Format(
                 extension = "nes",
                 headerSizeInBytes = 16,
-                mbcCommand = "NES",
             ),
         ),
         gamesFolderDefault = "NES",
         metadata = true,
+        mgl = Mgl(
+            delay = "2",
+            index = "0",
+            rbf = "_Console/NES",
+            type = "f",
+        ),
     ),
 
     ODYSSEY_2(
@@ -287,11 +312,16 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "chd",
-                mbcCommand = "MEGACD",
             ),
         ),
         gamesFolderDefault = "MegaCD",
         metadata = false,
+        mgl = Mgl(
+            delay = "1",
+            index = "0",
+            rbf = "_Console/MegaCD",
+            type = "s",
+        ),
     ),
 
     SEGA_GENESIS(
@@ -300,19 +330,22 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "bin",
-                mbcCommand = "MEGADRIVE.BIN",
             ),
             Format(
                 extension = "gen",
-                mbcCommand = "GENESIS",
             ),
             Format(
                 extension = "md",
-                mbcCommand = "MEGADRIVE",
             ),
         ),
         gamesFolderDefault = "Genesis",
         metadata = true,
+        mgl = Mgl(
+            delay = "1",
+            index = "0",
+            rbf = "_Console/Genesis",
+            type = "f",
+        ),
     ),
 
     SG_1000(
@@ -347,15 +380,19 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "sfc",
-                mbcCommand = "SNES",
             ),
             Format(
                 extension = "smc",
-                mbcCommand = "SNES",
             ),
         ),
         gamesFolderDefault = "SNES",
         metadata = true,
+        mgl = Mgl(
+            delay = "2",
+            index = "0",
+            rbf = "_Console/SNES",
+            type = "f",
+        ),
     ),
 
     TURBO_GRAFX_16(
@@ -364,11 +401,16 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "pce",
-                mbcCommand = "TGFX16",
             ),
         ),
         gamesFolderDefault = "TGFX16",
         metadata = true,
+        mgl = Mgl(
+            delay = "1",
+            index = "0",
+            rbf = "_Console/TurboGrafx16",
+            type = "f",
+        ),
     ),
 
     TURBO_GRAFX_CD(
@@ -377,11 +419,17 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "chd",
-                mbcCommand = "TGFX16-CD",
             ),
         ),
         gamesFolderDefault = "TGFX16-CD",
         metadata = false,
+        mgl = Mgl(
+            delay = "1",
+            index = "0",
+            prefix = "../TGFX16-CD/",
+            rbf = "_Console/TurboGrafx16",
+            type = "s",
+        ),
     ),
 
     VECTREX(
