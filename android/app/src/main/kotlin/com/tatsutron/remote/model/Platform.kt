@@ -285,11 +285,16 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "neo",
-                mbcCommand = "NEOGEO",
             ),
         ),
-        gamesFolderDefault = "NeoGeo",
+        gamesFolderDefault = "NEOGEO",
         metadata = false,
+        mgl = Mgl(
+            delay = "1",
+            index = "1",
+            rbf = "_Console/NeoGeo",
+            type = "f",
+        ),
     ),
 
     NINTENDO_ENTERTAINMENT_SYSTEM(
