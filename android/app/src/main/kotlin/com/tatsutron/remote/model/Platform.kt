@@ -23,6 +23,24 @@ enum class Platform(
         metadata = false,
     ),
 
+    ARCADIA_2001(
+        coreId = "Arcadia",
+        displayName = "Arcadia 2001",
+        formats = listOf(
+            Format(
+                extension = "bin",
+            ),
+        ),
+        gamesFolderDefault = "Arcadia",
+        metadata = false,
+        mgl = Mgl(
+            delay = "2",
+            index = "0",
+            rbf = "_Console/Arcadia",
+            type = "f",
+        ),
+    ),
+
     ATARI_2600(
         coreId = "Atari7800",
         displayName = "Atari 2600",
