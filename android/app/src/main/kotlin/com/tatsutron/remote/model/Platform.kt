@@ -126,6 +126,24 @@ enum class Platform(
         metadata = true,
     ),
 
+    FAIRCHILD_CHANNEL_F(
+        coreId = "ChannelF",
+        displayName = "Fairchild Channel F",
+        formats = listOf(
+            Format(
+                extension = "bin",
+            ),
+        ),
+        gamesFolderDefault = "ChannelF",
+        metadata = false,
+        mgl = Mgl(
+            delay = "2",
+            index = "0",
+            rbf = "_Console/ChannelF",
+            type = "f",
+        ),
+    ),
+
     FAMICOM_DISK_SYSTEM(
         coreId = "NES",
         displayName = "Famicom Disk System",
