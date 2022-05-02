@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app">MiSTer</string>
     <string name="arcades">Arcades</string>
     <string name="cancel">Cancel</string>
     <string name="confirm_play_game">Play %s?</string>

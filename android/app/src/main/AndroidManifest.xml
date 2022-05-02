@@ -8,10 +8,10 @@
     <application
         android:allowBackup="true"
         android:fullBackupOnly="true"
-        android:icon="@drawable/ic_app"
-        android:label="@string/app"
+        android:icon="@mipmap/ic_app"
+        android:label="@string/mistercon"
         android:name=".Application"
-        android:roundIcon="@drawable/ic_app"
+        android:roundIcon="@mipmap/ic_app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
