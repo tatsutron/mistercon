@@ -33,7 +33,9 @@ class CreditsFragment : BaseFragment() {
                             "Arufonsu",
                             "Christopher Gelatt",
                             "Clinton Bobrowski",
+                            "Dandi and Matija",
                             "Daniel Lugo",
+                            "Defkyle",
                             "DoOoM",
                             "Edward Hartley",
                             "Edward Mallett",
@@ -54,11 +56,16 @@ class CreditsFragment : BaseFragment() {
                             "Markus Kraus",
                             "Maxwell",
                             "Mist Sonata",
+                            "Mitchell Ogden",
+                            "Nik Outchcunis",
+                            "Nolan Mars",
+                            "Onno Feringa",
                             "peanutmans",
                             "Sergio L. Serrano",
                             "Tim Lehner",
                             "Tom B",
                             "Weasel5053",
+                            "WhiteScreen",
                         )
                     )
                 }
