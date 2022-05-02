@@ -6,7 +6,8 @@ mistercon is an Android app for use with [MiSTer](https://github.com/MiSTer-deve
 
 * Import and launch games for supported platforms
 * Load metadata and artwork for most formats
-* Run scripts
+* Search by name
+* Favorites
 * Launch known games by scanning QR codes
 
 # Console Support
