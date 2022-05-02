@@ -4,24 +4,25 @@ mistercon is an Android app for use with [MiSTer](https://github.com/MiSTer-deve
 
 # Features
 
-* Import and launch games for supported console platforms
+* Import and launch games for supported platforms
 * Load metadata and artwork for most formats
-* Import and run scripts
-* Reboot the MiSTer
+* Search by name
+* Favorites
 * Launch known games by scanning QR codes
 
 # Console Support
 
-
 Platform  | Format(s) | Metadata
 | - | - | - |
 Arcade | `.mra` | :x:
+Arcadia 2001 | `.bin` | :x:
 Atari 2600 | `.a26` | :white_check_mark:
 Atari 5200 | `.rom` | :white_check_mark:
 Atari 7800 | `.a78` | :white_check_mark:
 Atari Lynx | `.lnx` | :white_check_mark:
 Bally Astrocade | `.bin` | :x:
 ColecoVision | `.col` | :white_check_mark:
+Fairchild Channel F | `.bin` | :x:
 Famicom Disk System | `.fds` | :white_check_mark:
 Game Boy | `.gb` | :white_check_mark:
 Game Boy Advance | `.gba` | :white_check_mark:
@@ -34,6 +35,7 @@ Neo Geo | `.neo` | :x:
 Nintendo Entertainment System | `.nes` | :white_check_mark:
 Odyssey 2 | `.bin` | :white_check_mark:
 PlayStation | `.chd` | :x:
+Sega 32X | `.32x` | :white_check_mark:
 Sega CD | `.chd` | :x:
 Sega Genesis | `.bin` `.gen` `.md` | :white_check_mark:
 SG-1000 | `.sg` | :white_check_mark:
@@ -47,4 +49,4 @@ WonderSwan Color | `.wsc` | :white_check_mark:
 
 # Credits
 
-This project is made possible by **Arufonsu**, **Christopher Gelatt**, **Clinton Bobrowski**, **Daniel Lugo**, **DoOoM**, **Edward Hartley**, **Edward Mallett**, **Filip Kindt**, **GeorgZ**, **Greg Dyke**, **Gryzor/CPCwiki**, **Jason Carps**, **Jawler**, **Jeremy Hopkins**, **Johan**, **Keith Gordon**, **KremlingKuthroat19**, **Lakhdar Omar**, **Levi Prinzing**, **Louis Martinez**, **Marc SE**, **Markus Kraus**, **Maxwell**, **Mist Sonata**, **peanutmans**, **Sergio L. Serrano**, **Tim Lehner**, **Tom B**, and **Weasel5053**.
+This project is made possible by **Arufonsu**, **Christopher Gelatt**, **Clinton Bobrowski**, **Dandi and Matija**, **Daniel Lugo**, **Defkyle**, **DoOoM**, **Edward Hartley**, **Edward Mallett**, **Filip Kindt**, **GeorgZ**, **Greg Dyke**, **Gryzor/CPCwiki**, **Jason Carps**, **Jawler**, **Jeremy Hopkins**, **Johan**, **Keith Gordon**, **KremlingKuthroat19**, **Lakhdar Omar**, **Levi Prinzing**, **Louis Martinez**, **Marc SE**, **Markus Kraus**, **Maxwell**, **Mist Sonata**, **Mitchell Ogden**, **Nik Outchcunis**, **Nolan Mars**, **Onno Feringa**, **peanutmans**, **Sergio L. Serrano**, **Tim Lehner**, **Tom B**, **Weasel5053**, and **WhiteScreen**.
