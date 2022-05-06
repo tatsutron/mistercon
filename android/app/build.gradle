@@ -43,7 +43,7 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation "com.afollestad.material-dialogs:input:3.3.0"
-    implementation "com.github.bumptech.glide:glide:4.9.0"
+    implementation "com.github.bumptech.glide:glide:4.13.2"
     implementation "com.github.MikeOrtiz:TouchImageView:3.1.0"
     implementation "com.google.android.material:material:1.4.0"
     implementation "com.google.mlkit:barcode-scanning:17.0.0"

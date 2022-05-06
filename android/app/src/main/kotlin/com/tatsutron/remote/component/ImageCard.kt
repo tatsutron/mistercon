@@ -38,7 +38,7 @@ class ImageCard(
     }
 
     fun set(activity: Activity, url: String) {
-        Glide.with(activity.baseContext)
+        Glide.with(activity.applicationContext)
             .load(Uri.parse(url))
             .into(image)
         setOnClickListener {
