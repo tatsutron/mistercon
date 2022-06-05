@@ -8,7 +8,6 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PUT
 import retrofit2.http.Path
-import java.io.File
 
 interface ScanService {
     @GET("/scan/{extensions}/{path}")
@@ -25,23 +24,36 @@ interface PlayService {
 
 object Http {
 
-    // TODO This needs to handle the host changing
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("http://${Persistence.getConfig()?.host}:${Constants.PORT}")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-    private val scanService = retrofit.create(ScanService::class.java)
-    private val playService = retrofit.create(PlayService::class.java)
+    private var retrofit: Retrofit? = null
+    private var scanService: ScanService? = null
+    private var playService: PlayService? = null
+
+    init {
+        reset()
+    }
+
+    fun reset() {
+        val host = Persistence.getConfig()?.host
+        val port = Constants.PORT
+        retrofit = Retrofit.Builder()
+            .baseUrl("http://${host}:${port}")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        scanService = retrofit?.create(ScanService::class.java)
+        playService = retrofit?.create(PlayService::class.java)
+    }
 
     fun scan(extensions: String, path: String) =
-        scanService.scan(extensions, path)
-            .execute()
-            .body()
+        scanService
+            ?.scan(extensions, path)
+            ?.execute()
+            ?.body()
             ?: listOf()
 
     fun play(game: Game) {
         val mgl = game.platform.mgl!!
-        val path = "${mgl.prefix}${File(game.path).name}"
+        val path = "${mgl.prefix}${game.path}"
+            .replace("${game.platform.gamesPath}/", "")
         val body = mapOf(
             Pair("rbf", mgl.rbf),
             Pair("delay", mgl.delay),
@@ -49,7 +61,8 @@ object Http {
             Pair("path", path),
             Pair("type", mgl.type),
         )
-        playService.play(body)
-            .execute()
+        playService
+            ?.play(body)
+            ?.execute()
     }
 }

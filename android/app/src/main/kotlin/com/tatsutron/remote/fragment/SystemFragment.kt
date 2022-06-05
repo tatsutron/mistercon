@@ -1,9 +1,8 @@
 package com.tatsutron.remote.fragment
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.*
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
@@ -67,30 +66,28 @@ class SystemFragment : BaseFragment() {
             text?.let {
                 setSelection(it.length)
             }
-            addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
+            setOnEditorActionListener { _, actionId, _ ->
+                if (actionId and EditorInfo.IME_MASK_ACTION != 0) {
+                    val oldHost = Persistence.getConfig()!!.host
+                    val newHost = text
+                    try {
+                        Persistence.saveConfig(
+                            Persistence.getConfig()!!.copy(
+                                host = newHost.toString(),
+                            ),
+                        )
+                        Http.reset()
+                    } catch (e: Throwable) {
+                        Persistence.saveConfig(
+                            Persistence.getConfig()!!.copy(
+                                host = oldHost,
+                            ),
+                        )
+                        setText(oldHost)
+                    }
                 }
-
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int,
-                ) {
-                    Persistence.saveConfig(
-                        Persistence.getConfig()!!.copy(
-                            host = s.toString(),
-                        ),
-                    )
-                }
-
-                override fun afterTextChanged(s: Editable?) {}
-            })
+                false
+            }
         }
     }
 
