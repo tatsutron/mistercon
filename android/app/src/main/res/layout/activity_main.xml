@@ -13,7 +13,7 @@
         android:id="@+id/loading_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/loading_screen"
+        android:background="@color/loading_screen_background"
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical"

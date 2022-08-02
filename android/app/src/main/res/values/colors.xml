@@ -11,6 +11,9 @@
     <color name="analogous_800">#00926A</color>
     <color name="analogous_900">#00734A</color>
     <color name="black">#000000</color>
+    <color name="black_32_opacity">#20000000</color>
+    <color name="black_153_opacity">#99000000</color>
+    <color name="black_zero_opacity">#00000000</color>
     <color name="complementary_100">#FFE0B7</color>
     <color name="complementary_200">#FFCb89</color>
     <color name="complementary_300">#FFB65D</color>
@@ -31,9 +34,6 @@
     <color name="gray_700">#616161</color>
     <color name="gray_800">#424242</color>
     <color name="gray_900">#212121</color>
-    <color name="loading_screen">#99000000</color>
-    <color name="mtrl_textinput_default_box_stroke_color">@color/primary_500</color>
-    <color name="overlay">#20000000</color>
     <color name="primary_100">#B4E3FA</color>
     <color name="primary_200">#83D0F6</color>
     <color name="primary_300">#56BEF0</color>
@@ -44,7 +44,6 @@
     <color name="primary_700">#2182C7</color>
     <color name="primary_800">#1E72B3</color>
     <color name="primary_900">#185291</color>
-    <color name="transparent_black">#00000000</color>
     <color name="triadic_100">#F1BAE1</color>
     <color name="triadic_200">#EC8CCC</color>
     <color name="triadic_300">#EA59B6</color>
@@ -56,4 +55,10 @@
     <color name="triadic_800">#AD007B</color>
     <color name="triadic_900">#83006F</color>
     <color name="white">#FFFFFF</color>
+    <!-- Aliases -->
+    <color name="loading_screen_background">@color/black_153_opacity</color>
+    <color name="main_fragment_background">@color/gray_800</color>
+    <color name="speed_dial_overlay_background">@color/black_32_opacity</color>
+    <!-- System -->
+    <color name="mtrl_textinput_default_box_stroke_color">@color/primary_500</color>
 </resources>
