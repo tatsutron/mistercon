@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_800"
+    android:background="@color/app_background"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -13,8 +13,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray_700"
-        android:padding="@dimen/margin_small">
+        android:padding="@dimen/margin_small"
+        android:layout_marginBottom="-4dp">
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -22,9 +22,9 @@
             android:layout_height="wrap_content"
             android:hint="@string/hostname_or_ip_address"
             android:paddingBottom="5dp"
-            android:textColorHint="@color/gray_500"
+            android:textColorHint="@color/text_header"
             app:boxStrokeColor="@color/text_input_layout_stroke_color"
-            app:boxStrokeWidth="2dp"
+            app:boxStrokeWidth="1dp"
             app:hintTextColor="@color/gray_500">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -49,9 +49,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/gray_800"
             android:clickable="true"
-            android:divider="@drawable/vertical_divider_small"
+            android:divider="@drawable/vertical_divider_medium"
             android:focusable="true"
             android:orientation="vertical"
             android:showDividers="middle">
@@ -64,8 +63,8 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="@string/credits"
-                android:textColor="@color/primary_200"
-                app:strokeColor="@color/primary_200" />
+                android:textColor="@color/button_background"
+                app:strokeColor="@color/button_background" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/scripts_button"
@@ -75,8 +74,8 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="@string/scripts"
-                android:textColor="@color/primary_200"
-                app:strokeColor="@color/primary_200" />
+                android:textColor="@color/button_background"
+                app:strokeColor="@color/button_background" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/menu_button"
@@ -86,8 +85,8 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="@string/menu"
-                android:textColor="@color/primary_200"
-                app:strokeColor="@color/primary_200" />
+                android:textColor="@color/button_background"
+                app:strokeColor="@color/button_background" />
 
         </LinearLayout>
 

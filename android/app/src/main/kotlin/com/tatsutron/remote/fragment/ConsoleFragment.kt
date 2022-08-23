@@ -172,10 +172,10 @@ class ConsoleFragment : BaseFragment() {
             addActionItem(
                 SpeedDialActionItem.Builder(R.id.sync, R.drawable.ic_sync)
                     .setLabel(string(R.string.sync))
-                    .setLabelBackgroundColor(color(R.color.gray_900))
-                    .setLabelColor(color(R.color.primary_500))
-                    .setFabBackgroundColor(color(R.color.gray_900))
-                    .setFabImageTintColor(color(R.color.primary_500))
+                    .setLabelBackgroundColor(color(R.color.button_background))
+                    .setLabelColor(color(R.color.button_label))
+                    .setFabBackgroundColor(color(R.color.button_background))
+                    .setFabImageTintColor(color(R.color.button_label))
                     .create()
             )
             if (adapter.itemList.count() > 1) {
@@ -185,10 +185,10 @@ class ConsoleFragment : BaseFragment() {
                         R.drawable.ic_random,
                     )
                         .setLabel(string(R.string.random))
-                        .setLabelBackgroundColor(color(R.color.gray_900))
-                        .setLabelColor(color(R.color.primary_500))
-                        .setFabBackgroundColor(color(R.color.gray_900))
-                        .setFabImageTintColor(color(R.color.primary_500))
+                        .setLabelBackgroundColor(color(R.color.button_background))
+                        .setLabelColor(color(R.color.button_label))
+                        .setFabBackgroundColor(color(R.color.button_background))
+                        .setFabImageTintColor(color(R.color.button_label))
                         .create()
                 )
             }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/gray_800"
+    android:background="@color/app_background"
     android:clickable="true"
     android:focusable="true">
 
@@ -21,6 +21,11 @@
             app:contentInsetStartWithNavigation="0dp"
             app:navigationIcon="@drawable/ic_back" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/separator" />
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -31,9 +36,9 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:paddingVertical="@dimen/margin_small"
-                app:bubbleColor="@color/gray_900"
-                app:bubbleTextColor="@color/primary_500"
-                app:handleColor="@color/gray_500"
+                app:bubbleColor="@color/button_background"
+                app:bubbleTextColor="@color/button_label"
+                app:handleColor="@color/button_background"
                 app:hideScrollbar="false" />
 
         </FrameLayout>
@@ -52,10 +57,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        app:sdMainFabClosedBackgroundColor="@color/gray_900"
-        app:sdMainFabClosedIconColor="@color/primary_500"
+        app:sdMainFabClosedBackgroundColor="@color/button_background"
+        app:sdMainFabClosedIconColor="@color/button_label"
         app:sdMainFabClosedSrc="@drawable/ic_plus"
-        app:sdMainFabOpenedBackgroundColor="@color/gray_900"
+        app:sdMainFabOpenedBackgroundColor="@color/button_background"
         app:sdOverlayLayout="@id/speed_dial_overlay_console" />
 
 </FrameLayout>

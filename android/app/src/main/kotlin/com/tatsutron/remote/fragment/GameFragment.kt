@@ -93,10 +93,10 @@ class GameFragment : BaseFragment() {
             addActionItem(
                 SpeedDialActionItem.Builder(R.id.play, R.drawable.ic_play)
                     .setLabel(string(R.string.play))
-                    .setLabelBackgroundColor(color(R.color.gray_900))
-                    .setLabelColor(color(R.color.primary_500))
-                    .setFabBackgroundColor(color(R.color.gray_900))
-                    .setFabImageTintColor(color(R.color.primary_500))
+                    .setLabelBackgroundColor(color(R.color.button_background))
+                    .setLabelColor(color(R.color.button_label))
+                    .setFabBackgroundColor(color(R.color.button_background))
+                    .setFabImageTintColor(color(R.color.button_label))
                     .create()
             )
             if (game.favorite) {
@@ -106,10 +106,10 @@ class GameFragment : BaseFragment() {
                         R.drawable.ic_star_fill
                     )
                         .setLabel(string(R.string.unfavorite))
-                        .setLabelBackgroundColor(color(R.color.gray_900))
-                        .setLabelColor(color(R.color.primary_500))
-                        .setFabBackgroundColor(color(R.color.gray_900))
-                        .setFabImageTintColor(color(R.color.primary_500))
+                        .setLabelBackgroundColor(color(R.color.button_background))
+                        .setLabelColor(color(R.color.button_label))
+                        .setFabBackgroundColor(color(R.color.button_background))
+                        .setFabImageTintColor(color(R.color.button_label))
                         .create()
                 )
             } else {
@@ -119,10 +119,10 @@ class GameFragment : BaseFragment() {
                         R.drawable.ic_star_outline
                     )
                         .setLabel(string(R.string.favorite))
-                        .setLabelBackgroundColor(color(R.color.gray_900))
-                        .setLabelColor(color(R.color.primary_500))
-                        .setFabBackgroundColor(color(R.color.gray_900))
-                        .setFabImageTintColor(color(R.color.primary_500))
+                        .setLabelBackgroundColor(color(R.color.button_background))
+                        .setLabelColor(color(R.color.button_label))
+                        .setFabBackgroundColor(color(R.color.button_background))
+                        .setFabImageTintColor(color(R.color.button_label))
                         .create()
                 )
             }
@@ -130,10 +130,10 @@ class GameFragment : BaseFragment() {
                 addActionItem(
                     SpeedDialActionItem.Builder(R.id.sync, R.drawable.ic_sync)
                         .setLabel(string(R.string.sync))
-                        .setLabelBackgroundColor(color(R.color.gray_900))
-                        .setLabelColor(color(R.color.primary_500))
-                        .setFabBackgroundColor(color(R.color.gray_900))
-                        .setFabImageTintColor(color(R.color.primary_500))
+                        .setLabelBackgroundColor(color(R.color.button_background))
+                        .setLabelColor(color(R.color.button_label))
+                        .setFabBackgroundColor(color(R.color.button_background))
+                        .setFabImageTintColor(color(R.color.button_label))
                         .create()
                 )
             }
@@ -144,10 +144,10 @@ class GameFragment : BaseFragment() {
                         R.drawable.ic_copy,
                     )
                         .setLabel(string(R.string.copy_qr_data))
-                        .setLabelBackgroundColor(color(R.color.gray_900))
-                        .setLabelColor(color(R.color.primary_500))
-                        .setFabBackgroundColor(color(R.color.gray_900))
-                        .setFabImageTintColor(color(R.color.primary_500))
+                        .setLabelBackgroundColor(color(R.color.button_background))
+                        .setLabelColor(color(R.color.button_label))
+                        .setFabBackgroundColor(color(R.color.button_background))
+                        .setFabImageTintColor(color(R.color.button_label))
                         .create()
                 )
             }

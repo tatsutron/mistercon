@@ -9,10 +9,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/Toolbar" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
@@ -35,10 +31,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        app:sdMainFabClosedBackgroundColor="@color/gray_900"
-        app:sdMainFabClosedIconColor="@color/primary_500"
+        app:sdMainFabClosedBackgroundColor="@color/button_background"
+        app:sdMainFabClosedIconColor="@color/button_label"
         app:sdMainFabClosedSrc="@drawable/ic_plus"
-        app:sdMainFabOpenedBackgroundColor="@color/gray_900"
+        app:sdMainFabOpenedBackgroundColor="@color/button_background"
         app:sdOverlayLayout="@id/speed_dial_overlay_script_list" />
 
 </FrameLayout>

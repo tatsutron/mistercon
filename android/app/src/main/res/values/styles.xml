@@ -13,10 +13,10 @@
         <item name="actionBarStyle">@style/ActionBar</item>
         <item name="android:colorControlActivated">@color/primary_200</item>
         <item name="android:editTextColor">@color/white</item>
-        <item name="android:windowBackground">@color/gray_900</item>
+        <item name="android:windowBackground">@color/app_background</item>
         <item name="colorAccent">@color/primary_500</item>
         <item name="colorBackgroundFloating">@color/gray_800</item>
-        <item name="colorPrimary">@color/gray_900</item>
+        <item name="colorPrimary">@color/app_background</item>
         <item name="colorPrimaryDark">@color/gray_900</item>
         <item name="md_color_button_text">@color/primary_500</item>
         <item name="md_color_content">@color/white</item>
@@ -55,7 +55,7 @@
     <style name="Toolbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:background">@color/primary_700</item>
+        <item name="android:background">@color/toolbar_background</item>
         <item name="titleTextColor">@color/white</item>
     </style>
 

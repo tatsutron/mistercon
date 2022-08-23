@@ -32,6 +32,6 @@
         android:layout_width="244dp"
         android:layout_height="1dp"
         android:layout_gravity="bottom|end"
-        android:background="@color/gray_700" />
+        android:background="@color/separator" />
 
 </FrameLayout>

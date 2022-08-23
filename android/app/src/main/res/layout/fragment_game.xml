@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_800">
+    android:background="@color/app_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,6 +17,11 @@
             app:contentInsetStart="0dp"
             app:contentInsetStartWithNavigation="0dp"
             app:navigationIcon="@drawable/ic_back" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/separator" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -32,10 +37,10 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
-                    android:divider="@drawable/vertical_divider_small"
+                    android:divider="@drawable/vertical_divider_medium"
                     android:focusable="true"
                     android:orientation="vertical"
-                    android:padding="@dimen/margin_small"
+                    android:padding="@dimen/margin_medium"
                     android:showDividers="middle">
 
                     <com.tatsutron.remote.component.MetadataCard
@@ -120,10 +125,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        app:sdMainFabClosedBackgroundColor="@color/gray_900"
-        app:sdMainFabClosedIconColor="@color/primary_500"
+        app:sdMainFabClosedBackgroundColor="@color/button_background"
+        app:sdMainFabClosedIconColor="@color/button_label"
         app:sdMainFabClosedSrc="@drawable/ic_plus"
-        app:sdMainFabOpenedBackgroundColor="@color/gray_900"
+        app:sdMainFabOpenedBackgroundColor="@color/button_background"
         app:sdOverlayLayout="@id/speed_dial_overlay_game" />
 
 </FrameLayout>

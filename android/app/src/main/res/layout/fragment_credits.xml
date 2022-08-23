@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_900">
+    android:background="@color/app_background">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/separator" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,13 +25,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/mistercon"
-            android:textColor="@color/primary_200"
+            android:textColor="@color/primary_500"
             android:textSize="@dimen/text_size_largest" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/primary_200" />
+            android:background="@color/primary_500" />
 
         <android.lib.widget.verticalmarqueetextview.VerticalMarqueeTextView
             android:id="@+id/credits_scroll"
@@ -41,7 +46,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/primary_200" />
+            android:background="@color/primary_500" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,7 +56,7 @@
             android:paddingHorizontal="@dimen/margin_large"
             android:paddingVertical="@dimen/margin_small"
             android:text="@string/thank_you"
-            android:textColor="@color/white"
+            android:textColor="@color/triadic_500"
             android:textSize="@dimen/text_size_smallest" />
 
         <View
@@ -66,7 +71,7 @@
         android:layout_height="match_parent"
         android:gravity="bottom|end"
         android:padding="@dimen/margin_small"
-        android:textColor="@color/primary_200" />
+        android:textColor="@color/primary_500" />
 
     <View
         android:layout_width="match_parent"

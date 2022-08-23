@@ -1,20 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textColorHint="@color/primary_200"
-    android:visibility="gone"
-    app:hintAnimationEnabled="false">
+    android:orientation="vertical"
+    android:visibility="gone">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/edit_text"
+    <TextView
+        android:id="@+id/header_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:enabled="false"
-        android:textColor="@color/white"
-        android:textCursorDrawable="@null" />
+        android:textColor="@color/text_header"
+        android:textSize="@dimen/text_size_smallest" />
 
-</com.google.android.material.textfield.TextInputLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margin_smallest"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:background="@color/separator" />
+
+    <TextView
+        android:id="@+id/body_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_body"
+        android:textSize="@dimen/text_size_medium" />
+
+</LinearLayout>
