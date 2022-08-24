@@ -61,6 +61,7 @@ class CreditsFragment : BaseFragment() {
                             "Nolan Mars",
                             "Onno Feringa",
                             "peanutmans",
+                            "Rocco",
                             "Sergio L. Serrano",
                             "Tim Lehner",
                             "Tom B",
