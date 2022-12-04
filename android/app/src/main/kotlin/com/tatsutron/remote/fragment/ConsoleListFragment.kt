@@ -111,7 +111,8 @@ class ConsoleListFragment : BaseFragment() {
                 Coroutine.launch(
                     activity = requireActivity(),
                     run = {
-                        val corePaths = Http.scan(
+                        val corePaths = Util.listFiles(
+                            context = requireContext(),
                             extensions = "rbf",
                             path = consolePath,
                         )

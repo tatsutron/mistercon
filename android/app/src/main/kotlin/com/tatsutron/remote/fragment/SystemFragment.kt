@@ -67,6 +67,7 @@ class SystemFragment : BaseFragment() {
                 setSelection(it.length)
             }
             setOnEditorActionListener { _, actionId, _ ->
+                // TODO Is this exception handling still necessary?
                 if (actionId and EditorInfo.IME_MASK_ACTION != 0) {
                     val oldHost = Persistence.getConfig()!!.host
                     val newHost = text
@@ -76,7 +77,6 @@ class SystemFragment : BaseFragment() {
                                 host = newHost.toString(),
                             ),
                         )
-                        Http.reset()
                     } catch (e: Throwable) {
                         Persistence.saveConfig(
                             Persistence.getConfig()!!.copy(

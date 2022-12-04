@@ -114,7 +114,11 @@ class ScriptListFragment : BaseFragment() {
                 Coroutine.launch(
                     activity = requireActivity(),
                     run = {
-                        val scriptPaths = Http.scan("sh", scriptsPath)
+                        val scriptPaths = Util.listFiles(
+                            context = requireContext(),
+                            extensions = "sh",
+                            path = scriptsPath,
+                        )
                         scriptPaths.forEach {
                             Persistence.saveScript(
                                 File(scriptsPath, it).path,

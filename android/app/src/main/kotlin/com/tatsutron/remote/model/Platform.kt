@@ -10,7 +10,6 @@ enum class Platform(
     val gamesFolderDefault: String? = null,
     var gamesPath: String? = null,
     val metadata: Boolean,
-    val mgl: Mgl? = null,
 ) {
 
     ARCADE(
@@ -23,23 +22,24 @@ enum class Platform(
         metadata = false,
     ),
 
-    ARCADIA_2001(
-        coreId = "Arcadia",
-        displayName = "Arcadia 2001",
-        formats = listOf(
-            Format(
-                extension = "bin",
-            ),
-        ),
-        gamesFolderDefault = "Arcadia",
-        metadata = false,
-        mgl = Mgl(
-            delay = "2",
-            index = "0",
-            rbf = "_Console/Arcadia",
-            type = "f",
-        ),
-    ),
+    // TODO Add this to MBC
+//    ARCADIA_2001(
+//        coreId = "Arcadia",
+//        displayName = "Arcadia 2001",
+//        formats = listOf(
+//            Format(
+//                extension = "bin",
+//            ),
+//        ),
+//        gamesFolderDefault = "Arcadia",
+//        metadata = false,
+//        mgl = Mgl(
+//            delay = "2",
+//            index = "0",
+//            rbf = "_Console/Arcadia",
+//            type = "f",
+//        ),
+//    ),
 
     ATARI_2600(
         coreId = "Atari7800",
@@ -47,16 +47,11 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "a26",
+                mbcCommand = "ATARI2600",
             ),
         ),
         gamesFolderDefault = "ATARI7800",
         metadata = true,
-        mgl = Mgl(
-            delay = "2",
-            index = "0",
-            rbf = "_Console/Atari7800",
-            type = "f",
-        ),
     ),
 
     ATARI_5200(
@@ -126,23 +121,24 @@ enum class Platform(
         metadata = true,
     ),
 
-    FAIRCHILD_CHANNEL_F(
-        coreId = "ChannelF",
-        displayName = "Fairchild Channel F",
-        formats = listOf(
-            Format(
-                extension = "bin",
-            ),
-        ),
-        gamesFolderDefault = "ChannelF",
-        metadata = false,
-        mgl = Mgl(
-            delay = "2",
-            index = "0",
-            rbf = "_Console/ChannelF",
-            type = "f",
-        ),
-    ),
+    // TODO Add this to MBC
+//    FAIRCHILD_CHANNEL_F(
+//        coreId = "ChannelF",
+//        displayName = "Fairchild Channel F",
+//        formats = listOf(
+//            Format(
+//                extension = "bin",
+//            ),
+//        ),
+//        gamesFolderDefault = "ChannelF",
+//        metadata = false,
+//        mgl = Mgl(
+//            delay = "2",
+//            index = "0",
+//            rbf = "_Console/ChannelF",
+//            type = "f",
+//        ),
+//    ),
 
     FAMICOM_DISK_SYSTEM(
         coreId = "NES",
@@ -151,16 +147,11 @@ enum class Platform(
             Format(
                 extension = "fds",
                 headerSizeInBytes = 16,
+                mbcCommand = "NES.FDS",
             ),
         ),
         gamesFolderDefault = "NES",
         metadata = true,
-        mgl = Mgl(
-            delay = "2",
-            index = "0",
-            rbf = "_Console/NES",
-            type = "f",
-        ),
     ),
 
     GAME_BOY(
@@ -169,16 +160,11 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "gb",
+                mbcCommand = "GAMEBOY",
             ),
         ),
         gamesFolderDefault = "Gameboy",
         metadata = true,
-        mgl = Mgl(
-            delay = "2",
-            index = "0",
-            rbf = "_Console/Gameboy",
-            type = "f",
-        ),
     ),
 
     GAME_BOY_ADVANCE(
@@ -187,16 +173,11 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "gba",
+                mbcCommand = "GBA",
             ),
         ),
         gamesFolderDefault = "GBA",
         metadata = true,
-        mgl = Mgl(
-            delay = "2",
-            index = "0",
-            rbf = "_Console/GBA",
-            type = "f",
-        ),
     ),
 
     GAME_BOY_COLOR(
@@ -205,16 +186,11 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "gbc",
+                mbcCommand = "GAMEBOY.COL",
             ),
         ),
         gamesFolderDefault = "Gameboy",
         metadata = true,
-        mgl = Mgl(
-            delay = "2",
-            index = "0",
-            rbf = "_Console/Gameboy",
-            type = "f",
-        ),
     ),
 
     GAME_GEAR(
@@ -223,16 +199,11 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "gg",
+                mbcCommand = "SMS.GG",
             ),
         ),
         gamesFolderDefault = "SMS",
         metadata = true,
-        mgl = Mgl(
-            delay = "1",
-            index = "2",
-            rbf = "_Console/SMS",
-            type = "f",
-        ),
     ),
 
     INTELLIVISION(
@@ -267,16 +238,11 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "sms",
+                mbcCommand = "SMS",
             ),
         ),
         gamesFolderDefault = "SMS",
         metadata = true,
-        mgl = Mgl(
-            delay = "1",
-            index = "1",
-            rbf = "_Console/SMS",
-            type = "f",
-        ),
     ),
 
     NEO_GEO(
@@ -285,16 +251,11 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "neo",
+                mbcCommand = "NEOGEO",
             ),
         ),
         gamesFolderDefault = "NEOGEO",
         metadata = false,
-        mgl = Mgl(
-            delay = "1",
-            index = "1",
-            rbf = "_Console/NeoGeo",
-            type = "f",
-        ),
     ),
 
     NINTENDO_ENTERTAINMENT_SYSTEM(
@@ -304,16 +265,11 @@ enum class Platform(
             Format(
                 extension = "nes",
                 headerSizeInBytes = 16,
+                mbcCommand = "NES",
             ),
         ),
         gamesFolderDefault = "NES",
         metadata = true,
-        mgl = Mgl(
-            delay = "2",
-            index = "0",
-            rbf = "_Console/NES",
-            type = "f",
-        ),
     ),
 
     ODYSSEY_2(
@@ -329,58 +285,55 @@ enum class Platform(
         metadata = true,
     ),
 
+    // TODO Re-test this now that the format has changed
     PLAYSTATION(
         coreId = "PSX",
         displayName = "PlayStation",
         formats = listOf(
             Format(
-                extension = "chd",
+                extension = "cue",
+                mbcCommand = "PSX",
             ),
         ),
         gamesFolderDefault = "PSX",
         metadata = false,
-        mgl = Mgl(
-            delay = "1",
-            index = "1",
-            rbf = "_Console/PSX",
-            type = "s",
-        ),
     ),
 
-    SEGA_32X(
-        coreId = "S32X",
-        displayName = "Sega 32X",
-        formats = listOf(
-            Format(
-                extension = "32x",
-            ),
-        ),
-        gamesFolderDefault = "S32X",
-        metadata = true,
-        mgl = Mgl(
-            delay = "1",
-            index = "0",
-            rbf = "_Console/S32X",
-            type = "f",
-        ),
-    ),
+    // TODO Add this to MBC
+//    SEGA_32X(
+//        coreId = "S32X",
+//        displayName = "Sega 32X",
+//        formats = listOf(
+//            Format(
+//                extension = "32x",
+//            ),
+//        ),
+//        gamesFolderDefault = "S32X",
+//        metadata = true,
+//        mgl = Mgl(
+//            delay = "1",
+//            index = "0",
+//            rbf = "_Console/S32X",
+//            type = "f",
+//        ),
+//    ),
 
+    // TODO Test this with a .cue
     SEGA_CD(
         coreId = "MegaCD",
         displayName = "Sega CD",
         formats = listOf(
             Format(
                 extension = "chd",
+                mbcCommand = "MEGACD",
+            ),
+            Format(
+                extension = "cue",
+                mbcCommand = "MEGACD.CUE",
             ),
         ),
         gamesFolderDefault = "MegaCD",
         metadata = false,
-        mgl = Mgl(
-            delay = "1",
-            index = "0",
-            rbf = "_Console/MegaCD",
-            type = "s",
-        ),
     ),
 
     SEGA_GENESIS(
@@ -389,22 +342,19 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "bin",
+                mbcCommand = "GENESIS",
             ),
             Format(
                 extension = "gen",
+                mbcCommand = "GENESIS",
             ),
             Format(
                 extension = "md",
+                mbcCommand = "GENESIS",
             ),
         ),
         gamesFolderDefault = "Genesis",
         metadata = true,
-        mgl = Mgl(
-            delay = "1",
-            index = "0",
-            rbf = "_Console/Genesis",
-            type = "f",
-        ),
     ),
 
     SG_1000(
@@ -439,19 +389,15 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "sfc",
+                mbcCommand = "SNES",
             ),
             Format(
                 extension = "smc",
+                mbcCommand = "SNES",
             ),
         ),
         gamesFolderDefault = "SNES",
         metadata = true,
-        mgl = Mgl(
-            delay = "2",
-            index = "0",
-            rbf = "_Console/SNES",
-            type = "f",
-        ),
     ),
 
     TURBO_GRAFX_16(
@@ -460,35 +406,29 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "pce",
+                mbcCommand = "TGFX16",
             ),
         ),
         gamesFolderDefault = "TGFX16",
         metadata = true,
-        mgl = Mgl(
-            delay = "1",
-            index = "0",
-            rbf = "_Console/TurboGrafx16",
-            type = "f",
-        ),
     ),
 
+    // TODO Test .cue
     TURBO_GRAFX_CD(
         coreId = "TurboGrafx16",
         displayName = "TurboGrafx-CD",
         formats = listOf(
             Format(
                 extension = "chd",
+                mbcCommand = "TGFX16-CD",
+            ),
+            Format(
+                extension = "cue",
+                mbcCommand = "TGFX16-CD.CUE",
             ),
         ),
         gamesFolderDefault = "TGFX16-CD",
         metadata = false,
-        mgl = Mgl(
-            delay = "1",
-            index = "0",
-            prefix = "../TGFX16-CD/",
-            rbf = "_Console/TurboGrafx16",
-            type = "s",
-        ),
     ),
 
     VECTREX(
