@@ -30,6 +30,7 @@ class CreditsFragment : BaseFragment() {
                 repeat(8) {
                     addAll(
                         listOf(
+                            "Aaron Thompson",
                             "Arufonsu",
                             "Christopher Gelatt",
                             "Clinton Bobrowski",
