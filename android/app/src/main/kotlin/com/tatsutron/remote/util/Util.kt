@@ -11,7 +11,7 @@ object Util {
         path: String,
     ): List<String> {
         val session = Ssh.session()
-        Assets.require(context, session, "util.py")
+        Assets.require(context, session, "mister_util.py")
         val command = StringBuilder().apply {
             append("python3 ${Constants.MISTER_UTIL_PATH} list")
             append(" ")

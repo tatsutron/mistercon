@@ -10,6 +10,7 @@ object Assets {
     fun require(context: Context, session: Session, name: String) {
         Ssh.sftp(session).apply {
             try {
+                mkdir(Constants.TATSUTRON_ROOT)
                 mkdir(Constants.MISTERCON_ROOT)
             } catch (e: Throwable) {
                 e.printStackTrace()
