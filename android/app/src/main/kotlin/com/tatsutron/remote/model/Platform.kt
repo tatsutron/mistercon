@@ -22,7 +22,6 @@ enum class Platform(
         metadata = false,
     ),
 
-    // TODO Add this to MBC
 //    ARCADIA_2001(
 //        coreId = "Arcadia",
 //        displayName = "Arcadia 2001",
@@ -121,7 +120,6 @@ enum class Platform(
         metadata = true,
     ),
 
-    // TODO Add this to MBC
 //    FAIRCHILD_CHANNEL_F(
 //        coreId = "ChannelF",
 //        displayName = "Fairchild Channel F",
@@ -285,7 +283,6 @@ enum class Platform(
         metadata = true,
     ),
 
-    // TODO Re-test this now that the format has changed
     PLAYSTATION(
         coreId = "PSX",
         displayName = "PlayStation",
@@ -299,7 +296,6 @@ enum class Platform(
         metadata = false,
     ),
 
-    // TODO Add this to MBC
 //    SEGA_32X(
 //        coreId = "S32X",
 //        displayName = "Sega 32X",
@@ -318,7 +314,6 @@ enum class Platform(
 //        ),
 //    ),
 
-    // TODO Test this with a .cue
     SEGA_CD(
         coreId = "MegaCD",
         displayName = "Sega CD",
@@ -413,7 +408,6 @@ enum class Platform(
         metadata = true,
     ),
 
-    // TODO Test .cue
     TURBO_GRAFX_CD(
         coreId = "TurboGrafx16",
         displayName = "TurboGrafx-CD",
