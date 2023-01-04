@@ -1,14 +1,13 @@
 package com.tatsutron.remote.model
 
-// TODO Make this whole thing immutable
-//  and find another way to deal with the paths
+import com.tatsutron.remote.util.Constants
+import java.io.File
+
 enum class Platform(
     val coreId: String? = null,
-    var corePath: String? = null,
     val displayName: String? = null,
     val formats: List<Format>,
-    val gamesFolderDefault: String? = null,
-    var gamesPath: String? = null,
+    val gamesFolder: String? = null,
     val metadata: Boolean,
 ) {
 
@@ -49,7 +48,7 @@ enum class Platform(
                 mbcCommand = "ATARI2600",
             ),
         ),
-        gamesFolderDefault = "ATARI7800",
+        gamesFolder = "ATARI7800",
         metadata = true,
     ),
 
@@ -62,7 +61,7 @@ enum class Platform(
                 mbcCommand = "ATARI5200",
             ),
         ),
-        gamesFolderDefault = "Atari5200",
+        gamesFolder = "Atari5200",
         metadata = true,
     ),
 
@@ -76,7 +75,7 @@ enum class Platform(
                 mbcCommand = "ATARI7800",
             ),
         ),
-        gamesFolderDefault = "Atari7800",
+        gamesFolder = "Atari7800",
         metadata = true,
     ),
 
@@ -90,7 +89,7 @@ enum class Platform(
                 mbcCommand = "ATARILYNX",
             ),
         ),
-        gamesFolderDefault = "AtariLynx",
+        gamesFolder = "AtariLynx",
         metadata = true,
     ),
 
@@ -103,7 +102,7 @@ enum class Platform(
                 mbcCommand = "ASTROCADE",
             ),
         ),
-        gamesFolderDefault = "Astrocade",
+        gamesFolder = "Astrocade",
         metadata = false,
     ),
 
@@ -116,7 +115,7 @@ enum class Platform(
                 mbcCommand = "COLECO",
             ),
         ),
-        gamesFolderDefault = "Coleco",
+        gamesFolder = "Coleco",
         metadata = true,
     ),
 
@@ -148,7 +147,7 @@ enum class Platform(
                 mbcCommand = "NES.FDS",
             ),
         ),
-        gamesFolderDefault = "NES",
+        gamesFolder = "NES",
         metadata = true,
     ),
 
@@ -161,7 +160,7 @@ enum class Platform(
                 mbcCommand = "GAMEBOY",
             ),
         ),
-        gamesFolderDefault = "Gameboy",
+        gamesFolder = "Gameboy",
         metadata = true,
     ),
 
@@ -174,7 +173,7 @@ enum class Platform(
                 mbcCommand = "GBA",
             ),
         ),
-        gamesFolderDefault = "GBA",
+        gamesFolder = "GBA",
         metadata = true,
     ),
 
@@ -187,7 +186,7 @@ enum class Platform(
                 mbcCommand = "GAMEBOY.COL",
             ),
         ),
-        gamesFolderDefault = "Gameboy",
+        gamesFolder = "Gameboy",
         metadata = true,
     ),
 
@@ -200,7 +199,7 @@ enum class Platform(
                 mbcCommand = "SMS.GG",
             ),
         ),
-        gamesFolderDefault = "SMS",
+        gamesFolder = "SMS",
         metadata = true,
     ),
 
@@ -213,7 +212,7 @@ enum class Platform(
                 mbcCommand = "INTELLIVISION",
             ),
         ),
-        gamesFolderDefault = "Intellivision",
+        gamesFolder = "Intellivision",
         metadata = true,
     ),
 
@@ -226,7 +225,7 @@ enum class Platform(
                 mbcCommand = "VC4000",
             ),
         ),
-        gamesFolderDefault = "VC4000",
+        gamesFolder = "VC4000",
         metadata = false,
     ),
 
@@ -239,7 +238,7 @@ enum class Platform(
                 mbcCommand = "SMS",
             ),
         ),
-        gamesFolderDefault = "SMS",
+        gamesFolder = "SMS",
         metadata = true,
     ),
 
@@ -252,7 +251,7 @@ enum class Platform(
                 mbcCommand = "NEOGEO",
             ),
         ),
-        gamesFolderDefault = "NEOGEO",
+        gamesFolder = "NEOGEO",
         metadata = false,
     ),
 
@@ -266,7 +265,7 @@ enum class Platform(
                 mbcCommand = "NES",
             ),
         ),
-        gamesFolderDefault = "NES",
+        gamesFolder = "NES",
         metadata = true,
     ),
 
@@ -279,7 +278,7 @@ enum class Platform(
                 mbcCommand = "ODYSSEY2",
             ),
         ),
-        gamesFolderDefault = "Odyssey2",
+        gamesFolder = "Odyssey2",
         metadata = true,
     ),
 
@@ -292,7 +291,7 @@ enum class Platform(
                 mbcCommand = "PSX",
             ),
         ),
-        gamesFolderDefault = "PSX",
+        gamesFolder = "PSX",
         metadata = false,
     ),
 
@@ -327,7 +326,7 @@ enum class Platform(
                 mbcCommand = "MEGACD.CUE",
             ),
         ),
-        gamesFolderDefault = "MegaCD",
+        gamesFolder = "MegaCD",
         metadata = false,
     ),
 
@@ -348,7 +347,7 @@ enum class Platform(
                 mbcCommand = "GENESIS",
             ),
         ),
-        gamesFolderDefault = "Genesis",
+        gamesFolder = "Genesis",
         metadata = true,
     ),
 
@@ -361,7 +360,7 @@ enum class Platform(
                 mbcCommand = "COLECO.SG",
             ),
         ),
-        gamesFolderDefault = "Coleco",
+        gamesFolder = "Coleco",
         metadata = true,
     ),
 
@@ -374,7 +373,7 @@ enum class Platform(
                 mbcCommand = "SUPERGRAFX",
             ),
         ),
-        gamesFolderDefault = "TGFX16",
+        gamesFolder = "TGFX16",
         metadata = true,
     ),
 
@@ -391,7 +390,7 @@ enum class Platform(
                 mbcCommand = "SNES",
             ),
         ),
-        gamesFolderDefault = "SNES",
+        gamesFolder = "SNES",
         metadata = true,
     ),
 
@@ -404,7 +403,7 @@ enum class Platform(
                 mbcCommand = "TGFX16",
             ),
         ),
-        gamesFolderDefault = "TGFX16",
+        gamesFolder = "TGFX16",
         metadata = true,
     ),
 
@@ -421,7 +420,7 @@ enum class Platform(
                 mbcCommand = "TGFX16-CD.CUE",
             ),
         ),
-        gamesFolderDefault = "TGFX16-CD",
+        gamesFolder = "TGFX16-CD",
         metadata = false,
     ),
 
@@ -438,7 +437,7 @@ enum class Platform(
                 mbcCommand = "VECTREX",
             ),
         ),
-        gamesFolderDefault = "Vectrex",
+        gamesFolder = "Vectrex",
         metadata = true,
     ),
 
@@ -451,7 +450,7 @@ enum class Platform(
                 mbcCommand = "WONDERSWAN",
             ),
         ),
-        gamesFolderDefault = "WonderSwan",
+        gamesFolder = "WonderSwan",
         metadata = true,
     ),
 
@@ -464,7 +463,21 @@ enum class Platform(
                 mbcCommand = "WONDERSWAN.COL",
             ),
         ),
-        gamesFolderDefault = "WonderSwan",
+        gamesFolder = "WonderSwan",
         metadata = true,
     );
+
+    val corePath: String?
+        get() = if (coreId != null) {
+            File(Constants.CONSOLE_PATH, coreId).path
+        } else {
+            null
+        }
+
+    val gamesPath: String?
+        get() = if (gamesFolder != null) {
+            File(Constants.GAMES_PATH, gamesFolder).path
+        } else {
+            null
+        }
 }

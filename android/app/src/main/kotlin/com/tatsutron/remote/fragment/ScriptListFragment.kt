@@ -63,7 +63,7 @@ class ScriptListFragment : BaseFragment() {
         setRecycler()
         setSpeedDial()
         if (Persistence.getScriptList().isEmpty()) {
-            onSync(automatic = true)
+            onSync()
         }
     }
 
@@ -93,50 +93,26 @@ class ScriptListFragment : BaseFragment() {
         }
     }
 
-    private fun onSync(automatic: Boolean = false) {
-        val context = requireContext()
-        val config = Persistence.getConfig()!!
-        var scriptsPath = config.scriptsPath
-        Dialog.input(
-            context = context,
-            title = context.getString(
-                R.string.sync_specific,
-                context.getString(R.string.scripts),
-            ),
-            text = scriptsPath,
-            ok = { _, text ->
-                scriptsPath = text.toString()
-                Persistence.saveConfig(
-                    config.copy(scriptsPath = scriptsPath),
+    private fun onSync() {
+        Navigator.showLoadingScreen()
+        Persistence.clearScripts()
+        Coroutine.launch(
+            activity = requireActivity(),
+            run = {
+                val scriptPaths = Util.listFiles(
+                    context = requireContext(),
+                    extensions = "sh",
+                    path = Constants.SCRIPTS_PATH,
                 )
-                Navigator.showLoadingScreen()
-                Persistence.clearScripts()
-                Coroutine.launch(
-                    activity = requireActivity(),
-                    run = {
-                        val scriptPaths = Util.listFiles(
-                            context = requireContext(),
-                            extensions = "sh",
-                            path = scriptsPath,
-                        )
-                        scriptPaths.forEach {
-                            Persistence.saveScript(
-                                File(scriptsPath, it).path,
-                            )
-                        }
-                    },
-                    success = {
-                        setRecycler()
-                    },
-                    finally = {
-                        Navigator.hideLoadingScreen()
-                    },
-                )
-            },
-            cancel = {
-                if (automatic) {
-                    activity?.onBackPressed()
+                scriptPaths.forEach {
+                    Persistence.saveScript(it)
                 }
+            },
+            success = {
+                setRecycler()
+            },
+            finally = {
+                Navigator.hideLoadingScreen()
             },
         )
     }

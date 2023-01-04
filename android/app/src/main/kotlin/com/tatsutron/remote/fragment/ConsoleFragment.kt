@@ -66,7 +66,7 @@ class ConsoleFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         if (Persistence.getGamesByPlatform(platform).isEmpty()) {
-            onSync(automatic = true)
+            onSync()
         }
     }
 
@@ -212,81 +212,61 @@ class ConsoleFragment : BaseFragment() {
         }
     }
 
-    private fun onSync(automatic: Boolean = false) {
-        val context = requireContext()
-        Dialog.input(
-            context = context,
-            title = context.getString(
-                R.string.sync_specific,
-                platform.displayName,
-            ),
-            text = platform.gamesPath!!,
-            ok = { _, text ->
-                Persistence.savePlatform(
-                    corePath = platform.corePath!!,
-                    gamesPath = text.toString(),
-                    platform = platform,
-                )
-                platform = Persistence.getPlatform(platform)!!
-                Navigator.showLoadingScreen()
-                Coroutine.launch(
-                    activity = requireActivity(),
-                    run = {
-                        val session = Ssh.session()
-                        Assets.require(requireContext(), session, "list")
-                        val extensions = platform.formats
-                            .map {
-                                it.extension
-                            }
-                            .reduce { acc, string ->
-                                "$acc|$string"
-                            }
-                        val regex = "($extensions)$"
-                        val command = StringBuilder().apply {
-                            append("\"${Constants.LIST_PATH}\"")
-                            append(" ")
-                            append("\"${platform.gamesPath!!}\"")
-                            append(" ")
-                            append("\"$regex\"")
-                        }.toString()
-                        val list = Ssh.command(session, command)
-                        val new = list.split("\n")
-                            .filter {
-                                it.isNotBlank()
-                            }
-                        val old = Persistence.getGamesByPlatform(platform)
-                            .map {
-                                it.path
-                            }
-                        new.forEach {
-                            if (it !in old) {
-                                Persistence.saveGame(
-                                    path = it,
-                                    platform = platform,
-                                    sha1 = null,
-                                )
-                            }
-                        }
-                        old.forEach {
-                            if (it !in new) {
-                                Persistence.deleteGame(it)
-                            }
-                        }
-                        session.disconnect()
-                    },
-                    success = {
-                        setRecycler()
-                        setSpeedDial()
-                    },
-                    finally = {
-                        Navigator.hideLoadingScreen()
-                    },
-                )
-            },
-            cancel = {
-                if (automatic) {
-                    activity?.onBackPressed()
+    private fun onSync() {
+        Persistence.savePlatform(platform)
+        platform = Persistence.getPlatform(platform)!!
+        Navigator.showLoadingScreen()
+        Coroutine.launch(
+            activity = requireActivity(),
+            run = {
+                val session = Ssh.session()
+                Assets.require(requireContext(), session, "list")
+                val extensions = platform.formats
+                    .map {
+                        it.extension
+                    }
+                    .reduce { acc, string ->
+                        "$acc|$string"
+                    }
+                val regex = "($extensions)$"
+                val command = StringBuilder().apply {
+                    append("\"${Constants.LIST_PATH}\"")
+                    append(" ")
+                    append("\"${platform.gamesPath!!}\"")
+                    append(" ")
+                    append("\"$regex\"")
+                }.toString()
+                val list = Ssh.command(session, command)
+                val new = list.split("\n")
+                    .filter {
+                        it.isNotBlank()
+                    }
+                val old = Persistence.getGamesByPlatform(platform)
+                    .map {
+                        it.path
+                    }
+                new.forEach {
+                    if (it !in old) {
+                        Persistence.saveGame(
+                            path = it,
+                            platform = platform,
+                            sha1 = null,
+                        )
+                    }
                 }
+                old.forEach {
+                    if (it !in new) {
+                        Persistence.deleteGame(it)
+                    }
+                }
+                session.disconnect()
+            },
+            success = {
+                setRecycler()
+                setSpeedDial()
+            },
+            finally = {
+                Navigator.hideLoadingScreen()
             },
         )
     }

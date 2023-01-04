@@ -1,0 +1,12 @@
+-- Remove support for custom paths
+
+DROP TABLE IF EXISTS Config;
+CREATE TABLE Config (
+    host TEXT NOT NULL,
+    id INTEGER PRIMARY KEY CHECK (id = 0)
+);
+
+DROP TABLE IF EXISTS Platforms;
+CREATE TABLE Platforms (
+    name TEXT NOT NULL PRIMARY KEY
+);

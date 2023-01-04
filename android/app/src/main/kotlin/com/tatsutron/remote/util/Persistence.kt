@@ -35,10 +35,7 @@ object Persistence {
         if (config == null) {
             saveConfig(
                 Config(
-                    arcadePath = Constants.ARCADE_PATH,
-                    consolePath = Constants.CONSOLE_PATH,
                     host = Constants.HOST,
-                    scriptsPath = Constants.SCRIPTS_PATH,
                 ),
             )
         }
@@ -47,11 +44,8 @@ object Persistence {
     fun saveConfig(config: Config) {
         database?.configQueries
             ?.save(
-                arcadePath = config.arcadePath,
-                consolePath = config.consolePath,
                 host = config.host,
                 id = 0,
-                scriptsPath = config.scriptsPath,
             )
     }
 
@@ -61,10 +55,7 @@ object Persistence {
             ?.executeAsOneOrNull()
             ?.let {
                 Config(
-                    arcadePath = it.arcadePath,
-                    consolePath = it.consolePath,
                     host = it.host,
-                    scriptsPath = it.scriptsPath,
                 )
             }
 
@@ -85,9 +76,9 @@ object Persistence {
             ?.clear()
     }
 
-    fun savePlatform(corePath: String, gamesPath: String, platform: Platform) {
+    fun savePlatform(platform: Platform) {
         database?.platformsQueries
-            ?.save(corePath, gamesPath, platform.name)
+            ?.save(platform.name)
     }
 
     fun getPlatform(platform: Platform): Platform? =
@@ -95,21 +86,15 @@ object Persistence {
             ?.selectByName(platform.name)
             ?.executeAsOneOrNull()
             ?.let {
-                Platform.valueOf(it.name).apply {
-                    corePath = it.corePath
-                    gamesPath = it.gamesPath
-                }
+                Platform.valueOf(it)
             }
 
-    fun getConsolePlatforms() =
+    fun getConsoles() =
         database?.platformsQueries
             ?.selectAll()
             ?.executeAsList()
             ?.map {
-                Platform.valueOf(it.name)
-            }
-            ?.filter {
-                it != Platform.ARCADE
+                Platform.valueOf(it)
             }
             ?.sorted()
             ?: listOf()

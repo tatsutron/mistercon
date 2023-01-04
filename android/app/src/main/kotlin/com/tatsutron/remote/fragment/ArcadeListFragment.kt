@@ -72,7 +72,7 @@ class ArcadeListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        currentFolder = Persistence.getConfig()?.arcadePath!!
+        currentFolder = Constants.ARCADE_PATH
         adapter = GameListAdapter(requireActivity())
         view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
@@ -82,16 +82,14 @@ class ArcadeListFragment : BaseFragment() {
         setSpeedDial()
     }
 
-    override fun onBackPressed(): Boolean {
-        val arcadePath = Persistence.getConfig()?.arcadePath!!
-        return if (currentFolder.length > arcadePath.length) {
+    override fun onBackPressed() =
+        if (currentFolder.length > Constants.ARCADE_PATH.length) {
             currentFolder = File(currentFolder).parent!!
             setRecycler()
             true
         } else {
             super.onBackPressed()
         }
-    }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setRecycler() {
@@ -162,56 +160,39 @@ class ArcadeListFragment : BaseFragment() {
     }
 
     private fun onSync() {
-        val context = requireContext()
-        val config = Persistence.getConfig()!!
-        var arcadePath = config.arcadePath
-        Dialog.input(
-            context = context,
-            title = context.getString(
-                R.string.sync_specific,
-                context.getString(R.string.arcades),
-            ),
-            text = arcadePath,
-            ok = { _, text ->
-                arcadePath = text.toString()
-                Persistence.saveConfig(
-                    config.copy(arcadePath = arcadePath),
-                )
-                Navigator.showLoadingScreen()
-                Persistence.clearGamesByPlatform(Platform.ARCADE)
-                Coroutine.launch(
-                    activity = requireActivity(),
-                    run = {
-                        val session = Ssh.session()
-                        Assets.require(requireContext(), session, "list")
-                        val command = StringBuilder().apply {
-                            append("\"${Constants.LIST_PATH}\"")
-                            append(" ")
-                            append("\"${arcadePath}\"")
-                            append(" ")
-                            append("\"(mra)$\"")
-                        }.toString()
-                        Ssh.command(session, command)
-                            .split("\n")
-                            .filter {
-                                it.endsWith(".mra")
-                            }
-                            .forEach {
-                                Persistence.saveGame(
-                                    path = it,
-                                    platform = Platform.ARCADE,
-                                    sha1 = null,
-                                )
-                            }
-                        session.disconnect()
-                    },
-                    success = {
-                        setRecycler()
-                    },
-                    finally = {
-                        Navigator.hideLoadingScreen()
-                    },
-                )
+        Navigator.showLoadingScreen()
+        Persistence.clearGamesByPlatform(Platform.ARCADE)
+        Coroutine.launch(
+            activity = requireActivity(),
+            run = {
+                val session = Ssh.session()
+                Assets.require(requireContext(), session, "list")
+                val command = StringBuilder().apply {
+                    append("\"${Constants.LIST_PATH}\"")
+                    append(" ")
+                    append("\"${Constants.ARCADE_PATH}\"")
+                    append(" ")
+                    append("\"(mra)$\"")
+                }.toString()
+                Ssh.command(session, command)
+                    .split("\n")
+                    .filter {
+                        it.endsWith(".mra")
+                    }
+                    .forEach {
+                        Persistence.saveGame(
+                            path = it,
+                            platform = Platform.ARCADE,
+                            sha1 = null,
+                        )
+                    }
+                session.disconnect()
+            },
+            success = {
+                setRecycler()
+            },
+            finally = {
+                Navigator.hideLoadingScreen()
             },
         )
     }

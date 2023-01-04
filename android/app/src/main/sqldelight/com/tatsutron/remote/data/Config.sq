@@ -1,9 +1,6 @@
 CREATE TABLE Config (
-    arcadePath TEXT NOT NULL,
-    consolePath TEXT NOT NULL,
     host TEXT NOT NULL,
-    id INTEGER PRIMARY KEY CHECK (id = 0),
-    scriptsPath TEXT NOT NULL
+    id INTEGER PRIMARY KEY CHECK (id = 0)
 );
 
 select:
@@ -11,16 +8,10 @@ SELECT * FROM Config WHERE id='0';
 
 save:
 REPLACE INTO Config(
-    arcadePath,
-    consolePath,
     host,
-    id,
-    scriptsPath
+    id
 )
 VALUES (
-    :arcadePath,
-    :consolePath,
     :host,
-    :id,
-    :scriptsPath
+    :id
 );

@@ -50,7 +50,7 @@ class ConsoleListFragment : BaseFragment() {
             setSupportActionBar(view?.findViewById(R.id.toolbar))
             supportActionBar?.title = context?.getString(R.string.consoles)
         }
-        if (Persistence.getConsolePlatforms().isEmpty()) {
+        if (Persistence.getConsoles().isEmpty()) {
             onSync()
         }
     }
@@ -68,7 +68,7 @@ class ConsoleListFragment : BaseFragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setRecycler() {
-        val items = Persistence.getConsolePlatforms()
+        val items = Persistence.getConsoles()
             .map {
                 ConsoleItem(it)
             }
@@ -91,59 +91,32 @@ class ConsoleListFragment : BaseFragment() {
     }
 
     private fun onSync() {
-        val context = requireContext()
-        val config = Persistence.getConfig()!!
-        var consolePath = config.consolePath
-        Dialog.input(
-            context = context,
-            title = context.getString(
-                R.string.sync_specific,
-                context.getString(R.string.consoles),
-            ),
-            text = consolePath,
-            ok = { _, text ->
-                consolePath = text.toString()
-                Persistence.saveConfig(
-                    config.copy(consolePath = consolePath),
+        Navigator.showLoadingScreen()
+        Persistence.clearPlatforms()
+        Coroutine.launch(
+            activity = requireActivity(),
+            run = {
+                val corePaths = Util.listFiles(
+                    context = requireContext(),
+                    extensions = "rbf",
+                    path = Constants.CONSOLE_PATH,
                 )
-                Navigator.showLoadingScreen()
-                Persistence.clearPlatforms()
-                Coroutine.launch(
-                    activity = requireActivity(),
-                    run = {
-                        val corePaths = Util.listFiles(
-                            context = requireContext(),
-                            extensions = "rbf",
-                            path = consolePath,
-                        )
-                        corePaths.forEach {
-                            val coreId = File(it).name
-                                .split("_")
-                                .firstOrNull()
-                            Platform.values().forEach { platform ->
-                                if (platform.coreId == coreId) {
-                                    Persistence.savePlatform(
-                                        corePath = File(consolePath, it).path,
-                                        gamesPath = Persistence
-                                            .getPlatform(platform)
-                                            ?.gamesPath
-                                            ?: File(
-                                                Constants.GAMES_PATH,
-                                                platform.gamesFolderDefault!!,
-                                            ).path,
-                                        platform = platform,
-                                    )
-                                }
-                            }
+                corePaths.forEach {
+                    val coreId = File(it).name
+                        .split("_")
+                        .firstOrNull()
+                    Platform.values().forEach { platform ->
+                        if (platform.coreId == coreId) {
+                            Persistence.savePlatform(platform)
                         }
-                    },
-                    success = {
-                        setRecycler()
-                    },
-                    finally = {
-                        Navigator.hideLoadingScreen()
-                    },
-                )
+                    }
+                }
+            },
+            success = {
+                setRecycler()
+            },
+            finally = {
+                Navigator.hideLoadingScreen()
             },
         )
     }
