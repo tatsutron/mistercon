@@ -3,7 +3,6 @@
     <string name="arcades">Arcades</string>
     <string name="cancel">Cancel</string>
     <string name="confirm_play_game">Play %s?</string>
-    <string name="confirm_run_script">Run script?</string>
     <string name="consoles">Consoles</string>
     <string name="copy_qr_data">Copy QR Data</string>
     <string name="credits">Credits</string>
@@ -28,8 +27,6 @@
     <string name="region">Region</string>
     <string name="release_date">Release Date</string>
     <string name="scan">Scan</string>
-    <string name="scripts">Scripts</string>
-    <string name="scripts_path">Scripts Path</string>
     <string name="search">Search</string>
     <string name="sync">Sync</string>
     <string name="sync_specific">Sync %s</string>

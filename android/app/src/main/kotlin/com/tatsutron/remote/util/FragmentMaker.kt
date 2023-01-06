@@ -31,6 +31,4 @@ object FragmentMaker {
     }
 
     fun scan() = ScanFragment()
-
-    fun scriptList() = ScriptListFragment()
 }

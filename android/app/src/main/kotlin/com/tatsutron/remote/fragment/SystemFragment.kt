@@ -56,7 +56,6 @@ class SystemFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setHost(view)
         setCreditsButton(view)
-        setScriptsButton(view)
         setMenuButton(view)
     }
 
@@ -85,17 +84,6 @@ class SystemFragment : BaseFragment() {
                 Navigator.showScreen(
                     activity as AppCompatActivity,
                     FragmentMaker.credits(),
-                )
-            }
-        }
-    }
-
-    private fun setScriptsButton(view: View) {
-        view.findViewById<Button>(R.id.scripts_button).apply {
-            setOnClickListener {
-                Navigator.showScreen(
-                    activity as AppCompatActivity,
-                    FragmentMaker.scriptList(),
                 )
             }
         }

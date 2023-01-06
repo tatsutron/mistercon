@@ -35,7 +35,7 @@
     </LinearLayout>
 
     <com.leinardi.android.speeddial.SpeedDialOverlayLayout
-        android:id="@+id/speed_dial_overlay_script_list"
+        android:id="@+id/speed_dial_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/speed_dial_overlay_background"
@@ -50,6 +50,6 @@
         app:sdMainFabClosedIconColor="@color/button_label"
         app:sdMainFabClosedSrc="@drawable/ic_plus"
         app:sdMainFabOpenedBackgroundColor="@color/button_background"
-        app:sdOverlayLayout="@id/speed_dial_overlay_script_list" />
+        app:sdOverlayLayout="@id/speed_dial_overlay" />
 
 </FrameLayout>

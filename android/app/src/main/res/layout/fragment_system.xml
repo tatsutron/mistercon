@@ -67,17 +67,6 @@
                 app:strokeColor="@color/button_background" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/scripts_button"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:text="@string/scripts"
-                android:textColor="@color/button_background"
-                app:strokeColor="@color/button_background" />
-
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/menu_button"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"

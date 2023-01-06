@@ -10,3 +10,8 @@ DROP TABLE IF EXISTS Platforms;
 CREATE TABLE Platforms (
     name TEXT NOT NULL PRIMARY KEY
 );
+
+
+-- Remove support for launching scripts
+
+DROP TABLE IF EXISTS Scripts;

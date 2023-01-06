@@ -59,23 +59,6 @@ object Persistence {
                 )
             }
 
-    fun saveScript(filename: String) {
-        database?.scriptsQueries
-            ?.save(filename)
-    }
-
-    fun getScriptList() =
-        database?.scriptsQueries
-            ?.selectAll()
-            ?.executeAsList()
-            ?.sorted()
-            ?: listOf()
-
-    fun clearScripts() {
-        database?.scriptsQueries
-            ?.clear()
-    }
-
     fun savePlatform(platform: Platform) {
         database?.platformsQueries
             ?.save(platform.name)
