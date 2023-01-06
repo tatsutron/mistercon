@@ -4,14 +4,16 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.os.Bundle
 import android.view.*
-import android.widget.*
+import android.widget.ScrollView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
-import com.tatsutron.remote.*
+import com.tatsutron.remote.Application
+import com.tatsutron.remote.R
 import com.tatsutron.remote.component.ImageCard
 import com.tatsutron.remote.component.MetadataCard
 import com.tatsutron.remote.model.Game
@@ -23,6 +25,11 @@ class GameFragment : BaseFragment() {
 
     private lateinit var game: Game
     private var metadata: Metadata? = null
+    private lateinit var playAction: SpeedDialActionItem
+    private lateinit var favoriteAction: SpeedDialActionItem
+    private lateinit var unfavoriteAction: SpeedDialActionItem
+    private lateinit var syncAction: SpeedDialActionItem
+    private lateinit var copyQrAction: SpeedDialActionItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +77,7 @@ class GameFragment : BaseFragment() {
             }
             supportActionBar?.title = game.name
         }
+        setSpeedDialActionItems()
         setSpeedDial()
         if (!game.platform.metadata) {
             setText(requireContext().getString(R.string.metadata_not_supported))
@@ -80,76 +88,59 @@ class GameFragment : BaseFragment() {
         }
     }
 
-    private fun setSpeedDial() {
+    private fun setSpeedDialActionItems() {
         val context = requireContext()
-        val string = { id: Int ->
-            context.getString(id)
-        }
-        val color = { id: Int ->
-            ResourcesCompat.getColor(resources, id, context.theme)
-        }
+        playAction = SpeedDialActionItem.Builder(R.id.play, R.drawable.ic_play)
+            .setLabel(context.getString(R.string.play))
+            .setLabelBackgroundColor(context.getColorCompat(R.color.button_background))
+            .setLabelColor(context.getColorCompat(R.color.button_label))
+            .setFabBackgroundColor(context.getColorCompat(R.color.button_background))
+            .setFabImageTintColor(context.getColorCompat(R.color.button_label))
+            .create()
+        favoriteAction = SpeedDialActionItem.Builder(R.id.favorite, R.drawable.ic_star_outline)
+            .setLabel(context.getString(R.string.favorite))
+            .setLabelBackgroundColor(context.getColorCompat(R.color.button_background))
+            .setLabelColor(context.getColorCompat(R.color.button_label))
+            .setFabBackgroundColor(context.getColorCompat(R.color.button_background))
+            .setFabImageTintColor(context.getColorCompat(R.color.button_label))
+            .create()
+        unfavoriteAction = SpeedDialActionItem.Builder(R.id.unfavorite, R.drawable.ic_star_fill)
+            .setLabel(context.getString(R.string.unfavorite))
+            .setLabelBackgroundColor(context.getColorCompat(R.color.button_background))
+            .setLabelColor(context.getColorCompat(R.color.button_label))
+            .setFabBackgroundColor(context.getColorCompat(R.color.button_background))
+            .setFabImageTintColor(context.getColorCompat(R.color.button_label))
+            .create()
+        syncAction = SpeedDialActionItem.Builder(R.id.sync, R.drawable.ic_sync)
+            .setLabel(context.getString(R.string.sync))
+            .setLabelBackgroundColor(context.getColorCompat(R.color.button_background))
+            .setLabelColor(context.getColorCompat(R.color.button_label))
+            .setFabBackgroundColor(context.getColorCompat(R.color.button_background))
+            .setFabImageTintColor(context.getColorCompat(R.color.button_label))
+            .create()
+        copyQrAction = SpeedDialActionItem.Builder(R.id.copy_qr, R.drawable.ic_copy)
+            .setLabel(context.getString(R.string.copy_qr_data))
+            .setLabelBackgroundColor(context.getColorCompat(R.color.button_background))
+            .setLabelColor(context.getColorCompat(R.color.button_label))
+            .setFabBackgroundColor(context.getColorCompat(R.color.button_background))
+            .setFabImageTintColor(context.getColorCompat(R.color.button_label))
+            .create()
+    }
+
+    private fun setSpeedDial() {
         view?.findViewById<SpeedDialView>(R.id.speed_dial)?.apply {
             clearActionItems()
-            addActionItem(
-                SpeedDialActionItem.Builder(R.id.play, R.drawable.ic_play)
-                    .setLabel(string(R.string.play))
-                    .setLabelBackgroundColor(color(R.color.button_background))
-                    .setLabelColor(color(R.color.button_label))
-                    .setFabBackgroundColor(color(R.color.button_background))
-                    .setFabImageTintColor(color(R.color.button_label))
-                    .create()
-            )
+            addActionItem(playAction)
             if (game.favorite) {
-                addActionItem(
-                    SpeedDialActionItem.Builder(
-                        R.id.unfavorite,
-                        R.drawable.ic_star_fill
-                    )
-                        .setLabel(string(R.string.unfavorite))
-                        .setLabelBackgroundColor(color(R.color.button_background))
-                        .setLabelColor(color(R.color.button_label))
-                        .setFabBackgroundColor(color(R.color.button_background))
-                        .setFabImageTintColor(color(R.color.button_label))
-                        .create()
-                )
+                addActionItem(unfavoriteAction)
             } else {
-                addActionItem(
-                    SpeedDialActionItem.Builder(
-                        R.id.favorite,
-                        R.drawable.ic_star_outline
-                    )
-                        .setLabel(string(R.string.favorite))
-                        .setLabelBackgroundColor(color(R.color.button_background))
-                        .setLabelColor(color(R.color.button_label))
-                        .setFabBackgroundColor(color(R.color.button_background))
-                        .setFabImageTintColor(color(R.color.button_label))
-                        .create()
-                )
+                addActionItem(favoriteAction)
             }
             if (game.platform.metadata) {
-                addActionItem(
-                    SpeedDialActionItem.Builder(R.id.sync, R.drawable.ic_sync)
-                        .setLabel(string(R.string.sync))
-                        .setLabelBackgroundColor(color(R.color.button_background))
-                        .setLabelColor(color(R.color.button_label))
-                        .setFabBackgroundColor(color(R.color.button_background))
-                        .setFabImageTintColor(color(R.color.button_label))
-                        .create()
-                )
+                addActionItem(syncAction)
             }
             if (game.sha1 != null) {
-                addActionItem(
-                    SpeedDialActionItem.Builder(
-                        R.id.copy_qr,
-                        R.drawable.ic_copy,
-                    )
-                        .setLabel(string(R.string.copy_qr_data))
-                        .setLabelBackgroundColor(color(R.color.button_background))
-                        .setLabelColor(color(R.color.button_label))
-                        .setFabBackgroundColor(color(R.color.button_background))
-                        .setFabImageTintColor(color(R.color.button_label))
-                        .create()
-                )
+                addActionItem(copyQrAction)
             }
             setOnActionSelectedListener(
                 SpeedDialView.OnActionSelectedListener { actionItem ->
