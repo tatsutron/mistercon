@@ -7,12 +7,11 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
-import com.tatsutron.remote.*
+import com.tatsutron.remote.R
 import com.tatsutron.remote.model.Game
 import com.tatsutron.remote.model.Platform
 import com.tatsutron.remote.recycler.FolderItem
@@ -26,6 +25,8 @@ class ConsoleFragment : BaseFragment() {
     private lateinit var platform: Platform
     private lateinit var currentFolder: String
     private lateinit var adapter: GameListAdapter
+    private lateinit var syncAction: SpeedDialActionItem
+    private lateinit var randomAction: SpeedDialActionItem
     private var searchTerm = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,6 +93,7 @@ class ConsoleFragment : BaseFragment() {
             adapter = this@ConsoleFragment.adapter
         }
         setRecycler()
+        setSpeedDialActionItems()
         setSpeedDial()
     }
 
@@ -159,38 +161,30 @@ class ConsoleFragment : BaseFragment() {
         adapter.notifyDataSetChanged()
     }
 
-    private fun setSpeedDial() {
+    private fun setSpeedDialActionItems() {
         val context = requireContext()
-        val string = { id: Int ->
-            context.getString(id)
-        }
-        val color = { id: Int ->
-            ResourcesCompat.getColor(resources, id, context.theme)
-        }
+        syncAction = SpeedDialActionItem.Builder(R.id.sync, R.drawable.ic_sync)
+            .setLabel(context.getString(R.string.sync))
+            .setLabelBackgroundColor(context.getColorCompat(R.color.button_background))
+            .setLabelColor(context.getColorCompat(R.color.button_label))
+            .setFabBackgroundColor(context.getColorCompat(R.color.button_background))
+            .setFabImageTintColor(context.getColorCompat(R.color.button_label))
+            .create()
+        randomAction = SpeedDialActionItem.Builder(R.id.random, R.drawable.ic_random)
+            .setLabel(context.getString(R.string.random))
+            .setLabelBackgroundColor(context.getColorCompat(R.color.button_background))
+            .setLabelColor(context.getColorCompat(R.color.button_label))
+            .setFabBackgroundColor(context.getColorCompat(R.color.button_background))
+            .setFabImageTintColor(context.getColorCompat(R.color.button_label))
+            .create()
+    }
+
+    private fun setSpeedDial() {
         view?.findViewById<SpeedDialView>(R.id.speed_dial)?.apply {
             clearActionItems()
-            addActionItem(
-                SpeedDialActionItem.Builder(R.id.sync, R.drawable.ic_sync)
-                    .setLabel(string(R.string.sync))
-                    .setLabelBackgroundColor(color(R.color.button_background))
-                    .setLabelColor(color(R.color.button_label))
-                    .setFabBackgroundColor(color(R.color.button_background))
-                    .setFabImageTintColor(color(R.color.button_label))
-                    .create()
-            )
+            addActionItem(syncAction)
             if (adapter.itemList.count() > 1) {
-                addActionItem(
-                    SpeedDialActionItem.Builder(
-                        R.id.random,
-                        R.drawable.ic_random,
-                    )
-                        .setLabel(string(R.string.random))
-                        .setLabelBackgroundColor(color(R.color.button_background))
-                        .setLabelColor(color(R.color.button_label))
-                        .setFabBackgroundColor(color(R.color.button_background))
-                        .setFabImageTintColor(color(R.color.button_label))
-                        .create()
-                )
+                addActionItem(randomAction)
             }
             setOnActionSelectedListener(
                 SpeedDialView.OnActionSelectedListener { actionItem ->
