@@ -21,23 +21,18 @@ enum class Platform(
         metadata = false,
     ),
 
-//    ARCADIA_2001(
-//        coreId = "Arcadia",
-//        displayName = "Arcadia 2001",
-//        formats = listOf(
-//            Format(
-//                extension = "bin",
-//            ),
-//        ),
-//        gamesFolderDefault = "Arcadia",
-//        metadata = false,
-//        mgl = Mgl(
-//            delay = "2",
-//            index = "0",
-//            rbf = "_Console/Arcadia",
-//            type = "f",
-//        ),
-//    ),
+    ARCADIA_2001(
+        coreId = "Arcadia",
+        displayName = "Arcadia 2001",
+        formats = listOf(
+            Format(
+                extension = "bin",
+                mbcCommand = "ARCADIA",
+            ),
+        ),
+        gamesFolder = "Arcadia",
+        metadata = false,
+    ),
 
     ATARI_2600(
         coreId = "Atari7800",
@@ -119,23 +114,18 @@ enum class Platform(
         metadata = true,
     ),
 
-//    FAIRCHILD_CHANNEL_F(
-//        coreId = "ChannelF",
-//        displayName = "Fairchild Channel F",
-//        formats = listOf(
-//            Format(
-//                extension = "bin",
-//            ),
-//        ),
-//        gamesFolderDefault = "ChannelF",
-//        metadata = false,
-//        mgl = Mgl(
-//            delay = "2",
-//            index = "0",
-//            rbf = "_Console/ChannelF",
-//            type = "f",
-//        ),
-//    ),
+    FAIRCHILD_CHANNEL_F(
+        coreId = "ChannelF",
+        displayName = "Fairchild Channel F",
+        formats = listOf(
+            Format(
+                extension = "bin",
+                mbcCommand = "CHANNELF",
+            ),
+        ),
+        gamesFolder = "ChannelF",
+        metadata = false,
+    ),
 
     FAMICOM_DISK_SYSTEM(
         coreId = "NES",
@@ -295,23 +285,18 @@ enum class Platform(
         metadata = false,
     ),
 
-//    SEGA_32X(
-//        coreId = "S32X",
-//        displayName = "Sega 32X",
-//        formats = listOf(
-//            Format(
-//                extension = "32x",
-//            ),
-//        ),
-//        gamesFolderDefault = "S32X",
-//        metadata = true,
-//        mgl = Mgl(
-//            delay = "1",
-//            index = "0",
-//            rbf = "_Console/S32X",
-//            type = "f",
-//        ),
-//    ),
+    SEGA_32X(
+        coreId = "S32X",
+        displayName = "Sega 32X",
+        formats = listOf(
+            Format(
+                extension = "32x",
+                mbcCommand = "S32X",
+            ),
+        ),
+        gamesFolder = "S32X",
+        metadata = true,
+    ),
 
     SEGA_CD(
         coreId = "MegaCD",
