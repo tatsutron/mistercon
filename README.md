@@ -10,7 +10,11 @@ mistercon is an Android app for use with [MiSTer](https://github.com/MiSTer-deve
 * Favorites
 * Launch known games by scanning QR codes
 
-# Console Support
+# Limitations
+
+* Cores and ROM data are assumed to be in the places that they would be after formatting an SD card with [Mr. Fusion](https://github.com/MiSTer-devel/mr-fusion)
+
+# Platforms
 
 Platform  | Format(s) | Metadata
 | - | - | - |
