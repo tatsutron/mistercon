@@ -20,7 +20,7 @@ import com.tatsutron.remote.recycler.GameListAdapter
 import com.tatsutron.remote.util.*
 import java.io.File
 
-class ConsoleFragment : BaseFragment() {
+class GameListFragment : BaseFragment() {
 
     private lateinit var platform: Platform
     private lateinit var currentFolder: String
@@ -90,7 +90,7 @@ class ConsoleFragment : BaseFragment() {
         adapter = GameListAdapter(activity as Activity)
         view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = this@ConsoleFragment.adapter
+            adapter = this@GameListFragment.adapter
         }
         setRecycler()
         setSpeedDialActionItems()

@@ -10,17 +10,17 @@ object FragmentMaker {
     const val KEY_PLATFORM = "KEY_PLATFORM"
     const val KEY_URL = "KEY_URL"
 
-    fun console(platform: Platform) = ConsoleFragment().apply {
-        arguments = Bundle().apply {
-            putString(KEY_PLATFORM, platform.name)
-        }
-    }
-
     fun credits() = CreditsFragment()
 
     fun game(path: String) = GameFragment().apply {
         arguments = Bundle().apply {
             putString(KEY_PATH, path)
+        }
+    }
+
+    fun gameList(platform: Platform) = GameListFragment().apply {
+        arguments = Bundle().apply {
+            putString(KEY_PLATFORM, platform.name)
         }
     }
 

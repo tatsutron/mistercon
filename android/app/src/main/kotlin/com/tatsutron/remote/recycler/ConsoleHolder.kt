@@ -35,7 +35,7 @@ class ConsoleHolder(
         itemView.setOnClickListener {
             Navigator.showScreen(
                 activity as AppCompatActivity,
-                FragmentMaker.console(item.platform),
+                FragmentMaker.gameList(item.platform),
             )
         }
     }
