@@ -73,11 +73,9 @@ class GameListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        platform = Persistence.getPlatform(
-            Platform.valueOf(
-                arguments?.getString(FragmentMaker.KEY_PLATFORM)!!,
-            )
-        )!!
+        platform = Platform.valueOf(
+            arguments?.getString(FragmentMaker.KEY_PLATFORM)!!,
+        )
         currentFolder = platform.gamesPath!!
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as? AppCompatActivity)?.apply {

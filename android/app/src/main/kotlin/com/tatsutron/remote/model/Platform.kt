@@ -452,17 +452,12 @@ enum class Platform(
         metadata = true,
     );
 
-    val corePath: String?
-        get() = if (coreId != null) {
-            File(Constants.CONSOLE_PATH, coreId).path
-        } else {
-            null
-        }
-
     val gamesPath: String?
-        get() = if (gamesFolder != null) {
-            File(Constants.GAMES_PATH, gamesFolder).path
-        } else {
-            null
+        get() = when {
+            this == ARCADE ->
+                Constants.ARCADE_PATH
+            gamesFolder != null ->
+                File(Constants.GAMES_PATH, gamesFolder).path
+            else -> null
         }
 }

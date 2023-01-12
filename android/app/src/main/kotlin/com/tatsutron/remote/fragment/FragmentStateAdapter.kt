@@ -1,6 +1,8 @@
 package com.tatsutron.remote.fragment
 
 import androidx.fragment.app.FragmentActivity
+import com.tatsutron.remote.model.Platform
+import com.tatsutron.remote.util.FragmentMaker
 
 class FragmentStateAdapter(
     activity: FragmentActivity,
@@ -8,7 +10,7 @@ class FragmentStateAdapter(
 
     private val items = listOf(
         ConsoleListFragment(),
-        ArcadeListFragment(),
+        FragmentMaker.gameList(Platform.ARCADE),
         FavoriteListFragment(),
         SystemFragment(),
     )
