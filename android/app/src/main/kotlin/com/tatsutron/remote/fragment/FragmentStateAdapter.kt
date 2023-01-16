@@ -8,11 +8,13 @@ class FragmentStateAdapter(
     activity: FragmentActivity,
 ) : androidx.viewpager2.adapter.FragmentStateAdapter(activity) {
 
+    // Needs to be kept in sync with the navigation menu
     private val items = listOf(
-        ConsoleListFragment(),
+        FragmentMaker.platformList(Platform.Category.CONSOLE),
         FragmentMaker.gameList(Platform.ARCADE),
-        FavoriteListFragment(),
-        SystemFragment(),
+        FragmentMaker.platformList(Platform.Category.HANDHELD),
+        FragmentMaker.favoriteList(),
+        FragmentMaker.system(),
     )
 
     override fun getItemCount() = items.size

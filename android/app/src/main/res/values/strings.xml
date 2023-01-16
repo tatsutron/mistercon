@@ -13,6 +13,7 @@
     <string name="favorites">Favorites</string>
     <string name="games">Games</string>
     <string name="genre">Genre</string>
+    <string name="handhelds">Handhelds</string>
     <string name="hostname_or_ip_address">Hostname or IP Address</string>
     <string name="menu">Menu</string>
     <string name="metadata_not_supported">Metadata is not yet supported for this platform.</string>

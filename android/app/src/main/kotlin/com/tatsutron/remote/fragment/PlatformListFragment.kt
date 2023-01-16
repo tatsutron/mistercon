@@ -16,7 +16,7 @@ import com.tatsutron.remote.recycler.ConsoleListAdapter
 import com.tatsutron.remote.util.*
 import java.io.File
 
-class ConsoleListFragment : BaseFragment() {
+class PlatformListFragment : BaseFragment() {
 
     private lateinit var adapter: ConsoleListAdapter
 
@@ -60,7 +60,7 @@ class ConsoleListFragment : BaseFragment() {
         adapter = ConsoleListAdapter(activity as Activity)
         view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = this@ConsoleListFragment.adapter
+            adapter = this@PlatformListFragment.adapter
         }
         setRecycler()
         setSpeedDial()
@@ -101,12 +101,14 @@ class ConsoleListFragment : BaseFragment() {
                     extensions = "rbf",
                     path = Constants.CONSOLE_PATH,
                 )
+                val category = arguments
+                    ?.getString(FragmentMaker.KEY_PLATFORM_CATEGORY)!!
                 corePaths.forEach {
                     val coreId = File(it).name
                         .split("_")
                         .firstOrNull()
                     Platform.values().forEach { platform ->
-                        if (platform.coreId == coreId) {
+                        if (platform.category.name == category && platform.coreId == coreId) {
                             Persistence.savePlatform(platform)
                         }
                     }

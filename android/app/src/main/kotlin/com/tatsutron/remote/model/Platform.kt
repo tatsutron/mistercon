@@ -4,6 +4,7 @@ import com.tatsutron.remote.util.Constants
 import java.io.File
 
 enum class Platform(
+    val category: Category,
     val coreId: String? = null,
     val displayName: String? = null,
     val formats: List<Format>,
@@ -12,6 +13,7 @@ enum class Platform(
 ) {
 
     ARCADE(
+        category = Category.ARCADE,
         formats = listOf(
             Format(
                 extension = "mra",
@@ -22,6 +24,7 @@ enum class Platform(
     ),
 
     ARCADIA_2001(
+        category = Category.CONSOLE,
         coreId = "Arcadia",
         displayName = "Arcadia 2001",
         formats = listOf(
@@ -35,6 +38,7 @@ enum class Platform(
     ),
 
     ATARI_2600(
+        category = Category.CONSOLE,
         coreId = "Atari7800",
         displayName = "Atari 2600",
         formats = listOf(
@@ -48,6 +52,7 @@ enum class Platform(
     ),
 
     ATARI_5200(
+        category = Category.CONSOLE,
         coreId = "Atari5200",
         displayName = "Atari 5200",
         formats = listOf(
@@ -61,6 +66,7 @@ enum class Platform(
     ),
 
     ATARI_7800(
+        category = Category.CONSOLE,
         coreId = "Atari7800",
         displayName = "Atari 7800",
         formats = listOf(
@@ -75,6 +81,7 @@ enum class Platform(
     ),
 
     ATARI_LYNX(
+        category = Category.HANDHELD,
         coreId = "AtariLynx",
         displayName = "Atari Lynx",
         formats = listOf(
@@ -89,6 +96,7 @@ enum class Platform(
     ),
 
     BALLY_ASTROCADE(
+        category = Category.CONSOLE,
         coreId = "Astrocade",
         displayName = "Bally Astrocade",
         formats = listOf(
@@ -102,6 +110,7 @@ enum class Platform(
     ),
 
     COLECOVISION(
+        category = Category.CONSOLE,
         coreId = "ColecoVision",
         displayName = "ColecoVision",
         formats = listOf(
@@ -115,6 +124,7 @@ enum class Platform(
     ),
 
     FAIRCHILD_CHANNEL_F(
+        category = Category.CONSOLE,
         coreId = "ChannelF",
         displayName = "Fairchild Channel F",
         formats = listOf(
@@ -128,6 +138,7 @@ enum class Platform(
     ),
 
     FAMICOM_DISK_SYSTEM(
+        category = Category.CONSOLE,
         coreId = "NES",
         displayName = "Famicom Disk System",
         formats = listOf(
@@ -142,6 +153,7 @@ enum class Platform(
     ),
 
     GAME_BOY(
+        category = Category.HANDHELD,
         coreId = "Gameboy",
         displayName = "Game Boy",
         formats = listOf(
@@ -155,6 +167,7 @@ enum class Platform(
     ),
 
     GAME_BOY_ADVANCE(
+        category = Category.HANDHELD,
         coreId = "GBA",
         displayName = "Game Boy Advance",
         formats = listOf(
@@ -168,6 +181,7 @@ enum class Platform(
     ),
 
     GAME_BOY_COLOR(
+        category = Category.HANDHELD,
         coreId = "Gameboy",
         displayName = "Game Boy Color",
         formats = listOf(
@@ -181,6 +195,7 @@ enum class Platform(
     ),
 
     GAME_GEAR(
+        category = Category.HANDHELD,
         coreId = "SMS",
         displayName = "Game Gear",
         formats = listOf(
@@ -194,6 +209,7 @@ enum class Platform(
     ),
 
     INTELLIVISION(
+        category = Category.CONSOLE,
         coreId = "Intellivision",
         displayName = "Intellivision",
         formats = listOf(
@@ -207,6 +223,7 @@ enum class Platform(
     ),
 
     INTERTON_VC_4000(
+        category = Category.CONSOLE,
         coreId = "VC4000",
         displayName = "Interton VC 4000",
         formats = listOf(
@@ -220,6 +237,7 @@ enum class Platform(
     ),
 
     MASTER_SYSTEM(
+        category = Category.CONSOLE,
         coreId = "SMS",
         displayName = "Master System",
         formats = listOf(
@@ -233,6 +251,7 @@ enum class Platform(
     ),
 
     NEO_GEO(
+        category = Category.CONSOLE,
         coreId = "NeoGeo",
         displayName = "Neo Geo",
         formats = listOf(
@@ -246,6 +265,7 @@ enum class Platform(
     ),
 
     NINTENDO_ENTERTAINMENT_SYSTEM(
+        category = Category.CONSOLE,
         coreId = "NES",
         displayName = "Nintendo Entertainment System",
         formats = listOf(
@@ -260,6 +280,7 @@ enum class Platform(
     ),
 
     ODYSSEY_2(
+        category = Category.CONSOLE,
         coreId = "Odyssey2",
         displayName = "Odyssey 2",
         formats = listOf(
@@ -273,6 +294,7 @@ enum class Platform(
     ),
 
     PLAYSTATION(
+        category = Category.CONSOLE,
         coreId = "PSX",
         displayName = "PlayStation",
         formats = listOf(
@@ -286,6 +308,7 @@ enum class Platform(
     ),
 
     SEGA_32X(
+        category = Category.CONSOLE,
         coreId = "S32X",
         displayName = "Sega 32X",
         formats = listOf(
@@ -299,6 +322,7 @@ enum class Platform(
     ),
 
     SEGA_CD(
+        category = Category.CONSOLE,
         coreId = "MegaCD",
         displayName = "Sega CD",
         formats = listOf(
@@ -316,6 +340,7 @@ enum class Platform(
     ),
 
     SEGA_GENESIS(
+        category = Category.CONSOLE,
         coreId = "Genesis",
         displayName = "Sega Genesis",
         formats = listOf(
@@ -337,6 +362,7 @@ enum class Platform(
     ),
 
     SG_1000(
+        category = Category.CONSOLE,
         coreId = "ColecoVision",
         displayName = "SG-1000",
         formats = listOf(
@@ -350,6 +376,7 @@ enum class Platform(
     ),
 
     SUPER_GRAFX(
+        category = Category.CONSOLE,
         coreId = "TurboGrafx16",
         displayName = "SuperGrafx",
         formats = listOf(
@@ -363,6 +390,7 @@ enum class Platform(
     ),
 
     SUPER_NINTENDO(
+        category = Category.CONSOLE,
         coreId = "SNES",
         displayName = "Super Nintendo",
         formats = listOf(
@@ -380,6 +408,7 @@ enum class Platform(
     ),
 
     TURBO_GRAFX_16(
+        category = Category.CONSOLE,
         coreId = "TurboGrafx16",
         displayName = "TurboGrafx-16",
         formats = listOf(
@@ -393,6 +422,7 @@ enum class Platform(
     ),
 
     TURBO_GRAFX_CD(
+        category = Category.CONSOLE,
         coreId = "TurboGrafx16",
         displayName = "TurboGrafx-CD",
         formats = listOf(
@@ -410,6 +440,7 @@ enum class Platform(
     ),
 
     VECTREX(
+        category = Category.CONSOLE,
         coreId = "Vectrex",
         displayName = "Vectrex",
         formats = listOf(
@@ -427,6 +458,7 @@ enum class Platform(
     ),
 
     WONDERSWAN(
+        category = Category.HANDHELD,
         coreId = "WonderSwan",
         displayName = "WonderSwan",
         formats = listOf(
@@ -440,6 +472,7 @@ enum class Platform(
     ),
 
     WONDERSWAN_COLOR(
+        category = Category.HANDHELD,
         coreId = "WonderSwan",
         displayName = "WonderSwan Color",
         formats = listOf(
@@ -451,6 +484,13 @@ enum class Platform(
         gamesFolder = "WonderSwan",
         metadata = true,
     );
+
+    enum class Category {
+        ARCADE,
+        CONSOLE,
+        COMPUTER,
+        HANDHELD,
+    }
 
     val gamesPath: String?
         get() = when {

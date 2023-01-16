@@ -6,6 +6,9 @@
     <item android:id="@+id/arcades"
         android:title="@string/arcades"
         android:icon="@drawable/ic_arcades" />
+    <item android:id="@+id/handhelds"
+        android:title="@string/handhelds"
+        android:icon="@drawable/ic_handhelds" />
     <item android:id="@+id/favorites"
         android:title="@string/favorites"
         android:icon="@drawable/ic_star_fill" />
