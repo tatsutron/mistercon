@@ -284,28 +284,15 @@ class GameFragment : BaseFragment() {
         Coroutine.launch(
             activity = activity,
             run = {
-                val session = Ssh.session()
-                Assets.require(requireContext(), session, "hash")
-                val headerSizeInBytes = game.platform.formats
-                    .find {
-                        it.extension == File(game.path).extension
-                    }
-                    ?.headerSizeInBytes
-                    ?: 0
-                val command = StringBuilder().apply {
-                    append("\"${Constants.HASH_PATH}\"")
-                    append(" ")
-                    append("\"${game.path}\"")
-                    append(" ")
-                    append(headerSizeInBytes.toString())
-                }.toString()
-                val output = Ssh.command(session, command)
+                val sha1 = Util.hashFile(
+                    context = activity,
+                    path = game.path,
+                )
                 Persistence.saveGame(
                     path = game.path,
                     platform = game.platform,
-                    sha1 = output.trim(),
+                    sha1 = sha1,
                 )
-                session.disconnect()
             },
             success = {
                 game = Persistence.getGameByPath(game.path)!!
@@ -313,7 +300,6 @@ class GameFragment : BaseFragment() {
                 setSpeedDial()
                 setMetadata()
             },
-
             failure = { throwable ->
                 when (throwable) {
                     is JSchException ->

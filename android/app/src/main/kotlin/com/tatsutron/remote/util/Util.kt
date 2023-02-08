@@ -20,4 +20,17 @@ object Util {
         session.disconnect()
         return output.split(";")
     }
+
+    fun hashFile(context: Context, path: String): String {
+        val session = Ssh.session()
+        Assets.require(context, session, "mister_util.py")
+        val command = StringBuilder().apply {
+            append("python3 ${Constants.MISTER_UTIL_PATH} hash")
+            append(" ")
+            append("\"${path}\"")
+        }.toString()
+        val output = Ssh.command(session, command)
+        session.disconnect()
+        return output.trim()
+    }
 }
