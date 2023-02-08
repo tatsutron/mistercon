@@ -6,6 +6,7 @@ object Constants {
     const val MISTERCON_ROOT = "${TATSUTRON_ROOT}/mistercon"
 
     const val ARCADE_PATH = "${VOLUME}/_Arcade"
+    const val COMPUTER_PATH = "${VOLUME}/_Computer"
     const val CONSOLE_PATH = "${VOLUME}/_Console"
     const val GAMES_PATH = "${VOLUME}/games"
     const val HASH_PATH = "${MISTERCON_ROOT}/hash"

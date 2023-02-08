@@ -64,20 +64,15 @@ object Persistence {
             ?.save(platform.name)
     }
 
-    fun getPlatform(platform: Platform): Platform? =
-        database?.platformsQueries
-            ?.selectByName(platform.name)
-            ?.executeAsOneOrNull()
-            ?.let {
-                Platform.valueOf(it)
-            }
-
-    fun getConsoles() =
+    fun getPlatforms(category: Platform.Category) =
         database?.platformsQueries
             ?.selectAll()
             ?.executeAsList()
             ?.map {
                 Platform.valueOf(it)
+            }
+            ?.filter {
+                it.category == category
             }
             ?.sorted()
             ?: listOf()

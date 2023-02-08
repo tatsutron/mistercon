@@ -1,11 +1,13 @@
 package com.tatsutron.remote.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
 import android.view.*
-import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.textfield.TextInputEditText
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 import com.tatsutron.remote.R
 import com.tatsutron.remote.util.*
 
@@ -54,37 +56,33 @@ class SystemFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHost(view)
-        setCreditsButton(view)
+        setIpButton(view)
         setMenuButton(view)
+        setCreditsButton(view)
     }
 
-    private fun setHost(view: View) {
-        view.findViewById<TextInputEditText>(R.id.host_or_ip_text).apply {
-            setText(Persistence.getConfig()?.host)
-            text?.let {
-                setSelection(it.length)
-            }
-            setOnEditorActionListener { _, actionId, _ ->
-                if (actionId and EditorInfo.IME_MASK_ACTION != 0) {
-                    Persistence.saveConfig(
-                        Persistence.getConfig()!!.copy(
-                            host = text.toString(),
-                        ),
+    @SuppressLint("CheckResult")
+    private fun setIpButton(view: View) {
+        view.findViewById<Button>(R.id.ip_button).apply {
+            setOnClickListener  {
+                MaterialDialog(context).show {
+                    title(
+                        res = R.string.enter_mister_ip_address,
+                    )
+                    negativeButton(R.string.cancel)
+                    positiveButton(R.string.ok)
+                    input(
+                        inputType = TYPE_TEXT_FLAG_NO_SUGGESTIONS,
+                        prefill = Persistence.getConfig()?.host ,
+                        callback = { _, text ->
+                            Persistence.saveConfig(
+                                Persistence.getConfig()!!.copy(
+                                    host = text.toString(),
+                                ),
+                            )
+                        },
                     )
                 }
-                false
-            }
-        }
-    }
-
-    private fun setCreditsButton(view: View) {
-        view.findViewById<Button>(R.id.credits_button).apply {
-            setOnClickListener {
-                Navigator.showScreen(
-                    activity as AppCompatActivity,
-                    FragmentMaker.credits(),
-                )
             }
         }
     }
@@ -104,6 +102,17 @@ class SystemFragment : BaseFragment() {
                     finally = {
                         Navigator.hideLoadingScreen()
                     },
+                )
+            }
+        }
+    }
+
+    private fun setCreditsButton(view: View) {
+        view.findViewById<Button>(R.id.credits_button).apply {
+            setOnClickListener {
+                Navigator.showScreen(
+                    activity as AppCompatActivity,
+                    FragmentMaker.credits(),
                 )
             }
         }

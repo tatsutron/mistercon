@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import com.jcraft.jsch.JSchException
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.Application
@@ -279,8 +280,9 @@ class GameFragment : BaseFragment() {
 
     private fun onSync() {
         Navigator.showLoadingScreen()
+        val activity = requireActivity()
         Coroutine.launch(
-            activity = requireActivity(),
+            activity = activity,
             run = {
                 val session = Ssh.session()
                 Assets.require(requireContext(), session, "hash")
@@ -310,6 +312,15 @@ class GameFragment : BaseFragment() {
                 metadata = Persistence.getMetadataBySha1(game.sha1!!)
                 setSpeedDial()
                 setMetadata()
+            },
+
+            failure = { throwable ->
+                when (throwable) {
+                    is JSchException ->
+                        Dialog.connectionFailed(activity)
+                    else ->
+                        Dialog.error(activity, throwable)
+                }
             },
             finally = {
                 Navigator.hideLoadingScreen()

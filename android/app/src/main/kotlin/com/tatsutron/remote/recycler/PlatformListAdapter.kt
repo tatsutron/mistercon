@@ -6,25 +6,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tatsutron.remote.R
 
-class ConsoleListAdapter(
+class PlatformListAdapter(
     private val activity: Activity,
-    val itemList: MutableList<ConsoleItem> = mutableListOf(),
-) : RecyclerView.Adapter<ConsoleHolder>() {
+    val itemList: MutableList<PlatformItem> = mutableListOf(),
+) : RecyclerView.Adapter<PlatformHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): ConsoleHolder {
+    ): PlatformHolder {
         val layoutInflater = LayoutInflater.from(activity)
         val itemView = layoutInflater.inflate(
             R.layout.list_item_console,
             parent,
             false,
         )
-        return ConsoleHolder(activity, itemView)
+        return PlatformHolder(activity, itemView)
     }
 
-    override fun onBindViewHolder(holder: ConsoleHolder, position: Int) {
+    override fun onBindViewHolder(holder: PlatformHolder, position: Int) {
         holder.bind(itemList[position])
     }
 

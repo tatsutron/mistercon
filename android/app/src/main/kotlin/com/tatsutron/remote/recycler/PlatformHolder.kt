@@ -12,7 +12,7 @@ import com.tatsutron.remote.util.FragmentMaker
 import com.tatsutron.remote.util.Navigator
 import java.util.*
 
-class ConsoleHolder(
+class PlatformHolder(
     private val activity: Activity,
     itemView: View,
 ) : RecyclerView.ViewHolder(itemView) {
@@ -20,7 +20,7 @@ class ConsoleHolder(
     private val image: ImageView = itemView.findViewById(R.id.image)
     private val label: TextView = itemView.findViewById(R.id.label)
 
-    fun bind(item: ConsoleItem) {
+    fun bind(item: PlatformItem) {
         image.setImageDrawable(
             AppCompatResources.getDrawable(
                 image.context,

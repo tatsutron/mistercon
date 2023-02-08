@@ -1,7 +1,6 @@
+package com.tatsutron.remote.util
+
 import android.content.Context
-import com.tatsutron.remote.util.Assets
-import com.tatsutron.remote.util.Constants
-import com.tatsutron.remote.util.Ssh
 
 object Util {
 

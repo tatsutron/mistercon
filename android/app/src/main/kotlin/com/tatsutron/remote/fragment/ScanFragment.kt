@@ -14,6 +14,7 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.afollestad.materialdialogs.MaterialDialog
 import com.tatsutron.remote.Application
 import com.tatsutron.remote.MainActivity
 import com.tatsutron.remote.R
@@ -59,15 +60,17 @@ class ScanFragment : BaseFragment() {
                 startCamera()
             } else {
                 val context = requireContext()
-                Dialog.info(
-                    context = context,
-                    message = context.getString(
-                        R.string.no_camera_permission,
-                    ),
-                    ok = {
-                        (activity as? MainActivity)?.onBackPressed()
-                    },
-                )
+                MaterialDialog(context).show {
+                    message(
+                        text = context.getString(R.string.no_camera_permission),
+                    )
+                    positiveButton(
+                        res = R.string.ok,
+                        click = {
+                            (activity as? MainActivity)?.onBackPressed()
+                        },
+                    )
+                }
             }
         }
         val requiredPermission = Manifest.permission.CAMERA

@@ -8,17 +8,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jcraft.jsch.JSchException
 import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.R
 import com.tatsutron.remote.model.Platform
-import com.tatsutron.remote.recycler.ConsoleItem
-import com.tatsutron.remote.recycler.ConsoleListAdapter
+import com.tatsutron.remote.recycler.PlatformItem
+import com.tatsutron.remote.recycler.PlatformListAdapter
 import com.tatsutron.remote.util.*
 import java.io.File
 
 class PlatformListFragment : BaseFragment() {
 
-    private lateinit var adapter: ConsoleListAdapter
+    private lateinit var platformCategory: Platform.Category
+    private lateinit var adapter: PlatformListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +40,7 @@ class PlatformListFragment : BaseFragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(
-            R.layout.fragment_console_list,
+            R.layout.fragment_platform_list,
             container,
             false,
         )
@@ -48,16 +50,19 @@ class PlatformListFragment : BaseFragment() {
         super.onResume()
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(view?.findViewById(R.id.toolbar))
-            supportActionBar?.title = context?.getString(R.string.consoles)
+            supportActionBar?.title = platformCategory.name
         }
-        if (Persistence.getConsoles().isEmpty()) {
+        if (Persistence.getPlatforms(platformCategory).isEmpty()) {
             onSync()
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = ConsoleListAdapter(activity as Activity)
+        platformCategory = Platform.Category.valueOf(
+            arguments?.getString(FragmentMaker.KEY_PLATFORM_CATEGORY)!!,
+        )
+        adapter = PlatformListAdapter(activity as Activity)
         view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
             adapter = this@PlatformListFragment.adapter
@@ -68,9 +73,9 @@ class PlatformListFragment : BaseFragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setRecycler() {
-        val items = Persistence.getConsoles()
+        val items = Persistence.getPlatforms(platformCategory)
             .map {
-                ConsoleItem(it)
+                PlatformItem(it)
             }
         adapter.itemList.clear()
         adapter.itemList.addAll(items)
@@ -93,13 +98,14 @@ class PlatformListFragment : BaseFragment() {
     private fun onSync() {
         Navigator.showLoadingScreen()
         Persistence.clearPlatforms()
+        val activity = requireActivity()
         Coroutine.launch(
-            activity = requireActivity(),
+            activity = activity,
             run = {
                 val corePaths = Util.listFiles(
-                    context = requireContext(),
+                    context = activity,
                     extensions = "rbf",
-                    path = Constants.CONSOLE_PATH,
+                    path = platformCategory.path,
                 )
                 val category = arguments
                     ?.getString(FragmentMaker.KEY_PLATFORM_CATEGORY)!!
@@ -116,6 +122,14 @@ class PlatformListFragment : BaseFragment() {
             },
             success = {
                 setRecycler()
+            },
+            failure = { throwable ->
+                when (throwable) {
+                    is JSchException ->
+                        Dialog.connectionFailed(activity)
+                    else ->
+                        Dialog.error(activity, throwable)
+                }
             },
             finally = {
                 Navigator.hideLoadingScreen()

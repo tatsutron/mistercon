@@ -58,7 +58,7 @@ class GameListFragment : BaseFragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(
-            R.layout.fragment_console,
+            R.layout.fragment_game_list,
             container,
             false,
         )
@@ -205,8 +205,6 @@ class GameListFragment : BaseFragment() {
     }
 
     private fun onSync() {
-        Persistence.savePlatform(platform)
-        platform = Persistence.getPlatform(platform)!!
         Navigator.showLoadingScreen()
         Coroutine.launch(
             activity = requireActivity(),

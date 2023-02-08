@@ -485,11 +485,11 @@ enum class Platform(
         metadata = true,
     );
 
-    enum class Category {
-        ARCADE,
-        CONSOLE,
-        COMPUTER,
-        HANDHELD,
+    enum class Category(val path: String) {
+        ARCADE(Constants.ARCADE_PATH),
+        CONSOLE(Constants.CONSOLE_PATH),
+        COMPUTER(Constants.COMPUTER_PATH),
+        HANDHELD(Constants.CONSOLE_PATH),
     }
 
     val gamesPath: String?
