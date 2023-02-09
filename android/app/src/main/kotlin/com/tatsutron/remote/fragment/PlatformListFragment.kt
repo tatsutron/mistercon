@@ -104,8 +104,9 @@ class PlatformListFragment : BaseFragment() {
             run = {
                 val corePaths = Util.listFiles(
                     context = activity,
-                    extensions = "rbf",
+                    extensions = listOf("rbf"),
                     path = platformCategory.path,
+                    recurse = false,
                 )
                 val category = arguments
                     ?.getString(FragmentMaker.KEY_PLATFORM_CATEGORY)!!

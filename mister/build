@@ -1,3 +1,0 @@
-docker run -it --rm -v $(pwd):/mister misterkun/toolchain /bin/bash
-arm-linux-gnueabihf-gcc hash.c sha1.c -o hash
-arm-linux-gnueabihf-gcc list.c -o list

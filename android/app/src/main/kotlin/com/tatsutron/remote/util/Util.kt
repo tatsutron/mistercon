@@ -6,15 +6,23 @@ object Util {
 
     fun listFiles(
         context: Context,
-        extensions: String,
+        extensions: List<String>,
         path: String,
+        recurse: Boolean,
     ): List<String> {
         val session = Ssh.session()
         Assets.require(context, session, "mister_util.py")
         val command = StringBuilder().apply {
-            append("python3 ${Constants.MISTER_UTIL_PATH} list")
+            if (recurse) {
+                append("python3 ${Constants.MISTER_UTIL_PATH} list -r")
+            } else {
+                append("python3 ${Constants.MISTER_UTIL_PATH} list")
+            }
             append(" ")
-            append("\"${path}\" $extensions")
+            val ext = extensions.reduce { acc, string ->
+                "$acc|$string"
+            }
+            append("\"${path}\" \"${ext}\"")
         }.toString()
         val output = Ssh.command(session, command)
         session.disconnect()
@@ -31,6 +39,6 @@ object Util {
         }.toString()
         val output = Ssh.command(session, command)
         session.disconnect()
-        return output.trim()
+        return output
     }
 }

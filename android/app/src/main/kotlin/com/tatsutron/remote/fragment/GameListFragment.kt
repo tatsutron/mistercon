@@ -206,31 +206,17 @@ class GameListFragment : BaseFragment() {
 
     private fun onSync() {
         Navigator.showLoadingScreen()
+        val activity = requireActivity()
         Coroutine.launch(
-            activity = requireActivity(),
+            activity = activity,
             run = {
                 val session = Ssh.session()
-                Assets.require(requireContext(), session, "list")
-                val extensions = platform.formats
-                    .map {
-                        it.extension
-                    }
-                    .reduce { acc, string ->
-                        "$acc|$string"
-                    }
-                val regex = "($extensions)$"
-                val command = StringBuilder().apply {
-                    append("\"${Constants.LIST_PATH}\"")
-                    append(" ")
-                    append("\"${platform.gamesPath!!}\"")
-                    append(" ")
-                    append("\"$regex\"")
-                }.toString()
-                val list = Ssh.command(session, command)
-                val new = list.split("\n")
-                    .filter {
-                        it.isNotBlank()
-                    }
+                val new = Util.listFiles(
+                    context = activity,
+                    extensions = platform.formats.map { it.extension },
+                    path = platform.gamesPath!!,
+                    recurse = true,
+                )
                 val old = Persistence.getGamesByPlatform(platform)
                     .map {
                         it.path
