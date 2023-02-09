@@ -14,6 +14,7 @@
     <color name="black_32_opacity">#20000000</color>
     <color name="black_153_opacity">#99000000</color>
     <color name="black_zero_opacity">#00000000</color>
+    <color name="blue">#5BCEFA</color>
     <color name="complementary_100">#FFE0B7</color>
     <color name="complementary_200">#FFCb89</color>
     <color name="complementary_300">#FFB65D</color>
@@ -34,6 +35,7 @@
     <color name="gray_700">#616161</color>
     <color name="gray_800">#424242</color>
     <color name="gray_900">#212121</color>
+    <color name="pink">#F5A9B8</color>
     <color name="primary_100">#B4E3FA</color>
     <color name="primary_200">#83D0F6</color>
     <color name="primary_300">#56BEF0</color>
