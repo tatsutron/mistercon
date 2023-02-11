@@ -29,16 +29,6 @@ object Persistence {
         database = Database(
             AndroidSqliteDriver(Database.Schema, context, name)
         )
-        val config = database?.configQueries
-            ?.select()
-            ?.executeAsOneOrNull()
-        if (config == null) {
-            saveConfig(
-                Config(
-                    host = Constants.HOST,
-                ),
-            )
-        }
     }
 
     fun saveConfig(config: Config) {

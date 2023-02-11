@@ -6,6 +6,7 @@ import android.text.InputType
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.tatsutron.remote.R
+import com.tatsutron.remote.model.Config
 
 object Dialog {
 
@@ -32,9 +33,7 @@ object Dialog {
                             prefill = Persistence.getConfig()?.host,
                             callback = { _, text ->
                                 Persistence.saveConfig(
-                                    Persistence.getConfig()!!.copy(
-                                        host = text.toString(),
-                                    ),
+                                    Config(host = text.toString()),
                                 )
                             },
                         )

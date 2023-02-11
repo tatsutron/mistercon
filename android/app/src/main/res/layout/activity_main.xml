@@ -9,6 +9,11 @@
         android:layout_height="match_parent"
         android:background="@color/gray_800" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/separator" />
+
     <RelativeLayout
         android:id="@+id/loading_screen"
         android:layout_width="match_parent"
@@ -26,10 +31,5 @@
             android:indeterminateTint="@color/spinner" />
 
     </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/separator" />
 
 </FrameLayout>
