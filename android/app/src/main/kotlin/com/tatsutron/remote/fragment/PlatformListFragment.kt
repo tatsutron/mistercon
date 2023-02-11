@@ -127,7 +127,17 @@ class PlatformListFragment : BaseFragment() {
             failure = { throwable ->
                 when (throwable) {
                     is JSchException ->
-                        Dialog.connectionFailed(activity)
+                        if (Persistence.getConfig() == null) {
+                            Dialog.enterIpAddress(
+                                context = activity,
+                                ipAddressSet = ::onSync,
+                            )
+                        } else {
+                            Dialog.connectionFailed(
+                                context = activity,
+                                ipAddressSet = ::onSync,
+                            )
+                        }
                     else ->
                         Dialog.error(activity, throwable)
                 }

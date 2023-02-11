@@ -300,7 +300,10 @@ class GameFragment : BaseFragment() {
             failure = { throwable ->
                 when (throwable) {
                     is JSchException ->
-                        Dialog.connectionFailed(activity)
+                        Dialog.connectionFailed(
+                            context = activity,
+                            ipAddressSet = ::onSync,
+                        )
                     else ->
                         Dialog.error(activity, throwable)
                 }

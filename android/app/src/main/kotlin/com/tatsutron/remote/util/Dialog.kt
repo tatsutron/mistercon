@@ -11,7 +11,28 @@ import com.tatsutron.remote.model.Config
 object Dialog {
 
     @SuppressLint("CheckResult")
-    fun connectionFailed(context: Context) {
+    fun enterIpAddress(context: Context, ipAddressSet: () -> Unit) {
+        MaterialDialog(context).show {
+            title(
+                res = R.string.enter_mister_ip_address,
+            )
+            negativeButton(R.string.cancel)
+            positiveButton(R.string.ok)
+            input(
+                inputType = InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS,
+                prefill = Persistence.getConfig()?.host,
+                callback = { _, text ->
+                    Persistence.saveConfig(
+                        Config(host = text.toString()),
+                    )
+                    ipAddressSet.invoke()
+                },
+            )
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    fun connectionFailed(context: Context, ipAddressSet: () -> Unit) {
         MaterialDialog(context).show {
             title(
                 res = R.string.failed_to_connect,
@@ -22,22 +43,7 @@ object Dialog {
             negativeButton(
                 res = R.string.set_ip_address,
                 click = {
-                    MaterialDialog(context).show {
-                        title(
-                            res = R.string.enter_mister_ip_address,
-                        )
-                        negativeButton(R.string.cancel)
-                        positiveButton(R.string.ok)
-                        input(
-                            inputType = InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS,
-                            prefill = Persistence.getConfig()?.host,
-                            callback = { _, text ->
-                                Persistence.saveConfig(
-                                    Config(host = text.toString()),
-                                )
-                            },
-                        )
-                    }
+                    ::enterIpAddress.invoke(context, ipAddressSet)
                 },
             )
             positiveButton(R.string.ok)
