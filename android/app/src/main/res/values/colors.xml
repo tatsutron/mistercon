@@ -68,7 +68,7 @@
     <color name="spinner">@color/pink</color>
     <color name="text_body">@color/white</color>
     <color name="text_header">@color/pink</color>
-    <color name="toolbar_background">@color/gray_900</color>
+    <color name="toolbar_background">@color/black</color>
     <!-- System -->
     <color name="mtrl_textinput_default_box_stroke_color">@color/blue</color>
 </resources>

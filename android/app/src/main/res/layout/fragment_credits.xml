@@ -25,13 +25,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/mistercon"
-            android:textColor="@color/primary_500"
+            android:textColor="@color/blue"
             android:textSize="@dimen/text_size_largest" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/primary_500" />
+            android:background="@color/blue" />
 
         <android.lib.widget.verticalmarqueetextview.VerticalMarqueeTextView
             android:id="@+id/credits_scroll"
@@ -46,7 +46,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/primary_500" />
+            android:background="@color/blue" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
             android:paddingHorizontal="@dimen/margin_large"
             android:paddingVertical="@dimen/margin_small"
             android:text="@string/thank_you"
-            android:textColor="@color/triadic_500"
+            android:textColor="@color/pink"
             android:textSize="@dimen/text_size_smallest" />
 
         <View

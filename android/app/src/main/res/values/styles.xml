@@ -17,7 +17,7 @@
         <item name="colorAccent">@color/primary_500</item>
         <item name="colorBackgroundFloating">@color/gray_800</item>
         <item name="colorPrimary">@color/app_background</item>
-        <item name="colorPrimaryDark">@color/gray_900</item>
+        <item name="colorPrimaryDark">@color/black</item>
         <item name="md_color_button_text">@color/primary_500</item>
         <item name="md_color_content">@color/white</item>
         <item name="md_color_hint">@color/gray_700</item>
