@@ -12,11 +12,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/game_toolbar"
-            style="@style/Toolbar"
-            app:contentInsetLeft="0dp"
-            app:contentInsetStart="0dp"
-            app:contentInsetStartWithNavigation="0dp"
-            app:navigationIcon="@drawable/ic_back" />
+            style="@style/Toolbar" />
 
         <View
             android:layout_width="match_parent"
@@ -40,7 +36,8 @@
                     android:divider="@drawable/vertical_divider_medium"
                     android:focusable="true"
                     android:orientation="vertical"
-                    android:padding="@dimen/margin_medium"
+                    android:paddingHorizontal="@dimen/margin_medium"
+                    android:paddingVertical="@dimen/margin_small"
                     android:showDividers="middle">
 
                     <com.tatsutron.remote.component.MetadataCard

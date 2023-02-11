@@ -14,6 +14,7 @@ enum class Platform(
 
     ARCADE(
         category = Category.ARCADE,
+        displayName = "Arcades",
         formats = listOf(
             Format(
                 extension = "mra",

@@ -14,12 +14,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            style="@style/Toolbar"
-            app:collapseIcon="@drawable/ic_back"
-            app:contentInsetLeft="0dp"
-            app:contentInsetStart="0dp"
-            app:contentInsetStartWithNavigation="0dp"
-            app:navigationIcon="@drawable/ic_back" />
+            style="@style/Toolbar" />
 
         <View
             android:layout_width="match_parent"

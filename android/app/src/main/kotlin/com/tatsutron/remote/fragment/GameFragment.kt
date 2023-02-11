@@ -73,9 +73,6 @@ class GameFragment : BaseFragment() {
         val toolbar = view.findViewById<Toolbar>(R.id.game_toolbar)
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(toolbar)
-            toolbar.setNavigationOnClickListener {
-                onBackPressed()
-            }
             supportActionBar?.title = game.name
         }
         setSpeedDialActionItems()
