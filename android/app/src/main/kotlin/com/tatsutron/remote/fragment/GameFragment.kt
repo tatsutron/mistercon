@@ -20,7 +20,6 @@ import com.tatsutron.remote.component.MetadataCard
 import com.tatsutron.remote.model.Game
 import com.tatsutron.remote.model.Metadata
 import com.tatsutron.remote.util.*
-import java.io.File
 
 class GameFragment : BaseFragment() {
 
@@ -281,7 +280,7 @@ class GameFragment : BaseFragment() {
         Coroutine.launch(
             activity = activity,
             run = {
-                val sha1 = Util.hashFile(
+                val sha1 = Util.hash(
                     context = activity,
                     path = game.path,
                 )

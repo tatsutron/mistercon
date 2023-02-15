@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jcraft.jsch.JSchException
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.R
@@ -20,6 +21,8 @@ import com.tatsutron.remote.recycler.GameListAdapter
 import com.tatsutron.remote.util.*
 import java.io.File
 
+// TODO Hide title for arcades list
+// TODO Fix search bar back button visibility
 class GameListFragment : BaseFragment() {
 
     private lateinit var platform: Platform
@@ -199,11 +202,10 @@ class GameListFragment : BaseFragment() {
             activity = activity,
             run = {
                 val session = Ssh.session()
-                val new = Util.listFiles(
+                val new = Util.scan(
                     context = activity,
                     extensions = platform.formats.map { it.extension },
                     path = platform.gamesPath!!,
-                    recurse = true,
                 )
                 val old = Persistence.getGamesByPlatform(platform)
                     .map {
@@ -228,6 +230,24 @@ class GameListFragment : BaseFragment() {
             success = {
                 setRecycler()
                 setSpeedDial()
+            },
+            failure = { throwable ->
+                when (throwable) {
+                    is JSchException ->
+                        if (Persistence.getConfig() == null) {
+                            Dialog.enterIpAddress(
+                                context = activity,
+                                ipAddressSet = ::onSync,
+                            )
+                        } else {
+                            Dialog.connectionFailed(
+                                context = activity,
+                                ipAddressSet = ::onSync,
+                            )
+                        }
+                    else ->
+                        Dialog.error(activity, throwable)
+                }
             },
             finally = {
                 Navigator.hideLoadingScreen()

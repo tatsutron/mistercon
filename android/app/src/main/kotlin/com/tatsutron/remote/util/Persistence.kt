@@ -49,29 +49,6 @@ object Persistence {
                 )
             }
 
-    fun savePlatform(platform: Platform) {
-        database?.platformsQueries
-            ?.save(platform.name)
-    }
-
-    fun getPlatforms(category: Platform.Category) =
-        database?.platformsQueries
-            ?.selectAll()
-            ?.executeAsList()
-            ?.map {
-                Platform.valueOf(it)
-            }
-            ?.filter {
-                it.category == category
-            }
-            ?.sorted()
-            ?: listOf()
-
-    fun clearPlatforms() {
-        database?.platformsQueries
-            ?.clear()
-    }
-
     fun saveGame(path: String, platform: Platform, sha1: String?) {
         database?.gamesQueries
             ?.save(path, platform.name, sha1)
@@ -125,11 +102,6 @@ object Persistence {
     fun deleteGame(path: String) {
         database?.gamesQueries
             ?.deleteByPath(path)
-    }
-
-    fun clearGamesByPlatform(platform: Platform) {
-        database?.gamesQueries
-            ?.deleteByPlatform(platform.name)
     }
 
     fun getMetadataBySha1(sha1: String) =

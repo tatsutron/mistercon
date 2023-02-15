@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,23 +17,5 @@
             android:paddingVertical="@dimen/margin_small" />
 
     </LinearLayout>
-
-    <com.leinardi.android.speeddial.SpeedDialOverlayLayout
-        android:id="@+id/speed_dial_overlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/speed_dial_overlay_background"
-        app:clickable_overlay="true" />
-
-    <com.leinardi.android.speeddial.SpeedDialView
-        android:id="@+id/speed_dial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        app:sdMainFabClosedBackgroundColor="@color/button_background"
-        app:sdMainFabClosedIconColor="@color/button_label"
-        app:sdMainFabClosedSrc="@drawable/ic_plus"
-        app:sdMainFabOpenedBackgroundColor="@color/button_background"
-        app:sdOverlayLayout="@id/speed_dial_overlay" />
 
 </FrameLayout>

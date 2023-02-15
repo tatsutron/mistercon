@@ -5,17 +5,13 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.jcraft.jsch.JSchException
-import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.R
 import com.tatsutron.remote.model.Platform
 import com.tatsutron.remote.recycler.PlatformItem
 import com.tatsutron.remote.recycler.PlatformListAdapter
-import com.tatsutron.remote.util.*
-import java.io.File
+import com.tatsutron.remote.util.FragmentMaker
 
 class PlatformListFragment : BaseFragment() {
 
@@ -52,9 +48,6 @@ class PlatformListFragment : BaseFragment() {
             setSupportActionBar(view?.findViewById(R.id.toolbar))
             supportActionBar?.title = platformCategory.name
         }
-        if (Persistence.getPlatforms(platformCategory).isEmpty()) {
-            onSync()
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,83 +61,19 @@ class PlatformListFragment : BaseFragment() {
             adapter = this@PlatformListFragment.adapter
         }
         setRecycler()
-        setSpeedDial()
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setRecycler() {
-        val items = Persistence.getPlatforms(platformCategory)
+        val items = Platform.values()
+            .filter {
+                it.category == platformCategory
+            }
             .map {
                 PlatformItem(it)
             }
         adapter.itemList.clear()
         adapter.itemList.addAll(items)
         adapter.notifyDataSetChanged()
-    }
-
-    private fun setSpeedDial() {
-        view?.findViewById<SpeedDialView>(R.id.speed_dial)?.apply {
-            mainFab.apply {
-                setOnClickListener {
-                    onSync()
-                }
-                setImageDrawable(
-                    AppCompatResources.getDrawable(context, R.drawable.ic_sync)
-                )
-            }
-        }
-    }
-
-    private fun onSync() {
-        Navigator.showLoadingScreen()
-        Persistence.clearPlatforms()
-        val activity = requireActivity()
-        Coroutine.launch(
-            activity = activity,
-            run = {
-                val corePaths = Util.listFiles(
-                    context = activity,
-                    extensions = listOf("rbf"),
-                    path = platformCategory.path,
-                    recurse = false,
-                )
-                val category = arguments
-                    ?.getString(FragmentMaker.KEY_PLATFORM_CATEGORY)!!
-                corePaths.forEach {
-                    val coreId = File(it).name
-                        .split("_")
-                        .firstOrNull()
-                    Platform.values().forEach { platform ->
-                        if (platform.category.name == category && platform.coreId == coreId) {
-                            Persistence.savePlatform(platform)
-                        }
-                    }
-                }
-            },
-            success = {
-                setRecycler()
-            },
-            failure = { throwable ->
-                when (throwable) {
-                    is JSchException ->
-                        if (Persistence.getConfig() == null) {
-                            Dialog.enterIpAddress(
-                                context = activity,
-                                ipAddressSet = ::onSync,
-                            )
-                        } else {
-                            Dialog.connectionFailed(
-                                context = activity,
-                                ipAddressSet = ::onSync,
-                            )
-                        }
-                    else ->
-                        Dialog.error(activity, throwable)
-                }
-            },
-            finally = {
-                Navigator.hideLoadingScreen()
-            },
-        )
     }
 }
