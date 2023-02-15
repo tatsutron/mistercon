@@ -8,7 +8,7 @@ def scan(path, extensions, entries):
             if os.path.basename(root).startswith("."):
                 pass
             elif entry.is_dir():
-                scan(entry, entries)
+                scan(entry, extensions, entries)
             else:
                 if extension[1:] in extensions.split("|"):
                     entries.append(entry.path)
