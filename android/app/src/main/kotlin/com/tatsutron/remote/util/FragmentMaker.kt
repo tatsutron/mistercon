@@ -9,7 +9,6 @@ object FragmentMaker {
     const val KEY_PATH = "KEY_PATH"
     const val KEY_PLATFORM = "KEY_PLATFORM"
     const val KEY_PLATFORM_CATEGORY = "KEY_PLATFORM_CATEGORY"
-    const val KEY_SHOW_TOOLBAR = "KEY_SHOW_TOOLBAR"
     const val KEY_URL = "KEY_URL"
 
     fun credits() = CreditsFragment()
@@ -22,10 +21,9 @@ object FragmentMaker {
         }
     }
 
-    fun gameList(platform: Platform, showToolbar: Boolean = true) = GameListFragment().apply {
+    fun gameList(platform: Platform) = GameListFragment().apply {
         arguments = Bundle().apply {
             putString(KEY_PLATFORM, platform.name)
-            putBoolean(KEY_SHOW_TOOLBAR, showToolbar)
         }
     }
 

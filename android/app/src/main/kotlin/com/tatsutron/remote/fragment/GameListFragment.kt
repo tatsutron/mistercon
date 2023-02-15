@@ -80,13 +80,9 @@ class GameListFragment : BaseFragment() {
         )
         currentFolder = platform.gamesPath!!
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        if (arguments?.getBoolean(FragmentMaker.KEY_SHOW_TOOLBAR) == true) {
-            (activity as? AppCompatActivity)?.apply {
-                setSupportActionBar(toolbar)
-                supportActionBar?.title = platform.displayName
-            }
-        } else {
-            toolbar.visibility = View.GONE
+        (activity as? AppCompatActivity)?.apply {
+            setSupportActionBar(toolbar)
+            supportActionBar?.title = platform.displayName
         }
         adapter = GameListAdapter(activity as Activity)
         view.findViewById<RecyclerView>(R.id.recycler).apply {

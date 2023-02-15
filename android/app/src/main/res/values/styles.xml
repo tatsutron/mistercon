@@ -13,6 +13,7 @@
         <item name="actionBarStyle">@style/ActionBar</item>
         <item name="android:colorControlActivated">@color/primary_200</item>
         <item name="android:editTextColor">@color/white</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_left</item>
         <item name="android:windowBackground">@color/app_background</item>
         <item name="colorAccent">@color/primary_500</item>
         <item name="colorBackgroundFloating">@color/gray_800</item>
