@@ -21,7 +21,6 @@ import com.tatsutron.remote.recycler.GameListAdapter
 import com.tatsutron.remote.util.*
 import java.io.File
 
-// TODO Fix search bar back button visibility
 class GameListFragment : BaseFragment() {
 
     private lateinit var platform: Platform
