@@ -11,7 +11,7 @@ class FragmentStateAdapter(
     // Needs to be kept in sync with the navigation menu
     private val items = listOf(
         FragmentMaker.platformList(Platform.Category.CONSOLE),
-        FragmentMaker.gameList(Platform.ARCADE),
+        FragmentMaker.gameList(Platform.ARCADE, showToolbar = false),
         FragmentMaker.platformList(Platform.Category.HANDHELD),
         FragmentMaker.favoriteList(),
         FragmentMaker.system(),

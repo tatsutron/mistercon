@@ -21,7 +21,6 @@ import com.tatsutron.remote.recycler.GameListAdapter
 import com.tatsutron.remote.util.*
 import java.io.File
 
-// TODO Hide title for arcades list
 // TODO Fix search bar back button visibility
 class GameListFragment : BaseFragment() {
 
@@ -81,9 +80,13 @@ class GameListFragment : BaseFragment() {
         )
         currentFolder = platform.gamesPath!!
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        (activity as? AppCompatActivity)?.apply {
-            setSupportActionBar(toolbar)
-            supportActionBar?.title = platform.displayName
+        if (arguments?.getBoolean(FragmentMaker.KEY_SHOW_TOOLBAR) == true) {
+            (activity as? AppCompatActivity)?.apply {
+                setSupportActionBar(toolbar)
+                supportActionBar?.title = platform.displayName
+            }
+        } else {
+            toolbar.visibility = View.GONE
         }
         adapter = GameListAdapter(activity as Activity)
         view.findViewById<RecyclerView>(R.id.recycler).apply {
