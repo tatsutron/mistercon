@@ -14,7 +14,7 @@ object Ssh {
     private val jsch = JSch()
 
     fun session(): Session =
-        jsch.getSession(USER, Persistence.getConfig()?.host, PORT).apply {
+        jsch.getSession(USER, Persistence.host, PORT).apply {
             setConfig(
                 Properties().apply {
                     setProperty("StrictHostKeyChecking", "no")

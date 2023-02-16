@@ -73,13 +73,9 @@ class SystemFragment : BaseFragment() {
                     positiveButton(R.string.ok)
                     input(
                         inputType = TYPE_TEXT_FLAG_NO_SUGGESTIONS,
-                        prefill = Persistence.getConfig()?.host ,
+                        prefill = Persistence.host ,
                         callback = { _, text ->
-                            Persistence.saveConfig(
-                                Persistence.getConfig()!!.copy(
-                                    host = text.toString(),
-                                ),
-                            )
+                            Persistence.host = text.toString()
                         },
                     )
                 }

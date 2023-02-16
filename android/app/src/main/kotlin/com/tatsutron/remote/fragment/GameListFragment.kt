@@ -232,7 +232,7 @@ class GameListFragment : BaseFragment() {
             failure = { throwable ->
                 when (throwable) {
                     is JSchException ->
-                        if (Persistence.getConfig() == null) {
+                        if (Persistence.host.isEmpty()) {
                             Dialog.enterIpAddress(
                                 context = activity,
                                 ipAddressSet = ::onSync,

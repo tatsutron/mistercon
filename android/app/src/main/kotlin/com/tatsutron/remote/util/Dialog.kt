@@ -6,7 +6,6 @@ import android.text.InputType
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.tatsutron.remote.R
-import com.tatsutron.remote.model.Config
 
 object Dialog {
 
@@ -20,11 +19,9 @@ object Dialog {
             positiveButton(R.string.ok)
             input(
                 inputType = InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS,
-                prefill = Persistence.getConfig()?.host,
+                prefill = Persistence.host,
                 callback = { _, text ->
-                    Persistence.saveConfig(
-                        Config(host = text.toString()),
-                    )
+                    Persistence.host = text.toString()
                     ipAddressSet.invoke()
                 },
             )

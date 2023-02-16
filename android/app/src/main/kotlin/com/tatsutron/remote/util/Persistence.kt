@@ -2,6 +2,7 @@ package com.tatsutron.remote.util
 
 import android.annotation.SuppressLint
 import android.content.Context
+import com.google.gson.Gson
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.tatsutron.remote.Database
 import com.tatsutron.remote.data.Games
@@ -13,10 +14,21 @@ import java.util.*
 
 object Persistence {
 
+    private lateinit var configFile: File
+    private lateinit var config: Config
+    private val gson = Gson()
     private var database: Database? = null
 
     @SuppressLint("SdCardPath")
     fun init(context: Context) {
+        configFile = File(context.filesDir, "config.json")
+        if (configFile.exists()) {
+            config = gson.fromJson(configFile.readText(), Config::class.java)
+        } else {
+            config = Config()
+            configFile.writeText(gson.toJson(config))
+        }
+
         val dir = "/data/data/com.tatsutron.remote/databases"
         val name = "app.db"
         val path = File(dir, name).path
@@ -31,23 +43,12 @@ object Persistence {
         )
     }
 
-    fun saveConfig(config: Config) {
-        database?.configQueries
-            ?.save(
-                host = config.host,
-                id = 0,
-            )
-    }
-
-    fun getConfig() =
-        database?.configQueries
-            ?.select()
-            ?.executeAsOneOrNull()
-            ?.let {
-                Config(
-                    host = it.host,
-                )
-            }
+    var host: String
+        set(ipAddress) {
+            config.host = ipAddress
+            configFile.writeText(gson.toJson(config))
+        }
+        get() = config.host
 
     fun saveGame(path: String, platform: Platform, sha1: String?) {
         database?.gamesQueries
