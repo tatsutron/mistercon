@@ -17,7 +17,7 @@ class PlatformListAdapter(
     ): PlatformHolder {
         val layoutInflater = LayoutInflater.from(activity)
         val itemView = layoutInflater.inflate(
-            R.layout.list_item_console,
+            R.layout.list_item_platform,
             parent,
             false,
         )
