@@ -8,6 +8,7 @@ object Util {
         context: Context,
         extensions: List<String>,
         path: String,
+        includeZip: Boolean,
     ): List<String> {
         val session = Ssh.session()
         Assets.require(context, session, "mister_util.py")
@@ -18,6 +19,12 @@ object Util {
                 "$acc|$string"
             }
             append("\"${path}\" \"${ext}\"")
+            append(" ")
+            if (includeZip) {
+                append("--include-zip")
+            } else {
+                append("--no-zip")
+            }
         }.toString()
         val output = Ssh.command(session, command)
         session.disconnect()

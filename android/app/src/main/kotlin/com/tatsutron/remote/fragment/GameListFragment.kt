@@ -21,6 +21,7 @@ import com.tatsutron.remote.recycler.GameListAdapter
 import com.tatsutron.remote.util.*
 import java.io.File
 
+// TODO Rename to `PlatformFragment`?
 class GameListFragment : BaseFragment() {
 
     private lateinit var platform: Platform
@@ -204,6 +205,7 @@ class GameListFragment : BaseFragment() {
                     context = activity,
                     extensions = platform.formats.map { it.extension },
                     path = platform.gamesPath!!,
+                    includeZip = platform.supportsZip,
                 )
                 val old = Persistence.getGamesByPlatform(platform)
                     .map {

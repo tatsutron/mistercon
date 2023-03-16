@@ -5,11 +5,11 @@ import java.io.File
 
 enum class Platform(
     val category: Category,
-    val coreId: String? = null,
     val displayName: String? = null,
     val formats: List<Format>,
     val gamesFolder: String? = null,
     val metadata: Boolean,
+    val supportsZip: Boolean,
 ) {
 
     ARCADE(
@@ -22,11 +22,11 @@ enum class Platform(
             ),
         ),
         metadata = false,
+        supportsZip = false,
     ),
 
     ARCADIA_2001(
         category = Category.CONSOLE,
-        coreId = "Arcadia",
         displayName = "Arcadia 2001",
         formats = listOf(
             Format(
@@ -36,11 +36,11 @@ enum class Platform(
         ),
         gamesFolder = "Arcadia",
         metadata = false,
+        supportsZip = false,
     ),
 
     ATARI_2600(
         category = Category.CONSOLE,
-        coreId = "Atari7800",
         displayName = "Atari 2600",
         formats = listOf(
             Format(
@@ -50,11 +50,11 @@ enum class Platform(
         ),
         gamesFolder = "ATARI7800",
         metadata = true,
+        supportsZip = false,
     ),
 
     ATARI_5200(
         category = Category.CONSOLE,
-        coreId = "Atari5200",
         displayName = "Atari 5200",
         formats = listOf(
             Format(
@@ -64,11 +64,11 @@ enum class Platform(
         ),
         gamesFolder = "Atari5200",
         metadata = true,
+        supportsZip = false,
     ),
 
     ATARI_7800(
         category = Category.CONSOLE,
-        coreId = "Atari7800",
         displayName = "Atari 7800",
         formats = listOf(
             Format(
@@ -79,11 +79,11 @@ enum class Platform(
         ),
         gamesFolder = "Atari7800",
         metadata = true,
+        supportsZip = false,
     ),
 
     ATARI_LYNX(
         category = Category.HANDHELD,
-        coreId = "AtariLynx",
         displayName = "Atari Lynx",
         formats = listOf(
             Format(
@@ -94,11 +94,11 @@ enum class Platform(
         ),
         gamesFolder = "AtariLynx",
         metadata = true,
+        supportsZip = false,
     ),
 
     BALLY_ASTROCADE(
         category = Category.CONSOLE,
-        coreId = "Astrocade",
         displayName = "Bally Astrocade",
         formats = listOf(
             Format(
@@ -108,11 +108,11 @@ enum class Platform(
         ),
         gamesFolder = "Astrocade",
         metadata = false,
+        supportsZip = false,
     ),
 
     COLECOVISION(
         category = Category.CONSOLE,
-        coreId = "ColecoVision",
         displayName = "ColecoVision",
         formats = listOf(
             Format(
@@ -122,11 +122,11 @@ enum class Platform(
         ),
         gamesFolder = "Coleco",
         metadata = true,
+        supportsZip = false,
     ),
 
     FAIRCHILD_CHANNEL_F(
         category = Category.CONSOLE,
-        coreId = "ChannelF",
         displayName = "Fairchild Channel F",
         formats = listOf(
             Format(
@@ -136,11 +136,11 @@ enum class Platform(
         ),
         gamesFolder = "ChannelF",
         metadata = false,
+        supportsZip = false,
     ),
 
     FAMICOM_DISK_SYSTEM(
         category = Category.CONSOLE,
-        coreId = "NES",
         displayName = "Famicom Disk System",
         formats = listOf(
             Format(
@@ -151,11 +151,11 @@ enum class Platform(
         ),
         gamesFolder = "NES",
         metadata = true,
+        supportsZip = false,
     ),
 
     GAME_BOY(
         category = Category.HANDHELD,
-        coreId = "Gameboy",
         displayName = "Game Boy",
         formats = listOf(
             Format(
@@ -165,11 +165,11 @@ enum class Platform(
         ),
         gamesFolder = "Gameboy",
         metadata = true,
+        supportsZip = false,
     ),
 
     GAME_BOY_ADVANCE(
         category = Category.HANDHELD,
-        coreId = "GBA",
         displayName = "Game Boy Advance",
         formats = listOf(
             Format(
@@ -179,11 +179,11 @@ enum class Platform(
         ),
         gamesFolder = "GBA",
         metadata = true,
+        supportsZip = false,
     ),
 
     GAME_BOY_COLOR(
         category = Category.HANDHELD,
-        coreId = "Gameboy",
         displayName = "Game Boy Color",
         formats = listOf(
             Format(
@@ -193,11 +193,11 @@ enum class Platform(
         ),
         gamesFolder = "Gameboy",
         metadata = true,
+        supportsZip = false,
     ),
 
     GAME_GEAR(
         category = Category.HANDHELD,
-        coreId = "SMS",
         displayName = "Game Gear",
         formats = listOf(
             Format(
@@ -207,11 +207,11 @@ enum class Platform(
         ),
         gamesFolder = "SMS",
         metadata = true,
+        supportsZip = false,
     ),
 
     INTELLIVISION(
         category = Category.CONSOLE,
-        coreId = "Intellivision",
         displayName = "Intellivision",
         formats = listOf(
             Format(
@@ -221,11 +221,11 @@ enum class Platform(
         ),
         gamesFolder = "Intellivision",
         metadata = true,
+        supportsZip = false,
     ),
 
     INTERTON_VC_4000(
         category = Category.CONSOLE,
-        coreId = "VC4000",
         displayName = "Interton VC 4000",
         formats = listOf(
             Format(
@@ -235,11 +235,11 @@ enum class Platform(
         ),
         gamesFolder = "VC4000",
         metadata = false,
+        supportsZip = false,
     ),
 
     MASTER_SYSTEM(
         category = Category.CONSOLE,
-        coreId = "SMS",
         displayName = "Master System",
         formats = listOf(
             Format(
@@ -249,11 +249,11 @@ enum class Platform(
         ),
         gamesFolder = "SMS",
         metadata = true,
+        supportsZip = false,
     ),
 
     NEO_GEO(
         category = Category.CONSOLE,
-        coreId = "NeoGeo",
         displayName = "Neo Geo",
         formats = listOf(
             Format(
@@ -263,11 +263,11 @@ enum class Platform(
         ),
         gamesFolder = "NEOGEO",
         metadata = false,
+        supportsZip = false,
     ),
 
     NINTENDO_ENTERTAINMENT_SYSTEM(
         category = Category.CONSOLE,
-        coreId = "NES",
         displayName = "Nintendo Entertainment System",
         formats = listOf(
             Format(
@@ -278,11 +278,11 @@ enum class Platform(
         ),
         gamesFolder = "NES",
         metadata = true,
+        supportsZip = false,
     ),
 
     ODYSSEY_2(
         category = Category.CONSOLE,
-        coreId = "Odyssey2",
         displayName = "Odyssey 2",
         formats = listOf(
             Format(
@@ -292,11 +292,11 @@ enum class Platform(
         ),
         gamesFolder = "Odyssey2",
         metadata = true,
+        supportsZip = false,
     ),
 
     PLAYSTATION(
         category = Category.CONSOLE,
-        coreId = "PSX",
         displayName = "PlayStation",
         formats = listOf(
             Format(
@@ -306,11 +306,11 @@ enum class Platform(
         ),
         gamesFolder = "PSX",
         metadata = false,
+        supportsZip = false,
     ),
 
     SEGA_32X(
         category = Category.CONSOLE,
-        coreId = "S32X",
         displayName = "Sega 32X",
         formats = listOf(
             Format(
@@ -320,11 +320,11 @@ enum class Platform(
         ),
         gamesFolder = "S32X",
         metadata = true,
+        supportsZip = false,
     ),
 
     SEGA_CD(
         category = Category.CONSOLE,
-        coreId = "MegaCD",
         displayName = "Sega CD",
         formats = listOf(
             Format(
@@ -338,11 +338,11 @@ enum class Platform(
         ),
         gamesFolder = "MegaCD",
         metadata = false,
+        supportsZip = false,
     ),
 
     SEGA_GENESIS(
         category = Category.CONSOLE,
-        coreId = "Genesis",
         displayName = "Sega Genesis",
         formats = listOf(
             Format(
@@ -360,11 +360,11 @@ enum class Platform(
         ),
         gamesFolder = "Genesis",
         metadata = true,
+        supportsZip = false,
     ),
 
     SG_1000(
         category = Category.CONSOLE,
-        coreId = "ColecoVision",
         displayName = "SG-1000",
         formats = listOf(
             Format(
@@ -374,11 +374,11 @@ enum class Platform(
         ),
         gamesFolder = "Coleco",
         metadata = true,
+        supportsZip = false,
     ),
 
     SUPER_GRAFX(
         category = Category.CONSOLE,
-        coreId = "TurboGrafx16",
         displayName = "SuperGrafx",
         formats = listOf(
             Format(
@@ -388,11 +388,11 @@ enum class Platform(
         ),
         gamesFolder = "TGFX16",
         metadata = true,
+        supportsZip = false,
     ),
 
     SUPER_NINTENDO(
         category = Category.CONSOLE,
-        coreId = "SNES",
         displayName = "Super Nintendo",
         formats = listOf(
             Format(
@@ -406,11 +406,11 @@ enum class Platform(
         ),
         gamesFolder = "SNES",
         metadata = true,
+        supportsZip = true,
     ),
 
     TURBO_GRAFX_16(
         category = Category.CONSOLE,
-        coreId = "TurboGrafx16",
         displayName = "TurboGrafx-16",
         formats = listOf(
             Format(
@@ -420,11 +420,11 @@ enum class Platform(
         ),
         gamesFolder = "TGFX16",
         metadata = true,
+        supportsZip = false,
     ),
 
     TURBO_GRAFX_CD(
         category = Category.CONSOLE,
-        coreId = "TurboGrafx16",
         displayName = "TurboGrafx-CD",
         formats = listOf(
             Format(
@@ -438,11 +438,11 @@ enum class Platform(
         ),
         gamesFolder = "TGFX16-CD",
         metadata = false,
+        supportsZip = false,
     ),
 
     VECTREX(
         category = Category.CONSOLE,
-        coreId = "Vectrex",
         displayName = "Vectrex",
         formats = listOf(
             Format(
@@ -456,11 +456,11 @@ enum class Platform(
         ),
         gamesFolder = "Vectrex",
         metadata = true,
+        supportsZip = false,
     ),
 
     WONDERSWAN(
         category = Category.HANDHELD,
-        coreId = "WonderSwan",
         displayName = "WonderSwan",
         formats = listOf(
             Format(
@@ -470,11 +470,11 @@ enum class Platform(
         ),
         gamesFolder = "WonderSwan",
         metadata = true,
+        supportsZip = false,
     ),
 
     WONDERSWAN_COLOR(
         category = Category.HANDHELD,
-        coreId = "WonderSwan",
         displayName = "WonderSwan Color",
         formats = listOf(
             Format(
@@ -484,6 +484,7 @@ enum class Platform(
         ),
         gamesFolder = "WonderSwan",
         metadata = true,
+        supportsZip = false,
     );
 
     enum class Category(val path: String) {
