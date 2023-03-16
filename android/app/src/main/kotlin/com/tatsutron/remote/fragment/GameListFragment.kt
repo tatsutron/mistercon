@@ -82,6 +82,9 @@ class GameListFragment : BaseFragment() {
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(toolbar)
+            toolbar.setNavigationOnClickListener {
+                onBackPressed()
+            }
             supportActionBar?.title = platform.displayName
         }
         adapter = GameListAdapter(activity as Activity)
@@ -93,6 +96,15 @@ class GameListFragment : BaseFragment() {
         setSpeedDialActionItems()
         setSpeedDial()
     }
+
+    override fun onBackPressed() =
+        if (currentFolder.length > platform.gamesPath?.length!!) {
+            currentFolder = File(currentFolder).parent!!
+            setRecycler()
+            true
+        } else {
+            super.onBackPressed()
+        }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setRecycler() {
