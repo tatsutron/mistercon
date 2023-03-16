@@ -21,12 +21,9 @@ class GameHolder(
     private val label: TextView = itemView.findViewById(R.id.label)
 
     fun bind(item: GameItem) {
-        if (item.markAsFavorite) {
+        item.icon?.let {
             icon.setImageDrawable(
-                AppCompatResources.getDrawable(
-                    icon.context,
-                    R.drawable.ic_star_fill,
-                ),
+                AppCompatResources.getDrawable(icon.context, it),
             )
         }
         label.text = item.game.name
@@ -43,7 +40,7 @@ class GameHolder(
                 game = item.game,
                 callback = {
                     Navigator.hideLoadingScreen()
-                }
+                },
             )
             true
         }

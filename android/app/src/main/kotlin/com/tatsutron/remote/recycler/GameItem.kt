@@ -4,7 +4,7 @@ import com.tatsutron.remote.model.Game
 
 class GameItem(
     val game: Game,
-    val markAsFavorite: Boolean = false,
+    val icon: Int? = null,
 ) : GameListItem {
 
     override val text: String

@@ -144,7 +144,7 @@ class PlatformFragment : BaseFragment() {
             }
         val gameItems = games
             .map {
-                GameItem(it)
+                GameItem(it, icon = platform.media.icon)
             }
         val items = folderItems + gameItems
         adapter.itemList.clear()
