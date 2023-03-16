@@ -10,7 +10,7 @@ def scan_in_zip(path, extensions, entries):
             pass
         elif extension and extension[1:] in extensions.split("|"):
             entries.append(os.path.join(path, entry))
-192.168.50.170
+
 
 def scan(path, extensions, entries, include_zip):
     with os.scandir(path) as it:
