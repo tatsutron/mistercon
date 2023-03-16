@@ -21,8 +21,7 @@ import com.tatsutron.remote.recycler.GameListAdapter
 import com.tatsutron.remote.util.*
 import java.io.File
 
-// TODO Rename to `PlatformFragment`?
-class GameListFragment : BaseFragment() {
+class PlatformFragment : BaseFragment() {
 
     private lateinit var platform: Platform
     private lateinit var currentFolder: String
@@ -60,7 +59,7 @@ class GameListFragment : BaseFragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(
-            R.layout.fragment_game_list,
+            R.layout.fragment_platform,
             container,
             false,
         )
@@ -90,7 +89,7 @@ class GameListFragment : BaseFragment() {
         adapter = GameListAdapter(activity as Activity)
         view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = this@GameListFragment.adapter
+            adapter = this@PlatformFragment.adapter
         }
         setRecycler()
         setSpeedDialActionItems()

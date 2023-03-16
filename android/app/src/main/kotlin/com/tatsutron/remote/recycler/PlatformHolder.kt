@@ -35,7 +35,7 @@ class PlatformHolder(
         itemView.setOnClickListener {
             Navigator.showScreen(
                 activity as AppCompatActivity,
-                FragmentMaker.gameList(item.platform),
+                FragmentMaker.platform(item.platform),
             )
         }
     }
