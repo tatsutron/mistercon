@@ -10,7 +10,7 @@ def scan_in_zip(path, extensions, entries):
             pass
         elif extension and extension[1:] in extensions.split("|"):
             entries.append(os.path.join(path, entry))
-
+192.168.50.170
 
 def scan(path, extensions, entries, include_zip):
     with os.scandir(path) as it:
@@ -27,7 +27,7 @@ def scan(path, extensions, entries, include_zip):
                     scan_in_zip(entry.path, extensions, entries)
 
 
-def hash_in_zip(full_path):
+def hash_in_zip(full_path, header_size_in_bytes):
     index = full_path.index(".zip") + 4
     archive_path = full_path[:index]
     archive = zipfile.ZipFile(archive_path)
@@ -37,6 +37,7 @@ def hash_in_zip(full_path):
         if entry == file_path:
             file = archive.open(entry)
             sha1 = hashlib.sha1()
+            file.seek(header_size_in_bytes)
             while True:
                 block = file.read(blocksize)
                 if not block:
@@ -45,10 +46,11 @@ def hash_in_zip(full_path):
             return sha1.hexdigest()
 
 
-def hash(path):
+def hash(path, header_size_in_bytes):
     buffer_size = 256**2
     sha1 = hashlib.sha1()
     with open(path, "rb") as file:
+        file.seek(header_size_in_bytes)
         while True:
             data = file.read(buffer_size)
             if not data:
@@ -66,8 +68,8 @@ if sys.argv[1] == "scan":
         scan(path, extensions, entries, include_zip=False)
     print(";".join(entries), end="")
 elif sys.argv[1] == "hash":
-    path = sys.argv[2]
+    path, header_size_in_bytes = sys.argv[2:]
     if ".zip" in path:
-        print(hash_in_zip(path), end="")
+        print(hash_in_zip(path, int(header_size_in_bytes)), end="")
     else:
-        print(hash(path), end="")
+        print(hash(path, int(header_size_in_bytes)), end="")

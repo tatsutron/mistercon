@@ -8,6 +8,7 @@ enum class Platform(
     val displayName: String? = null,
     val formats: List<Format>,
     val gamesFolder: String? = null,
+    val headerSizeInBytes: Int? = null,
     val metadata: Boolean,
     val supportsZip: Boolean,
 ) {
@@ -73,11 +74,11 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "a78",
-                headerSizeInBytes = 128,
                 mbcCommand = "ATARI7800",
             ),
         ),
         gamesFolder = "Atari7800",
+        headerSizeInBytes = 128,
         metadata = true,
         supportsZip = false,
     ),
@@ -88,11 +89,11 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "lnx",
-                headerSizeInBytes = 64,
                 mbcCommand = "ATARILYNX",
             ),
         ),
         gamesFolder = "AtariLynx",
+        headerSizeInBytes = 64,
         metadata = true,
         supportsZip = false,
     ),
@@ -145,11 +146,11 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "fds",
-                headerSizeInBytes = 16,
                 mbcCommand = "NES.FDS",
             ),
         ),
         gamesFolder = "NES",
+        headerSizeInBytes = 16,
         metadata = true,
         supportsZip = false,
     ),
@@ -272,13 +273,13 @@ enum class Platform(
         formats = listOf(
             Format(
                 extension = "nes",
-                headerSizeInBytes = 16,
                 mbcCommand = "NES",
             ),
         ),
         gamesFolder = "NES",
+        headerSizeInBytes = 16,
         metadata = true,
-        supportsZip = false,
+        supportsZip = true,
     ),
 
     ODYSSEY_2(

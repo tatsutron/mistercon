@@ -283,6 +283,7 @@ class GameFragment : BaseFragment() {
                 val sha1 = Util.hash(
                     context = activity,
                     path = game.path,
+                    headerSizeInBytes = game.platform.headerSizeInBytes ?: 0,
                 )
                 Persistence.saveGame(
                     path = game.path,

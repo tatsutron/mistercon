@@ -6,8 +6,8 @@ object Util {
 
     fun scan(
         context: Context,
-        extensions: List<String>,
         path: String,
+        extensions: List<String>,
         includeZip: Boolean,
     ): List<String> {
         val session = Ssh.session()
@@ -18,7 +18,9 @@ object Util {
             val ext = extensions.reduce { acc, string ->
                 "$acc|$string"
             }
-            append("\"${path}\" \"${ext}\"")
+            append("\"${path}\"")
+            append(" ")
+            append("\"${ext}\"")
             append(" ")
             if (includeZip) {
                 append("--include-zip")
@@ -31,13 +33,19 @@ object Util {
         return output.split(";")
     }
 
-    fun hash(context: Context, path: String): String {
+    fun hash(
+        context: Context,
+        path: String,
+        headerSizeInBytes: Int,
+    ): String {
         val session = Ssh.session()
         Assets.require(context, session, "mister_util.py")
         val command = StringBuilder().apply {
             append("python3 ${Constants.MISTER_UTIL_PATH} hash")
             append(" ")
             append("\"${path}\"")
+            append(" ")
+            append(headerSizeInBytes)
         }.toString()
         val output = Ssh.command(session, command)
         session.disconnect()
