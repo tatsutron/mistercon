@@ -62,6 +62,7 @@ class CreditsFragment : BaseFragment() {
                             "Nik Outchcunis",
                             "Nolan Mars",
                             "Onno Feringa",
+                            "Patrik Rosenhall",
                             "peanutmans",
                             "Rocco",
                             "Sean",
