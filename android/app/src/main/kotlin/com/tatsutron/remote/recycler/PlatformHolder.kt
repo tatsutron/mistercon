@@ -25,7 +25,7 @@ class PlatformHolder(
             AppCompatResources.getDrawable(
                 image.context,
                 image.resources.getIdentifier(
-                    item.platform.name.toLowerCase(Locale.getDefault()),
+                    "platform_${item.platform.name.toLowerCase(Locale.getDefault())}",
                     "drawable",
                     image.context.packageName,
                 )
