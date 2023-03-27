@@ -86,7 +86,7 @@ enum class Platform(
         headerSizeInBytes = 128,
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        supportsZip = true,
     ),
 
     ATARI_LYNX(
@@ -178,7 +178,7 @@ enum class Platform(
         gamesFolder = "Gameboy",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        supportsZip = true,
     ),
 
     GAME_BOY_ADVANCE(
@@ -193,7 +193,7 @@ enum class Platform(
         gamesFolder = "GBA",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        supportsZip = true,
     ),
 
     GAME_BOY_COLOR(
@@ -208,7 +208,7 @@ enum class Platform(
         gamesFolder = "Gameboy",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        supportsZip = true,
     ),
 
     GAME_GEAR(
@@ -268,7 +268,7 @@ enum class Platform(
         gamesFolder = "SMS",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        supportsZip = true,
     ),
 
     NEO_GEO(
@@ -314,7 +314,7 @@ enum class Platform(
         gamesFolder = "Odyssey2",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        supportsZip = true,
     ),
 
     PLAYSTATION(
@@ -344,7 +344,7 @@ enum class Platform(
         gamesFolder = "S32X",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        supportsZip = true,
     ),
 
     SEGA_CD(
@@ -386,7 +386,7 @@ enum class Platform(
         gamesFolder = "Genesis",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        supportsZip = true,
     ),
 
     SG_1000(
@@ -450,7 +450,7 @@ enum class Platform(
         gamesFolder = "TGFX16",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        supportsZip = true,
     ),
 
     TURBO_GRAFX_CD(
