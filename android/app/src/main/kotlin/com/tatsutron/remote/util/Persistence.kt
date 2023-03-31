@@ -29,7 +29,7 @@ object Persistence {
             configFile.writeText(gson.toJson(config))
         }
 
-        val dir = "/data/data/com.tatsutron.remote/databases"
+        val dir = "/data/data/${context.packageName}/databases"
         val name = "app.db"
         val path = File(dir, name).path
         if (!File(path).exists()) {
@@ -42,6 +42,9 @@ object Persistence {
             AndroidSqliteDriver(Database.Schema, context, name)
         )
     }
+
+    val isPatron: Boolean
+        get() = false
 
     var host: String
         set(ipAddress) {

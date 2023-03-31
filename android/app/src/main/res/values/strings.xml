@@ -30,10 +30,11 @@
     <string name="scan">Scan</string>
     <string name="search">Search</string>
     <string name="set_ip_address">Set IP Address</string>
+    <string name="subscribe">Subscribe for extra features!\npatreon.com/tatsutron</string>
     <string name="sync">Sync</string>
     <string name="sync_specific">Sync %s</string>
     <string name="system">System</string>
-    <string name="thank_you">Thank you so much to those who make this project possible!</string>
+    <string name="thank_you">❤ Thank you so much! ❤</string>
     <string name="toggle_menu">Toggle Menu</string>
     <string name="unfavorite">Unfavorite</string>
 </resources>

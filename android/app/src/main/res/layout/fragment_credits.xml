@@ -44,13 +44,13 @@
             android:background="@color/blue" />
 
         <TextView
+            android:id="@+id/postscript"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:paddingHorizontal="@dimen/margin_large"
             android:paddingVertical="@dimen/margin_small"
-            android:text="@string/thank_you"
             android:textColor="@color/pink"
             android:textSize="@dimen/text_size_smallest" />
 
