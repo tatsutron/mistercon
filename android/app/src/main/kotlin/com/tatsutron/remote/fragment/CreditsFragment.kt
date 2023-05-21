@@ -60,6 +60,7 @@ class CreditsFragment : BaseFragment() {
                             "Maxwell",
                             "Mist Sonata",
                             "Mitchell Ogden",
+                            "Nic Kaiman",
                             "Nik Outchcunis",
                             "Nolan Mars",
                             "Onno Feringa",
@@ -72,6 +73,7 @@ class CreditsFragment : BaseFragment() {
                             "Tom B",
                             "Weasel5053",
                             "WhiteScreen",
+                            "Whittier H",
                         )
                     )
                 }
