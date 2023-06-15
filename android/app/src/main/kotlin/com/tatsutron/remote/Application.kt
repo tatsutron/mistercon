@@ -40,7 +40,7 @@ class Application : android.app.Application() {
                             mkdir(Constants.TATSUTRON_ROOT)
                             mkdir(Constants.MISTERCON_ROOT)
                             mkdir(Constants.MREXT_ROOT)
-                            mkdir(File(Constants.MREXT_ROOT, "out").path)
+                            mkdir(Constants.MREXT_OUTPUT_PATH)
                             listOf(
                                 Pair("mbc", Constants.MISTERCON_ROOT),
                                 Pair("mister_util.py", Constants.MISTERCON_ROOT),

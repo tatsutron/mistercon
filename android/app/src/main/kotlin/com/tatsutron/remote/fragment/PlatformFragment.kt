@@ -212,11 +212,7 @@ class PlatformFragment : BaseFragment() {
             activity = activity,
             run = {
                 val session = Ssh.session()
-                val new = Util.scan(
-                    extensions = platform.formats.map { it.extension },
-                    path = platform.gamesPath!!,
-                    includeZip = platform.supportsZip,
-                )
+                val new = Util.scan(platform.mrextId)
                 val old = Persistence.getGamesByPlatform(platform)
                     .map {
                         it.path

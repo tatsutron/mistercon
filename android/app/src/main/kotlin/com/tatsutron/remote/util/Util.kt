@@ -2,31 +2,34 @@ package com.tatsutron.remote.util
 
 object Util {
 
-    fun scan(
-        path: String,
-        extensions: List<String>,
-        includeZip: Boolean,
-    ): List<String> {
+    fun scan(mrextId: String): List<String> {
         val session = Ssh.session()
         val command = StringBuilder().apply {
-            append("python3 ${Constants.MISTER_UTIL_PATH} scan")
+            append(Constants.MREXT_CONTOOL_PATH)
             append(" ")
-            val ext = extensions.reduce { acc, string ->
-                "$acc|$string"
-            }
-            append("\"${path}\"")
+            append("-filter")
             append(" ")
-            append("\"${ext}\"")
+            append(mrextId)
             append(" ")
-            if (includeZip) {
-                append("--include-zip")
-            } else {
-                append("--no-zip")
-            }
+            append("-out")
+            append(" ")
+            append(Constants.MREXT_OUTPUT_PATH)
+            append(" ")
+            append("-quiet")
+            append(" ")
+            append("&&")
+            append(" ")
+            append("cat")
+            append(" ")
+            append("${Constants.MREXT_OUTPUT_PATH}/${mrextId}.txt")
         }.toString()
         val output = Ssh.command(session, command)
         session.disconnect()
-        return output.split(";")
+        return output
+            .split("\n")
+            .filter {
+                it.isNotEmpty()
+            }
     }
 
     fun hash(

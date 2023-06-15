@@ -11,7 +11,7 @@ enum class Platform(
     val headerSizeInBytes: Int? = null,
     val media: Media,
     val metadata: Boolean,
-    val supportsZip: Boolean,
+    val mrextId: String,
 ) {
 
     ARCADE(
@@ -25,7 +25,7 @@ enum class Platform(
         ),
         media = Media.PRINTED_CIRCUIT_BOARD,
         metadata = false,
-        supportsZip = false,
+        mrextId = "arcade",
     ),
 
     ARCADIA_2001(
@@ -40,7 +40,7 @@ enum class Platform(
         gamesFolder = "Arcadia",
         media = Media.ROM_CARTRIDGE,
         metadata = false,
-        supportsZip = false,
+        mrextId = "arcadia",
     ),
 
     ATARI_2600(
@@ -52,10 +52,10 @@ enum class Platform(
                 mbcCommand = "ATARI2600",
             ),
         ),
-        gamesFolder = "ATARI7800",
+        gamesFolder = "Atari2600",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        mrextId = "atari2600",
     ),
 
     ATARI_5200(
@@ -67,10 +67,10 @@ enum class Platform(
                 mbcCommand = "ATARI5200",
             ),
         ),
-        gamesFolder = "Atari5200",
+        gamesFolder = "ATARI5200",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        mrextId = "atari5200",
     ),
 
     ATARI_7800(
@@ -82,11 +82,11 @@ enum class Platform(
                 mbcCommand = "ATARI7800",
             ),
         ),
-        gamesFolder = "Atari7800",
+        gamesFolder = "ATARI7800",
         headerSizeInBytes = 128,
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = true,
+        mrextId = "atari7800",
     ),
 
     ATARI_LYNX(
@@ -102,7 +102,7 @@ enum class Platform(
         headerSizeInBytes = 64,
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        mrextId = "atarilynx",
     ),
 
     BALLY_ASTROCADE(
@@ -117,7 +117,7 @@ enum class Platform(
         gamesFolder = "Astrocade",
         media = Media.ROM_CARTRIDGE,
         metadata = false,
-        supportsZip = false,
+        mrextId = "astrocade",
     ),
 
     COLECOVISION(
@@ -132,7 +132,7 @@ enum class Platform(
         gamesFolder = "Coleco",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        mrextId = "colecovision",
     ),
 
     FAIRCHILD_CHANNEL_F(
@@ -147,7 +147,7 @@ enum class Platform(
         gamesFolder = "ChannelF",
         media = Media.ROM_CARTRIDGE,
         metadata = false,
-        supportsZip = false,
+        mrextId = "channelf",
     ),
 
     FAMICOM_DISK_SYSTEM(
@@ -163,7 +163,7 @@ enum class Platform(
         headerSizeInBytes = 16,
         media = Media.FLOPPY_DISK,
         metadata = true,
-        supportsZip = false,
+        mrextId = "fds",
     ),
 
     GAME_BOY(
@@ -175,10 +175,10 @@ enum class Platform(
                 mbcCommand = "GAMEBOY",
             ),
         ),
-        gamesFolder = "Gameboy",
+        gamesFolder = "GAMEBOY",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = true,
+        mrextId = "gameboy",
     ),
 
     GAME_BOY_ADVANCE(
@@ -193,7 +193,7 @@ enum class Platform(
         gamesFolder = "GBA",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = true,
+        mrextId = "gba",
     ),
 
     GAME_BOY_COLOR(
@@ -205,10 +205,10 @@ enum class Platform(
                 mbcCommand = "GAMEBOY.COL",
             ),
         ),
-        gamesFolder = "Gameboy",
+        gamesFolder = "GBC",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = true,
+        mrextId = "gameboycolor",
     ),
 
     GAME_GEAR(
@@ -220,10 +220,10 @@ enum class Platform(
                 mbcCommand = "SMS.GG",
             ),
         ),
-        gamesFolder = "SMS",
+        gamesFolder = "GameGear",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        mrextId = "gamegear",
     ),
 
     INTELLIVISION(
@@ -238,7 +238,7 @@ enum class Platform(
         gamesFolder = "Intellivision",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        mrextId = "intellivision",
     ),
 
     INTERTON_VC_4000(
@@ -253,7 +253,7 @@ enum class Platform(
         gamesFolder = "VC4000",
         media = Media.ROM_CARTRIDGE,
         metadata = false,
-        supportsZip = false,
+        mrextId = "vc4000",
     ),
 
     MASTER_SYSTEM(
@@ -268,7 +268,7 @@ enum class Platform(
         gamesFolder = "SMS",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = true,
+        mrextId = "mastersystem",
     ),
 
     NEO_GEO(
@@ -283,7 +283,7 @@ enum class Platform(
         gamesFolder = "NEOGEO",
         media = Media.ROM_CARTRIDGE,
         metadata = false,
-        supportsZip = false,
+        mrextId = "neogeo",
     ),
 
     NINTENDO_ENTERTAINMENT_SYSTEM(
@@ -299,7 +299,7 @@ enum class Platform(
         headerSizeInBytes = 16,
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = true,
+        mrextId = "nes",
     ),
 
     ODYSSEY_2(
@@ -311,10 +311,10 @@ enum class Platform(
                 mbcCommand = "ODYSSEY2",
             ),
         ),
-        gamesFolder = "Odyssey2",
+        gamesFolder = "ODYSSEY2",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = true,
+        mrextId = "odyssey2",
     ),
 
     PLAYSTATION(
@@ -329,7 +329,7 @@ enum class Platform(
         gamesFolder = "PSX",
         media = Media.OPTICAL_DISC,
         metadata = false,
-        supportsZip = false,
+        mrextId = "psx",
     ),
 
     SEGA_32X(
@@ -344,7 +344,7 @@ enum class Platform(
         gamesFolder = "S32X",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = true,
+        mrextId = "sega32x",
     ),
 
     SEGA_CD(
@@ -363,7 +363,7 @@ enum class Platform(
         gamesFolder = "MegaCD",
         media = Media.OPTICAL_DISC,
         metadata = false,
-        supportsZip = false,
+        mrextId = "megacd",
     ),
 
     SEGA_GENESIS(
@@ -386,7 +386,7 @@ enum class Platform(
         gamesFolder = "Genesis",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = true,
+        mrextId = "genesis",
     ),
 
     SG_1000(
@@ -401,7 +401,7 @@ enum class Platform(
         gamesFolder = "Coleco",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        mrextId = "sg1000",
     ),
 
     SUPER_GRAFX(
@@ -416,7 +416,7 @@ enum class Platform(
         gamesFolder = "TGFX16",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        mrextId = "supergrafx",
     ),
 
     SUPER_NINTENDO(
@@ -435,7 +435,7 @@ enum class Platform(
         gamesFolder = "SNES",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = true,
+        mrextId = "snes",
     ),
 
     TURBO_GRAFX_16(
@@ -450,7 +450,7 @@ enum class Platform(
         gamesFolder = "TGFX16",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = true,
+        mrextId = "turbografx16",
     ),
 
     TURBO_GRAFX_CD(
@@ -469,7 +469,7 @@ enum class Platform(
         gamesFolder = "TGFX16-CD",
         media = Media.OPTICAL_DISC,
         metadata = false,
-        supportsZip = false,
+        mrextId = "turbografx16cd",
     ),
 
     VECTREX(
@@ -485,10 +485,10 @@ enum class Platform(
                 mbcCommand = "VECTREX",
             ),
         ),
-        gamesFolder = "Vectrex",
+        gamesFolder = "VECTREX",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        mrextId = "vectrex",
     ),
 
     WONDERSWAN(
@@ -503,7 +503,7 @@ enum class Platform(
         gamesFolder = "WonderSwan",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        mrextId = "wonderswan",
     ),
 
     WONDERSWAN_COLOR(
@@ -515,10 +515,10 @@ enum class Platform(
                 mbcCommand = "WONDERSWAN.COL",
             ),
         ),
-        gamesFolder = "WonderSwan",
+        gamesFolder = "WonderSwanColor",
         media = Media.ROM_CARTRIDGE,
         metadata = true,
-        supportsZip = false,
+        mrextId = "wonderswancolor",
     );
 
     enum class Category(val path: String) {
