@@ -281,7 +281,6 @@ class GameFragment : BaseFragment() {
             activity = activity,
             run = {
                 val sha1 = Util.hash(
-                    context = activity,
                     path = game.path,
                     headerSizeInBytes = game.platform.headerSizeInBytes ?: 0,
                 )

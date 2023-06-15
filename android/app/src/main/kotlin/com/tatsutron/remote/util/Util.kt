@@ -1,17 +1,13 @@
 package com.tatsutron.remote.util
 
-import android.content.Context
-
 object Util {
 
     fun scan(
-        context: Context,
         path: String,
         extensions: List<String>,
         includeZip: Boolean,
     ): List<String> {
         val session = Ssh.session()
-        Assets.require(context, session, "mister_util.py")
         val command = StringBuilder().apply {
             append("python3 ${Constants.MISTER_UTIL_PATH} scan")
             append(" ")
@@ -34,12 +30,10 @@ object Util {
     }
 
     fun hash(
-        context: Context,
         path: String,
         headerSizeInBytes: Int,
     ): String {
         val session = Ssh.session()
-        Assets.require(context, session, "mister_util.py")
         val command = StringBuilder().apply {
             append("python3 ${Constants.MISTER_UTIL_PATH} hash")
             append(" ")

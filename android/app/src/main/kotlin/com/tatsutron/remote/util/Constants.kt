@@ -4,6 +4,7 @@ object Constants {
     private const val VOLUME = "/media/fat"
     const val TATSUTRON_ROOT = "${VOLUME}/tatsutron"
     const val MISTERCON_ROOT = "${TATSUTRON_ROOT}/mistercon"
+    const val MREXT_ROOT = "${MISTERCON_ROOT}/mrext"
 
     const val ARCADE_PATH = "${VOLUME}/_Arcade"
     const val COMPUTER_PATH = "${VOLUME}/_Computer"

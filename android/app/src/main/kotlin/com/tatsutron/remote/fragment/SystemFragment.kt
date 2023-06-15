@@ -8,6 +8,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
+import com.tatsutron.remote.Application
 import com.tatsutron.remote.R
 import com.tatsutron.remote.util.*
 
@@ -64,7 +65,7 @@ class SystemFragment : BaseFragment() {
     @SuppressLint("CheckResult")
     private fun setIpButton(view: View) {
         view.findViewById<Button>(R.id.ip_button).apply {
-            setOnClickListener  {
+            setOnClickListener {
                 MaterialDialog(context).show {
                     title(
                         res = R.string.enter_mister_ip_address,
@@ -73,9 +74,16 @@ class SystemFragment : BaseFragment() {
                     positiveButton(R.string.ok)
                     input(
                         inputType = TYPE_TEXT_FLAG_NO_SUGGESTIONS,
-                        prefill = Persistence.host ,
+                        prefill = Persistence.host,
                         callback = { _, text ->
                             Persistence.host = text.toString()
+                            Navigator.showLoadingScreen()
+                            Application.deployAssets(
+                                activity = requireActivity(),
+                                callback = {
+                                    Navigator.hideLoadingScreen()
+                                },
+                            )
                         },
                     )
                 }
@@ -91,7 +99,6 @@ class SystemFragment : BaseFragment() {
                     activity = requireActivity(),
                     run = {
                         val session = Ssh.session()
-                        Assets.require(requireContext(), session, "mbc")
                         Ssh.command(session, "${Constants.MBC_PATH} raw_seq M")
                         session.disconnect()
                     },

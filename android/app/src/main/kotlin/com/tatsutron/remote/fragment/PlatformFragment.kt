@@ -213,7 +213,6 @@ class PlatformFragment : BaseFragment() {
             run = {
                 val session = Ssh.session()
                 val new = Util.scan(
-                    context = activity,
                     extensions = platform.formats.map { it.extension },
                     path = platform.gamesPath!!,
                     includeZip = platform.supportsZip,
