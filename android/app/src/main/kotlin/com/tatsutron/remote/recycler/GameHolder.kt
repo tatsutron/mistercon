@@ -11,6 +11,7 @@ import com.tatsutron.remote.Application
 import com.tatsutron.remote.R
 import com.tatsutron.remote.util.FragmentMaker
 import com.tatsutron.remote.util.Navigator
+import com.tatsutron.remote.util.Util
 
 class GameHolder(
     private val activity: Activity,
@@ -35,7 +36,7 @@ class GameHolder(
         }
         itemView.setOnLongClickListener {
             Navigator.showLoadingScreen()
-            Application.loadGame(
+            Util.loadGame(
                 activity = activity,
                 game = item.game,
                 callback = {

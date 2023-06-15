@@ -15,13 +15,13 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.MaterialDialog
-import com.tatsutron.remote.Application
 import com.tatsutron.remote.MainActivity
 import com.tatsutron.remote.R
 import com.tatsutron.remote.util.Dialog
 import com.tatsutron.remote.util.Navigator
 import com.tatsutron.remote.util.Persistence
-import kotlinx.android.synthetic.main.fragment_scan.*
+import com.tatsutron.remote.util.Util
+import kotlinx.android.synthetic.main.fragment_scan.preview
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -131,7 +131,7 @@ class ScanFragment : BaseFragment() {
         Persistence.getGameBySha1(data)
             ?.let { game ->
                 Navigator.showLoadingScreen()
-                Application.loadGame(
+                Util.loadGame(
                     activity = requireActivity(),
                     game = game,
                     callback = {

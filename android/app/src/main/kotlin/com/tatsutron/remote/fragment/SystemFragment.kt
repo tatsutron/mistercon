@@ -78,7 +78,7 @@ class SystemFragment : BaseFragment() {
                         callback = { _, text ->
                             Persistence.host = text.toString()
                             Navigator.showLoadingScreen()
-                            Application.deployAssets(
+                            Util.deployAssets(
                                 activity = requireActivity(),
                                 callback = {
                                     Navigator.hideLoadingScreen()
