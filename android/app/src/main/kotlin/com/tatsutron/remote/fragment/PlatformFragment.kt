@@ -25,6 +25,7 @@ class PlatformFragment : BaseFragment() {
 
     private lateinit var platform: Platform
     private lateinit var currentFolder: String
+    private lateinit var recycler: RecyclerView
     private lateinit var adapter: GameListAdapter
     private lateinit var syncAction: SpeedDialActionItem
     private lateinit var randomAction: SpeedDialActionItem
@@ -87,7 +88,7 @@ class PlatformFragment : BaseFragment() {
             supportActionBar?.title = platform.displayName
         }
         adapter = GameListAdapter(activity as Activity)
-        view.findViewById<RecyclerView>(R.id.recycler).apply {
+        recycler = view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
             adapter = this@PlatformFragment.adapter
         }
@@ -158,6 +159,11 @@ class PlatformFragment : BaseFragment() {
             }
         }
         adapter.notifyDataSetChanged()
+        recycler.visibility = if (items.isNotEmpty()) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
     }
 
     private fun setSpeedDialActionItems() {

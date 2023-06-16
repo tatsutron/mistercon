@@ -8,7 +8,6 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
-import com.tatsutron.remote.Application
 import com.tatsutron.remote.R
 import com.tatsutron.remote.util.*
 
