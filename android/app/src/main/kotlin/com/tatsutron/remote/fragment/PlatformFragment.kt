@@ -270,12 +270,7 @@ class PlatformFragment : BaseFragment() {
     private fun onRandom() {
         Navigator.showScreen(
             activity as AppCompatActivity,
-            FragmentMaker.game(
-                adapter.itemList
-                    .filterIsInstance<GameItem>()
-                    .random()
-                    .game.path
-            )
+            FragmentMaker.game(Persistence.getGamesByPlatform(platform).random().path)
         )
     }
 }
