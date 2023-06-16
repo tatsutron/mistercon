@@ -17,7 +17,7 @@
     <string name="games">Games</string>
     <string name="genre">Genre</string>
     <string name="handhelds">Handhelds</string>
-    <string name="metadata_not_supported">Metadata is not yet supported for this platform.</string>
+    <string name="metadata_not_supported">Metadata is not supported for this platform.</string>
     <string name="mistercon">mistercon</string>
     <string name="no_camera_permission">Camera permission is required to use this feature.</string>
     <string name="no_data_was_found_for_game">No data found for %s.</string>
@@ -30,7 +30,7 @@
     <string name="scan">Scan</string>
     <string name="search">Search</string>
     <string name="set_ip_address">Set IP Address</string>
-    <string name="subscribe">Subscribe for extra features!\npatreon.com/tatsutron</string>
+    <string name="subscribe">Subscribe for bonus features!\npatreon.com/tatsutron</string>
     <string name="sync">Sync</string>
     <string name="sync_specific">Sync %s</string>
     <string name="system">System</string>
