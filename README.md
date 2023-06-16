@@ -16,40 +16,40 @@ mistercon is an Android app for use with [MiSTer](https://github.com/MiSTer-deve
 
 # Platforms
 
-Platform  | Format(s) | Metadata
-| - | - | - |
-Arcade | `.mra` | :x:
-Arcadia 2001 | `.bin` | :x:
-Atari 2600 | `.a26` | :white_check_mark:
-Atari 5200 | `.rom` | :white_check_mark:
-Atari 7800 | `.a78` | :white_check_mark:
-Atari Lynx | `.lnx` | :white_check_mark:
-Bally Astrocade | `.bin` | :x:
-ColecoVision | `.col` | :white_check_mark:
-Fairchild Channel F | `.bin` | :x:
-Famicom Disk System | `.fds` | :white_check_mark:
-Game Boy | `.gb` | :white_check_mark:
-Game Boy Advance | `.gba` | :white_check_mark:
-Game Boy Color | `.gbc` | :white_check_mark:
-Game Gear | `.gg` | :white_check_mark:
-Intellivision | `.bin` | :white_check_mark:
-Interton VC 4000 | `.bin` | :x:
-Master System | `.sms` | :white_check_mark:
-Neo Geo | `.neo` | :x:
-Nintendo Entertainment System | `.nes` | :white_check_mark:
-Odyssey 2 | `.bin` | :white_check_mark:
-PlayStation | `.chd` | :x:
-Sega 32X | `.32x` | :white_check_mark:
-Sega CD | `.chd` `.cue` | :x:
-Sega Genesis | `.bin` `.gen` `.md` | :white_check_mark:
-SG-1000 | `.sg` | :white_check_mark:
-Super Nintendo | `.sfc` `.smc` | :white_check_mark:
-SuperGrafx | `.sgx` | :white_check_mark:
-TurboGrafx-16 | `.pce` | :white_check_mark:
-TurboGrafx-CD | `.chd` `.cue`| :x:
-Vectrex | `.ovr` `.vec` | :white_check_mark:
-WonderSwan | `.ws` | :white_check_mark:
-WonderSwan Color | `.wsc` | :white_check_mark:
+Platform  | Metadata
+| - | - |
+Arcade | :x:
+Arcadia 2001 | :x:
+Atari 2600 | :white_check_mark:
+Atari 5200 | :white_check_mark:
+Atari 7800 | :white_check_mark:
+Atari Lynx | :white_check_mark:
+Bally Astrocade | :x:
+ColecoVision | :white_check_mark:
+Fairchild Channel F | :x:
+Famicom Disk System | :white_check_mark:
+Game Boy | :white_check_mark:
+Game Boy Advance | :white_check_mark:
+Game Boy Color | :white_check_mark:
+Game Gear | :white_check_mark:
+Intellivision | :white_check_mark:
+Interton VC 4000 | :x:
+Master System | :white_check_mark:
+Neo Geo | :x:
+Nintendo Entertainment System | :white_check_mark:
+Odyssey 2 | :white_check_mark:
+PlayStation | :x:
+Sega 32X | :white_check_mark:
+Sega CD | :x:
+Sega Genesis | :white_check_mark:
+SG-1000 | :white_check_mark:
+Super Nintendo | :white_check_mark:
+SuperGrafx | :white_check_mark:
+TurboGrafx-16 | :white_check_mark:
+TurboGrafx-CD | :x:
+Vectrex | :white_check_mark:
+WonderSwan | :white_check_mark:
+WonderSwan Color | :white_check_mark:
 
 # Credits
 
