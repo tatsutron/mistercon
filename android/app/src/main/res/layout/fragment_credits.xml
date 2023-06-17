@@ -15,13 +15,13 @@
         android:padding="@dimen/margin_large"
         android:showDividers="middle">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/mistercon"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/text_size_largest" />
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/mistercon_logo" />
 
         <View
             android:layout_width="match_parent"

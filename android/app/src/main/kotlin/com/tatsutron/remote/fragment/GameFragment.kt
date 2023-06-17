@@ -79,7 +79,7 @@ class GameFragment : BaseFragment() {
         if (game.sha1 != null) {
             metadata = Persistence.getMetadataBySha1(game.sha1!!)
         }
-        val toolbar = view.findViewById<Toolbar>(R.id.game_toolbar)
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(toolbar)
             supportActionBar?.title = game.name
