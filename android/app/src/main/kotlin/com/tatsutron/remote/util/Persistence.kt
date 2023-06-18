@@ -43,9 +43,6 @@ object Persistence {
         )
     }
 
-    val isPatron: Boolean
-        get() = false
-
     var host: String
         set(ipAddress) {
             config.host = ipAddress
