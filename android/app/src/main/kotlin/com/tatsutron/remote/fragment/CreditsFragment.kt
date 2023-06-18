@@ -90,7 +90,8 @@ class CreditsFragment : BaseFragment() {
                             "\uD83D\uDC99 Whittier H \uD83D\uDC99",
                             "",
                             "Developed by",
-                            "\uD83D\uDC9A\uD83D\uDC96 Sio & Casey",
+                            "Sio & Casey",
+                            "\uD83D\uDC9A\uD83D\uDC96",
                         )
                     )
                 }
