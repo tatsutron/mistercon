@@ -14,6 +14,7 @@
         <item name="android:colorControlActivated">@color/primary_200</item>
         <item name="android:editTextColor">@color/white</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_left</item>
+        <item name="android:textColorSecondary">@color/white</item>
         <item name="android:windowBackground">@color/app_background</item>
         <item name="colorAccent">@color/primary_500</item>
         <item name="colorBackgroundFloating">@color/gray_800</item>
@@ -58,6 +59,11 @@
         <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="android:background">@color/toolbar_background</item>
         <item name="titleTextColor">@color/white</item>
+    </style>
+
+    <style name="ToolbarPopupTheme" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:background">@color/gray_900</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
 </resources>
