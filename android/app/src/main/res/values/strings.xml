@@ -2,6 +2,7 @@
 <resources>
     <string name="arcades">Arcades</string>
     <string name="cancel">Cancel</string>
+    <string name="computers">Computers</string>
     <string name="confirm_play_game">Play %s?</string>
     <string name="consoles">Consoles</string>
     <string name="copy_qr_data">Copy QR Data</string>

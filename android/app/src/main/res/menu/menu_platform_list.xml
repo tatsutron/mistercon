@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always|collapseActionView" />
+
+    <item
+        android:id="@+id/set_ip_address"
+        android:title="Set IP address"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/favorites"
+        android:title="@string/favorites"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/scan_qr_code"
+        android:title="@string/scan_qr_code"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/credits"
+        android:title="@string/credits"
+        app:showAsAction="never" />
+
+</menu>
