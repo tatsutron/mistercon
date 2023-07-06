@@ -13,8 +13,7 @@ class FragmentStateAdapter(
         FragmentMaker.platformList(Platform.Category.CONSOLE),
         FragmentMaker.platform(Platform.ARCADE),
         FragmentMaker.platformList(Platform.Category.HANDHELD),
-        FragmentMaker.favoriteList(),
-        FragmentMaker.system(),
+        FragmentMaker.platformList(Platform.Category.COMPUTER),
     )
 
     override fun getItemCount() = items.size

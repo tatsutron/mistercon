@@ -28,7 +28,7 @@
     <string name="random">Random</string>
     <string name="region">Region</string>
     <string name="release_date">Release Date</string>
-    <string name="scan">Scan</string>
+    <string name="scan_qr_code">Scan QR code</string>
     <string name="search">Search</string>
     <string name="set_ip_address">Set IP Address</string>
     <string name="subscribe">Subscribe for bonus features!\npatreon.com/tatsutron</string>
