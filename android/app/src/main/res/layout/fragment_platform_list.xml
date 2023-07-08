@@ -19,13 +19,22 @@
             android:layout_height="1dp"
             android:background="@color/separator" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:clipToPadding="false"
-            android:paddingVertical="@dimen/margin_small" />
+            android:layout_height="match_parent">
+
+            <com.l4digital.fastscroll.FastScrollRecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingVertical="@dimen/margin_small"
+                app:bubbleColor="@color/button_background"
+                app:bubbleTextColor="@color/button_label"
+                app:handleColor="@color/button_background"
+                app:hideScrollbar="true" />
+
+        </FrameLayout>
 
     </LinearLayout>
 

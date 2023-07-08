@@ -35,7 +35,7 @@
                 app:bubbleColor="@color/button_background"
                 app:bubbleTextColor="@color/button_label"
                 app:handleColor="@color/button_background"
-                app:hideScrollbar="false" />
+                app:hideScrollbar="true" />
 
         </FrameLayout>
 

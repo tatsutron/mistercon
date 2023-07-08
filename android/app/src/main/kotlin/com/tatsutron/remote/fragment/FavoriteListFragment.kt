@@ -48,7 +48,11 @@ class FavoriteListFragment : BaseFragment() {
         adapter.itemList.clear()
         adapter.itemList.addAll(
             Persistence.getGamesByFavorite().map {
-                GameItem(it, icon = R.drawable.ic_star_fill)
+                GameItem(
+                    icon = it.platform.media.icon,
+                    game = it,
+                    subscript = it.platform.displayName ?: "",
+                )
             },
         )
         adapter.notifyDataSetChanged()

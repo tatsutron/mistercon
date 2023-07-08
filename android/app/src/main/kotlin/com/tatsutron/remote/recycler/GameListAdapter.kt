@@ -25,7 +25,11 @@ class GameListAdapter(
     ): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(activity)
         val itemView = layoutInflater.inflate(
-            R.layout.list_item_with_icon,
+            if (viewType == TYPE_FOLDER) {
+                R.layout.list_item_folder
+            } else {
+                R.layout.list_item_game
+            },
             parent,
             false,
         )

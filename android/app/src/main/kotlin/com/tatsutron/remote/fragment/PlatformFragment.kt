@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.jcraft.jsch.JSchException
+import com.l4digital.fastscroll.FastScrollRecyclerView
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.tatsutron.remote.R
@@ -25,7 +25,7 @@ class PlatformFragment : BaseFragment() {
 
     private lateinit var platform: Platform
     private lateinit var currentFolder: String
-    private lateinit var recycler: RecyclerView
+    private lateinit var recycler: FastScrollRecyclerView
     private lateinit var adapter: GameListAdapter
     private lateinit var syncAction: SpeedDialActionItem
     private lateinit var randomAction: SpeedDialActionItem
@@ -82,10 +82,10 @@ class PlatformFragment : BaseFragment() {
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(toolbar)
-            toolbar.title = platform.name
+            toolbar.title = platform.displayName
         }
         adapter = GameListAdapter(activity as Activity)
-        recycler = view.findViewById<RecyclerView>(R.id.recycler).apply {
+        recycler = view.findViewById<FastScrollRecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
             adapter = this@PlatformFragment.adapter
         }
@@ -144,23 +144,26 @@ class PlatformFragment : BaseFragment() {
                 }
             val gameItems = games
                 .map {
-                    GameItem(it, icon = platform.media.icon)
+                    GameItem(
+                        icon = platform.media.icon,
+                        game = it,
+                        subscript = platform.displayName ?: "",
+                    )
                 }
             val items = folderItems + gameItems
             adapter.itemList.addAll(items)
         } else {
             val items = Persistence.getGamesBySearch(searchTerm)
                 .map {
-                    GameItem(it)
+                    GameItem(
+                        icon = it.platform.media.icon,
+                        game = it,
+                        subscript = it.platform.displayName ?: "",
+                    )
                 }
             adapter.itemList.addAll(items)
         }
         adapter.notifyDataSetChanged()
-        recycler.visibility = if (adapter.itemList.isNotEmpty()) {
-            View.VISIBLE
-        } else {
-            View.GONE
-        }
     }
 
     private fun setSpeedDialActionItems() {
@@ -196,6 +199,7 @@ class PlatformFragment : BaseFragment() {
                             close()
                             return@OnActionSelectedListener true
                         }
+
                         R.id.sync -> {
                             onSync()
                             close()
@@ -254,6 +258,7 @@ class PlatformFragment : BaseFragment() {
                                 ipAddressSet = ::onSync,
                             )
                         }
+
                     else ->
                         Dialog.error(activity, throwable)
                 }

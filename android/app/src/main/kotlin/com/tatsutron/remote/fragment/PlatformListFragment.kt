@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
+import com.l4digital.fastscroll.FastScrollRecyclerView
 import com.tatsutron.remote.R
 import com.tatsutron.remote.model.Platform
 import com.tatsutron.remote.recycler.GameItem
@@ -26,7 +26,7 @@ import com.tatsutron.remote.util.Util
 class PlatformListFragment : BaseFragment() {
 
     private lateinit var platformCategory: Platform.Category
-    private lateinit var recycler: RecyclerView
+    private lateinit var recycler: FastScrollRecyclerView
     private lateinit var platformListAdapter: PlatformListAdapter
     private lateinit var gameListAdapter: GameListAdapter
     private var searchTerm = ""
@@ -134,10 +134,11 @@ class PlatformListFragment : BaseFragment() {
         }
         platformListAdapter = PlatformListAdapter(activity as Activity)
         gameListAdapter = GameListAdapter(activity as Activity)
-        recycler = view.findViewById<RecyclerView>(R.id.recycler).apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = this@PlatformListFragment.platformListAdapter
-        }
+        recycler = view.findViewById<FastScrollRecyclerView>(R.id.recycler)
+            .apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = this@PlatformListFragment.platformListAdapter
+            }
         setRecycler()
     }
 
@@ -161,7 +162,11 @@ class PlatformListFragment : BaseFragment() {
             recycler.adapter = gameListAdapter
             val items = Persistence.getGamesBySearch(searchTerm)
                 .map {
-                    GameItem(it)
+                    GameItem(
+                        icon = it.platform.media.icon,
+                        game = it,
+                        subscript = it.platform.displayName ?: "",
+                    )
                 }
             gameListAdapter.apply {
                 itemList.clear()

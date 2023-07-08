@@ -3,8 +3,9 @@ package com.tatsutron.remote.recycler
 import com.tatsutron.remote.model.Game
 
 class GameItem(
+    val icon: Int,
     val game: Game,
-    val icon: Int? = null,
+    val subscript: String,
 ) : GameListItem {
 
     override val text: String

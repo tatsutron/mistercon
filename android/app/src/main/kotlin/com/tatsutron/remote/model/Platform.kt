@@ -1,5 +1,7 @@
 package com.tatsutron.remote.model
 
+import android.graphics.Color
+import com.tatsutron.remote.R
 import com.tatsutron.remote.util.Constants
 import java.io.File
 
@@ -334,4 +336,13 @@ enum class Platform(
                 File(Constants.GAMES_PATH, gamesFolder).path
             else -> null
         }
+
+    private val subscriptColors = listOf(
+        R.color.analogous_200,
+        R.color.complementary_200,
+        R.color.triadic_200,
+    )
+
+    val subscriptColor: Int
+        get() = subscriptColors[ordinal % subscriptColors.size]
 }
