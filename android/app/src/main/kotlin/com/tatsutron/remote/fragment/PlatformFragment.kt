@@ -40,7 +40,7 @@ class PlatformFragment : BaseFragment() {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
         inflater.inflate(R.menu.menu_search_and_options, menu)
-        (menu.getItem(0).actionView as? SearchView)?.apply {
+        (menu.findItem(R.id.search).actionView as? SearchView)?.apply {
             maxWidth = Integer.MAX_VALUE
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String) = true
@@ -50,6 +50,9 @@ class PlatformFragment : BaseFragment() {
                     return true
                 }
             })
+        }
+        menu.findItem(R.id.scan_qr_code).apply {
+            isVisible = User.isPatron
         }
     }
 
