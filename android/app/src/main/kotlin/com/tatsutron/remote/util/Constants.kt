@@ -10,7 +10,6 @@ object Constants {
     const val COMPUTER_PATH = "${VOLUME}/_Computer"
     const val CONSOLE_PATH = "${VOLUME}/_Console"
     const val GAMES_PATH = "${VOLUME}/games"
-    const val MBC_PATH = "${MISTERCON_ROOT}/mbc"
     const val MISTER_UTIL_PATH = "${MISTERCON_ROOT}/mister_util.py"
     const val MREXT_CONTOOL_PATH = "${MREXT_ROOT}/contool"
     const val MREXT_OUTPUT_PATH = "${MREXT_ROOT}/out"

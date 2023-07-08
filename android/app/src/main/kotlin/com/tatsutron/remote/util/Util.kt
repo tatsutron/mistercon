@@ -19,7 +19,6 @@ object Util {
                         mkdir(Constants.MREXT_ROOT)
                         mkdir(Constants.MREXT_OUTPUT_PATH)
                         listOf(
-                            Pair("mbc", Constants.MISTERCON_ROOT),
                             Pair("mister_util.py", Constants.MISTERCON_ROOT),
                             Pair("contool", Constants.MREXT_ROOT),
                         ).forEach {
