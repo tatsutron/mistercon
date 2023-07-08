@@ -29,6 +29,6 @@
         app:itemIconTint="@drawable/selector_item_bottom_navigation"
         app:itemTextColor="@drawable/selector_item_bottom_navigation"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/menu_navigation" />
+        app:menu="@menu/menu_bottom_navigation" />
 
 </LinearLayout>

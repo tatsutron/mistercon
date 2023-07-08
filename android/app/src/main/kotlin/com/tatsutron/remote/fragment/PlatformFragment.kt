@@ -39,7 +39,7 @@ class PlatformFragment : BaseFragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
-        inflater.inflate(R.menu.menu_search, menu)
+        inflater.inflate(R.menu.menu_search_and_options, menu)
         (menu.getItem(0).actionView as? SearchView)?.apply {
             maxWidth = Integer.MAX_VALUE
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -82,10 +82,7 @@ class PlatformFragment : BaseFragment() {
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(toolbar)
-            toolbar.setNavigationOnClickListener {
-                onBackPressed()
-            }
-            supportActionBar?.title = platform.displayName
+            toolbar.title = platform.name
         }
         adapter = GameListAdapter(activity as Activity)
         recycler = view.findViewById<RecyclerView>(R.id.recycler).apply {
@@ -108,58 +105,58 @@ class PlatformFragment : BaseFragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setRecycler() {
-        val subfolder: Game.() -> String? = {
-            val relativePath = path
-                .removePrefix("$currentFolder${File.separator}")
-            val tokens = relativePath.split(File.separator)
-            if (tokens.size <= 1) {
-                null
-            } else {
-                tokens[0]
-            }
-        }
-        val games = mutableListOf<Game>()
-        val folders = mutableSetOf<String>()
-        Persistence.getGamesByPlatform(platform)
-            .filter {
-                it.path.startsWith(currentFolder)
-            }
-            .forEach {
-                val folder = it.subfolder()
-                if (folder != null) {
-                    folders.add(folder)
-                } else {
-                    games.add(it)
-                }
-            }
-        val folderItems = folders
-            .sorted()
-            .map {
-                FolderItem(
-                    name = it,
-                    onClick = {
-                        currentFolder = File(currentFolder, it).path
-                        setRecycler()
-                    },
-                )
-            }
-        val gameItems = games
-            .map {
-                GameItem(it, icon = platform.media.icon)
-            }
-        val items = folderItems + gameItems
         adapter.itemList.clear()
         if (searchTerm.isBlank()) {
-            adapter.itemList.addAll(items)
-        } else {
-            items.forEach {
-                if (it.text.contains(searchTerm, ignoreCase = true)) {
-                    adapter.itemList.add(it)
+            val subfolder: Game.() -> String? = {
+                val relativePath = path
+                    .removePrefix("$currentFolder${File.separator}")
+                val tokens = relativePath.split(File.separator)
+                if (tokens.size <= 1) {
+                    null
+                } else {
+                    tokens[0]
                 }
             }
+            val games = mutableListOf<Game>()
+            val folders = mutableSetOf<String>()
+            Persistence.getGamesByPlatform(platform)
+                .filter {
+                    it.path.startsWith(currentFolder)
+                }
+                .forEach {
+                    val folder = it.subfolder()
+                    if (folder != null) {
+                        folders.add(folder)
+                    } else {
+                        games.add(it)
+                    }
+                }
+            val folderItems = folders
+                .sorted()
+                .map {
+                    FolderItem(
+                        name = it,
+                        onClick = {
+                            currentFolder = File(currentFolder, it).path
+                            setRecycler()
+                        },
+                    )
+                }
+            val gameItems = games
+                .map {
+                    GameItem(it, icon = platform.media.icon)
+                }
+            val items = folderItems + gameItems
+            adapter.itemList.addAll(items)
+        } else {
+            val items = Persistence.getGamesBySearch(searchTerm)
+                .map {
+                    GameItem(it)
+                }
+            adapter.itemList.addAll(items)
         }
         adapter.notifyDataSetChanged()
-        recycler.visibility = if (items.isNotEmpty()) {
+        recycler.visibility = if (adapter.itemList.isNotEmpty()) {
             View.VISIBLE
         } else {
             View.GONE

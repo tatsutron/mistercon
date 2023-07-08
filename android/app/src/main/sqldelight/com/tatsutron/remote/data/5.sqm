@@ -1,0 +1,10 @@
+-- Add `name` for (hopefully) efficient global search
+
+DROP TABLE IF EXISTS Games;
+CREATE TABLE Games (
+    favorite INTEGER NOT NULL DEFAULT 0,
+    name TEXT NOT NULL,
+    path TEXT NOT NULL UNIQUE PRIMARY KEY,
+    platform TEXT NOT NULL,
+    sha1 TEXT
+);

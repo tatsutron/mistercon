@@ -14,7 +14,8 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            style="@style/Toolbar" />
+            style="@style/Toolbar"
+            app:popupTheme="@style/ToolbarPopupTheme" />
 
         <View
             android:layout_width="match_parent"

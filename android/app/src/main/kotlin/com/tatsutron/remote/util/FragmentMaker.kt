@@ -40,6 +40,4 @@ object FragmentMaker {
     }
 
     fun scan() = ScanFragment()
-
-    fun system() = SystemFragment()
 }

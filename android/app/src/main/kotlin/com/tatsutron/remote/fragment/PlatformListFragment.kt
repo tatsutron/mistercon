@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,8 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.tatsutron.remote.R
 import com.tatsutron.remote.model.Platform
+import com.tatsutron.remote.recycler.GameItem
+import com.tatsutron.remote.recycler.GameListAdapter
 import com.tatsutron.remote.recycler.PlatformItem
 import com.tatsutron.remote.recycler.PlatformListAdapter
 import com.tatsutron.remote.util.FragmentMaker
@@ -20,11 +23,13 @@ import com.tatsutron.remote.util.Navigator
 import com.tatsutron.remote.util.Persistence
 import com.tatsutron.remote.util.Util
 
-
 class PlatformListFragment : BaseFragment() {
 
     private lateinit var platformCategory: Platform.Category
-    private lateinit var adapter: PlatformListAdapter
+    private lateinit var recycler: RecyclerView
+    private lateinit var platformListAdapter: PlatformListAdapter
+    private lateinit var gameListAdapter: GameListAdapter
+    private var searchTerm = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +39,18 @@ class PlatformListFragment : BaseFragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
-        inflater.inflate(R.menu.menu_platform_list, menu)
+        inflater.inflate(R.menu.menu_search_and_options, menu)
+        (menu.getItem(0).actionView as? SearchView)?.apply {
+            maxWidth = Integer.MAX_VALUE
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String) = true
+                override fun onQueryTextChange(newText: String): Boolean {
+                    searchTerm = newText
+                    setRecycler()
+                    return true
+                }
+            })
+        }
     }
 
     override fun onCreateView(
@@ -114,30 +130,44 @@ class PlatformListFragment : BaseFragment() {
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as? AppCompatActivity)?.apply {
             setSupportActionBar(toolbar)
-            toolbar.setNavigationOnClickListener {
-                onBackPressed()
-            }
-            supportActionBar?.title = platformCategory.displayName
+            toolbar.title = platformCategory.displayName
         }
-        adapter = PlatformListAdapter(activity as Activity)
-        view.findViewById<RecyclerView>(R.id.recycler).apply {
+        platformListAdapter = PlatformListAdapter(activity as Activity)
+        gameListAdapter = GameListAdapter(activity as Activity)
+        recycler = view.findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = this@PlatformListFragment.adapter
+            adapter = this@PlatformListFragment.platformListAdapter
         }
         setRecycler()
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setRecycler() {
-        val items = Platform.values()
-            .filter {
-                it.category == platformCategory
+        if (searchTerm.isEmpty()) {
+            recycler.adapter = platformListAdapter
+            val items = Platform.values()
+                .filter {
+                    it.category == platformCategory
+                }
+                .map {
+                    PlatformItem(it)
+                }
+            platformListAdapter.apply {
+                itemList.clear()
+                itemList.addAll(items)
+                notifyDataSetChanged()
             }
-            .map {
-                PlatformItem(it)
+        } else {
+            recycler.adapter = gameListAdapter
+            val items = Persistence.getGamesBySearch(searchTerm)
+                .map {
+                    GameItem(it)
+                }
+            gameListAdapter.apply {
+                itemList.clear()
+                itemList.addAll(items)
+                notifyDataSetChanged()
             }
-        adapter.itemList.clear()
-        adapter.itemList.addAll(items)
-        adapter.notifyDataSetChanged()
+        }
     }
 }

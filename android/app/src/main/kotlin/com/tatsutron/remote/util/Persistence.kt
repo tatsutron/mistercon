@@ -52,12 +52,24 @@ object Persistence {
 
     fun saveGame(path: String, platform: Platform, sha1: String?) {
         database?.gamesQueries
-            ?.save(path, platform.name, sha1)
+            ?.save(File(path).nameWithoutExtension, path, platform.name, sha1)
     }
 
     fun getGamesByPlatform(platform: Platform) =
         database?.gamesQueries
             ?.selectByPlatform(platform.name)
+            ?.executeAsList()
+            ?.map {
+                game(it)
+            }
+            ?.sortedBy {
+                File(it.path).name.toLowerCase(Locale.getDefault())
+            }
+            ?: listOf()
+
+    fun getGamesBySearch(searchTerm: String) =
+        database?.gamesQueries
+            ?.selectBySearch(searchTerm)
             ?.executeAsList()
             ?.map {
                 game(it)

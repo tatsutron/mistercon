@@ -1,6 +1,8 @@
 -- Assume platforms are all there per mr-fusion
+
 DROP TABLE IF EXISTS Platforms;
 
 
 -- Move to config file
+
 DROP TABLE IF EXISTS Config;

@@ -12,9 +12,10 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
         <item name="actionBarStyle">@style/ActionBar</item>
         <item name="android:colorControlActivated">@color/primary_200</item>
-        <item name="android:editTextColor">@color/white</item>
+        <item name="android:editTextColor">@color/primary_200</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_left</item>
-        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:textColorHint">@color/primary_200</item>
+        <item name="android:textColorSecondary">@color/primary_200</item>
         <item name="android:windowBackground">@color/app_background</item>
         <item name="colorAccent">@color/primary_500</item>
         <item name="colorBackgroundFloating">@color/gray_800</item>
@@ -37,6 +38,8 @@
         <item name="queryBackground">@null</item>
         <item name="closeIcon">@drawable/ic_close</item>
         <item name="searchHintIcon">@null</item>
+        <item name="queryHint">Search all games</item>
+        <item name="iconifiedByDefault">true</item>
     </style>
 
     <style name="TextInputEditText" parent="@style/Widget.MaterialComponents.TextInputEditText.FilledBox">
@@ -57,7 +60,7 @@
     <style name="Toolbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:background">@color/toolbar_background</item>
+        <item name="android:background">@color/black</item>
         <item name="titleTextColor">@color/white</item>
     </style>
 

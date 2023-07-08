@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/scan"
-        android:icon="@drawable/ic_scan"
-        android:title="@string/scan_qr_code"
-        app:showAsAction="always" />
-</menu>
