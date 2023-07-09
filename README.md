@@ -4,7 +4,7 @@
 
 mistercon is an Android app for use with [MiSTer](https://github.com/MiSTer-devel/Main_MiSTer/wiki). It is designed to remotely control your MiSTer and to supplement its built-in user interface.
 
-* Search for games by name and launch them from your phone
+* Search or browse for games and launch them from your phone
 * Mark the best games to create a list of your favorites
 * Import metadata for your games, including front and back cover images, from [OpenVGDB](https://github.com/OpenVGDB)
 * ([Patron](https://patreon.com/tatsutron) only) Launch games by scanning QR codes with your phone's camera
