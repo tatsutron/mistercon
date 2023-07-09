@@ -1,3 +1,5 @@
+![logo](https://github.com/tatsutron/mistercon/assets/51144928/44421768-baff-4de4-8434-17db9e065c36)
+
 # mistercon
 
 mistercon is an Android app for use with [MiSTer](https://github.com/MiSTer-devel/Main_MiSTer/wiki). It is designed to support UX features which MiSTer eschews e.g. displaying metadata and artwork. Hat tip to [mrsonicblue](https://github.com/mrsonicblue), [OpenVGDB](https://github.com/OpenVGDB), [pocomane](https://github.com/pocomane), and [wizzomafizzo](https://github.com/wizzomafizzo) for doing the work that this project is built upon.
