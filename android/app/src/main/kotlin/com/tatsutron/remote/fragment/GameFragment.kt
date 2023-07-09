@@ -28,6 +28,7 @@ import com.tatsutron.remote.util.Dialog
 import com.tatsutron.remote.util.FragmentMaker
 import com.tatsutron.remote.util.Navigator
 import com.tatsutron.remote.util.Persistence
+import com.tatsutron.remote.util.User
 import com.tatsutron.remote.util.Util
 import com.tatsutron.remote.util.getColorCompat
 
@@ -146,7 +147,7 @@ class GameFragment : BaseFragment() {
             if (game.platform.metadata) {
                 addActionItem(syncAction)
             }
-            if (game.sha1 != null) {
+            if (User.isPatron && game.sha1 != null) {
                 addActionItem(copyQrAction)
             }
             setOnActionSelectedListener(
