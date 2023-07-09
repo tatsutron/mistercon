@@ -30,6 +30,3 @@ UPDATE Games SET favorite = ? WHERE path = ?;
 
 deleteByPath:
 DELETE FROM Games WHERE path = ?;
-
-deleteByPlatform:
-DELETE FROM Games WHERE platform = ?;
