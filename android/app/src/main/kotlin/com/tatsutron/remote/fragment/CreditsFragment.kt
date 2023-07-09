@@ -125,7 +125,7 @@ class CreditsFragment : BaseFragment() {
             val versionName = context.packageManager
                 .getPackageInfo(context.packageName, 0)
                 .versionName
-            val version = "$versionName${if (User.isPatron) "p" else ""}"
+            val version = "v$versionName${if (User.isPatron) "p" else ""}"
             text = version
         }
     }
