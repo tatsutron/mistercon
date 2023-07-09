@@ -50,10 +50,9 @@ object Persistence {
         }
         get() = config.host
 
-    fun saveGame(path: String, platform: Platform, sha1: String?) {
+    fun saveGame(path: String, platform: Platform, sha1: String?) =
         database?.gamesQueries
             ?.save(File(path).nameWithoutExtension, path, platform.name, sha1)
-    }
 
     fun getGamesByPlatform(platform: Platform) =
         database?.gamesQueries

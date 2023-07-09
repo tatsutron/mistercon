@@ -1,6 +1,5 @@
 package com.tatsutron.remote.model
 
-import android.graphics.Color
 import com.tatsutron.remote.R
 import com.tatsutron.remote.util.Constants
 import java.io.File
