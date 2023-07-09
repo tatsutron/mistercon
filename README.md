@@ -6,14 +6,14 @@ mistercon is an Android app for use with [MiSTer](https://github.com/MiSTer-deve
 
 * Search for games by name and launch them from your phone
 * Mark the best games to create a list of your favorites
-* Automatically import information about your games, including front and back covers, from [OpenVGDB](https://github.com/OpenVGDB))
+* Import metadata for your games, including front and back cover images, from [OpenVGDB](https://github.com/OpenVGDB)
 * ([Patron](https://patreon.com/tatsutron) only) Launch games by scanning QR codes with your phone's camera
 
-More features are always underway. Follow our [Patreon](https://patreon.com/tatsutron) for behind-the-scenes updates.
+More features are always in development. Follow our [Patreon](https://patreon.com/tatsutron) for behind-the-scenes updates.
 
 # Patrons
 
-This project would have died a long time ago if it weren't for the incredible generosity of our patrons! If you like our work (and have some spare money lying around, and you feel like it) please consider [supporting us on Patreon](https://patreon.com/tatsutron). You'll be helping mistercon be as polished and feature-rich as it can be, plus you'll get rewards and bonus features! 💚💖
+This project would have died a long time ago if it weren't for the incredible generosity of our patrons! If you like our work (and have some spare money lying around, and you feel like it) please consider [supporting us on Patreon](https://patreon.com/tatsutron). You'll be helping mistercon be as polished and feature-rich as it can be, plus you'll get rewards and bonus features!
 
 * **Aaron Thompson** 💙
 * **Arufonsu** 💙
@@ -60,6 +60,10 @@ This project would have died a long time ago if it weren't for the incredible ge
 
 Special thanks to [mrsonicblue](https://github.com/mrsonicblue), [OpenVGDB](https://github.com/OpenVGDB), [pocomane](https://github.com/pocomane), and [wizzomafizzo](https://github.com/wizzomafizzo) for doing the work that this project is built upon. 🧡
 
+# Will there be an iOS version?
+
+We get asked about a possible iOS app more than anything else, and we would love to develop one! Maintaining a whole second native app would be quite an undertaking for our little two-woman operation. Now that Casey left her full-time job, we'd have enough time if she didn't have to work on other stuff to cover our bills. If we can find enough [Patreon](https://patreon.com/tatsutron) support out there to replace that income, she'd be thrilled to just work on mistercon all day! 🙂
+
 # Supported Platforms
 
 Platform  | Metadata
@@ -101,4 +105,6 @@ WonderSwan Color | :white_check_mark:
 
 * Cores and games are assumed to be in the places that they would be by default after formatting an SD card with [Mr. Fusion](https://github.com/MiSTer-devel/mr-fusion)
 
-# Love, Sio & Casey 💚💖
+#
+
+_Love,<br>Sio & Casey<br>💚💖_
