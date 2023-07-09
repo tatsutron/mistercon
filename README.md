@@ -107,4 +107,4 @@ WonderSwan Color | :white_check_mark:
 
 #
 
-_Love,<br>Sio & Casey<br>💚💖_
+Love,<br>Sio & Casey<br>💚💖
