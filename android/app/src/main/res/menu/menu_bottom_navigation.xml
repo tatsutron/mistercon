@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/consoles"
-        android:title="@string/consoles"
-        android:icon="@drawable/ic_consoles" />
-    <item android:id="@+id/arcades"
-        android:title="@string/arcades"
-        android:icon="@drawable/ic_arcades" />
-    <item android:id="@+id/handhelds"
-        android:title="@string/handhelds"
-        android:icon="@drawable/ic_handhelds" />
-    <item android:id="@+id/computers"
-        android:title="@string/computers"
-        android:icon="@drawable/ic_computers" />
+    <item
+        android:id="@+id/consoles"
+        android:icon="@drawable/ic_consoles"
+        android:title="@string/consoles" />
+    <item
+        android:id="@+id/arcades"
+        android:icon="@drawable/ic_arcades"
+        android:title="@string/arcades" />
+    <item
+        android:id="@+id/handhelds"
+        android:icon="@drawable/ic_handhelds"
+        android:title="@string/handhelds" />
+    <item
+        android:id="@+id/computers"
+        android:icon="@drawable/ic_computers"
+        android:title="@string/computers" />
 </menu>
