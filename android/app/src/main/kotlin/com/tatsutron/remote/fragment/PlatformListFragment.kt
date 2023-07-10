@@ -18,6 +18,7 @@ import com.tatsutron.remote.recycler.GameItem
 import com.tatsutron.remote.recycler.GameListAdapter
 import com.tatsutron.remote.recycler.PlatformItem
 import com.tatsutron.remote.recycler.PlatformListAdapter
+import com.tatsutron.remote.util.Coroutine
 import com.tatsutron.remote.util.FragmentMaker
 import com.tatsutron.remote.util.Navigator
 import com.tatsutron.remote.util.Persistence
@@ -71,8 +72,8 @@ class PlatformListFragment : BaseFragment() {
     }
 
     @SuppressLint("CheckResult")
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        when (item.itemId) {
             R.id.set_ip_address -> {
                 MaterialDialog(requireContext()).show {
                     title(
@@ -95,6 +96,20 @@ class PlatformListFragment : BaseFragment() {
                         },
                     )
                 }
+                true
+            }
+
+            R.id.sync_library -> {
+                Navigator.showLoadingScreen()
+                Coroutine.launch(
+                    activity = activity as Activity,
+                    run = {
+                        Util.syncPlatforms(Platform.values().toList())
+                    },
+                    finally = {
+                        Navigator.hideLoadingScreen()
+                    }
+                )
                 true
             }
 
@@ -124,7 +139,6 @@ class PlatformListFragment : BaseFragment() {
 
             else -> super.onOptionsItemSelected(item)
         }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

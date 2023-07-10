@@ -4,6 +4,7 @@
     <string name="cancel">Cancel</string>
     <string name="computers">Computers</string>
     <string name="confirm_play_game">Play %s?</string>
+    <string name="connect">Connect</string>
     <string name="consoles">Consoles</string>
     <string name="copy_qr_data">Copy QR Data</string>
     <string name="credits">Credits</string>
@@ -30,10 +31,10 @@
     <string name="release_date">Release Date</string>
     <string name="scan_qr_code">Scan QR code</string>
     <string name="search">Search</string>
-    <string name="set_ip_address">Set IP Address</string>
+    <string name="set_ip_address">Set IP address</string>
     <string name="subscribe">Subscribe for bonus features!\npatreon.com/tatsutron</string>
     <string name="sync">Sync</string>
-    <string name="sync_specific">Sync %s</string>
+    <string name="sync_library">Sync library</string>
     <string name="system">System</string>
     <string name="thank_you">❤ Thank you so much! ❤</string>
     <string name="toggle_menu">Toggle Menu</string>

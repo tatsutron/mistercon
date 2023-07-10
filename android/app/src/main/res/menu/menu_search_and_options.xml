@@ -11,7 +11,12 @@
 
     <item
         android:id="@+id/set_ip_address"
-        android:title="Set IP address"
+        android:title="@string/connect"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/sync_library"
+        android:title="@string/sync_library"
         app:showAsAction="never" />
 
     <item

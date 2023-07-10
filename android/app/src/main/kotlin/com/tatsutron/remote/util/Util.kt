@@ -2,11 +2,13 @@ package com.tatsutron.remote.util
 
 import android.app.Activity
 import com.tatsutron.remote.model.Game
+import com.tatsutron.remote.model.Platform
 import java.io.File
 import java.io.FileOutputStream
 
 object Util {
 
+    // TODO Maybe this should be wrapped by `Coroutine`?
     fun deployAssets(activity: Activity, callback: () -> Unit) {
         Coroutine.launch(
             activity = activity,
@@ -33,7 +35,7 @@ object Util {
                             }
                             put(file.path, File(folder, name).path)
                         }
-                    } catch (e:Throwable) {
+                    } catch (e: Throwable) {
                         e.printStackTrace()
                     }
                     disconnect()
@@ -44,34 +46,55 @@ object Util {
         )
     }
 
-    fun scan(mrextId: String): List<String> {
+    fun syncPlatforms(platforms: List<Platform>) {
         val session = Ssh.session()
-        val command = StringBuilder().apply {
+        val filter = platforms.joinToString(",") {
+            it.mrextId
+        }
+        val contoolCommand = StringBuilder().apply {
             append(Constants.MREXT_CONTOOL_PATH)
             append(" ")
             append("-filter")
             append(" ")
-            append(mrextId)
+            append(filter)
             append(" ")
             append("-out")
             append(" ")
             append(Constants.MREXT_OUTPUT_PATH)
-            append(" ")
-            append("-quiet")
-            append(" ")
-            append("&&")
-            append(" ")
-            append("cat")
-            append(" ")
-            append("${Constants.MREXT_OUTPUT_PATH}/${mrextId}.txt")
         }.toString()
-        val output = Ssh.command(session, command)
-        session.disconnect()
-        return output
-            .split("\n")
-            .filter {
-                it.isNotEmpty()
+        Ssh.command(session, contoolCommand)
+        platforms.forEach { platform ->
+            val catCommand = StringBuilder().apply {
+                append("cat")
+                append(" ")
+                append("${Constants.MREXT_OUTPUT_PATH}/${platform.mrextId}.txt")
+            }.toString()
+            val output = Ssh.command(session, catCommand)
+            val new = output
+                .split("\n")
+                .filter {
+                    it.isNotEmpty()
+                }
+            val old = Persistence.getGamesByPlatform(platform)
+                .map {
+                    it.path
+                }
+            new.forEach {
+                if (it !in old) {
+                    Persistence.saveGame(
+                        path = it,
+                        platform = platform,
+                        sha1 = null,
+                    )
+                }
             }
+            old.forEach {
+                if (it !in new) {
+                    Persistence.deleteGame(it)
+                }
+            }
+        }
+        session.disconnect()
     }
 
     fun hash(
@@ -91,6 +114,7 @@ object Util {
         return output
     }
 
+    // TODO Maybe this should be wrapped by `Coroutine`?
     fun loadGame(activity: Activity, game: Game, callback: () -> Unit) {
         Coroutine.launch(
             activity = activity,

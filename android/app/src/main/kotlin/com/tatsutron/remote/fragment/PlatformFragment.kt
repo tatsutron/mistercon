@@ -221,27 +221,7 @@ class PlatformFragment : BaseFragment() {
         Coroutine.launch(
             activity = activity,
             run = {
-                val session = Ssh.session()
-                val new = Util.scan(platform.mrextId)
-                val old = Persistence.getGamesByPlatform(platform)
-                    .map {
-                        it.path
-                    }
-                new.forEach {
-                    if (it !in old) {
-                        Persistence.saveGame(
-                            path = it,
-                            platform = platform,
-                            sha1 = null,
-                        )
-                    }
-                }
-                old.forEach {
-                    if (it !in new) {
-                        Persistence.deleteGame(it)
-                    }
-                }
-                session.disconnect()
+                Util.syncPlatforms(listOf(platform))
             },
             success = {
                 setRecycler()
