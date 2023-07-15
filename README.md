@@ -60,6 +60,8 @@ This project would have died a long time ago if it weren't for the incredible ge
 
 Special thanks to Jeremy Workman, [mrsonicblue](https://github.com/mrsonicblue), [OpenVGDB](https://github.com/OpenVGDB), [pocomane](https://github.com/pocomane), and [wizzomafizzo](https://github.com/wizzomafizzo) for doing the work that this project is built upon. 🧡
 
+This project is dedicated to Alexey Melnikov.
+
 # Will there be an iOS version?
 
 We get asked about a possible iOS app more than anything else, and we would love to develop one! Maintaining a whole second native app would be quite an undertaking for our little two-woman operation. Now that Casey left her full-time job, we'd have enough time if she didn't have to work on other stuff to cover our bills. If we can find enough [Patreon](https://patreon.com/tatsutron) support out there to replace that income, she'd be thrilled to just work on mistercon all day! 🙂
