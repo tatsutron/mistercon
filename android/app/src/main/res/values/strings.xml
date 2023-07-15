@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="arcades">Arcades</string>
+    <string name="arcade">Arcade</string>
     <string name="cancel">Cancel</string>
-    <string name="computers">Computers</string>
+    <string name="computer">Computer</string>
     <string name="confirm_play_game">Play %s?</string>
     <string name="connect">Connect</string>
-    <string name="consoles">Consoles</string>
+    <string name="console">Console</string>
     <string name="copy_qr_data">Copy QR Data</string>
     <string name="credits">Credits</string>
     <string name="description">Description</string>
@@ -18,7 +18,7 @@
     <string name="favorites">Favorites</string>
     <string name="games">Games</string>
     <string name="genre">Genre</string>
-    <string name="handhelds">Handhelds</string>
+    <string name="handheld">Handheld</string>
     <string name="metadata_not_supported">Metadata is not supported for this platform.</string>
     <string name="mistercon">mistercon</string>
     <string name="no_camera_permission">Camera permission is required to use this feature.</string>

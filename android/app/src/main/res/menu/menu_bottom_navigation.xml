@@ -3,17 +3,17 @@
     <item
         android:id="@+id/consoles"
         android:icon="@drawable/ic_consoles"
-        android:title="@string/consoles" />
+        android:title="@string/console" />
     <item
         android:id="@+id/arcades"
         android:icon="@drawable/ic_arcades"
-        android:title="@string/arcades" />
+        android:title="@string/arcade" />
     <item
         android:id="@+id/handhelds"
         android:icon="@drawable/ic_handhelds"
-        android:title="@string/handhelds" />
+        android:title="@string/handheld" />
     <item
         android:id="@+id/computers"
         android:icon="@drawable/ic_computers"
-        android:title="@string/computers" />
+        android:title="@string/computer" />
 </menu>

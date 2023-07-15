@@ -16,7 +16,7 @@ enum class Platform(
 
     ARCADE(
         category = Category.ARCADE,
-        displayName = "Arcades",
+        displayName = "Arcade",
         media = Media.PRINTED_CIRCUIT_BOARD,
         metadata = false,
         mrextId = "arcade",
@@ -310,19 +310,19 @@ enum class Platform(
         val path: String,
     ) {
         ARCADE(
-            displayName = "Arcades",
+            displayName = "Arcade",
             path = Constants.ARCADE_PATH
         ),
         CONSOLE(
-            displayName = "Consoles",
+            displayName = "Console",
             path = Constants.CONSOLE_PATH
         ),
         COMPUTER(
-            displayName = "Computers",
+            displayName = "Computer",
             path = Constants.COMPUTER_PATH,
         ),
         HANDHELD(
-            displayName = "Handhelds",
+            displayName = "Handheld",
             path = Constants.CONSOLE_PATH,
         ),
     }
