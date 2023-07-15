@@ -58,7 +58,7 @@ This project would have died a long time ago if it weren't for the incredible ge
 * **WhiteScreen** 💙
 * **Whittier H** 💙
 
-Special thanks to [mrsonicblue](https://github.com/mrsonicblue), [OpenVGDB](https://github.com/OpenVGDB), [pocomane](https://github.com/pocomane), and [wizzomafizzo](https://github.com/wizzomafizzo) for doing the work that this project is built upon. 🧡
+Special thanks to Jeremy Workman, [mrsonicblue](https://github.com/mrsonicblue), [OpenVGDB](https://github.com/OpenVGDB), [pocomane](https://github.com/pocomane), and [wizzomafizzo](https://github.com/wizzomafizzo) for doing the work that this project is built upon. 🧡
 
 # Will there be an iOS version?
 
