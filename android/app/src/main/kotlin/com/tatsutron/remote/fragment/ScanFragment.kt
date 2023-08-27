@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
@@ -18,6 +19,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.tatsutron.remote.MainActivity
 import com.tatsutron.remote.R
 import com.tatsutron.remote.util.Dialog
+import com.tatsutron.remote.util.FragmentMaker
 import com.tatsutron.remote.util.Navigator
 import com.tatsutron.remote.util.Persistence
 import com.tatsutron.remote.util.Util
@@ -138,6 +140,10 @@ class ScanFragment : BaseFragment() {
                         Navigator.hideLoadingScreen()
                         Handler(Looper.getMainLooper()).postDelayed({
                             (activity as? MainActivity)?.onBackPressed()
+                            Navigator.showScreen(
+                                activity as AppCompatActivity,
+                                FragmentMaker.game(game.path),
+                            )
                         }, 100)
                     },
                 )
