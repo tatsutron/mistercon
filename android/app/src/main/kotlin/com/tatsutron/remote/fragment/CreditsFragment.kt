@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.tatsutron.remote.R
-import com.tatsutron.remote.util.User
 
 class CreditsFragment : BaseFragment() {
 
@@ -132,17 +131,13 @@ class CreditsFragment : BaseFragment() {
             }.joinToString("\n")
         }
         view.findViewById<TextView>(R.id.postscript).apply {
-            text = if (User.isPatron) {
-                context.getText(R.string.thank_you)
-            } else {
-                context.getText(R.string.subscribe)
-            }
+            text = context.getText(R.string.thank_you)
         }
         view.findViewById<TextView>(R.id.version_name).apply {
             val versionName = context.packageManager
                 .getPackageInfo(context.packageName, 0)
                 .versionName
-            val version = "v$versionName${if (User.isPatron) "p" else ""}"
+            val version = "v$versionName"
             text = version
         }
     }

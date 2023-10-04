@@ -22,7 +22,6 @@ import com.tatsutron.remote.util.Coroutine
 import com.tatsutron.remote.util.FragmentMaker
 import com.tatsutron.remote.util.Navigator
 import com.tatsutron.remote.util.Persistence
-import com.tatsutron.remote.util.User
 import com.tatsutron.remote.util.Util
 
 class PlatformListFragment : BaseFragment() {
@@ -52,9 +51,6 @@ class PlatformListFragment : BaseFragment() {
                     return true
                 }
             })
-        }
-        menu.findItem(R.id.scan_qr_code).apply {
-            isVisible = User.isPatron
         }
     }
 

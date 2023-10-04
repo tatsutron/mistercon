@@ -51,9 +51,6 @@ class PlatformFragment : BaseFragment() {
                 }
             })
         }
-        menu.findItem(R.id.scan_qr_code).apply {
-            isVisible = User.isPatron
-        }
     }
 
     override fun onCreateView(

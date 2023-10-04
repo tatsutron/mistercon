@@ -32,11 +32,10 @@
     <string name="scan_qr_code">Scan QR code</string>
     <string name="search">Search</string>
     <string name="set_ip_address">Set IP address</string>
-    <string name="subscribe">Subscribe for bonus features!\npatreon.com/tatsutron</string>
     <string name="sync">Sync</string>
     <string name="sync_library">Sync library</string>
     <string name="system">System</string>
-    <string name="thank_you">❤ Thank you so much! ❤</string>
+    <string name="thank_you">❤ Thank you all so much! ❤</string>
     <string name="toggle_menu">Toggle Menu</string>
     <string name="unfavorite">Unfavorite</string>
 </resources>

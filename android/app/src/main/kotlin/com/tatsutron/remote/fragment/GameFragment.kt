@@ -28,7 +28,6 @@ import com.tatsutron.remote.util.Dialog
 import com.tatsutron.remote.util.FragmentMaker
 import com.tatsutron.remote.util.Navigator
 import com.tatsutron.remote.util.Persistence
-import com.tatsutron.remote.util.User
 import com.tatsutron.remote.util.Util
 import com.tatsutron.remote.util.getColorCompat
 
@@ -147,7 +146,7 @@ class GameFragment : BaseFragment() {
             if (game.platform.metadata) {
                 addActionItem(syncAction)
             }
-            if (User.isPatron && game.sha1 != null) {
+            if (game.sha1 != null) {
                 addActionItem(copyQrAction)
             }
             setOnActionSelectedListener(
@@ -158,21 +157,25 @@ class GameFragment : BaseFragment() {
                             close()
                             return@OnActionSelectedListener true
                         }
+
                         R.id.favorite -> {
                             onToggleFavorite()
                             close()
                             return@OnActionSelectedListener true
                         }
+
                         R.id.play -> {
                             onPlay()
                             close()
                             return@OnActionSelectedListener true
                         }
+
                         R.id.sync -> {
                             onSync()
                             close()
                             return@OnActionSelectedListener true
                         }
+
                         R.id.unfavorite -> {
                             onToggleFavorite()
                             close()
@@ -314,6 +317,7 @@ class GameFragment : BaseFragment() {
                             context = activity,
                             ipAddressSet = ::onSync,
                         )
+
                     else ->
                         Dialog.error(activity, throwable)
                 }
